@@ -1,115 +1,368 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<title>Érosion — réseau hydrographique</title>
+<meta charset="utf-8"/>
+<title>Érosion — Sandbox Hydrographique</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
 <style>
-  :root{
-    --bg:#08090a; --panel:#101314; --line:#c9d3d6; --line-dim:#454e50;
-    --water:#5db8d8; --accent:#e8b34a; --text:#c9d3d6; --text-dim:#5c6567;
-    --mono:'IBM Plex Mono','SF Mono',Consolas,monospace;
+  :root {
+    --bg-surface: #1e1d1b;
+    --bg-panel: rgba(28, 27, 25, 0.85);
+    --bg-control: #2c2b29;
+    --text-primary: #e6e3dd;
+    --text-muted: #96938a;
+    --accent: #d2a15c;
+    --water: #4c8fb5;
+    --border: #3d3b37;
+    
+    --font-ui: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
   }
-  *{box-sizing:border-box;}
-  html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:var(--mono);overflow:hidden;}
-  #wrap{display:flex;height:100%;}
-  #stage{flex:1;display:flex;align-items:center;justify-content:center;position:relative;}
-  canvas{cursor:crosshair;box-shadow:0 0 0 1px var(--line-dim);}
-  #hud{position:absolute;top:14px;left:14px;font-size:11px;color:var(--text-dim);letter-spacing:.03em;line-height:1.7;pointer-events:none;}
-  #hud b{color:var(--text);font-weight:500;}
-  #hud .mode{color:var(--accent);}
-  #panel{width:256px;background:var(--panel);border-left:1px solid var(--line-dim);padding:20px 18px;display:flex;flex-direction:column;gap:16px;overflow-y:auto;}
-  h1{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--text);margin:0 0 2px;}
-  .sub{font-size:10px;color:var(--text-dim);margin:0 0 4px;line-height:1.5;}
-  .field{display:flex;flex-direction:column;gap:6px;}
-  .field.disabled{opacity:.35;pointer-events:none;}
-  .field label{font-size:10px;color:var(--text-dim);letter-spacing:.05em;text-transform:uppercase;display:flex;justify-content:space-between;}
-  .field label span{color:var(--accent);font-weight:600;}
-  input[type=range]{-webkit-appearance:none;width:100%;height:2px;background:var(--line-dim);outline:none;}
-  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:11px;height:11px;border-radius:50%;background:var(--text);cursor:pointer;}
-  input[type=range]::-moz-range-thumb{width:11px;height:11px;border-radius:50%;background:var(--text);border:none;cursor:pointer;}
-  button{background:none;border:1px solid var(--line-dim);color:var(--text);font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;padding:9px;cursor:pointer;transition:border-color .15s,color .15s;}
-  button:hover{border-color:var(--text);color:#fff;}
-  button.on{border-color:var(--accent);color:var(--accent);}
-  .hr{height:1px;background:var(--line-dim);margin:2px 0;}
-  .lbl{display:block;font-size:10px;color:var(--text-dim);letter-spacing:.05em;text-transform:uppercase;}
-  #sources{display:flex;flex-direction:column;gap:4px;font-size:10px;color:var(--text-dim);max-height:110px;overflow-y:auto;}
-  .src-row{display:flex;justify-content:space-between;align-items:center;gap:6px;}
-  .src-row span{color:var(--water);}
-  .src-row span.off{color:var(--text-dim);text-decoration:line-through;}
-  .src-row a{color:var(--text-dim);cursor:pointer;text-decoration:none;flex-shrink:0;}
-  .src-row a:hover{color:#fff;}
-  .modes{display:flex;gap:4px;flex-wrap:wrap;}
-  .modes button{flex:1;padding:6px 2px;font-size:9px;min-width:38px;}
-  .layers{display:flex;flex-direction:column;gap:3px;}
-  .layer{display:flex;align-items:center;gap:8px;font-size:10px;letter-spacing:.06em;text-transform:uppercase;
-         color:var(--text-dim);padding:5px 7px;cursor:pointer;border:1px solid transparent;
-         transition:color .15s,background .15s;user-select:none;}
-  .layer:hover{color:#fff;}
-  .layer.on{color:var(--text);background:rgba(255,255,255,.03);}
-  .layer .sw{width:9px;height:9px;flex-shrink:0;border:1px solid var(--line-dim);background:transparent;transition:background .15s;}
-  .layer.on .sw{background:var(--c);border-color:transparent;}
-  .hint{font-size:10px;color:var(--text-dim);line-height:1.5;}
+  
+  body {
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+  }
+  
+  #app {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  /* Canvas Hero */
+  #stage {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: radial-gradient(circle, #252422 0%, var(--bg-surface) 100%);
+  }
+
+  canvas {
+    cursor: crosshair;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
+    transition: transform 0.2s ease;
+  }
+
+  /* HUD */
+  #hud {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    background: var(--bg-panel);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  #hud b { color: var(--text-primary); font-weight: 500; }
+  #hud .mode { color: var(--accent); }
+
+  /* Floating Bottom Control Bar */
+  #bottom-bar {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-panel);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    z-index: 10;
+  }
+
+  .ctrl-btn {
+    background: var(--bg-control);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .ctrl-btn:hover { background: #383734; border-color: #55524c; }
+  .ctrl-btn.active { background: var(--accent); color: #000; border-color: var(--accent); }
+  .ctrl-btn .material-symbols-outlined { font-size: 20px; }
+
+  .speed-ctrl {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 12px;
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+  }
+  
+  /* Side Panel */
+  #side-panel {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 300px;
+    background: var(--bg-panel);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+
+  .panel-header {
+    margin-bottom: 8px;
+  }
+  h1 { font-size: 14px; font-weight: 600; color: var(--text-primary); margin: 0 0 4px; }
+  p.desc { font-size: 11px; color: var(--text-muted); line-height: 1.5; margin: 0; }
+
+  .section-title {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  /* Lab Inputs */
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .field.disabled { opacity: 0.4; pointer-events: none; }
+  .field label {
+    font-size: 11px;
+    color: var(--text-muted);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .field label span {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    background: rgba(210, 161, 92, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 4px;
+    background: #111;
+    border-radius: 2px;
+    outline: none;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    border: 2px solid var(--bg-control);
+    box-shadow: 0 0 4px rgba(0,0,0,0.5);
+  }
+
+  /* Segmented Control (Modes) */
+  .segmented {
+    display: flex;
+    background: #111;
+    padding: 4px;
+    border-radius: 8px;
+    gap: 4px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+  }
+  .segmented button {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 6px 0;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .segmented button.on {
+    background: var(--bg-control);
+    color: var(--text-primary);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  }
+
+  /* Layers */
+  .layer-group { margin-bottom: 12px; }
+  .layer-group-title { font-size: 11px; color: var(--text-primary); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+  
+  .layer-list { display: flex; flex-direction: column; gap: 4px; }
+  .layer-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    color: var(--text-muted);
+    padding: 6px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .layer-item:hover { background: rgba(255,255,255,0.03); color: var(--text-primary); }
+  .layer-item.on { color: var(--text-primary); background: rgba(255,255,255,0.05); }
+  
+  .swatch {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    transition: all 0.15s;
+  }
+  .layer-item.on .swatch { background: var(--c); border-color: var(--c); }
+
+  /* Sources List */
+  #sources {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-height: 120px;
+    overflow-y: auto;
+    background: rgba(0,0,0,0.2);
+    border-radius: 6px;
+    padding: 8px;
+  }
+  .src-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 10px;
+  }
+  .src-row span { color: var(--water); }
+  .src-row span.off { color: var(--text-muted); text-decoration: line-through; }
+  .src-row a {
+    color: var(--text-muted);
+    cursor: pointer;
+    background: var(--bg-control);
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-decoration: none;
+  }
+  .src-row a:hover { color: #f87171; background: rgba(248,113,113,0.1); }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+  .hr { height: 1px; background: var(--border); margin: 16px 0; }
 </style>
 </head>
 <body>
-<div id="wrap">
-  <div id="stage">
-    <canvas id="c"></canvas>
-    <div id="hud">
-      <b class="mode" id="modeLbl">composite</b><br>
-      <b id="fps">--</b> fps réel · cible <b id="tgtMult">×1</b> · réel <b id="realMult">×1</b><br>
-      <b id="tcount">0</b> pas · <b id="tsim">0.0</b> s simulées
+<div id="app">
+<!-- Canvas Area -->
+<div id="stage">
+<canvas id="c"></canvas>
+<!-- HUD -->
+<div id="hud">
+      Mode: <b class="mode" id="modeLbl">Simulation</b><br/>
+<span class="material-symbols-outlined" style="font-size:12px;vertical-align:middle;margin-right:4px;">speed</span>
+<b id="fps">--</b> fps · cible <b id="tgtMult">×1</b> · réel <b id="realMult">×1</b><br/>
+<span class="material-symbols-outlined" style="font-size:12px;vertical-align:middle;margin-right:4px;">schedule</span>
+<b id="tcount">0</b> pas · <b id="tsim">0.0</b>s
     </div>
-  </div>
-  <div id="panel">
-    <div>
-      <h1>Érosion hydraulique</h1>
-      <p class="sub">Tuyaux virtuels (Mei, Decaudin &amp; Hu, 2007) + réseau hydrographique dérivé d'une vraie accumulation de surface contributive (D8, à la façon d'un SIG hydrologique). Clic sur le terrain : nouvelle source. Clic sur un marqueur : activer/désactiver.</p>
-    </div>
-    <div class="hr"></div>
-    <div class="field">
-      <label>Vitesse du temps <span id="speedLbl">×1</span></label>
-      <input id="speed" type="range" min="0" max="8" value="0" step="1">
-    </div>
-    <div class="field">
-      <label>Débit de la prochaine source <span id="rateLbl">1.0</span></label>
-      <input id="rate" type="range" min="0.1" max="4" value="1" step="0.1">
-    </div>
-    <div class="field" id="isoField">
-      <label>Intervalle des courbes <span id="stepLbl">0.090</span></label>
-      <input id="isoStep" type="range" min="0.04" max="0.2" value="0.09" step="0.005">
-    </div>
-    <div class="hr"></div>
-    <label class="lbl" style="margin-bottom:8px;">Mode de vue (1–2)</label>
-    <div class="modes">
-      <button data-m="composite" class="on">Composite</button>
-      <button data-m="contribution">Contribution</button>
-    </div>
-    <div id="layersBox">
-      <div class="field" style="margin-top:12px;">
-        <label>Calques superposés <span id="layerCount">6/6</span></label>
-        <div class="layers" id="layers"></div>
-      </div>
-      <div class="modes" style="margin-top:10px;">
-        <button id="layAll">Tout</button>
-        <button id="layNone">Aucun</button>
-        <button id="layHydro">Hydro</button>
-      </div>
-    </div>
-    <div class="hr"></div>
-    <button id="pause">Pause</button>
-    <button id="regen">Nouveau terrain</button>
-    <button id="clearSrc">Retirer toutes les sources</button>
-    <div class="hr"></div>
-    <div>
-      <label class="lbl">Sources</label>
-      <div id="sources" style="margin-top:8px;"></div>
-    </div>
-    <div class="hr"></div>
-    <p class="hint">Vue <b>Composite</b> : assemblez librement les calques — relief, courbes de niveau, eau, réseau, érosion, particules — le rendu est la somme de ceux qui sont actifs. Le bleu marque l'eau. Les lignes cyan du calque Réseau sont le réseau <b>actif</b> — de l'eau réellement présente et réellement en mouvement, pas une prédiction du relief : cyan clair = ruisseau actif, cyan vif et plus épais = rivière active. Les points blancs du calque Particules n'existent que là où de l'eau s'écoule réellement, et disparaissent dès que le courant s'arrête ou que la lame s'assèche. Le calque Érosion réchauffe la teinte du relief là où le sol a été creusé, la refroidit là où du sédiment s'est déposé. Vue <b>Contribution</b> : aucun calque — c'est la vue diagnostic du réseau <b>potentiel</b> (D8, relief seul), visible même sans eau, pour vérifier que l'algorithme hydrologique est cohérent.</p>
-  </div>
 </div>
-
+<!-- Bottom Control Bar -->
+<div id="bottom-bar">
+<button class="ctrl-btn" id="pause" title="Pause / Reprendre">
+<span class="material-symbols-outlined" id="pauseIcon">pause</span>
+</button>
+<div class="speed-ctrl">
+<span class="material-symbols-outlined" style="color:var(--text-muted);font-size:16px;">slow_motion_video</span>
+<input id="speed" max="8" min="0" step="1" style="width: 100px;" type="range" value="0"/>
+<span id="speedLbl" style="font-family:var(--font-mono);font-size:12px;color:var(--accent);width:24px;">×1</span>
+</div>
+<button class="ctrl-btn" id="regen" title="Générer nouveau terrain">
+<span class="material-symbols-outlined">refresh</span>
+</button>
+<button class="ctrl-btn" id="clearSrc" title="Effacer toutes les sources">
+<span class="material-symbols-outlined">water_drop</span>
+</button>
+</div>
+<!-- Side Settings Panel -->
+<div id="side-panel">
+<div class="panel-header">
+<h1>Sandbox Hydrographique</h1>
+<p class="desc">Modèle Mei, Decaudin &amp; Hu. Clic sur le sable pour ajouter une source d'eau.</p>
+</div>
+<div class="segmented modes">
+<button class="on" data-m="composite">Simulation</button>
+<button data-m="contribution">Analyse Terrain (D8)</button>
+</div>
+<div class="hr"></div>
+<div id="layersBox">
+<div class="section-title">Couches Visuelles</div>
+<div class="layer-group">
+<div class="layer-group-title">
+<span class="material-symbols-outlined" style="font-size:14px;">terrain</span> Terrain
+        </div>
+<div class="layer-list" id="layers-terrain"></div>
+</div>
+<div class="layer-group">
+<div class="layer-group-title">
+<span class="material-symbols-outlined" style="font-size:14px;">water</span> Eau &amp; Dynamique
+        </div>
+<div class="layer-list" id="layers-water"></div>
+</div>
+</div>
+<div class="hr"></div>
+<div class="section-title">Paramètres</div>
+<div class="field">
+<label>Débit nouvelle source <span id="rateLbl">1.0</span></label>
+<input id="rate" max="4" min="0.1" step="0.1" type="range" value="1"/>
+</div>
+<div class="field" id="isoField">
+<label>Intervalle Topo <span id="stepLbl">0.090</span></label>
+<input id="isoStep" max="0.2" min="0.04" step="0.005" type="range" value="0.09"/>
+</div>
+<div class="section-title" style="margin-top:16px;">Sources Actives (<span id="srcCount">0</span>)</div>
+<div id="sources"></div>
+</div>
+</div>
 <script>
 (function(){
 "use strict";
@@ -120,8 +373,6 @@ const KC = 0.055, KS = 0.045, KD = 0.045, KE = 0.012;
 const EROSION_VIS_SCALE = 0.06;
 
 // ---------- réseau hydrographique POTENTIEL : accumulation de bassin versant D8 ----------
-// Déterminé uniquement par le relief. Existe même sans eau. Réservé à la vue Contribution —
-// ne doit jamais servir à représenter un cours d'eau actif (voir plus bas).
 const DRAIN_SMOOTH = 0.85;
 const STREAM_FRAC = 0.34;
 const RIVER_FRAC  = 0.60;
@@ -206,14 +457,12 @@ function genTerrain(){
   computeDrainage();
 }
 
-// ---------- pas de simulation ----------
 function step(){
   for(let i=0;i<sources.length;i++){
     const src=sources[i];
     if(src.active) d[idx(src.x,src.y)] += DT*src.rate;
   }
 
-  // A. flux (pression hydrostatique entre cellules voisines)
   for(let y=0;y<N;y++)for(let x=0;x<N;x++){
     const i=idx(x,y);
     const h=b[i]+d[i];
@@ -235,7 +484,6 @@ function step(){
     fL[i]=nl; fR[i]=nr; fT[i]=nt; fB[i]=nb;
   }
 
-  // B. hauteur d'eau -> tmpD, puis échange de buffers
   for(let y=0;y<N;y++)for(let x=0;x<N;x++){
     const i=idx(x,y);
     const fin = (x>0?fR[i-1]:0) + (x<N-1?fL[i+1]:0) + (y>0?fB[i-N]:0) + (y<N-1?fT[i+N]:0);
@@ -244,7 +492,6 @@ function step(){
   }
   { const t=d; d=tmpD; tmpD=t; }
 
-  // C. vitesse + érosion/dépôt + accumulation de débit
   for(let y=0;y<N;y++)for(let x=0;x<N;x++){
     const i=idx(x,y);
     const inL = x>0?fR[i-1]:0, outL = fL[i];
@@ -270,7 +517,6 @@ function step(){
     else { const diff=KD*(si-C); b[i]+=diff; s[i]=Math.max(0,si-diff); }
   }
 
-  // D. advection du sédiment + évaporation
   for(let y=0;y<N;y++)for(let x=0;x<N;x++){
     const i=idx(x,y);
     let sx=x-u[i]*DT/L, sy=y-v[i]*DT/L;
@@ -286,7 +532,6 @@ function step(){
   steps++; simTime+=DT;
 }
 
-// ---------- réseau hydrographique potentiel : direction D8 + accumulation topologique ----------
 function computeDrainage(){
   for(let y=0;y<N;y++)for(let x=0;x<N;x++){
     const i=idx(x,y);
@@ -319,7 +564,6 @@ function computeDrainage(){
 
 function smoothstep(a,c,x){ const t=Math.min(1,Math.max(0,(x-a)/(c-a))); return t*t*(3-2*t); }
 
-// ---------- réseau hydrographique ACTIF : uniquement d, u, v ----------
 function computeActiveNetwork(){
   maxActiveQ = 1e-6;
   for(let i=0;i<NN;i++){
@@ -356,7 +600,6 @@ function bilerp(arr,fx,fy){
   return lerp(lerp(v00,v10,tx),lerp(v01,v11,tx),ty);
 }
 
-// ---------- particules ----------
 function stepParticles(dtSim){
   if(dtSim<=0) return;
   const SCALE=55;
@@ -391,24 +634,32 @@ function stepParticles(dtSim){
 // ---------- rendu ----------
 const canvas=document.getElementById('c');
 const ctx=canvas.getContext('2d');
-const DISPLAY=680;
+function resizeCanvas() {
+  const size = Math.min(window.innerWidth - 350, window.innerHeight - 100);
+  canvas.style.width = size + 'px';
+  canvas.style.height = size + 'px';
+}
+window.addEventListener('resize', resizeCanvas);
+const DISPLAY=800;
 canvas.width=DISPLAY; canvas.height=DISPLAY;
+resizeCanvas();
+
 const off=document.createElement('canvas');
 off.width=N; off.height=N;
 const octx=off.getContext('2d');
 const img=octx.createImageData(N,N);
 
 // ---------- vues & calques ----------
-// Deux vues seulement : Composite (calques superposables à volonté) et Contribution (aucun calque,
-// vue diagnostic brute du réseau potentiel D8).
 let viewMode='composite';
-const LAYER_DEFS=[
-  {id:'relief',    label:'Relief',           color:'#8d9799'},
-  {id:'contours',  label:'Courbes de niveau',color:'#c9d3d6'},
-  {id:'eau',       label:'Eau',              color:'#3f8cb0'},
-  {id:'reseau',    label:'Réseau actif',     color:'#5db8d8'},
-  {id:'erosion',   label:'Érosion',          color:'#c98f52'},
-  {id:'particules',label:'Particules',       color:'#d2eeff'},
+const LAYER_DEFS_TERRAIN=[
+  {id:'relief',    label:'Sable / Roche',      color:'#8c7b65'},
+  {id:'contours',  label:'Courbes Topo',       color:'#bfa88c'},
+  {id:'erosion',   label:'Sédiments & Usure',  color:'#d2a15c'},
+];
+const LAYER_DEFS_WATER=[
+  {id:'eau',       label:'Masse d\'eau',       color:'#3f8cb0'},
+  {id:'reseau',    label:'Courants Actifs',    color:'#5db8d8'},
+  {id:'particules',label:'Traceurs Fluides',   color:'#d2eeff'},
 ];
 const layerOn={relief:true,contours:true,eau:true,reseau:true,erosion:true,particules:true};
 
@@ -419,12 +670,12 @@ function render(isoStepMajor){
   const range=Math.max(1e-4,bmax-bmin);
   const isoMinor=isoStepMajor/5;
   const isContribution = (viewMode==='contribution');
-  // chaque calque est indépendant : le rendu composite est la somme des calques actifs
+  
   const showRelief    = !isContribution && layerOn.relief;
   const showContours  = !isContribution && layerOn.contours;
   const showErosion   = !isContribution && layerOn.erosion;
   const showWater     = !isContribution && layerOn.eau;
-  const showActive    = !isContribution && layerOn.reseau;     // raster + tracés vectoriels
+  const showActive    = !isContribution && layerOn.reseau;
   const showParticles = !isContribution && layerOn.particules;
 
   for(let y=0;y<N;y++)for(let x=0;x<N;x++){
@@ -434,55 +685,63 @@ function render(isoStepMajor){
     let r,g2,bl;
 
     if(isContribution){
-      // vue diagnostic : contribution brute, aucun calque superposé
       const v=Math.pow(accumSmooth[i],0.6);
-      const g=Math.round(lerp(16,232,v));
-      r=Math.round(g*0.5); g2=Math.round(g*0.82); bl=g;
+      const g=Math.round(lerp(20,200,v));
+      r=Math.round(g*0.4); g2=Math.round(g*0.6); bl=g;
       const o=i*4; data[o]=r; data[o+1]=g2; data[o+2]=bl; data[o+3]=255;
       continue;
     }
 
-    // base : calque Relief, sinon fond sombre neutre
     if(showRelief){
-      const base=Math.round(lerp(56,124,t));
-      r=base; g2=base+1; bl=base+2;
+      r=Math.round(lerp(70, 140, t));
+      g2=Math.round(lerp(60, 120, t));
+      bl=Math.round(lerp(50, 100, t));
     } else {
-      r=30; g2=32; bl=34;
+      r=30; g2=29; bl=27;
     }
 
-    // calque Courbes : dessiné par-dessus n'importe quelle base (effet carte topo si Relief est off)
     if(showContours && d[i]<0.02){
       const majorHere=Math.floor(h/isoStepMajor);
       const minorHere=Math.floor(h/isoMinor);
       let majorLine=false, minorLine=false;
       if(x<N-1){ if(Math.floor(b[i+1]/isoStepMajor)!==majorHere) majorLine=true; else if(Math.floor(b[i+1]/isoMinor)!==minorHere) minorLine=true; }
       if(y<N-1){ if(Math.floor(b[i+N]/isoStepMajor)!==majorHere) majorLine=true; else if(Math.floor(b[i+N]/isoMinor)!==minorHere) minorLine=true; }
-      if(majorLine){ r=Math.round(lerp(r,208,0.32)); g2=Math.round(lerp(g2,214,0.32)); bl=Math.round(lerp(bl,217,0.32)); }
-      else if(minorLine){ r=Math.round(lerp(r,180,0.09)); g2=Math.round(lerp(g2,186,0.09)); bl=Math.round(lerp(bl,189,0.09)); }
+      if(majorLine){ r=Math.round(lerp(r,190,0.3)); g2=Math.round(lerp(g2,170,0.3)); bl=Math.round(lerp(bl,150,0.3)); }
+      else if(minorLine){ r=Math.round(lerp(r,160,0.1)); g2=Math.round(lerp(g2,140,0.1)); bl=Math.round(lerp(bl,120,0.1)); }
     }
 
     if(showErosion){
       const diff=(b[i]-bInit[i])/EROSION_VIS_SCALE;
-      if(diff<-0.02){ const w=Math.min(1,-diff); r=Math.round(lerp(r,132,w*0.5)); g2=Math.round(lerp(g2,78,w*0.5)); bl=Math.round(lerp(bl,46,w*0.5)); }
-      else if(diff>0.02){ const w=Math.min(1,diff); r=Math.round(lerp(r,196,w*0.35)); g2=Math.round(lerp(g2,208,w*0.35)); bl=Math.round(lerp(bl,214,w*0.35)); }
+      if(diff<-0.02){ 
+        const w=Math.min(1,-diff); 
+        r=Math.round(lerp(r,170,w*0.6)); 
+        g2=Math.round(lerp(g2,150,w*0.6)); 
+        bl=Math.round(lerp(bl,120,w*0.6)); 
+      }
+      else if(diff>0.02){ 
+        const w=Math.min(1,diff); 
+        r=Math.round(lerp(r,40,w*0.5)); 
+        g2=Math.round(lerp(g2,35,w*0.5)); 
+        bl=Math.round(lerp(bl,30,w*0.5)); 
+      }
     }
 
     const depth=d[i];
     if(showWater || showActive){
       const depthT=smoothstep(0,0.07,depth);
-      // calque Eau : teinte bleue proportionnelle à la lame
       if(showWater && depthT>0.002){
-        r=Math.round(lerp(r,10,depthT)); g2=Math.round(lerp(g2,64+22*depthT,depthT)); bl=Math.round(lerp(bl,112+48*depthT,depthT));
+        r=Math.round(lerp(r,50,depthT*0.8)); 
+        g2=Math.round(lerp(g2,110+20*depthT,depthT*0.8)); 
+        bl=Math.round(lerp(bl,140+40*depthT,depthT*0.8));
       }
-      // calque Réseau (raster) : fond cyan du réseau ACTIF uniquement (eau réelle en mouvement)
       if(showActive && activeCell[i]){
         const q=depth*activeVel[i];
         const qn=Math.min(1,q/maxActiveQ);
         const riverT=qn*0.6*Math.min(1,depthT*3+0.15);
         if(riverT>0.02){
-          r=Math.min(255,Math.round(lerp(r,150,riverT)));
-          g2=Math.min(255,Math.round(lerp(g2,224,riverT)));
-          bl=Math.min(255,Math.round(lerp(bl,255,riverT)));
+          r=Math.min(255,Math.round(lerp(r,100,riverT)));
+          g2=Math.min(255,Math.round(lerp(g2,180,riverT)));
+          bl=Math.min(255,Math.round(lerp(bl,210,riverT)));
         }
       }
     }
@@ -495,7 +754,6 @@ function render(isoStepMajor){
   ctx.clearRect(0,0,DISPLAY,DISPLAY);
   ctx.drawImage(off,0,0,DISPLAY,DISPLAY);
 
-  // ---- réseau POTENTIEL (D8) : uniquement en vue Contribution, à titre diagnostique ----
   if(isContribution){
     const streamPath=new Path2D(), riverPath=new Path2D();
     for(let i=0;i<NN;i++){
@@ -510,11 +768,10 @@ function render(isoStepMajor){
       path.moveTo(sx,sy); path.lineTo(ex,ey);
     }
     ctx.lineCap='round'; ctx.lineJoin='round';
-    ctx.strokeStyle='rgba(120,195,228,.45)'; ctx.lineWidth=1.3; ctx.stroke(streamPath);
-    ctx.strokeStyle='rgba(165,230,255,.75)'; ctx.lineWidth=3.0; ctx.stroke(riverPath);
+    ctx.strokeStyle='rgba(100,150,180,.4)'; ctx.lineWidth=1.5; ctx.stroke(streamPath);
+    ctx.strokeStyle='rgba(120,180,220,.7)'; ctx.lineWidth=3.5; ctx.stroke(riverPath);
   }
 
-  // ---- calque Réseau ACTIF : tracés vectoriels (eau réelle, d/u/v uniquement) ----
   if(showActive){
     const streamPath=new Path2D(), riverPath=new Path2D();
     for(let y=0;y<N;y++)for(let x=0;x<N;x++){
@@ -531,13 +788,12 @@ function render(isoStepMajor){
       path.moveTo(sx,sy); path.lineTo(ex,ey);
     }
     ctx.lineCap='round'; ctx.lineJoin='round';
-    ctx.strokeStyle='rgba(120,195,228,.6)'; ctx.lineWidth=1.4; ctx.stroke(streamPath);
-    ctx.strokeStyle='rgba(165,230,255,.95)'; ctx.lineWidth=3.2; ctx.stroke(riverPath);
+    ctx.strokeStyle='rgba(90,160,200,.6)'; ctx.lineWidth=1.5; ctx.stroke(streamPath);
+    ctx.strokeStyle='rgba(120,200,240,.9)'; ctx.lineWidth=3.5; ctx.stroke(riverPath);
   }
 
-  // ---- calque Particules : revérifie les seuils physiques en plus de pAlive ----
   if(showParticles){
-    ctx.fillStyle='rgba(210,238,255,.85)';
+    ctx.fillStyle='rgba(200,230,250,.8)';
     for(let i=0;i<NP;i++){
       if(!pAlive[i]) continue;
       const depth=bilerp(d,px[i],py[i]);
@@ -546,18 +802,22 @@ function render(isoStepMajor){
       const q=depth*vel;
       if(depth<D_DEATH || vel<V_DEATH || q<Q_DEATH) continue;
       const sx=(px[i]+0.5)/N*DISPLAY, sy=(py[i]+0.5)/N*DISPLAY;
-      ctx.beginPath(); ctx.arc(sx,sy,1.4,0,7); ctx.fill();
+      ctx.beginPath(); ctx.arc(sx,sy,1.6,0,7); ctx.fill();
     }
   }
 
-  ctx.fillStyle='#e8b34a';
+  // Source markers - "physical damp spots" style
   for(let k=0;k<sources.length;k++){
     const src=sources[k];
     const px2=(src.x+0.5)/N*DISPLAY, py2=(src.y+0.5)/N*DISPLAY;
-    ctx.globalAlpha = src.active?1:0.35;
+    ctx.globalAlpha = src.active ? 0.8 : 0.2;
+    
+    ctx.fillStyle='rgba(60, 130, 170, 0.4)';
+    ctx.beginPath(); ctx.arc(px2,py2,12,0,7); ctx.fill();
+    
+    ctx.fillStyle='rgba(30, 80, 110, 0.9)';
     ctx.beginPath(); ctx.arc(px2,py2,4,0,7); ctx.fill();
-    ctx.strokeStyle='rgba(232,179,74,.35)';
-    ctx.beginPath(); ctx.arc(px2,py2,8,0,7); ctx.stroke();
+    
     ctx.globalAlpha=1;
   }
 }
@@ -569,68 +829,67 @@ const rateEl=document.getElementById('rate'), rateLbl=document.getElementById('r
 const isoEl=document.getElementById('isoStep'), stepLbl=document.getElementById('stepLbl');
 const isoField=document.getElementById('isoField');
 const pauseBtn=document.getElementById('pause');
+const pauseIcon=document.getElementById('pauseIcon');
 const sourcesDiv=document.getElementById('sources');
 const modeLbl=document.getElementById('modeLbl');
 const layersBox=document.getElementById('layersBox');
-const layersDiv=document.getElementById('layers');
-const layerCountEl=document.getElementById('layerCount');
 let paused=false;
 
-// construction des rangées de calques (pastille de couleur = ce que le calque apporte)
-LAYER_DEFS.forEach(L=>{
-  const row=document.createElement('div');
-  row.className='layer on';
-  row.dataset.id=L.id;
-  row.style.setProperty('--c', L.color);
-  row.innerHTML='<span class="sw"></span>'+L.label;
-  row.onclick=()=>{ layerOn[L.id]=!layerOn[L.id]; updateLayersUI(); };
-  layersDiv.appendChild(row);
-});
+function buildLayerUI(defs, containerId) {
+  const container = document.getElementById(containerId);
+  defs.forEach(L=>{
+    const row=document.createElement('div');
+    row.className='layer-item on';
+    row.dataset.id=L.id;
+    row.style.setProperty('--c', L.color);
+    row.innerHTML=`<div class="swatch"></div><span>${L.label}</span>`;
+    row.onclick=()=>{ layerOn[L.id]=!layerOn[L.id]; updateLayersUI(); };
+    container.appendChild(row);
+  });
+}
+
+buildLayerUI(LAYER_DEFS_TERRAIN, 'layers-terrain');
+buildLayerUI(LAYER_DEFS_WATER, 'layers-water');
 
 function updateLayersUI(){
-  document.querySelectorAll('.layer').forEach(row=>{
+  document.querySelectorAll('.layer-item').forEach(row=>{
     row.classList.toggle('on', !!layerOn[row.dataset.id]);
   });
-  const n=LAYerCount();
-  layerCountEl.textContent=n+'/'+LAYER_DEFS.length;
-  // le curseur d'intervalle des courbes n'a de sens que si le calque Courbes est actif
   isoField.classList.toggle('disabled', viewMode!=='composite' || !layerOn.contours);
 }
-function LAYerCount(){ let n=0; LAYER_DEFS.forEach(L=>{ if(layerOn[L.id]) n++; }); return n; }
 
 function setMode(m){
   viewMode=m;
   document.querySelectorAll('.modes button[data-m]').forEach(b=>b.classList.toggle('on',b.dataset.m===m));
-  modeLbl.textContent = m;
-  // Contribution = vue diagnostic brute : la section des calques disparaît entièrement
-  layersBox.style.display = (m==='composite') ? '' : 'none';
+  modeLbl.textContent = m === 'composite' ? 'Simulation' : 'Analyse';
+  layersBox.style.display = (m==='composite') ? 'block' : 'none';
   updateLayersUI();
 }
 
 document.querySelectorAll('.modes button[data-m]').forEach(btn=>{
   btn.onclick=()=>setMode(btn.dataset.m);
 });
-document.addEventListener('keydown',(e)=>{
-  if(e.key==='1') setMode('composite');
-  else if(e.key==='2') setMode('contribution');
-});
-
-// préréglages de calques
-document.getElementById('layAll').onclick=()=>{ LAYER_DEFS.forEach(L=>layerOn[L.id]=true); updateLayersUI(); };
-document.getElementById('layNone').onclick=()=>{ LAYER_DEFS.forEach(L=>layerOn[L.id]=false); updateLayersUI(); };
-document.getElementById('layHydro').onclick=()=>{
-  layerOn.relief=false; layerOn.contours=false; layerOn.erosion=false;
-  layerOn.eau=true; layerOn.reseau=true; layerOn.particules=true;
-  updateLayersUI();
-};
 
 speedEl.oninput=()=>{ speedLbl.textContent='×'+SPEED_STEPS[+speedEl.value]; };
 rateEl.oninput=()=>{ rateLbl.textContent=(+rateEl.value).toFixed(1); };
 isoEl.oninput=()=>{ stepLbl.textContent=(+isoEl.value).toFixed(3); };
 
-pauseBtn.onclick=()=>{ paused=!paused; pauseBtn.classList.toggle('on',paused); pauseBtn.textContent=paused?'Reprendre':'Pause'; };
-document.getElementById('regen').onclick=()=>{ genTerrain(); refreshSourceList(); };
-document.getElementById('clearSrc').onclick=()=>{ sources.length=0; refreshSourceList(); };
+pauseBtn.onclick=()=>{ 
+  paused=!paused; 
+  pauseBtn.classList.toggle('active', paused); 
+  pauseIcon.textContent=paused ? 'play_arrow' : 'pause'; 
+};
+document.getElementById('regen').onclick=()=>{ 
+  const btn = document.getElementById('regen');
+  btn.style.transform = 'scale(0.9)';
+  setTimeout(()=>btn.style.transform = 'scale(1)', 100);
+  genTerrain(); 
+  refreshSourceList(); 
+};
+document.getElementById('clearSrc').onclick=()=>{ 
+  sources.length=0; 
+  refreshSourceList(); 
+};
 
 canvas.addEventListener('click',(e)=>{
   const rect=canvas.getBoundingClientRect();
@@ -638,21 +897,27 @@ canvas.addEventListener('click',(e)=>{
   const gx=px0*N, gy=py0*N;
   for(let i=0;i<sources.length;i++){
     const s2=sources[i];
-    if(Math.hypot(s2.x-gx,s2.y-gy)<4){ s2.active=!s2.active; refreshSourceList(); return; }
+    if(Math.hypot(s2.x-gx,s2.y-gy)<6){ s2.active=!s2.active; refreshSourceList(); return; }
   }
   const cx=Math.max(1,Math.min(N-2,Math.round(gx)));
   const cy=Math.max(1,Math.min(N-2,Math.round(gy)));
   sources.push({x:cx,y:cy,rate:+rateEl.value,active:true});
+  
+  // Physical click effect
+  canvas.style.transform = 'scale(0.99)';
+  setTimeout(()=>canvas.style.transform = 'scale(1)', 100);
+  
   refreshSourceList();
 });
 
 function refreshSourceList(){
   sourcesDiv.innerHTML='';
-  if(sources.length===0){ sourcesDiv.innerHTML='<div style="opacity:.5">aucune source</div>'; return; }
+  document.getElementById('srcCount').textContent = sources.length;
+  if(sources.length===0){ sourcesDiv.innerHTML='<div style="opacity:.5;font-size:11px;padding:4px">Aucune source. Clic sur le terrain.</div>'; return; }
   sources.forEach((s2,i)=>{
     const row=document.createElement('div');
     row.className='src-row';
-    row.innerHTML='<span class="'+(s2.active?'':'off')+'">#'+(i+1)+' · '+s2.rate.toFixed(1)+'</span><a data-i="'+i+'">retirer</a>';
+    row.innerHTML=`<span class="${s2.active?'':'off'}">Source ${i+1} [${s2.rate.toFixed(1)} L/s]</span><a data-i="${i}"><span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle;">close</span></a>`;
     row.querySelector('a').onclick=()=>{ sources.splice(i,1); refreshSourceList(); };
     sourcesDiv.appendChild(row);
   });
@@ -705,5 +970,4 @@ setMode('composite');
 requestAnimationFrame(loop);
 })();
 </script>
-</body>
-</html>
+</body></html>
