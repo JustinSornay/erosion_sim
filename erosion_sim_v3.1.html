@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Érosion — réseau hydrographique</title>
+<style>
+  :root{
+    --bg:#08090a; --panel:#101314; --line:#c9d3d6; --line-dim:#454e50;
+    --water:#5db8d8; --accent:#e8b34a; --text:#c9d3d6; --text-dim:#5c6567;
+    --mono:'IBM Plex Mono','SF Mono',Consolas,monospace;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:var(--mono);overflow:hidden;}
+  #wrap{display:flex;height:100%;}
+  #stage{flex:1;display:flex;align-items:center;justify-content:center;position:relative;}
+  canvas{cursor:crosshair;box-shadow:0 0 0 1px var(--line-dim);}
+  #hud{position:absolute;top:14px;left:14px;font-size:11px;color:var(--text-dim);letter-spacing:.03em;line-height:1.7;pointer-events:none;}
+  #hud b{color:var(--text);font-weight:500;}
+  #hud .mode{color:var(--accent);}
+  #panel{width:256px;background:var(--panel);border-left:1px solid var(--line-dim);padding:20px 18px;display:flex;flex-direction:column;gap:16px;overflow-y:auto;}
+  h1{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--text);margin:0 0 2px;}
+  .sub{font-size:10px;color:var(--text-dim);margin:0 0 4px;line-height:1.5;}
+  .field{display:flex;flex-direction:column;gap:6px;}
+  .field.disabled{opacity:.35;pointer-events:none;}
+  .field label{font-size:10px;color:var(--text-dim);letter-spacing:.05em;text-transform:uppercase;display:flex;justify-content:space-between;}
+  .field label span{color:var(--accent);font-weight:600;}
+  input[type=range]{-webkit-appearance:none;width:100%;height:2px;background:var(--line-dim);outline:none;}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:11px;height:11px;border-radius:50%;background:var(--text);cursor:pointer;}
+  input[type=range]::-moz-range-thumb{width:11px;height:11px;border-radius:50%;background:var(--text);border:none;cursor:pointer;}
+  button{background:none;border:1px solid var(--line-dim);color:var(--text);font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;padding:9px;cursor:pointer;transition:border-color .15s,color .15s;}
+  button:hover{border-color:var(--text);color:#fff;}
+  button.on{border-color:var(--accent);color:var(--accent);}
+  .hr{height:1px;background:var(--line-dim);margin:2px 0;}
+  .lbl{display:block;font-size:10px;color:var(--text-dim);letter-spacing:.05em;text-transform:uppercase;}
+  #sources{display:flex;flex-direction:column;gap:4px;font-size:10px;color:var(--text-dim);max-height:110px;overflow-y:auto;}
+  .src-row{display:flex;justify-content:space-between;align-items:center;gap:6px;}
+  .src-row span{color:var(--water);}
+  .src-row span.off{color:var(--text-dim);text-decoration:line-through;}
+  .src-row a{color:var(--text-dim);cursor:pointer;text-decoration:none;flex-shrink:0;}
+  .src-row a:hover{color:#fff;}
+  .modes{display:flex;gap:4px;flex-wrap:wrap;}
+  .modes button{flex:1;padding:6px 2px;font-size:9px;min-width:38px;}
+  .layers{display:flex;flex-direction:column;gap:3px;}
+  .layer{display:flex;align-items:center;gap:8px;font-size:10px;letter-spacing:.06em;text-transform:uppercase;
+         color:var(--text-dim);padding:5px 7px;cursor:pointer;border:1px solid transparent;
+         transition:color .15s,background .15s;user-select:none;}
+  .layer:hover{color:#fff;}
+  .layer.on{color:var(--text);background:rgba(255,255,255,.03);}
+  .layer .sw{width:9px;height:9px;flex-shrink:0;border:1px solid var(--line-dim);background:transparent;transition:background .15s;}
+  .layer.on .sw{background:var(--c);border-color:transparent;}
+  .hint{font-size:10px;color:var(--text-dim);line-height:1.5;}
+</style>
+</head>
+<body>
+<div id="wrap">
+  <div id="stage">
+    <canvas id="c"></canvas>
+    <div id="hud">
+      <b class="mode" id="modeLbl">composite</b><br>
+      <b id="fps">--</b> fps réel · cible <b id="tgtMult">×1</b> · réel <b id="realMult">×1</b><br>
+      <b id="tcount">0</b> pas · <b id="tsim">0.0</b> s simulées
+    </div>
+  </div>
+  <div id="panel">
+    <div>
+      <h1>Érosion hydraulique</h1>
+      <p class="sub">Tuyaux virtuels (Mei, Decaudin &amp; Hu, 2007) + réseau hydrographique dérivé d'une vraie accumulation de surface contributive (D8, à la façon d'un SIG hydrologique). Clic sur le terrain : nouvelle source. Clic sur un marqueur : activer/désactiver.</p>
+    </div>
+    <div class="hr"></div>
+    <div class="field">
+      <label>Vitesse du temps <span id="speedLbl">×1</span></label>
+      <input id="speed" type="range" min="0" max="8" value="0" step="1">
+    </div>
+    <div class="field">
+      <label>Débit de la prochaine source <span id="rateLbl">1.0</span></label>
+      <input id="rate" type="range" min="0.1" max="4" value="1" step="0.1">
+    </div>
+    <div class="field" id="isoField">
+      <label>Intervalle des courbes <span id="stepLbl">0.090</span></label>
+      <input id="isoStep" type="range" min="0.04" max="0.2" value="0.09" step="0.005">
+    </div>
+    <div class="hr"></div>
+    <label class="lbl" style="margin-bottom:8px;">Mode de vue (1–2)</label>
+    <div class="modes">
+      <button data-m="composite" class="on">Composite</button>
+      <button data-m="contribution">Contribution</button>
+    </div>
+    <div id="layersBox">
+      <div class="field" style="margin-top:12px;">
+        <label>Calques superposés <span id="layerCount">6/6</span></label>
+        <div class="layers" id="layers"></div>
+      </div>
+      <div class="modes" style="margin-top:10px;">
+        <button id="layAll">Tout</button>
+        <button id="layNone">Aucun</button>
+        <button id="layHydro">Hydro</button>
+      </div>
+    </div>
+    <div class="hr"></div>
+    <button id="pause">Pause</button>
+    <button id="regen">Nouveau terrain</button>
+    <button id="clearSrc">Retirer toutes les sources</button>
+    <div class="hr"></div>
+    <div>
+      <label class="lbl">Sources</label>
+      <div id="sources" style="margin-top:8px;"></div>
+    </div>
+    <div class="hr"></div>
+    <p class="hint">Vue <b>Composite</b> : assemblez librement les calques — relief, courbes de niveau, eau, réseau, érosion, particules — le rendu est la somme de ceux qui sont actifs. Le bleu marque l'eau. Les lignes cyan du calque Réseau sont le réseau <b>actif</b> — de l'eau réellement présente et réellement en mouvement, pas une prédiction du relief : cyan clair = ruisseau actif, cyan vif et plus épais = rivière active. Les points blancs du calque Particules n'existent que là où de l'eau s'écoule réellement, et disparaissent dès que le courant s'arrête ou que la lame s'assèche. Le calque Érosion réchauffe la teinte du relief là où le sol a été creusé, la refroidit là où du sédiment s'est déposé. Vue <b>Contribution</b> : aucun calque — c'est la vue diagnostic du réseau <b>potentiel</b> (D8, relief seul), visible même sans eau, pour vérifier que l'algorithme hydrologique est cohérent.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+// ---------- grille & constantes physiques ----------
+const N = 128, NN = N*N, L = 1, G = 9.81, A = 1.2, DT = 0.017;
+const KC = 0.055, KS = 0.045, KD = 0.045, KE = 0.012;
+const EROSION_VIS_SCALE = 0.06;
+
+// ---------- réseau hydrographique POTENTIEL : accumulation de bassin versant D8 ----------
+// Déterminé uniquement par le relief. Existe même sans eau. Réservé à la vue Contribution —
+// ne doit jamais servir à représenter un cours d'eau actif (voir plus bas).
+const DRAIN_SMOOTH = 0.85;
+const STREAM_FRAC = 0.34;
+const RIVER_FRAC  = 0.60;
+const NDX=[-1,0,1,-1,1,-1,0,1], NDY=[-1,-1,-1,0,0,1,1,1];
+const NDIST=[Math.SQRT2,1,Math.SQRT2,1,1,Math.SQRT2,1,Math.SQRT2];
+
+// ---------- réseau hydrographique ACTIF : eau réellement présente et réellement en mouvement ----------
+const D_SPAWN = 0.006,  D_DEATH = 0.0035;
+const V_SPAWN = 0.15,   V_DEATH = 0.07;
+const Q_SPAWN = 0.003,  Q_DEATH = 0.0014;
+
+let b, bInit, d, s, fL, fR, fT, fB, u, v, tmpS, tmpD;
+let flowTo, accum, accumSmooth, sortIdx, drainReady;
+let activeCell, activeVel, maxActiveQ;
+let sources = [];
+let steps = 0, simTime = 0;
+
+function idx(x,y){ return y*N+x; }
+
+// ---------- bruit (Perlin classique, seedé) ----------
+let seed = 918273645;
+function rnd(){ seed = (seed*1103515245+12345) & 0x7fffffff; return seed/0x7fffffff; }
+const perm = new Uint8Array(512);
+function reseedPerm(){
+  const p = new Uint8Array(256);
+  for(let i=0;i<256;i++) p[i]=i;
+  for(let i=255;i>0;i--){ const j=(rnd()*(i+1))|0; const t=p[i]; p[i]=p[j]; p[j]=t; }
+  for(let i=0;i<512;i++) perm[i]=p[i&255];
+}
+function fade(t){ return t*t*t*(t*(t*6-15)+10); }
+function lerp(a,b,t){ return a+t*(b-a); }
+function grad(h,x,y){ const g=h&7, uu=g<4?x:y, ww=g<4?y:x; return ((g&1)?-uu:uu)+((g&2)?-2*ww:2*ww); }
+function perlin(x,y){
+  const X=Math.floor(x)&255, Y=Math.floor(y)&255;
+  x-=Math.floor(x); y-=Math.floor(y);
+  const uu=fade(x), vv=fade(y);
+  const Aa=perm[X]+Y, Bb=perm[X+1]+Y;
+  return lerp(lerp(grad(perm[Aa],x,y),grad(perm[Bb],x-1,y),uu),
+              lerp(grad(perm[Aa+1],x,y-1),grad(perm[Bb+1],x-1,y-1),uu),vv);
+}
+function fbm(x,y){
+  let amp=1,freq=1,sum=0,norm=0;
+  for(let i=0;i<5;i++){ sum+=perlin(x*freq,y*freq)*amp; norm+=amp; amp*=0.5; freq*=2.02; }
+  return sum/norm;
+}
+
+// ---------- particules de flux ----------
+const NP = 260;
+let px, py, pAlive;
+
+function genTerrain(){
+  seed = (Math.random()*1e9)|0;
+  reseedPerm();
+  b = new Float32Array(NN); bInit = new Float32Array(NN);
+  d = new Float32Array(NN); s = new Float32Array(NN);
+  fL = new Float32Array(NN); fR = new Float32Array(NN);
+  fT = new Float32Array(NN); fB = new Float32Array(NN);
+  u = new Float32Array(NN); v = new Float32Array(NN);
+  tmpS = new Float32Array(NN); tmpD = new Float32Array(NN);
+  flowTo = new Int32Array(NN); accum = new Float32Array(NN);
+  accumSmooth = new Float32Array(NN); sortIdx = new Int32Array(NN);
+  drainReady = false;
+  activeCell = new Uint8Array(NN);
+  activeVel = new Float32Array(NN);
+  maxActiveQ = 1e-6;
+  const OUTLET_DROP = 0.55;
+  for(let y=0;y<N;y++)for(let x=0;x<N;x++){
+    const nx=x/N*3.2, ny=y/N*3.2;
+    const macro=(fbm(nx*0.4, ny*0.4)+1)*0.5;
+    const detail=(fbm(nx, ny)+1)*0.5;
+    let h = macro*0.8 + detail*0.2;
+    h += OUTLET_DROP*(1-y/N);
+    const wallDist = Math.min(x/N, 1-x/N, y/N);
+    h += Math.pow(Math.max(0,1-wallDist*7),2)*0.4;
+    b[idx(x,y)]=h*0.9;
+  }
+  bInit.set(b);
+  sources.length=0;
+  steps=0; simTime=0;
+  px = new Float32Array(NP); py = new Float32Array(NP); pAlive = new Uint8Array(NP);
+  for(let i=0;i<NP;i++){ px[i]=rnd()*N; py[i]=rnd()*N; pAlive[i]=0; }
+  computeDrainage();
+}
+
+// ---------- pas de simulation ----------
+function step(){
+  for(let i=0;i<sources.length;i++){
+    const src=sources[i];
+    if(src.active) d[idx(src.x,src.y)] += DT*src.rate;
+  }
+
+  // A. flux (pression hydrostatique entre cellules voisines)
+  for(let y=0;y<N;y++)for(let x=0;x<N;x++){
+    const i=idx(x,y);
+    const h=b[i]+d[i];
+    let dhL=0,dhR=0,dhT=0,dhB=0;
+    if(x>0)   dhL = h-(b[i-1]+d[i-1]);
+    if(x<N-1) dhR = h-(b[i+1]+d[i+1]);
+    if(y>0)   dhT = h-(b[i-N]+d[i-N]);
+    if(y<N-1) dhB = h-(b[i+N]+d[i+N]);
+    let nl = Math.max(0, fL[i] + DT*A*G*dhL/L);
+    let nr = Math.max(0, fR[i] + DT*A*G*dhR/L);
+    let nt = Math.max(0, fT[i] + DT*A*G*dhT/L);
+    let nb = Math.max(0, fB[i] + DT*A*G*dhB/L);
+    if(x===0) nl=0; if(x===N-1) nr=0; if(y===0) nt=0; if(y===N-1) nb=0;
+    const sum=nl+nr+nt+nb;
+    if(sum>0){
+      const K=Math.min(1, d[i]*L*L/(sum*DT+1e-9));
+      nl*=K; nr*=K; nt*=K; nb*=K;
+    }
+    fL[i]=nl; fR[i]=nr; fT[i]=nt; fB[i]=nb;
+  }
+
+  // B. hauteur d'eau -> tmpD, puis échange de buffers
+  for(let y=0;y<N;y++)for(let x=0;x<N;x++){
+    const i=idx(x,y);
+    const fin = (x>0?fR[i-1]:0) + (x<N-1?fL[i+1]:0) + (y>0?fB[i-N]:0) + (y<N-1?fT[i+N]:0);
+    const fout = fL[i]+fR[i]+fT[i]+fB[i];
+    tmpD[i] = Math.max(0, d[i] + DT*(fin-fout)/(L*L));
+  }
+  { const t=d; d=tmpD; tmpD=t; }
+
+  // C. vitesse + érosion/dépôt + accumulation de débit
+  for(let y=0;y<N;y++)for(let x=0;x<N;x++){
+    const i=idx(x,y);
+    const inL = x>0?fR[i-1]:0, outL = fL[i];
+    const inR = x<N-1?fL[i+1]:0, outR = fR[i];
+    const inT = y>0?fB[i-N]:0, outT = fT[i];
+    const inB = y<N-1?fT[i+N]:0, outB = fB[i];
+    const wx = ((inL-outL)+(outR-inR))*0.5;
+    const wy = ((inT-outT)+(outB-inB))*0.5;
+    const dbar = Math.max(1e-4, d[i]);
+    const ui = wx/(L*dbar), vi = wy/(L*dbar);
+    u[i]=ui; v[i]=vi;
+
+    const bl = x>0?b[i-1]:b[i], brr = x<N-1?b[i+1]:b[i];
+    const bt = y>0?b[i-N]:b[i], bb = y<N-1?b[i+N]:b[i];
+    const dzx=(brr-bl)*0.5, dzy=(bb-bt)*0.5;
+    const slope=Math.sqrt(dzx*dzx+dzy*dzy);
+    const sinA = slope/Math.sqrt(1+slope*slope);
+    const vel = Math.sqrt(ui*ui+vi*vi);
+    const dNorm = Math.min(1,d[i]*4);
+    const C = KC*sinA*vel*dNorm;
+    const si=s[i];
+    if(C>si){ const diff=KS*(C-si); b[i]-=diff; s[i]=si+diff; }
+    else { const diff=KD*(si-C); b[i]+=diff; s[i]=Math.max(0,si-diff); }
+  }
+
+  // D. advection du sédiment + évaporation
+  for(let y=0;y<N;y++)for(let x=0;x<N;x++){
+    const i=idx(x,y);
+    let sx=x-u[i]*DT/L, sy=y-v[i]*DT/L;
+    sx=Math.min(N-1.001,Math.max(0,sx)); sy=Math.min(N-1.001,Math.max(0,sy));
+    const x0=sx|0, y0=sy|0, x1=Math.min(x0+1,N-1), y1=Math.min(y0+1,N-1), tx=sx-x0, ty=sy-y0;
+    const s00=s[idx(x0,y0)], s10=s[idx(x1,y0)];
+    const s01=s[idx(x0,y1)], s11=s[idx(x1,y1)];
+    tmpS[i]=lerp(lerp(s00,s10,tx),lerp(s01,s11,tx),ty);
+    d[i]*=(1-KE*DT);
+  }
+  { const t=s; s=tmpS; tmpS=t; }
+
+  steps++; simTime+=DT;
+}
+
+// ---------- réseau hydrographique potentiel : direction D8 + accumulation topologique ----------
+function computeDrainage(){
+  for(let y=0;y<N;y++)for(let x=0;x<N;x++){
+    const i=idx(x,y);
+    const hi=b[i];
+    let bestJ=-1, bestSlope=1e-6;
+    for(let k=0;k<8;k++){
+      const nx=x+NDX[k], ny=y+NDY[k];
+      if(nx<0||nx>=N||ny<0||ny>=N) continue;
+      const j=idx(nx,ny);
+      const slope=(hi-b[j])/NDIST[k];
+      if(slope>bestSlope){ bestSlope=slope; bestJ=j; }
+    }
+    flowTo[i]=bestJ;
+  }
+  for(let i=0;i<NN;i++) sortIdx[i]=i;
+  sortIdx.sort((p,q)=>b[q]-b[p]);
+  accum.fill(1);
+  for(let k=0;k<NN;k++){
+    const i=sortIdx[k];
+    const j=flowTo[i];
+    if(j>=0) accum[j]+=accum[i];
+  }
+  const maxLog=Math.log(1+NN);
+  for(let i=0;i<NN;i++){
+    const lg=Math.log(1+accum[i])/maxLog;
+    accumSmooth[i] = drainReady ? accumSmooth[i]*DRAIN_SMOOTH+lg*(1-DRAIN_SMOOTH) : lg;
+  }
+  drainReady=true;
+}
+
+function smoothstep(a,c,x){ const t=Math.min(1,Math.max(0,(x-a)/(c-a))); return t*t*(3-2*t); }
+
+// ---------- réseau hydrographique ACTIF : uniquement d, u, v ----------
+function computeActiveNetwork(){
+  maxActiveQ = 1e-6;
+  for(let i=0;i<NN;i++){
+    const depth=d[i];
+    const vel=Math.hypot(u[i],v[i]);
+    const q=depth*vel;
+    activeVel[i]=vel;
+    const was=activeCell[i];
+    let now;
+    if(was) now = !(depth<D_DEATH || vel<V_DEATH || q<Q_DEATH);
+    else    now = (depth>D_SPAWN && vel>V_SPAWN && q>Q_SPAWN);
+    activeCell[i]=now?1:0;
+    if(now && q>maxActiveQ) maxActiveQ=q;
+  }
+}
+
+function activeDownstream(x,y,i){
+  const uu=u[i], vv=v[i];
+  if(uu===0 && vv===0) return -1;
+  let bestK=-1, bestDot=0;
+  for(let k=0;k<8;k++){
+    const dot=(uu*NDX[k]+vv*NDY[k])/NDIST[k];
+    if(dot>bestDot){ bestDot=dot; bestK=k; }
+  }
+  if(bestK<0) return -1;
+  const nx=x+NDX[bestK], ny=y+NDY[bestK];
+  if(nx<0||nx>=N||ny<0||ny>=N) return -1;
+  return idx(nx,ny);
+}
+function bilerp(arr,fx,fy){
+  fx=Math.min(N-1.001,Math.max(0,fx)); fy=Math.min(N-1.001,Math.max(0,fy));
+  const x0=fx|0,y0=fy|0,x1=Math.min(x0+1,N-1),y1=Math.min(y0+1,N-1),tx=fx-x0,ty=fy-y0;
+  const v00=arr[idx(x0,y0)],v10=arr[idx(x1,y0)],v01=arr[idx(x0,y1)],v11=arr[idx(x1,y1)];
+  return lerp(lerp(v00,v10,tx),lerp(v01,v11,tx),ty);
+}
+
+// ---------- particules ----------
+function stepParticles(dtSim){
+  if(dtSim<=0) return;
+  const SCALE=55;
+  for(let i=0;i<NP;i++){
+    let x=px[i], y=py[i];
+    if(pAlive[i]){
+      const depth=bilerp(d,x,y);
+      const uu=bilerp(u,x,y), vv=bilerp(v,x,y);
+      const vel=Math.hypot(uu,vv);
+      const q=depth*vel;
+      const outOfBounds = x<1||x>N-2||y<1||y>N-2;
+      if(!(depth<D_DEATH || vel<V_DEATH || q<Q_DEATH || outOfBounds)){
+        px[i]=x+uu*dtSim*SCALE; py[i]=y+vv*dtSim*SCALE;
+        continue;
+      }
+      pAlive[i]=0;
+    }
+    let bestX=-1,bestY=-1,bestQ=-1;
+    for(let k=0;k<6;k++){
+      const cx=1+rnd()*(N-2), cy=1+rnd()*(N-2);
+      const depth=bilerp(d,cx,cy);
+      const uu=bilerp(u,cx,cy), vv=bilerp(v,cx,cy);
+      const vel=Math.hypot(uu,vv);
+      const q=depth*vel;
+      if(depth>D_SPAWN && vel>V_SPAWN && q>Q_SPAWN && q>bestQ){ bestQ=q; bestX=cx; bestY=cy; }
+    }
+    if(bestX>=0){ px[i]=bestX; py[i]=bestY; pAlive[i]=1; }
+    else pAlive[i]=0;
+  }
+}
+
+// ---------- rendu ----------
+const canvas=document.getElementById('c');
+const ctx=canvas.getContext('2d');
+const DISPLAY=680;
+canvas.width=DISPLAY; canvas.height=DISPLAY;
+const off=document.createElement('canvas');
+off.width=N; off.height=N;
+const octx=off.getContext('2d');
+const img=octx.createImageData(N,N);
+
+// ---------- vues & calques ----------
+// Deux vues seulement : Composite (calques superposables à volonté) et Contribution (aucun calque,
+// vue diagnostic brute du réseau potentiel D8).
+let viewMode='composite';
+const LAYER_DEFS=[
+  {id:'relief',    label:'Relief',           color:'#8d9799'},
+  {id:'contours',  label:'Courbes de niveau',color:'#c9d3d6'},
+  {id:'eau',       label:'Eau',              color:'#3f8cb0'},
+  {id:'reseau',    label:'Réseau actif',     color:'#5db8d8'},
+  {id:'erosion',   label:'Érosion',          color:'#c98f52'},
+  {id:'particules',label:'Particules',       color:'#d2eeff'},
+];
+const layerOn={relief:true,contours:true,eau:true,reseau:true,erosion:true,particules:true};
+
+function render(isoStepMajor){
+  const data=img.data;
+  let bmin=1e9,bmax=-1e9;
+  for(let i=0;i<NN;i++){ const h=b[i]; if(h<bmin)bmin=h; if(h>bmax)bmax=h; }
+  const range=Math.max(1e-4,bmax-bmin);
+  const isoMinor=isoStepMajor/5;
+  const isContribution = (viewMode==='contribution');
+  // chaque calque est indépendant : le rendu composite est la somme des calques actifs
+  const showRelief    = !isContribution && layerOn.relief;
+  const showContours  = !isContribution && layerOn.contours;
+  const showErosion   = !isContribution && layerOn.erosion;
+  const showWater     = !isContribution && layerOn.eau;
+  const showActive    = !isContribution && layerOn.reseau;     // raster + tracés vectoriels
+  const showParticles = !isContribution && layerOn.particules;
+
+  for(let y=0;y<N;y++)for(let x=0;x<N;x++){
+    const i=idx(x,y);
+    const h=b[i];
+    const t=(h-bmin)/range;
+    let r,g2,bl;
+
+    if(isContribution){
+      // vue diagnostic : contribution brute, aucun calque superposé
+      const v=Math.pow(accumSmooth[i],0.6);
+      const g=Math.round(lerp(16,232,v));
+      r=Math.round(g*0.5); g2=Math.round(g*0.82); bl=g;
+      const o=i*4; data[o]=r; data[o+1]=g2; data[o+2]=bl; data[o+3]=255;
+      continue;
+    }
+
+    // base : calque Relief, sinon fond sombre neutre
+    if(showRelief){
+      const base=Math.round(lerp(56,124,t));
+      r=base; g2=base+1; bl=base+2;
+    } else {
+      r=30; g2=32; bl=34;
+    }
+
+    // calque Courbes : dessiné par-dessus n'importe quelle base (effet carte topo si Relief est off)
+    if(showContours && d[i]<0.02){
+      const majorHere=Math.floor(h/isoStepMajor);
+      const minorHere=Math.floor(h/isoMinor);
+      let majorLine=false, minorLine=false;
+      if(x<N-1){ if(Math.floor(b[i+1]/isoStepMajor)!==majorHere) majorLine=true; else if(Math.floor(b[i+1]/isoMinor)!==minorHere) minorLine=true; }
+      if(y<N-1){ if(Math.floor(b[i+N]/isoStepMajor)!==majorHere) majorLine=true; else if(Math.floor(b[i+N]/isoMinor)!==minorHere) minorLine=true; }
+      if(majorLine){ r=Math.round(lerp(r,208,0.32)); g2=Math.round(lerp(g2,214,0.32)); bl=Math.round(lerp(bl,217,0.32)); }
+      else if(minorLine){ r=Math.round(lerp(r,180,0.09)); g2=Math.round(lerp(g2,186,0.09)); bl=Math.round(lerp(bl,189,0.09)); }
+    }
+
+    if(showErosion){
+      const diff=(b[i]-bInit[i])/EROSION_VIS_SCALE;
+      if(diff<-0.02){ const w=Math.min(1,-diff); r=Math.round(lerp(r,132,w*0.5)); g2=Math.round(lerp(g2,78,w*0.5)); bl=Math.round(lerp(bl,46,w*0.5)); }
+      else if(diff>0.02){ const w=Math.min(1,diff); r=Math.round(lerp(r,196,w*0.35)); g2=Math.round(lerp(g2,208,w*0.35)); bl=Math.round(lerp(bl,214,w*0.35)); }
+    }
+
+    const depth=d[i];
+    if(showWater || showActive){
+      const depthT=smoothstep(0,0.07,depth);
+      // calque Eau : teinte bleue proportionnelle à la lame
+      if(showWater && depthT>0.002){
+        r=Math.round(lerp(r,10,depthT)); g2=Math.round(lerp(g2,64+22*depthT,depthT)); bl=Math.round(lerp(bl,112+48*depthT,depthT));
+      }
+      // calque Réseau (raster) : fond cyan du réseau ACTIF uniquement (eau réelle en mouvement)
+      if(showActive && activeCell[i]){
+        const q=depth*activeVel[i];
+        const qn=Math.min(1,q/maxActiveQ);
+        const riverT=qn*0.6*Math.min(1,depthT*3+0.15);
+        if(riverT>0.02){
+          r=Math.min(255,Math.round(lerp(r,150,riverT)));
+          g2=Math.min(255,Math.round(lerp(g2,224,riverT)));
+          bl=Math.min(255,Math.round(lerp(bl,255,riverT)));
+        }
+      }
+    }
+
+    const o=i*4;
+    data[o]=r; data[o+1]=g2; data[o+2]=bl; data[o+3]=255;
+  }
+  octx.putImageData(img,0,0);
+  ctx.imageSmoothingEnabled=true;
+  ctx.clearRect(0,0,DISPLAY,DISPLAY);
+  ctx.drawImage(off,0,0,DISPLAY,DISPLAY);
+
+  // ---- réseau POTENTIEL (D8) : uniquement en vue Contribution, à titre diagnostique ----
+  if(isContribution){
+    const streamPath=new Path2D(), riverPath=new Path2D();
+    for(let i=0;i<NN;i++){
+      const j=flowTo[i];
+      if(j<0) continue;
+      const val=accumSmooth[i];
+      if(val<STREAM_FRAC) continue;
+      const x0=i%N, y0=(i/N)|0, x1=j%N, y1=(j/N)|0;
+      const sx=(x0+0.5)/N*DISPLAY, sy=(y0+0.5)/N*DISPLAY;
+      const ex=(x1+0.5)/N*DISPLAY, ey=(y1+0.5)/N*DISPLAY;
+      const path = val>=RIVER_FRAC ? riverPath : streamPath;
+      path.moveTo(sx,sy); path.lineTo(ex,ey);
+    }
+    ctx.lineCap='round'; ctx.lineJoin='round';
+    ctx.strokeStyle='rgba(120,195,228,.45)'; ctx.lineWidth=1.3; ctx.stroke(streamPath);
+    ctx.strokeStyle='rgba(165,230,255,.75)'; ctx.lineWidth=3.0; ctx.stroke(riverPath);
+  }
+
+  // ---- calque Réseau ACTIF : tracés vectoriels (eau réelle, d/u/v uniquement) ----
+  if(showActive){
+    const streamPath=new Path2D(), riverPath=new Path2D();
+    for(let y=0;y<N;y++)for(let x=0;x<N;x++){
+      const i=idx(x,y);
+      if(!activeCell[i]) continue;
+      const j=activeDownstream(x,y,i);
+      if(j<0) continue;
+      const q=d[i]*activeVel[i];
+      const qn=q/maxActiveQ;
+      const x1=j%N, y1=(j/N)|0;
+      const sx=(x+0.5)/N*DISPLAY, sy=(y+0.5)/N*DISPLAY;
+      const ex=(x1+0.5)/N*DISPLAY, ey=(y1+0.5)/N*DISPLAY;
+      const path = qn>=0.45 ? riverPath : streamPath;
+      path.moveTo(sx,sy); path.lineTo(ex,ey);
+    }
+    ctx.lineCap='round'; ctx.lineJoin='round';
+    ctx.strokeStyle='rgba(120,195,228,.6)'; ctx.lineWidth=1.4; ctx.stroke(streamPath);
+    ctx.strokeStyle='rgba(165,230,255,.95)'; ctx.lineWidth=3.2; ctx.stroke(riverPath);
+  }
+
+  // ---- calque Particules : revérifie les seuils physiques en plus de pAlive ----
+  if(showParticles){
+    ctx.fillStyle='rgba(210,238,255,.85)';
+    for(let i=0;i<NP;i++){
+      if(!pAlive[i]) continue;
+      const depth=bilerp(d,px[i],py[i]);
+      const uu=bilerp(u,px[i],py[i]), vv=bilerp(v,px[i],py[i]);
+      const vel=Math.hypot(uu,vv);
+      const q=depth*vel;
+      if(depth<D_DEATH || vel<V_DEATH || q<Q_DEATH) continue;
+      const sx=(px[i]+0.5)/N*DISPLAY, sy=(py[i]+0.5)/N*DISPLAY;
+      ctx.beginPath(); ctx.arc(sx,sy,1.4,0,7); ctx.fill();
+    }
+  }
+
+  ctx.fillStyle='#e8b34a';
+  for(let k=0;k<sources.length;k++){
+    const src=sources[k];
+    const px2=(src.x+0.5)/N*DISPLAY, py2=(src.y+0.5)/N*DISPLAY;
+    ctx.globalAlpha = src.active?1:0.35;
+    ctx.beginPath(); ctx.arc(px2,py2,4,0,7); ctx.fill();
+    ctx.strokeStyle='rgba(232,179,74,.35)';
+    ctx.beginPath(); ctx.arc(px2,py2,8,0,7); ctx.stroke();
+    ctx.globalAlpha=1;
+  }
+}
+
+// ---------- UI ----------
+const SPEED_STEPS=[1,2,5,10,20,50,100,250,500];
+const speedEl=document.getElementById('speed'), speedLbl=document.getElementById('speedLbl');
+const rateEl=document.getElementById('rate'), rateLbl=document.getElementById('rateLbl');
+const isoEl=document.getElementById('isoStep'), stepLbl=document.getElementById('stepLbl');
+const isoField=document.getElementById('isoField');
+const pauseBtn=document.getElementById('pause');
+const sourcesDiv=document.getElementById('sources');
+const modeLbl=document.getElementById('modeLbl');
+const layersBox=document.getElementById('layersBox');
+const layersDiv=document.getElementById('layers');
+const layerCountEl=document.getElementById('layerCount');
+let paused=false;
+
+// construction des rangées de calques (pastille de couleur = ce que le calque apporte)
+LAYER_DEFS.forEach(L=>{
+  const row=document.createElement('div');
+  row.className='layer on';
+  row.dataset.id=L.id;
+  row.style.setProperty('--c', L.color);
+  row.innerHTML='<span class="sw"></span>'+L.label;
+  row.onclick=()=>{ layerOn[L.id]=!layerOn[L.id]; updateLayersUI(); };
+  layersDiv.appendChild(row);
+});
+
+function updateLayersUI(){
+  document.querySelectorAll('.layer').forEach(row=>{
+    row.classList.toggle('on', !!layerOn[row.dataset.id]);
+  });
+  const n=LAYerCount();
+  layerCountEl.textContent=n+'/'+LAYER_DEFS.length;
+  // le curseur d'intervalle des courbes n'a de sens que si le calque Courbes est actif
+  isoField.classList.toggle('disabled', viewMode!=='composite' || !layerOn.contours);
+}
+function LAYerCount(){ let n=0; LAYER_DEFS.forEach(L=>{ if(layerOn[L.id]) n++; }); return n; }
+
+function setMode(m){
+  viewMode=m;
+  document.querySelectorAll('.modes button[data-m]').forEach(b=>b.classList.toggle('on',b.dataset.m===m));
+  modeLbl.textContent = m;
+  // Contribution = vue diagnostic brute : la section des calques disparaît entièrement
+  layersBox.style.display = (m==='composite') ? '' : 'none';
+  updateLayersUI();
+}
+
+document.querySelectorAll('.modes button[data-m]').forEach(btn=>{
+  btn.onclick=()=>setMode(btn.dataset.m);
+});
+document.addEventListener('keydown',(e)=>{
+  if(e.key==='1') setMode('composite');
+  else if(e.key==='2') setMode('contribution');
+});
+
+// préréglages de calques
+document.getElementById('layAll').onclick=()=>{ LAYER_DEFS.forEach(L=>layerOn[L.id]=true); updateLayersUI(); };
+document.getElementById('layNone').onclick=()=>{ LAYER_DEFS.forEach(L=>layerOn[L.id]=false); updateLayersUI(); };
+document.getElementById('layHydro').onclick=()=>{
+  layerOn.relief=false; layerOn.contours=false; layerOn.erosion=false;
+  layerOn.eau=true; layerOn.reseau=true; layerOn.particules=true;
+  updateLayersUI();
+};
+
+speedEl.oninput=()=>{ speedLbl.textContent='×'+SPEED_STEPS[+speedEl.value]; };
+rateEl.oninput=()=>{ rateLbl.textContent=(+rateEl.value).toFixed(1); };
+isoEl.oninput=()=>{ stepLbl.textContent=(+isoEl.value).toFixed(3); };
+
+pauseBtn.onclick=()=>{ paused=!paused; pauseBtn.classList.toggle('on',paused); pauseBtn.textContent=paused?'Reprendre':'Pause'; };
+document.getElementById('regen').onclick=()=>{ genTerrain(); refreshSourceList(); };
+document.getElementById('clearSrc').onclick=()=>{ sources.length=0; refreshSourceList(); };
+
+canvas.addEventListener('click',(e)=>{
+  const rect=canvas.getBoundingClientRect();
+  const px0=(e.clientX-rect.left)/rect.width, py0=(e.clientY-rect.top)/rect.height;
+  const gx=px0*N, gy=py0*N;
+  for(let i=0;i<sources.length;i++){
+    const s2=sources[i];
+    if(Math.hypot(s2.x-gx,s2.y-gy)<4){ s2.active=!s2.active; refreshSourceList(); return; }
+  }
+  const cx=Math.max(1,Math.min(N-2,Math.round(gx)));
+  const cy=Math.max(1,Math.min(N-2,Math.round(gy)));
+  sources.push({x:cx,y:cy,rate:+rateEl.value,active:true});
+  refreshSourceList();
+});
+
+function refreshSourceList(){
+  sourcesDiv.innerHTML='';
+  if(sources.length===0){ sourcesDiv.innerHTML='<div style="opacity:.5">aucune source</div>'; return; }
+  sources.forEach((s2,i)=>{
+    const row=document.createElement('div');
+    row.className='src-row';
+    row.innerHTML='<span class="'+(s2.active?'':'off')+'">#'+(i+1)+' · '+s2.rate.toFixed(1)+'</span><a data-i="'+i+'">retirer</a>';
+    row.querySelector('a').onclick=()=>{ sources.splice(i,1); refreshSourceList(); };
+    sourcesDiv.appendChild(row);
+  });
+}
+
+// ---------- boucle ----------
+const fpsEl=document.getElementById('fps'), tEl=document.getElementById('tcount'), tsimEl=document.getElementById('tsim');
+const tgtMultEl=document.getElementById('tgtMult'), realMultEl=document.getElementById('realMult');
+let lastT=performance.now(), frames=0, fpsAcc=0;
+let stepAccumulator=0;
+let achievedStepsPerSecSmoothed=60;
+const FRAME_BUDGET_MS=35;
+
+function loop(now){
+  const dtRealMs=Math.min(80, now-lastT); lastT=now;
+  frames++; fpsAcc+=dtRealMs;
+  if(fpsAcc>500){ fpsEl.textContent=(1000/(fpsAcc/frames)).toFixed(0); frames=0; fpsAcc=0; }
+
+  let achieved=0;
+  if(!paused){
+    const target=SPEED_STEPS[+speedEl.value];
+    stepAccumulator += target*(dtRealMs/(1000/60));
+    stepAccumulator = Math.min(stepAccumulator, target*20);
+    let toRun=Math.floor(stepAccumulator);
+    const budgetStart=performance.now();
+    while(achieved<toRun){
+      step();
+      achieved++;
+      if(performance.now()-budgetStart>FRAME_BUDGET_MS) break;
+    }
+    stepAccumulator -= achieved;
+    const instRate = achieved/(dtRealMs/1000||1);
+    achievedStepsPerSecSmoothed = lerp(achievedStepsPerSecSmoothed, instRate, 0.15);
+    tgtMultEl.textContent='×'+target;
+    realMultEl.textContent='×'+Math.max(1,Math.round(achievedStepsPerSecSmoothed/60));
+  }
+
+  computeDrainage();
+  computeActiveNetwork();
+  stepParticles(achieved*DT);
+  render(+isoEl.value);
+  tEl.textContent=steps;
+  tsimEl.textContent=simTime.toFixed(1);
+  requestAnimationFrame(loop);
+}
+
+genTerrain();
+refreshSourceList();
+setMode('composite');
+requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
