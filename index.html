@@ -6,7 +6,6 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
-<link rel="icon" type="image/png" href="favicon.ico" />
 <style>
   :root {
     --bg-surface: #1e1d1b;
@@ -133,7 +132,7 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 12px;  /* reduced from 20px */
+    gap: 12px;
     max-height: calc(100vh - 48px);
     overflow-y: auto;
     box-shadow: 0 8px 32px rgba(0,0,0,0.3);
@@ -150,51 +149,8 @@
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--text-muted);
-    margin-bottom: 8px;  /* reduced from 12px */
+    margin-bottom: 8px;
     font-weight: 600;
-  }
-
-  /* Lab Inputs */
-  .field {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 12px;  /* reduced from 16px */
-  }
-  .field.disabled { opacity: 0.4; pointer-events: none; }
-  .field label {
-    font-size: 11px;
-    color: var(--text-muted);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .field label span {
-    font-family: var(--font-mono);
-    color: var(--accent);
-    background: rgba(210, 161, 92, 0.1);
-    padding: 2px 6px;
-    border-radius: 4px;
-  }
-
-  input[type=range] {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 4px;
-    background: #111;
-    border-radius: 2px;
-    outline: none;
-    box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);
-  }
-  input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: var(--accent);
-    cursor: pointer;
-    border: 2px solid var(--bg-control);
-    box-shadow: 0 0 4px rgba(0,0,0,0.5);
   }
 
   /* Segmented Control (Modes) */
@@ -205,6 +161,7 @@
     border-radius: 8px;
     gap: 4px;
     box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+    width: 100%;
   }
   .segmented button {
     flex: 1;
@@ -218,6 +175,7 @@
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.2s;
+    white-space: nowrap;
   }
   .segmented button.on {
     background: var(--bg-control);
@@ -225,7 +183,7 @@
     box-shadow: 0 1px 2px rgba(0,0,0,0.3);
   }
 
-  /* Layers */
+  /* Layer groups */
   .layer-group { margin-bottom: 4px; }
   .layer-group-title {
     font-size: 11px;
@@ -270,7 +228,7 @@
     display: flex;
     flex-direction: column;
     gap: 4px;
-    min-height: 80px;  /* added minimum height */
+    min-height: 80px;
     max-height: 120px;
     overflow-y: auto;
     background: rgba(0,0,0,0.2);
@@ -302,10 +260,73 @@
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
   ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
+  /* Slider styles */
+  input[type=range] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 4px;
+    background: #111;
+    border-radius: 2px;
+    outline: none;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    border: 2px solid var(--bg-control);
+    box-shadow: 0 0 4px rgba(0,0,0,0.5);
+  }
+  input[type=range]::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    border: 2px solid var(--bg-control);
+    box-shadow: 0 0 4px rgba(0,0,0,0.5);
+  }
+
   .hr {
     height: 1px;
     background: var(--border);
-    margin: 4px 0;
+    margin: 12px 0;
+  }
+
+  /* Custom Context Menu */
+  #context-menu {
+    position: absolute;
+    background: var(--bg-control);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 4px;
+    z-index: 100;
+    min-width: 160px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    display: none;
+  }
+  #context-menu button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    font-size: 12px;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: left;
+  }
+  #context-menu button:hover {
+    background: rgba(255,255,255,0.08);
   }
 </style>
 </head>
@@ -314,6 +335,12 @@
 <!-- Canvas Area -->
 <div id="stage">
 <canvas id="c"></canvas>
+<!-- Context Menu -->
+<div id="context-menu">
+  <button id="ctx-add-source">
+    <span class="material-symbols-outlined" style="font-size: 16px;">water_drop</span> Ajouter une source d'eau
+  </button>
+</div>
 <!-- HUD -->
 <div id="hud">
       Mode: <b class="mode" id="modeLbl">Simulation</b><br/>
@@ -337,7 +364,7 @@
 <span class="material-symbols-outlined">refresh</span>
 </button>
 <button class="ctrl-btn" id="clearSrc" title="Effacer toutes les sources">
-<span class="material-symbols-outlined">delete_sweep</span>  <!-- changed icon -->
+<span class="material-symbols-outlined">delete_sweep</span>
 </button>
 </div>
 <!-- Side Settings Panel -->
@@ -350,7 +377,10 @@
 <button class="on" data-m="composite">Simulation</button>
 <button data-m="contribution">Analyse Terrain (D8)</button>
 </div>
-<div class="hr"></div>
+
+<!-- Divider contrôlé par JS (caché si layersBox est caché) -->
+<div id="divider-top" class="hr"></div>
+
 <div id="layersBox">
 <div class="section-title">Couches Visuelles</div>
 <div class="layer-group">
@@ -366,17 +396,11 @@
 <div class="layer-list" id="layers-water"></div>
 </div>
 </div>
-<div class="hr"></div>
-<div class="section-title">Paramètres</div>
-<div class="field">
-<label>Débit nouvelle source <span id="rateLbl">1.0</span></label>
-<input id="rate" max="4" min="0.1" step="0.1" type="range" value="1"/>
-</div>
-<div class="field" id="isoField">
-<label>Intervalle Topo <span id="stepLbl">0.090</span></label>
-<input id="isoStep" max="0.2" min="0.04" step="0.005" type="range" value="0.09"/>
-</div>
-<div class="section-title" style="margin-top:12px;">Sources Actives (<span id="srcCount">0</span>)</div>
+
+<!-- Divider contrôlé par JS (caché si layersBox est caché) -->
+<div id="divider-bottom" class="hr"></div>
+
+<div class="section-title" style="margin-top:16px;">Sources Actives (<span id="srcCount">0</span>)</div>
 <div id="sources"></div>
 </div>
 </div>
@@ -388,6 +412,10 @@
 const N = 128, NN = N*N, L = 1, G = 9.81, A = 1.2, DT = 0.017;
 const KC = 0.055, KS = 0.045, KD = 0.045, KE = 0.012;
 const EROSION_VIS_SCALE = 0.06;
+
+// Constantes fixes remplaçant les sliders (valeurs par défaut actuelles)
+const DEFAULT_RATE = 2.2;
+const DEFAULT_ISO_STEP = 0.09;
 
 // ---------- réseau hydrographique POTENTIEL : accumulation de bassin versant D8 ----------
 const DRAIN_SMOOTH = 0.85;
@@ -842,14 +870,13 @@ function render(isoStepMajor){
 // ---------- UI ----------
 const SPEED_STEPS=[1,2,5,10,20,50,100,250,500];
 const speedEl=document.getElementById('speed'), speedLbl=document.getElementById('speedLbl');
-const rateEl=document.getElementById('rate'), rateLbl=document.getElementById('rateLbl');
-const isoEl=document.getElementById('isoStep'), stepLbl=document.getElementById('stepLbl');
-const isoField=document.getElementById('isoField');
 const pauseBtn=document.getElementById('pause');
 const pauseIcon=document.getElementById('pauseIcon');
 const sourcesDiv=document.getElementById('sources');
 const modeLbl=document.getElementById('modeLbl');
 const layersBox=document.getElementById('layersBox');
+const dividerTop = document.getElementById('divider-top');
+const dividerBottom = document.getElementById('divider-bottom');
 let paused=false;
 
 function buildLayerUI(defs, containerId) {
@@ -872,7 +899,6 @@ function updateLayersUI(){
   document.querySelectorAll('.layer-item').forEach(row=>{
     row.classList.toggle('on', !!layerOn[row.dataset.id]);
   });
-  isoField.classList.toggle('disabled', viewMode!=='composite' || !layerOn.contours);
 }
 
 function setMode(m){
@@ -880,6 +906,11 @@ function setMode(m){
   document.querySelectorAll('.modes button[data-m]').forEach(b=>b.classList.toggle('on',b.dataset.m===m));
   modeLbl.textContent = m === 'composite' ? 'Simulation' : 'Analyse';
   layersBox.style.display = (m==='composite') ? 'block' : 'none';
+  
+  // Afficher ou masquer les dividers en fonction de la visibilité de layersBox
+  dividerTop.style.display = (m==='composite') ? 'block' : 'none';
+  dividerBottom.style.display = (m==='composite') ? 'block' : 'none';
+  
   updateLayersUI();
 }
 
@@ -895,7 +926,7 @@ function toggleGroup(groupId) {
   items.forEach(item => {
     if (!layerOn[item.dataset.id]) allOn = false;
   });
-  const newState = !allOn; // if allOn is true, turn all off; else turn all on
+  const newState = !allOn;
   items.forEach(item => {
     layerOn[item.dataset.id] = newState;
   });
@@ -910,8 +941,6 @@ document.querySelectorAll('.layer-group-title').forEach(title => {
 });
 
 speedEl.oninput=()=>{ speedLbl.textContent='×'+SPEED_STEPS[+speedEl.value]; };
-rateEl.oninput=()=>{ rateLbl.textContent=(+rateEl.value).toFixed(1); };
-isoEl.oninput=()=>{ stepLbl.textContent=(+isoEl.value).toFixed(3); };
 
 pauseBtn.onclick=()=>{ 
   paused=!paused; 
@@ -930,23 +959,57 @@ document.getElementById('clearSrc').onclick=()=>{
   refreshSourceList(); 
 };
 
-canvas.addEventListener('click',(e)=>{
-  const rect=canvas.getBoundingClientRect();
-  const px0=(e.clientX-rect.left)/rect.width, py0=(e.clientY-rect.top)/rect.height;
-  const gx=px0*N, gy=py0*N;
+// Fonction utilitaire pour ajouter une source (utilisée pour le clic gauche et le clic droit)
+function addSourceAt(gx, gy) {
   for(let i=0;i<sources.length;i++){
     const s2=sources[i];
     if(Math.hypot(s2.x-gx,s2.y-gy)<6){ s2.active=!s2.active; refreshSourceList(); return; }
   }
   const cx=Math.max(1,Math.min(N-2,Math.round(gx)));
   const cy=Math.max(1,Math.min(N-2,Math.round(gy)));
-  sources.push({x:cx,y:cy,rate:+rateEl.value,active:true});
+  sources.push({x:cx,y:cy,rate:DEFAULT_RATE,active:true});
   
-  // Physical click effect
   canvas.style.transform = 'scale(0.99)';
   setTimeout(()=>canvas.style.transform = 'scale(1)', 100);
   
   refreshSourceList();
+}
+
+// Clic gauche (existant)
+canvas.addEventListener('click',(e)=>{
+  const rect=canvas.getBoundingClientRect();
+  const px0=(e.clientX-rect.left)/rect.width, py0=(e.clientY-rect.top)/rect.height;
+  addSourceAt(px0*N, py0*N);
+});
+
+// Clic droit : Afficher le menu contextuel personnalisé
+const contextMenu = document.getElementById('context-menu');
+const ctxAddBtn = document.getElementById('ctx-add-source');
+let contextMenuTarget = { x: 0, y: 0 };
+
+canvas.addEventListener('contextmenu',(e)=>{
+  e.preventDefault(); // Empêche le menu contextuel par défaut du navigateur
+  const rect=canvas.getBoundingClientRect();
+  const px0=(e.clientX-rect.left)/rect.width, py0=(e.clientY-rect.top)/rect.height;
+  contextMenuTarget = { x: px0*N, y: py0*N };
+  
+  // Positionner le menu
+  contextMenu.style.display = 'block';
+  contextMenu.style.left = e.clientX + 'px';
+  contextMenu.style.top = e.clientY + 'px';
+});
+
+// Fermer le menu quand on clique ailleurs
+document.addEventListener('click', (e) => {
+  if (!contextMenu.contains(e.target)) {
+    contextMenu.style.display = 'none';
+  }
+});
+
+// Action du menu contextuel
+ctxAddBtn.addEventListener('click', () => {
+  addSourceAt(contextMenuTarget.x, contextMenuTarget.y);
+  contextMenu.style.display = 'none';
 });
 
 function refreshSourceList(){
@@ -997,7 +1060,7 @@ function loop(now){
   computeDrainage();
   computeActiveNetwork();
   stepParticles(achieved*DT);
-  render(+isoEl.value);
+  render(DEFAULT_ISO_STEP);
   tEl.textContent=steps;
   tsimEl.textContent=simTime.toFixed(1);
   requestAnimationFrame(loop);
@@ -1009,4 +1072,5 @@ setMode('composite');
 requestAnimationFrame(loop);
 })();
 </script>
-</body></html>
+</body>
+</html>
