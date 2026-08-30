@@ -132,14 +132,14 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 12px;  /* reduced from 20px */
     max-height: calc(100vh - 48px);
     overflow-y: auto;
     box-shadow: 0 8px 32px rgba(0,0,0,0.3);
   }
 
   .panel-header {
-    margin-bottom: 8px;
+    margin-bottom: 4px;
   }
   h1 { font-size: 14px; font-weight: 600; color: var(--text-primary); margin: 0 0 4px; }
   p.desc { font-size: 11px; color: var(--text-muted); line-height: 1.5; margin: 0; }
@@ -149,7 +149,7 @@
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--text-muted);
-    margin-bottom: 12px;
+    margin-bottom: 8px;  /* reduced from 12px */
     font-weight: 600;
   }
 
@@ -158,7 +158,7 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    margin-bottom: 16px;
+    margin-bottom: 12px;  /* reduced from 16px */
   }
   .field.disabled { opacity: 0.4; pointer-events: none; }
   .field label {
@@ -225,8 +225,19 @@
   }
 
   /* Layers */
-  .layer-group { margin-bottom: 12px; }
-  .layer-group-title { font-size: 11px; color: var(--text-primary); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+  .layer-group { margin-bottom: 4px; }
+  .layer-group-title {
+    font-size: 11px;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.15s;
+  }
+  .layer-group-title:hover { color: var(--accent); }
   
   .layer-list { display: flex; flex-direction: column; gap: 4px; }
   .layer-item {
@@ -258,6 +269,7 @@
     display: flex;
     flex-direction: column;
     gap: 4px;
+    min-height: 80px;  /* added minimum height */
     max-height: 120px;
     overflow-y: auto;
     background: rgba(0,0,0,0.2);
@@ -289,7 +301,11 @@
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
   ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
-  .hr { height: 1px; background: var(--border); margin: 16px 0; }
+  .hr {
+    height: 1px;
+    background: var(--border);
+    margin: 4px 0;
+  }
 </style>
 </head>
 <body>
@@ -320,7 +336,7 @@
 <span class="material-symbols-outlined">refresh</span>
 </button>
 <button class="ctrl-btn" id="clearSrc" title="Effacer toutes les sources">
-<span class="material-symbols-outlined">water_drop</span>
+<span class="material-symbols-outlined">delete_sweep</span>  <!-- changed icon -->
 </button>
 </div>
 <!-- Side Settings Panel -->
@@ -337,13 +353,13 @@
 <div id="layersBox">
 <div class="section-title">Couches Visuelles</div>
 <div class="layer-group">
-<div class="layer-group-title">
+<div class="layer-group-title" data-group="layers-terrain">
 <span class="material-symbols-outlined" style="font-size:14px;">terrain</span> Terrain
         </div>
 <div class="layer-list" id="layers-terrain"></div>
 </div>
 <div class="layer-group">
-<div class="layer-group-title">
+<div class="layer-group-title" data-group="layers-water">
 <span class="material-symbols-outlined" style="font-size:14px;">water</span> Eau &amp; Dynamique
         </div>
 <div class="layer-list" id="layers-water"></div>
@@ -359,7 +375,7 @@
 <label>Intervalle Topo <span id="stepLbl">0.090</span></label>
 <input id="isoStep" max="0.2" min="0.04" step="0.005" type="range" value="0.09"/>
 </div>
-<div class="section-title" style="margin-top:16px;">Sources Actives (<span id="srcCount">0</span>)</div>
+<div class="section-title" style="margin-top:12px;">Sources Actives (<span id="srcCount">0</span>)</div>
 <div id="sources"></div>
 </div>
 </div>
@@ -868,6 +884,28 @@ function setMode(m){
 
 document.querySelectorAll('.modes button[data-m]').forEach(btn=>{
   btn.onclick=()=>setMode(btn.dataset.m);
+});
+
+// --- Make group titles clickable toggles ---
+function toggleGroup(groupId) {
+  const list = document.getElementById(groupId);
+  const items = list.querySelectorAll('.layer-item');
+  let allOn = true;
+  items.forEach(item => {
+    if (!layerOn[item.dataset.id]) allOn = false;
+  });
+  const newState = !allOn; // if allOn is true, turn all off; else turn all on
+  items.forEach(item => {
+    layerOn[item.dataset.id] = newState;
+  });
+  updateLayersUI();
+}
+
+document.querySelectorAll('.layer-group-title').forEach(title => {
+  title.addEventListener('click', () => {
+    const groupId = title.dataset.group;
+    if (groupId) toggleGroup(groupId);
+  });
 });
 
 speedEl.oninput=()=>{ speedLbl.textContent='×'+SPEED_STEPS[+speedEl.value]; };
