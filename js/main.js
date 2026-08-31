@@ -52,6 +52,7 @@ function loop(now) {
 
   if (now - lastDrainageUpdate >= DRAINAGE_UPDATE_MS) {
     computeDrainage();
+    invalidateDrainagePaths();
     lastDrainageUpdate = now;
   }
 

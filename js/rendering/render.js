@@ -47,6 +47,42 @@ const layerOn = {
   particules: true,
 };
 
+// Network geometry changes less often than the Canvas bitmap. Keep it outside render().
+let drainageStreamPath = null;
+let drainageRiverPath = null;
+let drainagePathsDirty = true;
+
+function invalidateDrainagePaths() {
+  drainagePathsDirty = true;
+}
+
+function ensureDrainagePaths() {
+  if (!drainagePathsDirty || viewMode !== "contribution") return;
+
+  const streamPath = new Path2D();
+  const riverPath = new Path2D();
+  for (let i = 0; i < NN; i++) {
+    const j = flowTo[i];
+    if (j < 0) continue;
+    const val = accumSmooth[i];
+    if (val < STREAM_FRAC) continue;
+    const x0 = i % N;
+    const y0 = (i / N) | 0;
+    const x1 = j % N;
+    const y1 = (j / N) | 0;
+    const sx = ((x0 + 0.5) / N) * DISPLAY;
+    const sy = ((y0 + 0.5) / N) * DISPLAY;
+    const ex = ((x1 + 0.5) / N) * DISPLAY;
+    const ey = ((y1 + 0.5) / N) * DISPLAY;
+    const path = val >= RIVER_FRAC ? riverPath : streamPath;
+    path.moveTo(sx, sy);
+    path.lineTo(ex, ey);
+  }
+  drainageStreamPath = streamPath;
+  drainageRiverPath = riverPath;
+  drainagePathsDirty = false;
+}
+
 function render(isoStepMajor) {
   const data = img.data;
   let bmin = 1e9,
@@ -173,33 +209,15 @@ function render(isoStepMajor) {
   ctx.drawImage(off, 0, 0, DISPLAY, DISPLAY);
 
   if (isContribution) {
-    const streamPath = new Path2D(),
-      riverPath = new Path2D();
-    for (let i = 0; i < NN; i++) {
-      const j = flowTo[i];
-      if (j < 0) continue;
-      const val = accumSmooth[i];
-      if (val < STREAM_FRAC) continue;
-      const x0 = i % N,
-        y0 = (i / N) | 0,
-        x1 = j % N,
-        y1 = (j / N) | 0;
-      const sx = ((x0 + 0.5) / N) * DISPLAY,
-        sy = ((y0 + 0.5) / N) * DISPLAY;
-      const ex = ((x1 + 0.5) / N) * DISPLAY,
-        ey = ((y1 + 0.5) / N) * DISPLAY;
-      const path = val >= RIVER_FRAC ? riverPath : streamPath;
-      path.moveTo(sx, sy);
-      path.lineTo(ex, ey);
-    }
+    ensureDrainagePaths();
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
     ctx.strokeStyle = "rgba(100,150,180,.4)";
     ctx.lineWidth = 1.5;
-    ctx.stroke(streamPath);
+    ctx.stroke(drainageStreamPath);
     ctx.strokeStyle = "rgba(120,180,220,.7)";
     ctx.lineWidth = 3.5;
-    ctx.stroke(riverPath);
+    ctx.stroke(drainageRiverPath);
   }
 
   if (showActive) {
