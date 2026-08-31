@@ -1,3 +1,11 @@
+/**
+ * Compresses simulation speed into a readable visual rate. Traceurs show flow
+ * direction at every multiplier instead of attempting to reproduce elapsed time.
+ */
+function getParticleVisualDt(multiplier) {
+  return DT * (1 + Math.log2(Math.max(1, multiplier)) * 0.12);
+}
+
 function stepParticles(dtSim) {
   if (dtSim <= 0) return;
   const SCALE = 55;

@@ -22,9 +22,10 @@ function loop(now) {
     fpsAcc = 0;
   }
 
+  const targetMultiplier = SPEED_STEPS[+speedEl.value];
   let achieved = 0;
   if (!paused) {
-    const target = SPEED_STEPS[+speedEl.value];
+    const target = targetMultiplier;
     stepAccumulator += target * (dtRealMs / (1000 / 60));
     stepAccumulator = Math.min(stepAccumulator, target * 20);
     let toRun = Math.floor(stepAccumulator);
@@ -48,7 +49,7 @@ function loop(now) {
 
   computeDrainage();
   computeActiveNetwork();
-  stepParticles(achieved * DT);
+  stepParticles(paused ? 0 : getParticleVisualDt(targetMultiplier));
   render(DEFAULT_ISO_STEP);
   tEl.textContent = steps;
   tsimEl.textContent = simTime.toFixed(1);

@@ -36,7 +36,7 @@ const LAYER_DEFS_TERRAIN = [
 const LAYER_DEFS_WATER = [
   { id: "eau", label: "Masse d'eau", color: "#3f8cb0" },
   { id: "reseau", label: "Courants Actifs", color: "#5db8d8" },
-  { id: "particules", label: "Traceurs Fluides", color: "#d2eeff" },
+  { id: "particules", label: "Traceurs d'écoulement", color: "#d2eeff" },
 ];
 const layerOn = {
   relief: true,
@@ -234,6 +234,9 @@ function render(isoStepMajor) {
   }
 
   if (showParticles) {
+    ctx.strokeStyle = "rgba(200,230,250,.45)";
+    ctx.lineWidth = 1.4;
+    ctx.lineCap = "round";
     ctx.fillStyle = "rgba(200,230,250,.8)";
     for (let i = 0; i < NP; i++) {
       if (!pAlive[i]) continue;
@@ -245,6 +248,16 @@ function render(isoStepMajor) {
       if (depth < D_DEATH || vel < V_DEATH || q < Q_DEATH) continue;
       const sx = ((px[i] + 0.5) / N) * DISPLAY,
         sy = ((py[i] + 0.5) / N) * DISPLAY;
+
+      // Trail length represents local physical speed, independent from traceur cadence.
+      const trailLength = Math.min(11, 2 + vel * 4);
+      const trailX = sx - (uu / vel) * trailLength;
+      const trailY = sy - (vv / vel) * trailLength;
+      ctx.beginPath();
+      ctx.moveTo(trailX, trailY);
+      ctx.lineTo(sx, sy);
+      ctx.stroke();
+
       ctx.beginPath();
       ctx.arc(sx, sy, 1.6, 0, 7);
       ctx.fill();
