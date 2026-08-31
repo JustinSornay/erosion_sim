@@ -1,0 +1,235 @@
+/* Side Panel */
+#side-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 320px;
+  height: 100vh;
+  background: var(--bg-panel);
+  backdrop-filter: blur(12px);
+  border-left: 1px solid var(--border);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* Espacement uniforme */
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  z-index: 20;
+  transition: transform 0.3s ease;
+  transform: translateX(100%);
+}
+
+#side-panel.open {
+  transform: translateX(0);
+}
+
+.panel-header {
+  margin-bottom: 4px;
+}
+h1 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 4px;
+}
+p.desc {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.section-title {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+/* Modes buttons */
+.segmented {
+  display: flex;
+  background: #111;
+  padding: 4px;
+  border-radius: 8px;
+  gap: 4px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+  width: 100%;
+}
+.segmented button {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 6px 0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.segmented button.on {
+  background: var(--bg-control);
+  color: var(--text-primary);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Layer groups */
+.layer-group {
+  margin-bottom: 4px;
+}
+.layer-group-title {
+  font-size: 11px;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.15s;
+}
+.layer-group-title:hover {
+  color: var(--accent);
+}
+
+.layer-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.layer-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  color: var(--text-muted);
+  padding: 6px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s;
+  user-select: none;
+}
+.layer-item:hover {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-primary);
+}
+.layer-item.on {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  transition: all 0.15s;
+}
+.layer-item.on .swatch {
+  background: var(--c);
+  border-color: var(--c);
+}
+
+/* Sources List */
+#sources {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 80px;
+  max-height: 120px;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  padding: 8px;
+}
+.src-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+.src-row span {
+  color: var(--water);
+}
+.src-row span.off {
+  color: var(--text-muted);
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+.src-row a {
+  color: var(--text-muted);
+  cursor: pointer;
+  background: var(--bg-control);
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-decoration: none;
+}
+.src-row a:hover {
+  color: #f87171;
+  background: rgba(248, 113, 113, 0.1);
+}
+
+/* Divider */
+.hr {
+  height: 1px;
+  background: var(--divider);
+  margin: 12px 0; /* Espacement vertical régulier */
+}
+
+/* Languette (tab) */
+#panel-tab {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 80px;
+  background: var(--bg-control);
+  border: 1px solid var(--border);
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  cursor: pointer;
+  z-index: 25;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  transition:
+    right 0.3s ease,
+    opacity 0.3s;
+}
+#panel-tab:hover {
+  background: #383734;
+}
+#panel-tab.hidden {
+  right: -28px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Bouton fermer (mobile uniquement) */
+#close-panel {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  background: var(--bg-control);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: none; /* Caché par défaut (desktop) */
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-primary);
+  z-index: 30;
+}
+#close-panel:hover {
+  background: #383734;
+}

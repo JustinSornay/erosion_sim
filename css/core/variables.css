@@ -1,0 +1,14 @@
+:root {
+  --bg-surface: #1e1d1b;
+  --bg-panel: rgba(28, 27, 25, 0.9);
+  --bg-control: #2c2b29;
+  --text-primary: #e6e3dd;
+  --text-muted: #96938a;
+  --accent: #d2a15c;
+  --water: #4c8fb5;
+  --border: #3d3b37;
+  --divider: rgba(255, 255, 255, 0.3); /* Plus visible */
+
+  --font-ui: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}

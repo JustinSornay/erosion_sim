@@ -1,0 +1,21 @@
+/* Canvas Area */
+#stage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: radial-gradient(circle, #252422 0%, var(--bg-surface) 100%);
+  overflow: hidden;
+}
+
+canvas {
+  cursor: crosshair;
+  border-radius: 8px;
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}

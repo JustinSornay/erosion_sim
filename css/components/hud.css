@@ -1,0 +1,25 @@
+/* HUD */
+#hud {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  background: var(--bg-panel);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 5;
+}
+#hud b {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+#hud .mode {
+  color: var(--accent);
+}

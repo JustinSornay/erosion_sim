@@ -1,0 +1,68 @@
+/* ----- RESPONSIVE BREAKPOINTS ----- */
+
+/* Mobile (< 768px) */
+@media (max-width: 767px) {
+  #side-panel {
+    width: 300px;
+    padding: 20px;
+    gap: 12px;
+  }
+  #close-panel {
+    display: flex;
+  }
+  #hud {
+    top: 12px;
+    left: 12px;
+    font-size: 10px;
+    padding: 8px;
+  }
+  #bottom-bar {
+    bottom: 12px;
+    padding: 6px 10px;
+    gap: 8px;
+    width: calc(100% - 24px);
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .speed-ctrl {
+    flex: 1;
+    justify-content: center;
+    border-left: none;
+    border-right: none;
+    padding: 0;
+    min-width: 120px;
+  }
+  #speed {
+    width: 100%;
+  }
+  #panel-tab {
+    display: flex;
+  }
+}
+
+/* Tablet (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  #side-panel {
+    width: 260px;
+    padding: 16px;
+  }
+  #panel-tab {
+    display: none;
+  }
+  #side-panel {
+    transform: translateX(0);
+  }
+}
+
+/* Desktop (> 1024px) */
+@media (min-width: 1025px) {
+  #side-panel {
+    width: 320px;
+  }
+  #panel-tab {
+    display: none;
+  }
+  #side-panel {
+    transform: translateX(0);
+  }
+}
