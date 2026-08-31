@@ -1,5 +1,5 @@
 // ---------- grille & constantes physiques ----------
-const N = 128,
+const N = 192,
   NN = N * N,
   L = 1,
   G = 9.81,
@@ -31,3 +31,8 @@ const V_SPAWN = 0.15,
 const Q_SPAWN = 0.003,
   Q_DEATH = 0.0014;
 const SPEED_STEPS = [1, 2, 5, 10, 20, 50, 100, 250, 500];
+
+// Visual systems update independently from the physical timestep.
+const DRAINAGE_UPDATE_MS = 150;
+const ACTIVE_NETWORK_UPDATE_MS = 34;
+const HUD_UPDATE_MS = 125;

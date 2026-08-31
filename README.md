@@ -13,3 +13,11 @@ Simulation d'érosion hydraulique exécutée entièrement dans le navigateur.
 
 Les scripts applicatifs sont chargés dans le `<head>` avec `defer`, dans leur ordre de
 dépendance. L'application reste compatible avec une ouverture directe via `file://`.
+
+## Validation physique
+
+`node tests/physics-regression.js 1000 --write-baseline` crée une baseline N128 avec seed
+et source fixes. Une baseline existante exige `--force` pour être remplacée.
+`node tests/physics-regression.js 1000` compare ensuite les buffers physiques à cette référence.
+`node tests/physics-benchmark.js 5000` mesure la médiane des steps/s du moteur isolé.
+`node tests/physics-profile.js 5000` mesure les cinq phases de `step()` hors production.

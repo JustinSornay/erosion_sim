@@ -43,9 +43,10 @@ function smoothstep(a, c, x) {
 
 function computeActiveNetwork() {
   maxActiveQ = 1e-6;
+  activeCellsCount = 0;
   for (let i = 0; i < NN; i++) {
     const depth = d[i];
-    const vel = Math.hypot(u[i], v[i]);
+    const vel = Math.sqrt(u[i] * u[i] + v[i] * v[i]);
     const q = depth * vel;
     activeVel[i] = vel;
     const was = activeCell[i];
@@ -53,7 +54,10 @@ function computeActiveNetwork() {
     if (was) now = !(depth < D_DEATH || vel < V_DEATH || q < Q_DEATH);
     else now = depth > D_SPAWN && vel > V_SPAWN && q > Q_SPAWN;
     activeCell[i] = now ? 1 : 0;
-    if (now && q > maxActiveQ) maxActiveQ = q;
+    if (now) {
+      activeCellsList[activeCellsCount++] = i;
+      if (q > maxActiveQ) maxActiveQ = q;
+    }
   }
 }
 

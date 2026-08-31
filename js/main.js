@@ -10,6 +10,9 @@ let lastT = performance.now(),
 let stepAccumulator = 0;
 let achievedStepsPerSecSmoothed = 60;
 const FRAME_BUDGET_MS = 35;
+let lastDrainageUpdate = 0;
+let lastActiveNetworkUpdate = 0;
+let lastHudUpdate = 0;
 
 function loop(now) {
   const dtRealMs = Math.min(80, now - lastT);
@@ -47,12 +50,26 @@ function loop(now) {
       "×" + Math.max(1, Math.round(achievedStepsPerSecSmoothed / 60));
   }
 
-  computeDrainage();
-  computeActiveNetwork();
-  stepParticles(paused ? 0 : getParticleVisualDt(targetMultiplier));
+  if (now - lastDrainageUpdate >= DRAINAGE_UPDATE_MS) {
+    computeDrainage();
+    lastDrainageUpdate = now;
+  }
+
+  if (now - lastActiveNetworkUpdate >= ACTIVE_NETWORK_UPDATE_MS) {
+    computeActiveNetwork();
+    lastActiveNetworkUpdate = now;
+  }
+
+  if (layerOn.particules && viewMode === "composite") {
+    stepParticles(paused ? 0 : getParticleVisualDt(targetMultiplier));
+  }
   render(DEFAULT_ISO_STEP);
-  tEl.textContent = steps;
-  tsimEl.textContent = simTime.toFixed(1);
+
+  if (now - lastHudUpdate >= HUD_UPDATE_MS) {
+    tEl.textContent = steps;
+    tsimEl.textContent = simTime.toFixed(1);
+    lastHudUpdate = now;
+  }
   requestAnimationFrame(loop);
 }
 

@@ -20,6 +20,8 @@ function genTerrain() {
   drainReady = false;
   activeCell = new Uint8Array(NN);
   activeVel = new Float32Array(NN);
+  activeCellsList = new Int32Array(NN);
+  activeCellsCount = 0;
   maxActiveQ = 1e-6;
   /*
    * A local depression establishes one natural outlet without imposing a

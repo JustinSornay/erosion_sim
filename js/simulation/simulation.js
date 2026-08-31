@@ -4,9 +4,10 @@ function step() {
     if (src.active) d[idx(src.x, src.y)] += DT * src.rate;
   }
 
-  for (let y = 0; y < N; y++)
+  for (let y = 0; y < N; y++) {
+    const row = y * N;
     for (let x = 0; x < N; x++) {
-      const i = idx(x, y);
+      const i = row + x;
       const h = b[i] + d[i];
       let dhL = 0,
         dhR = 0,
@@ -36,11 +37,12 @@ function step() {
       fR[i] = nr;
       fT[i] = nt;
       fB[i] = nb;
+      }
     }
-
-  for (let y = 0; y < N; y++)
+  for (let y = 0; y < N; y++) {
+    const row = y * N;
     for (let x = 0; x < N; x++) {
-      const i = idx(x, y);
+      const i = row + x;
       const fin =
         (x > 0 ? fR[i - 1] : 0) +
         (x < N - 1 ? fL[i + 1] : 0) +
@@ -49,15 +51,17 @@ function step() {
       const fout = fL[i] + fR[i] + fT[i] + fB[i];
       tmpD[i] = Math.max(0, d[i] + (DT * (fin - fout)) / (L * L));
     }
+  }
   {
     const t = d;
     d = tmpD;
     tmpD = t;
   }
 
-  for (let y = 0; y < N; y++)
+  for (let y = 0; y < N; y++) {
+    const row = y * N;
     for (let x = 0; x < N; x++) {
-      const i = idx(x, y);
+      const i = row + x;
       const inL = x > 0 ? fR[i - 1] : 0,
         outL = fL[i];
       const inR = x < N - 1 ? fL[i + 1] : 0,
@@ -96,10 +100,12 @@ function step() {
         s[i] = Math.max(0, si - diff);
       }
     }
+  }
 
-  for (let y = 0; y < N; y++)
+  for (let y = 0; y < N; y++) {
+    const row = y * N;
     for (let x = 0; x < N; x++) {
-      const i = idx(x, y);
+      const i = row + x;
       let sx = x - (u[i] * DT) / L,
         sy = y - (v[i] * DT) / L;
       sx = Math.min(N - 1.001, Math.max(0, sx));
@@ -110,13 +116,16 @@ function step() {
         y1 = Math.min(y0 + 1, N - 1),
         tx = sx - x0,
         ty = sy - y0;
-      const s00 = s[idx(x0, y0)],
-        s10 = s[idx(x1, y0)];
-      const s01 = s[idx(x0, y1)],
-        s11 = s[idx(x1, y1)];
+      const row0 = y0 * N,
+        row1 = y1 * N;
+      const s00 = s[row0 + x0],
+        s10 = s[row0 + x1];
+      const s01 = s[row1 + x0],
+        s11 = s[row1 + x1];
       tmpS[i] = lerp(lerp(s00, s10, tx), lerp(s01, s11, tx), ty);
       d[i] *= 1 - KE * DT;
     }
+  }
   {
     const t = s;
     s = tmpS;

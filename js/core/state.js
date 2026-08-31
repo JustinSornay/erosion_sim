@@ -1,6 +1,7 @@
 let b, bInit, d, s, fL, fR, fT, fB, u, v, tmpS, tmpD;
 let flowTo, accum, accumSmooth, sortIdx, drainReady;
 let activeCell, activeVel, maxActiveQ;
+let activeCellsList, activeCellsCount;
 let sources = [];
 let steps = 0,
   simTime = 0;

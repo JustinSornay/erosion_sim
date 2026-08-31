@@ -6,16 +6,16 @@ function resizeCanvas() {
 
   let size;
   if (w < 768) {
-    size = Math.min(w, h) * 0.95;
+    size = Math.min(w, h) * 0.98;
   } else {
-    size = Math.min(w - 350, h - 100);
+    size = Math.min(w - 330, h - 20);
   }
 
   canvas.style.width = size + "px";
   canvas.style.height = size + "px";
 }
 window.addEventListener("resize", resizeCanvas);
-const DISPLAY = 800;
+const DISPLAY = 1024;
 canvas.width = DISPLAY;
 canvas.height = DISPLAY;
 resizeCanvas();
