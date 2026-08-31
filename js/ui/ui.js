@@ -136,7 +136,19 @@ const contextMenu = document.getElementById("context-menu");
 const ctxAddBtn = document.getElementById("ctx-add-source");
 const ctxToggleBtn = document.getElementById("ctx-toggle-source");
 const ctxDeleteBtn = document.getElementById("ctx-delete-source");
+const ctxToggleIcon = ctxToggleBtn.querySelector(".material-symbols-outlined");
+const ctxToggleLabel = ctxToggleBtn.querySelector(".context-menu-label");
 let contextMenuTarget = { x: 0, y: 0, index: -1 };
+
+/** Aligns source-state feedback with the action exposed by the context menu. */
+function updateSourceContextMenu(source) {
+  const isActive = source.active;
+  ctxToggleIcon.textContent = isActive ? "toggle_on" : "toggle_off";
+  ctxToggleLabel.textContent = isActive
+    ? "Désactiver la source"
+    : "Activer la source";
+  ctxToggleBtn.dataset.state = isActive ? "active" : "inactive";
+}
 
 canvas.addEventListener("contextmenu", (e) => {
   e.preventDefault();
@@ -158,9 +170,11 @@ canvas.addEventListener("contextmenu", (e) => {
 
   // Configurer le menu en conséquence
   if (contextMenuTarget.index >= 0) {
+    const source = sources[contextMenuTarget.index];
     ctxAddBtn.style.display = "none";
     ctxToggleBtn.style.display = "flex";
     ctxDeleteBtn.style.display = "flex";
+    updateSourceContextMenu(source);
   } else {
     ctxAddBtn.style.display = "flex";
     ctxToggleBtn.style.display = "none";

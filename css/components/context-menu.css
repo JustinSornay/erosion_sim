@@ -28,3 +28,11 @@
 #context-menu button:hover {
   background: rgba(255, 255, 255, 0.08);
 }
+
+#ctx-toggle-source[data-state="active"] .material-symbols-outlined {
+  color: var(--water);
+}
+
+#ctx-toggle-source[data-state="inactive"] .material-symbols-outlined {
+  color: var(--text-muted);
+}

@@ -21,7 +21,16 @@ function genTerrain() {
   activeCell = new Uint8Array(NN);
   activeVel = new Float32Array(NN);
   maxActiveQ = 1e-6;
-  const OUTLET_DROP = 0.55;
+  /*
+   * A local depression establishes one natural outlet without imposing a
+   * directional slope or raising any terrain border.
+   */
+  const outletX = 0.35 + rnd() * 0.3;
+  const outletY = 1.02;
+  const OUTLET_DEPTH = 0.28;
+  const OUTLET_WIDTH_X = 0.14;
+  const OUTLET_WIDTH_Y = 0.12;
+
   for (let y = 0; y < N; y++)
     for (let x = 0; x < N; x++) {
       const nx = (x / N) * 3.2,
@@ -29,9 +38,14 @@ function genTerrain() {
       const macro = (fbm(nx * 0.4, ny * 0.4) + 1) * 0.5;
       const detail = (fbm(nx, ny) + 1) * 0.5;
       let h = macro * 0.8 + detail * 0.2;
-      h += OUTLET_DROP * (1 - y / N);
-      const wallDist = Math.min(x / N, 1 - x / N, y / N);
-      h += Math.pow(Math.max(0, 1 - wallDist * 7), 2) * 0.4;
+
+      const px = x / (N - 1);
+      const py = y / (N - 1);
+      const dx = (px - outletX) / OUTLET_WIDTH_X;
+      const dy = (py - outletY) / OUTLET_WIDTH_Y;
+      const outletInfluence = Math.exp(-0.5 * (dx * dx + dy * dy));
+      h -= OUTLET_DEPTH * outletInfluence;
+
       b[idx(x, y)] = h * 0.9;
     }
   bInit.set(b);
