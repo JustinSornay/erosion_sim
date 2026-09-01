@@ -12,7 +12,13 @@ let achievedStepsPerSecSmoothed = 60;
 const FRAME_BUDGET_MS = 35;
 let lastDrainageUpdate = 0;
 let lastActiveNetworkUpdate = 0;
+let lastParticleUpdate = 0;
+let lastRender = 0;
 let lastHudUpdate = 0;
+let renderedFrames = 0;
+
+// Exposes lightweight counters for the file:// browser benchmark only.
+window.__erosionPerformance = { renderedFrames: 0 };
 
 function loop(now) {
   const dtRealMs = Math.min(80, now - lastT);
@@ -26,11 +32,11 @@ function loop(now) {
   }
 
   const targetMultiplier = SPEED_STEPS[+speedEl.value];
+  const visualCadence = getVisualCadence(targetMultiplier);
   let achieved = 0;
   if (!paused) {
     const target = targetMultiplier;
     stepAccumulator += target * (dtRealMs / (1000 / 60));
-    stepAccumulator = Math.min(stepAccumulator, target * 20);
     let toRun = Math.floor(stepAccumulator);
     const budgetStart = performance.now();
     while (achieved < toRun) {
@@ -56,15 +62,26 @@ function loop(now) {
     lastDrainageUpdate = now;
   }
 
-  if (now - lastActiveNetworkUpdate >= ACTIVE_NETWORK_UPDATE_MS) {
+  if (now - lastActiveNetworkUpdate >= 1000 / visualCadence.activeNetworkHz) {
     computeActiveNetwork();
     lastActiveNetworkUpdate = now;
   }
 
-  if (layerOn.particules && viewMode === "composite") {
+  if (
+    now - lastParticleUpdate >= 1000 / visualCadence.particleHz &&
+    layerOn.particules &&
+    viewMode === "composite"
+  ) {
     stepParticles(paused ? 0 : getParticleVisualDt(targetMultiplier));
+    lastParticleUpdate = now;
   }
-  render(DEFAULT_ISO_STEP);
+
+  if (now - lastRender >= 1000 / visualCadence.renderHz) {
+    render(DEFAULT_ISO_STEP);
+    lastRender = now;
+    renderedFrames++;
+    window.__erosionPerformance.renderedFrames = renderedFrames;
+  }
 
   if (now - lastHudUpdate >= HUD_UPDATE_MS) {
     tEl.textContent = steps;

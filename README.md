@@ -21,3 +21,4 @@ et source fixes. Une baseline existante exige `--force` pour être remplacée.
 `node tests/physics-regression.js 1000` compare ensuite les buffers physiques à cette référence.
 `node tests/physics-benchmark.js 5000` mesure la médiane des steps/s du moteur isolé.
 `node tests/physics-profile.js 5000` mesure les cinq phases de `step()` hors production.
+`node tests/browser-benchmark.js` mesure toutes les couches à N192 pour x1, x10, x100 et x500.

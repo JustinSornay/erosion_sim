@@ -2,6 +2,7 @@
  * Repeats full-browser measurements with a warm-up period so visual changes
  * are assessed from distributions rather than one transient headless sample.
  * Usage: node tests/browser-benchmark.js [--warmup-ms 7000] [--duration-ms 15000] [--runs 5]
+ * Measures all visual layers at N192 for x1, x10, x100 and x500.
  */
 const http = require("http");
 
@@ -23,12 +24,8 @@ for (let index = 2; index < process.argv.length; index += 2) {
   else throw new Error(`Unknown option: ${option}`);
 }
 
-const configurations = [
-  { name: "all layers", layers: { relief: true, contours: true, eau: true, reseau: true, erosion: true, particules: true } },
-  { name: "no particles", layers: { relief: true, contours: true, eau: true, reseau: true, erosion: true, particules: false } },
-  { name: "no active network", layers: { relief: true, contours: true, eau: true, reseau: false, erosion: true, particules: true } },
-  { name: "minimal rendering", layers: { relief: false, contours: false, eau: false, reseau: false, erosion: false, particules: false } },
-];
+const targetMultipliers = [1, 10, 100, 500];
+const allLayers = { relief: true, contours: true, eau: true, reseau: true, erosion: true, particules: true };
 
 function requestJson(path) {
   return new Promise((resolve, reject) => {
@@ -97,34 +94,28 @@ async function createSession() {
 
 const sleep = (durationMs) => new Promise((resolve) => setTimeout(resolve, durationMs));
 
-async function measure(session, layers) {
-  const setup = JSON.stringify(layers);
+async function measure(session, multiplier) {
+  const setup = JSON.stringify(allLayers);
   await session.evaluate(`
     (() => {
       Object.assign(layerOn, ${setup});
       viewMode = "composite";
       paused = false;
-      speedEl.value = String(SPEED_STEPS.length - 1);
+      speedEl.value = String(SPEED_STEPS.indexOf(${multiplier}));
       speedEl.oninput();
-      window.__erosionBrowserBenchmark = { frames: 0, startedAt: performance.now() };
-      const counter = window.__erosionBrowserBenchmark;
-      const countFrame = () => {
-        if (window.__erosionBrowserBenchmark === counter) {
-          counter.frames += 1;
-          requestAnimationFrame(countFrame);
-        }
-      };
-      requestAnimationFrame(countFrame);
+      stepAccumulator = 0;
+      lastT = performance.now();
     })();
   `);
   await sleep(options.warmupMs);
-  const start = await session.evaluate(`({ steps, frames: window.__erosionBrowserBenchmark.frames, now: performance.now() })`);
+  const start = await session.evaluate(`({ steps, frames: window.__erosionPerformance.renderedFrames, now: performance.now() })`);
   await sleep(options.durationMs);
-  const end = await session.evaluate(`({ steps, frames: window.__erosionBrowserBenchmark.frames, now: performance.now() })`);
+  const end = await session.evaluate(`({ steps, frames: window.__erosionPerformance.renderedFrames, now: performance.now() })`);
   const elapsedSeconds = (end.now - start.now) / 1000;
   return {
     fps: (end.frames - start.frames) / elapsedSeconds,
     stepsPerSecond: (end.steps - start.steps) / elapsedSeconds,
+    realMultiplier: ((end.steps - start.steps) / elapsedSeconds) / 60,
   };
 }
 
@@ -132,19 +123,21 @@ async function measure(session, layers) {
   const session = await createSession();
   try {
     console.log(`Chrome headless benchmark: ${options.runs} runs, ${options.warmupMs}ms warm-up, ${options.durationMs}ms measurement.`);
-    for (const configuration of configurations) {
+    for (const multiplier of targetMultipliers) {
       const samples = [];
       for (let run = 0; run < options.runs; run++) {
-        const result = await measure(session, configuration.layers);
+        const result = await measure(session, multiplier);
         samples.push(result);
-        console.log(`${configuration.name} run ${run + 1}/${options.runs}: ${result.fps.toFixed(2)} FPS, ${result.stepsPerSecond.toFixed(1)} steps/s`);
+        console.log(`x${multiplier} run ${run + 1}/${options.runs}: ${result.fps.toFixed(2)} FPS, ${result.stepsPerSecond.toFixed(1)} steps/s, x${result.realMultiplier.toFixed(1)} real`);
       }
       const fps = summary(samples.map(({ fps: value }) => value));
       const steps = summary(samples.map(({ stepsPerSecond }) => stepsPerSecond));
+      const realMultiplier = summary(samples.map(({ realMultiplier: value }) => value));
       console.table({
-        configuration: configuration.name,
+        multiplier: `x${multiplier}`,
         fpsMin: fps.min.toFixed(2), fpsP25: fps.p25.toFixed(2), fpsMedian: fps.median.toFixed(2), fpsP75: fps.p75.toFixed(2), fpsMax: fps.max.toFixed(2),
         stepsMin: steps.min.toFixed(1), stepsP25: steps.p25.toFixed(1), stepsMedian: steps.median.toFixed(1), stepsP75: steps.p75.toFixed(1), stepsMax: steps.max.toFixed(1),
+        realMultiplierMedian: `x${realMultiplier.median.toFixed(1)}`,
       });
     }
   } finally {
