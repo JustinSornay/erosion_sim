@@ -99,6 +99,7 @@ document.getElementById("regen").onclick = () => {
 };
 document.getElementById("clearSrc").onclick = () => {
   sources.length = 0;
+  refreshSourceProtectionMask();
   refreshSourceList();
 };
 
@@ -117,13 +118,17 @@ function addSourceAt(gx, gy) {
     const s2 = sources[i];
     if (Math.hypot(s2.x - gx, s2.y - gy) < 6) {
       s2.active = !s2.active;
+      refreshSourceProtectionMask();
       refreshSourceList();
       return;
     }
   }
   const cx = Math.max(1, Math.min(N - 2, Math.round(gx)));
   const cy = Math.max(1, Math.min(N - 2, Math.round(gy)));
-  sources.push({ x: cx, y: cy, rate: DEFAULT_RATE, active: true });
+  const source = { x: cx, y: cy, rate: DEFAULT_RATE, active: true };
+  configureSourceOutlets(source);
+  sources.push(source);
+  refreshSourceProtectionMask();
 
   canvas.style.transform = "scale(0.99)";
   setTimeout(() => (canvas.style.transform = "scale(1)"), 100);
@@ -213,6 +218,7 @@ ctxToggleBtn.addEventListener("click", () => {
   if (contextMenuTarget.index >= 0) {
     const src = sources[contextMenuTarget.index];
     src.active = !src.active;
+    refreshSourceProtectionMask();
     refreshSourceList();
   }
   contextMenu.style.display = "none";
@@ -222,6 +228,7 @@ ctxToggleBtn.addEventListener("click", () => {
 ctxDeleteBtn.addEventListener("click", () => {
   if (contextMenuTarget.index >= 0) {
     sources.splice(contextMenuTarget.index, 1);
+    refreshSourceProtectionMask();
     refreshSourceList();
   }
   contextMenu.style.display = "none";
@@ -242,6 +249,7 @@ function refreshSourceList() {
     row.innerHTML = `<span class="${s2.active ? "" : "off"}">Source ${i + 1} [${s2.rate.toFixed(1)} L/s]</span><a data-i="${i}"><span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle;">close</span></a>`;
     row.querySelector("a").onclick = () => {
       sources.splice(i, 1);
+      refreshSourceProtectionMask();
       refreshSourceList();
     };
     sourcesDiv.appendChild(row);

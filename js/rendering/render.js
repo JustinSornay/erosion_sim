@@ -177,6 +177,15 @@ function render(isoStepMajor) {
         }
       }
 
+      // Protected cells reveal the resistant rock supporting each source.
+      const protection = 1 - sourceProtectionMask[i];
+      if (protection > 0) {
+        const rockBlend = protection * 0.82;
+        r = Math.round(lerp(r, 105, rockBlend));
+        g2 = Math.round(lerp(g2, 108, rockBlend));
+        bl = Math.round(lerp(bl, 110, rockBlend));
+      }
+
       const depth = d[i];
       if (showWater || showActive) {
         const depthT = smoothstep(0, 0.07, depth);

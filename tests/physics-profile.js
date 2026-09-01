@@ -63,7 +63,8 @@ const run = new Function(
   `const profile = { sources: 0, flux: 0, waterUpdate: 0, velocityErosion: 0, sedimentAdvection: 0 };
     ${source}
     genTerrain();
-    sources.push({ x: 48, y: 48, rate: DEFAULT_RATE, active: true });
+    const source = { x: 48, y: 48, rate: DEFAULT_RATE, active: true };
+    configureSourceOutlets(source); sources.push(source); refreshSourceProtectionMask();
     for (let i = 0; i < ${steps}; i++) step();
     return profile;`,
 );

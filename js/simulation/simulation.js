@@ -1,8 +1,106 @@
-function step() {
+/**
+ * Fixes a source mouth to terrain outlets selected at source creation. This
+ * prevents erosion and retained water from feeding back into source routing.
+ */
+function injectSources() {
   for (let i = 0; i < sources.length; i++) {
     const src = sources[i];
-    if (src.active) d[idx(src.x, src.y)] += DT * src.rate;
+    if (!src.active) continue;
+
+    const volumeStep = DT * src.rate;
+    if (src.outletCount === 0) {
+      d[idx(src.x, src.y)] += volumeStep / (L * L);
+      continue;
+    }
+    const volumePerArea = volumeStep / (L * L);
+    for (let outlet = 0; outlet < src.outletCount; outlet++) {
+      d[src.outletIndices[outlet]] += volumePerArea * src.outletWeights[outlet];
+    }
   }
+}
+
+/** Calculates a fixed three-cell mouth facing the lowest terrain direction. */
+function configureSourceOutlets(src) {
+  const sourceIndex = idx(src.x, src.y);
+  const sourceAltitude = b[sourceIndex];
+  let lowestIndex = -1;
+  let lowestAltitude = sourceAltitude;
+  let directionX = 0;
+  let directionY = 0;
+  for (let y = Math.max(0, src.y - 7); y <= Math.min(N - 1, src.y + 7); y++) {
+    for (let x = Math.max(0, src.x - 7); x <= Math.min(N - 1, src.x + 7); x++) {
+      const dx = x - src.x;
+      const dy = y - src.y;
+      const distanceSquared = dx * dx + dy * dy;
+      if (
+        distanceSquared < SOURCE_DIRECTION_MIN_RADIUS_SQUARED ||
+        distanceSquared > SOURCE_DIRECTION_MAX_RADIUS_SQUARED
+      ) continue;
+      const neighborIndex = idx(x, y);
+      if (b[neighborIndex] >= lowestAltitude) continue;
+      lowestAltitude = b[neighborIndex];
+      lowestIndex = neighborIndex;
+      directionX = dx;
+      directionY = dy;
+    }
+  }
+  if (lowestIndex < 0) {
+    src.outletCount = 0;
+    src.outletIndices = new Int32Array(0);
+    src.outletWeights = new Float32Array(0);
+    return;
+  }
+  const outletIndices = new Int32Array(3);
+  const outletScores = new Float32Array(3);
+  outletScores.fill(-Infinity);
+  for (let y = Math.max(0, src.y - 5); y <= Math.min(N - 1, src.y + 5); y++) {
+    for (let x = Math.max(0, src.x - 5); x <= Math.min(N - 1, src.x + 5); x++) {
+      const dx = x - src.x;
+      const dy = y - src.y;
+      if (dx * dx + dy * dy > SOURCE_FOUNDATION_RADIUS_SQUARED) continue;
+      const score = dx * directionX + dy * directionY;
+      if (score <= outletScores[2]) continue;
+      outletScores[2] = score;
+      outletIndices[2] = idx(x, y);
+      for (let rank = 2; rank > 0 && outletScores[rank] > outletScores[rank - 1]; rank--) {
+        const scoreSwap = outletScores[rank - 1];
+        outletScores[rank - 1] = outletScores[rank];
+        outletScores[rank] = scoreSwap;
+        const indexSwap = outletIndices[rank - 1];
+        outletIndices[rank - 1] = outletIndices[rank];
+        outletIndices[rank] = indexSwap;
+      }
+    }
+  }
+  src.outletCount = 3;
+  src.outletIndices = outletIndices;
+  src.outletWeights = new Float32Array([0.6, 0.2, 0.2]);
+  src.directionX = directionX;
+  src.directionY = directionY;
+}
+
+/** Rebuilds erosion-only source protection after source topology changes. */
+function refreshSourceProtectionMask() {
+  sourceProtectionMask.fill(1);
+  for (let source = 0; source < sources.length; source++) {
+    const src = sources[source];
+    for (let y = Math.max(0, src.y - SOURCE_PROTECTION_MAX_RADIUS); y <= Math.min(N - 1, src.y + SOURCE_PROTECTION_MAX_RADIUS); y++) {
+      for (let x = Math.max(0, src.x - SOURCE_PROTECTION_MAX_RADIUS); x <= Math.min(N - 1, src.x + SOURCE_PROTECTION_MAX_RADIUS); x++) {
+        const dx = x - src.x;
+        const dy = y - src.y;
+        const distanceSquared = dx * dx + dy * dy;
+        let factor = 1;
+        if (distanceSquared <= SOURCE_FOUNDATION_RADIUS_SQUARED) factor = 0;
+        else if (distanceSquared <= SOURCE_TRANSITION_RADIUS_SQUARED) factor = 0.5;
+        const cell = idx(x, y);
+        if (factor < sourceProtectionMask[cell]) sourceProtectionMask[cell] = factor;
+      }
+    }
+  }
+}
+
+function step() {
+  injectSources();
 
   for (let y = 0; y < N; y++) {
     const row = y * N;
@@ -91,7 +189,7 @@ function step() {
       const C = KC * sinA * vel * dNorm;
       const si = s[i];
       if (C > si) {
-        const diff = KS * (C - si);
+        const diff = KS * (C - si) * sourceProtectionMask[i];
         b[i] -= diff;
         s[i] = si + diff;
       } else {

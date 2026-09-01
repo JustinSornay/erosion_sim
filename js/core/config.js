@@ -15,6 +15,15 @@ const EROSION_VIS_SCALE = 0.06;
 const DEFAULT_RATE = 2.2;
 const DEFAULT_ISO_STEP = 0.09;
 
+// Fixed D8 source routing avoids per-step neighbor allocations.
+const SOURCE_DX = [-1, 0, 1, -1, 1, -1, 0, 1];
+const SOURCE_DY = [-1, -1, -1, 0, 0, 1, 1, 1];
+const SOURCE_FOUNDATION_RADIUS_SQUARED = 5 * 5;
+const SOURCE_TRANSITION_RADIUS_SQUARED = 6 * 6;
+const SOURCE_DIRECTION_MIN_RADIUS_SQUARED = 5 * 5;
+const SOURCE_DIRECTION_MAX_RADIUS_SQUARED = 7 * 7;
+const SOURCE_PROTECTION_MAX_RADIUS = 6;
+
 // ---------- réseau hydrographique POTENTIEL : accumulation de bassin versant D8 ----------
 const DRAIN_SMOOTH = 0.85;
 const STREAM_FRAC = 0.34;

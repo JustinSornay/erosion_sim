@@ -16,9 +16,11 @@ dépendance. L'application reste compatible avec une ouverture directe via `file
 
 ## Validation physique
 
-`node tests/physics-regression.js 1000 --write-baseline` crée une baseline N128 avec seed
+`node tests/physics-regression.js 1000 --baseline-version=incoming-source --write-baseline` crée une baseline N192 versionnée avec seed
 et source fixes. Une baseline existante exige `--force` pour être remplacée.
 `node tests/physics-regression.js 1000` compare ensuite les buffers physiques à cette référence.
+`node tests/source-injection.js` valide conservation du débit injecté au centre, bord et coin.
+`node tests/source-impact-profile.js` compare injection localisée et distribuée à 500, 2000, 5000 et 10000 steps.
 `node tests/physics-benchmark.js 5000` mesure la médiane des steps/s du moteur isolé.
 `node tests/physics-profile.js 5000` mesure les cinq phases de `step()` hors production.
 `node tests/browser-benchmark.js` mesure toutes les couches à N192 pour x1, x2, x5 et x10.

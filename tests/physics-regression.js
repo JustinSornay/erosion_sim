@@ -10,6 +10,9 @@ const fields = ["b", "d", "s", "u", "v", "fL", "fR", "fT", "fB"];
 const steps = Number.parseInt(process.argv[2] || "1000", 10);
 const writeFixture = process.argv.includes("--write-baseline");
 const forceWrite = process.argv.includes("--force");
+const baselineVersion = process.argv
+  .find((argument) => argument.startsWith("--baseline-version="))
+  ?.slice("--baseline-version=".length);
 const physicalScripts = [
   "js/core/config.js",
   "js/core/math.js",
@@ -32,7 +35,8 @@ function runSimulation() {
     "Uint8Array",
     `${source}
       genTerrain();
-      sources.push({ x: 48, y: 48, rate: DEFAULT_RATE, active: true });
+      const source = { x: 48, y: 48, rate: DEFAULT_RATE, active: true };
+      configureSourceOutlets(source); sources.push(source); refreshSourceProtectionMask();
       for (let i = 0; i < ${steps}; i++) step();
       return { b, d, s, u, v, fL, fR, fT, fB };`,
   );
@@ -72,7 +76,11 @@ function compare(snapshot, fixture) {
 
 const snapshot = runSimulation();
 const gridSize = Math.sqrt(snapshot.b.length);
-const fixtureDirectory = path.join(__dirname, "fixtures", `N${gridSize}`);
+const fixtureDirectory = path.join(
+  __dirname,
+  "fixtures",
+  `N${gridSize}${baselineVersion ? `-${baselineVersion}` : ""}`,
+);
 const fixturePath = path.join(fixtureDirectory, `physics-${steps}.bin`);
 
 if (writeFixture) {

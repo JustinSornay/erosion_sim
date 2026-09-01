@@ -32,7 +32,8 @@ const run = new Function(
   `
     ${source}
     genTerrain();
-    sources.push({ x: 48, y: 48, rate: DEFAULT_RATE, active: true });
+    const source = { x: 48, y: 48, rate: DEFAULT_RATE, active: true };
+    configureSourceOutlets(source); sources.push(source); refreshSourceProtectionMask();
     return () => { for (let i = 0; i < ${steps}; i++) step(); };
   `,
 );

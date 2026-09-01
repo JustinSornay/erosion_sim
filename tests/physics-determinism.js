@@ -33,7 +33,8 @@ function createSimulation() {
     `
       ${source}
       genTerrain();
-      sources.push({ x: 48, y: 48, rate: DEFAULT_RATE, active: true });
+      const source = { x: 48, y: 48, rate: DEFAULT_RATE, active: true };
+      configureSourceOutlets(source); sources.push(source); refreshSourceProtectionMask();
       for (let i = 0; i < ${steps}; i++) step();
       return { b, d, s, u, v, fL, fR, fT, fB };
     `,

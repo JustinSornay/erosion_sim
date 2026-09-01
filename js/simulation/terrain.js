@@ -23,6 +23,8 @@ function genTerrain() {
   activeCellsList = new Int32Array(NN);
   activeCellsCount = 0;
   maxActiveQ = 1e-6;
+  sourceProtectionMask = new Float32Array(NN);
+  sourceProtectionMask.fill(1);
   /*
    * A local depression establishes one natural outlet without imposing a
    * directional slope or raising any terrain border.
