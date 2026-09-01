@@ -2,7 +2,7 @@
  * Repeats full-browser measurements with a warm-up period so visual changes
  * are assessed from distributions rather than one transient headless sample.
  * Usage: node tests/browser-benchmark.js [--warmup-ms 7000] [--duration-ms 15000] [--runs 5]
- * Measures all visual layers at N192 for x1, x10, x100 and x500.
+ * Measures all visual layers at N192 for x1, x2, x5 and x10.
  */
 const http = require("http");
 
@@ -24,7 +24,7 @@ for (let index = 2; index < process.argv.length; index += 2) {
   else throw new Error(`Unknown option: ${option}`);
 }
 
-const targetMultipliers = [1, 10, 100, 500];
+const targetMultipliers = [1, 2, 5, 10];
 const allLayers = { relief: true, contours: true, eau: true, reseau: true, erosion: true, particules: true };
 
 function requestJson(path) {

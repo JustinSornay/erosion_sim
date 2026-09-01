@@ -11,6 +11,14 @@ const panelTab = document.getElementById("panel-tab");
 const closePanelBtn = document.getElementById("close-panel");
 let paused = false;
 
+// UI bounds derive from requested simulation targets, preventing stale slider positions.
+speedEl.min = "0";
+speedEl.max = String(SPEED_STEPS.length - 1);
+speedEl.value = String(
+  Math.min(Math.max(Number(speedEl.value) || 0, 0), SPEED_STEPS.length - 1),
+);
+speedLbl.textContent = "×" + SPEED_STEPS[+speedEl.value];
+
 function buildLayerUI(defs, containerId) {
   const container = document.getElementById(containerId);
   defs.forEach((L) => {

@@ -30,7 +30,7 @@ const V_SPAWN = 0.15,
   V_DEATH = 0.07;
 const Q_SPAWN = 0.003,
   Q_DEATH = 0.0014;
-const SPEED_STEPS = [1, 2, 5, 10, 20, 50, 100, 250, 500];
+const SPEED_STEPS = [1, 2, 5, 10];
 
 // Visual systems update independently from the physical timestep. This keeps
 // high-speed exploration responsive while every physical step remains intact.
@@ -38,9 +38,8 @@ const DRAINAGE_UPDATE_MS = 150;
 const HUD_UPDATE_MS = 200;
 const VISUAL_CADENCES = [
   { maximumMultiplier: 1, renderHz: 60, activeNetworkHz: 30, particleHz: 60 },
-  { maximumMultiplier: 10, renderHz: 45, activeNetworkHz: 20, particleHz: 45 },
-  { maximumMultiplier: 100, renderHz: 30, activeNetworkHz: 15, particleHz: 30 },
-  { maximumMultiplier: Infinity, renderHz: 20, activeNetworkHz: 10, particleHz: 20 },
+  { maximumMultiplier: 5, renderHz: 45, activeNetworkHz: 20, particleHz: 45 },
+  { maximumMultiplier: 10, renderHz: 30, activeNetworkHz: 15, particleHz: 30 },
 ];
 
 /** Returns visual cadence for the selected speed without affecting physics. */

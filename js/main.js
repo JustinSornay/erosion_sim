@@ -53,7 +53,7 @@ function loop(now) {
     );
     tgtMultEl.textContent = "×" + target;
     realMultEl.textContent =
-      "×" + Math.max(1, Math.round(achievedStepsPerSecSmoothed / 60));
+      "×" + Math.max(1, Number((achievedStepsPerSecSmoothed / 60).toFixed(1)));
   }
 
   if (now - lastDrainageUpdate >= DRAINAGE_UPDATE_MS) {
