@@ -182,9 +182,9 @@ function step() {
         bb = y < N - 1 ? b[i + N] : b[i];
       const dzx = (brr - bl) * 0.5,
         dzy = (bb - bt) * 0.5;
+      const vel = Math.sqrt(ui * ui + vi * vi);
       const slope = Math.sqrt(dzx * dzx + dzy * dzy);
       const sinA = slope / Math.sqrt(1 + slope * slope);
-      const vel = Math.sqrt(ui * ui + vi * vi);
       const dNorm = Math.min(1, d[i] * 4);
       const C = KC * sinA * vel * dNorm;
       const si = s[i];

@@ -15,8 +15,15 @@ const scripts = [
   "js/simulation/simulation.js",
   "js/simulation/drainage.js",
 ];
-const source = scripts.map((file) => fs.readFileSync(path.join(root, file), "utf8")).join("\n");
-const checkpoints = process.argv.slice(2).map(Number).filter(Number.isFinite);
+const magnitudeSource = scripts.map((file) => fs.readFileSync(path.join(root, file), "utf8")).join("\n");
+const hybridArgument = process.argv.find((argument) => argument.startsWith("--hybrid="));
+const hybridFactor = hybridArgument ? Number(hybridArgument.slice("--hybrid=".length)) : null;
+if (hybridArgument && (!Number.isFinite(hybridFactor) || hybridFactor < 0 || hybridFactor > 1)) throw new Error("--hybrid requires a factor in [0, 1]");
+const source = hybridFactor === null ? magnitudeSource : magnitudeSource.replace(
+  "const sinA = slope / Math.sqrt(1 + slope * slope);",
+  `let alignment = 0; if (slope > 1e-6 && vel > 1e-6) alignment = Math.max(0, Math.min(1, -(dzx * ui + dzy * vi) / (slope * vel))); const effectiveSlope = slope * (${hybridFactor} + ${(1 - hybridFactor)} * alignment); const sinA = effectiveSlope / Math.sqrt(1 + effectiveSlope * effectiveSlope);`,
+);
+const checkpoints = process.argv.slice(2).filter((argument) => !argument.startsWith("--")).map(Number).filter(Number.isFinite);
 if (checkpoints.length === 0) checkpoints.push(1000, 5000, 10000, 20000);
 const distances = [0, 2, 4, 6, 8, 12, 16, 24, 32];
 const dx = [-1, 0, 1, -1, 1, -1, 0, 1];
@@ -75,8 +82,11 @@ function measure(snapshot, cells, distance) {
   const velocity = Math.hypot(snapshot.u[cell], snapshot.v[cell]);
   const slopeMagnitude = Math.hypot(dzx, dzy);
   const flowSlope = Math.max(0, -(dzx * snapshot.u[cell] + dzy * snapshot.v[cell]) / Math.max(velocity, 1e-6));
-  const sinSlopeMagnitude = slopeMagnitude / Math.sqrt(1 + slopeMagnitude * slopeMagnitude);
-  const capacity = snapshot.KC * sinSlopeMagnitude * velocity * Math.min(1, snapshot.d[cell] * 4);
+  let alignment = 0;
+  if (slopeMagnitude > 1e-6 && velocity > 1e-6) alignment = Math.max(0, Math.min(1, -(dzx * snapshot.u[cell] + dzy * snapshot.v[cell]) / (slopeMagnitude * velocity)));
+  const effectiveSlope = hybridFactor === null ? slopeMagnitude : slopeMagnitude * (hybridFactor + (1 - hybridFactor) * alignment);
+  const sinEffectiveSlope = effectiveSlope / Math.sqrt(1 + effectiveSlope * effectiveSlope);
+  const capacity = snapshot.KC * sinEffectiveSlope * velocity * Math.min(1, snapshot.d[cell] * 4);
   const sediment = snapshot.s[cell];
   return {
     distance: sampledDistance, d: snapshot.d[cell], vel: velocity, q: snapshot.d[cell] * velocity,
@@ -88,7 +98,7 @@ function measure(snapshot, cells, distance) {
 
 function summarize(snapshot, cells, steps) {
   let maximumCapacity = 0;
-  let totalSaturation = 0;
+  const saturations = [];
   let maximumErosionPotential = 0;
   let maximumDischarge = 0;
   let totalSlopeMagnitude = 0;
@@ -98,7 +108,7 @@ function summarize(snapshot, cells, steps) {
   for (let distance = 0; distance < cells.length; distance++) {
     const metric = measure(snapshot, cells, distance);
     maximumCapacity = Math.max(maximumCapacity, metric.C);
-    totalSaturation += metric["s/C"];
+    if (metric.C > 1e-6) saturations.push(metric["s/C"]);
     maximumErosionPotential = Math.max(maximumErosionPotential, metric["C-s"]);
     maximumDischarge = Math.max(maximumDischarge, metric.q);
     totalSlopeMagnitude += metric.slopeMag;
@@ -111,7 +121,11 @@ function summarize(snapshot, cells, steps) {
   return {
     steps,
     Cmax: maximumCapacity,
-    meanSC: totalSaturation / cells.length,
+    activeCapacitySamples: saturations.length,
+    zeroCapacityFraction: 1 - saturations.length / cells.length,
+    p25SC: percentile(saturations, 0.25),
+    medianSC: percentile(saturations, 0.5),
+    p75SC: percentile(saturations, 0.75),
     maxCMinusS: maximumErosionPotential,
     qMax: maximumDischarge,
     meanSlopeMag: totalSlopeMagnitude / cells.length,
@@ -121,10 +135,20 @@ function summarize(snapshot, cells, steps) {
   };
 }
 
+function percentile(values, quantile) {
+  if (values.length === 0) return null;
+  const sorted = [...values].sort((first, second) => first - second);
+  return sorted[Math.floor((sorted.length - 1) * quantile)];
+}
+
+let referenceFlowPath;
 for (const steps of checkpoints) {
   const snapshot = run(steps);
-  const pathCells = tracePath(snapshot);
-  console.log(`Erosion path profile after ${steps} steps; traced ${pathCells.length - 1} cells.`);
+  const dynamicFlowPath = tracePath(snapshot);
+  if (!referenceFlowPath || steps <= 1000) referenceFlowPath = dynamicFlowPath;
+  const pathCells = referenceFlowPath;
+  console.log(`Erosion path profile (${hybridFactor === null ? "MAGNITUDE" : `HYBRID ${hybridFactor}`}) after ${steps} steps; traced ${pathCells.length - 1} cells.`);
   console.table(distances.map((distance) => measure(snapshot, pathCells, distance)));
   console.table([summarize(snapshot, pathCells, steps)]);
+  console.log(`Dynamic path length: ${dynamicFlowPath.length - 1}; reference path length: ${referenceFlowPath.length - 1}.`);
 }
