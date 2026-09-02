@@ -1,8 +1,20 @@
-/*
- * Repeats full-browser measurements with a warm-up period so visual changes
- * are assessed from distributions rather than one transient headless sample.
- * Usage: node tests/browser-benchmark.js [--warmup-ms 7000] [--duration-ms 15000] [--runs 5]
- * Measures all visual layers at N192 for x1, x2, x5 and x10.
+/**
+ * CATEGORY: BENCHMARK
+ *
+ * PURPOSE:
+ * Repeats full-browser visual-layer performance measurements after warm-up.
+ *
+ * STATUS:
+ * ACTIVE
+ *
+ * RESULT:
+ * Measures generic browser performance distributions.
+ *
+ * PRODUCTION:
+ * Does not modify production physics.
+ *
+ * RUN:
+ * node tests/benchmarks/browser-benchmark.js [options]
  */
 const http = require("http");
 

@@ -1,14 +1,26 @@
-/*
- * Verifies source routing independently from transport, evaporation and
- * erosion. Every scenario must inject its complete external timestep volume.
+/**
+ * CATEGORY: REGRESSION
  *
- * Usage: node tests/source-injection.js
+ * PURPOSE:
+ * Verifies complete external timestep volume reaches configured source outlets.
+ *
+ * STATUS:
+ * ACTIVE
+ *
+ * RESULT:
+ * Protects production source-routing behavior.
+ *
+ * PRODUCTION:
+ * Does not modify production physics.
+ *
+ * RUN:
+ * node tests/regression/source-injection.js
  */
 const assert = require("assert");
 const fs = require("fs");
 const path = require("path");
 
-const root = path.resolve(__dirname, "..");
+const root = path.resolve(__dirname, "../..");
 const physicalScripts = [
   "js/core/config.js",
   "js/core/math.js",

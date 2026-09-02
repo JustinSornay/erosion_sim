@@ -1,11 +1,25 @@
-/*
- * Captures or validates physical buffers for one deterministic scenario.
- * Usage: node tests/physics-regression.js <steps> [--write-baseline] [--force]
+/**
+ * CATEGORY: REGRESSION
+ *
+ * PURPOSE:
+ * Validates deterministic physical buffers against versioned reference fixtures.
+ *
+ * STATUS:
+ * ACTIVE
+ *
+ * RESULT:
+ * Protects expected production physics.
+ *
+ * PRODUCTION:
+ * Does not modify production physics.
+ *
+ * RUN:
+ * node tests/regression/physics-regression.js <steps>
  */
 const fs = require("fs");
 const path = require("path");
 
-const root = path.resolve(__dirname, "..");
+const root = path.resolve(__dirname, "../..");
 const fields = ["b", "d", "s", "u", "v", "fL", "fR", "fT", "fB"];
 const steps = Number.parseInt(process.argv[2] || "1000", 10);
 const writeFixture = process.argv.includes("--write-baseline");
@@ -78,7 +92,7 @@ const snapshot = runSimulation();
 const gridSize = Math.sqrt(snapshot.b.length);
 const fixtureDirectory = path.join(
   __dirname,
-  "fixtures",
+  "../fixtures",
   `N${gridSize}${baselineVersion ? `-${baselineVersion}` : ""}`,
 );
 const fixturePath = path.join(fixtureDirectory, `physics-${steps}.bin`);

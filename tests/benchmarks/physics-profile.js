@@ -1,11 +1,25 @@
-/*
- * Profiles the existing step phases in a benchmark-only instrumented copy.
- * Production simulation.js remains free from timing calls.
+/**
+ * CATEGORY: BENCHMARK
+ *
+ * PURPOSE:
+ * Profiles existing simulation phases in an instrumented isolated copy.
+ *
+ * STATUS:
+ * ACTIVE
+ *
+ * RESULT:
+ * Measures generic phase-level performance.
+ *
+ * PRODUCTION:
+ * Does not modify production physics.
+ *
+ * RUN:
+ * node tests/benchmarks/physics-profile.js [steps]
  */
 const fs = require("fs");
 const path = require("path");
 
-const root = path.resolve(__dirname, "..");
+const root = path.resolve(__dirname, "../..");
 const steps = Number.parseInt(process.argv[2] || "5000", 10);
 const phases = ["sources", "flux", "waterUpdate", "velocityErosion", "sedimentAdvection"];
 const scripts = [

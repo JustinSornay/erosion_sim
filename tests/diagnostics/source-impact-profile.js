@@ -1,13 +1,25 @@
-/*
- * Compares localized and distributed injection with the deterministic terrain.
- * Downstream erosion follows the terrain's pre-simulation drainage path.
+/**
+ * CATEGORY: DIAGNOSTIC
  *
- * Usage: node tests/source-impact-profile.js
+ * PURPOSE:
+ * Compares localized and distributed source injection along drainage paths.
+ *
+ * STATUS:
+ * ACTIVE
+ *
+ * RESULT:
+ * Provides supporting source-impact observations.
+ *
+ * PRODUCTION:
+ * Does not modify production physics.
+ *
+ * RUN:
+ * node tests/diagnostics/source-impact-profile.js
  */
 const fs = require("fs");
 const path = require("path");
 
-const root = path.resolve(__dirname, "..");
+const root = path.resolve(__dirname, "../..");
 const physicalScripts = [
   "js/core/config.js",
   "js/core/math.js",

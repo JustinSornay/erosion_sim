@@ -1,12 +1,25 @@
 /**
- * Benchmark-only comparison of a local incision floor. The production engine
- * remains unchanged: variants are injected into an isolated source string.
- * Usage: node tests/morphodynamic-stability-comparison.js [--write-captures]
+ * CATEGORY: EXPERIMENT
+ *
+ * PURPOSE:
+ * Compares local-incision constraints injected into isolated benchmark source.
+ *
+ * STATUS:
+ * REJECTED
+ *
+ * RESULT:
+ * No tested MAX_LOCAL_INCIDENCE satisfies all criteria at 5000.
+ *
+ * PRODUCTION:
+ * Does not modify production physics.
+ *
+ * RUN:
+ * node tests/experiments/morphodynamics/morphodynamic-stability-comparison.js [--write-captures]
  */
 const fs = require("fs");
 const path = require("path");
 
-const root = path.resolve(__dirname, "..");
+const root = path.resolve(__dirname, "../../..");
 const engineFiles = ["js/core/config.js", "js/core/math.js", "js/core/state.js", "js/simulation/terrain.js", "js/simulation/simulation.js", "js/simulation/drainage.js"];
 const currentSource = engineFiles.map((file) => fs.readFileSync(path.join(root, file), "utf8")).join("\n");
 const checkpoints = [1000, 5000, 10000, 20000];
@@ -170,7 +183,7 @@ function qualifies(candidate, current) {
 }
 
 function writeCapture(snapshot, variant, steps) {
-  const outputDirectory = path.join(__dirname, "morphodynamic-stability-captures");
+  const outputDirectory = path.join(root, "tests", "generated", "morphodynamic-stability");
   fs.mkdirSync(outputDirectory, { recursive: true });
   let terrainMin = Infinity; let terrainMax = -Infinity;
   for (const elevation of snapshot.b) { terrainMin = Math.min(terrainMin, elevation); terrainMax = Math.max(terrainMax, elevation); }

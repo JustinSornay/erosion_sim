@@ -1,4 +1,22 @@
-const fs=require("fs"),p=require("path"),root=p.resolve(__dirname,"..");
+/**
+ * CATEGORY: BENCHMARK
+ *
+ * PURPOSE:
+ * Profiles isolated velocity-erosion sub-phases.
+ *
+ * STATUS:
+ * ACTIVE
+ *
+ * RESULT:
+ * Measures generic sub-phase performance.
+ *
+ * PRODUCTION:
+ * Does not modify production physics.
+ *
+ * RUN:
+ * node tests/benchmarks/velocity-erosion-profile.js
+ */
+const fs=require("fs"),p=require("path"),root=p.resolve(__dirname,"../..");
 const src=["js/core/config.js","js/core/math.js","js/core/state.js","js/simulation/terrain.js","js/simulation/simulation.js","js/simulation/drainage.js"].map(f=>fs.readFileSync(p.join(root,f),"utf8")).join("\n");
 const make=new Function("Math","Float32Array","Int32Array","Uint8Array",`${src}
 genTerrain();const source={x:48,y:48,rate:DEFAULT_RATE,active:true};configureSourceOutlets(source);sources.push(source);refreshSourceProtectionMask();for(let z=0;z<100;z++)step();const wxBuffer=new Float32Array(NN),wyBuffer=new Float32Array(NN),uiBuffer=new Float32Array(NN),viBuffer=new Float32Array(NN),dzxBuffer=new Float32Array(NN),dzyBuffer=new Float32Array(NN),sinABuffer=new Float32Array(NN),velocityBuffer=new Float32Array(NN),capacityBuffer=new Float32Array(NN),bScratch=new Float32Array(NN),sScratch=new Float32Array(NN);

@@ -1,8 +1,25 @@
-/* Benchmark-only comparison of historical velocity and local-discharge capacity. */
+/**
+ * CATEGORY: EXPERIMENT
+ *
+ * PURPOSE:
+ * Compares historical velocity capacity with local-discharge capacity.
+ *
+ * STATUS:
+ * REJECTED
+ *
+ * RESULT:
+ * Simple C proportional to q does not provide a durable solution.
+ *
+ * PRODUCTION:
+ * Does not modify production physics.
+ *
+ * RUN:
+ * node tests/experiments/discharge/discharge-capacity-comparison.js [checkpoints]
+ */
 const fs = require("fs");
 const path = require("path");
 
-const root = path.resolve(__dirname, "..");
+const root = path.resolve(__dirname, "../../..");
 const files = ["js/core/config.js", "js/core/math.js", "js/core/state.js", "js/simulation/terrain.js", "js/simulation/simulation.js", "js/simulation/drainage.js"];
 const magnitudeSource = files.map((file) => fs.readFileSync(path.join(root, file), "utf8")).join("\n");
 const coefficients = [0.05, 0.1, 0.2, 0.4, 0.8, 1.2];

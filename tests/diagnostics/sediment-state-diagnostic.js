@@ -1,11 +1,25 @@
 /**
- * Audits sediment-state semantics and tests a mass-target concentration
- * interpretation in isolated benchmark source. Usage: node tests/sediment-state-diagnostic.js
+ * CATEGORY: DIAGNOSTIC
+ *
+ * PURPOSE:
+ * Audits sediment-state semantics and mass-target concentration interpretation.
+ *
+ * STATUS:
+ * ACCEPTED DIAGNOSTIC
+ *
+ * RESULT:
+ * SEDIMENT MODEL C — historical s is non-conservative / dimensionally inconsistent.
+ *
+ * PRODUCTION:
+ * Does not modify production physics.
+ *
+ * RUN:
+ * node tests/diagnostics/sediment-state-diagnostic.js
  */
 const fs = require("fs");
 const path = require("path");
 
-const root = path.resolve(__dirname, "..");
+const root = path.resolve(__dirname, "../..");
 const engineFiles = ["js/core/config.js", "js/core/math.js", "js/core/state.js", "js/simulation/terrain.js", "js/simulation/simulation.js", "js/simulation/drainage.js"];
 const currentSource = engineFiles.map((file) => fs.readFileSync(path.join(root, file), "utf8")).join("\n");
 const checkpoints = [100, 500, 1000, 2500, 5000, 10000];

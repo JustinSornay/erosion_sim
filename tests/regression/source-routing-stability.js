@@ -1,9 +1,26 @@
-/* Verifies terrain-defined source mouths stay unchanged after local erosion. */
+/**
+ * CATEGORY: REGRESSION
+ *
+ * PURPOSE:
+ * Verifies terrain-defined source outlet weights remain fixed after local erosion.
+ *
+ * STATUS:
+ * ACTIVE
+ *
+ * RESULT:
+ * Protects production source-routing stability.
+ *
+ * PRODUCTION:
+ * Does not modify production physics.
+ *
+ * RUN:
+ * node tests/regression/source-routing-stability.js
+ */
 const assert = require("assert");
 const fs = require("fs");
 const path = require("path");
 
-const root = path.resolve(__dirname, "..");
+const root = path.resolve(__dirname, "../..");
 const scripts = ["js/core/config.js", "js/core/math.js", "js/core/state.js", "js/simulation/terrain.js", "js/simulation/simulation.js", "js/simulation/drainage.js"];
 const source = scripts.map((file) => fs.readFileSync(path.join(root, file), "utf8")).join("\n");
 const run = new Function("Math", "Float32Array", "Int32Array", "Uint8Array", `${source}

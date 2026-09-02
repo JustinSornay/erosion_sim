@@ -1,11 +1,25 @@
-/*
- * Measures only the deterministic physical engine: no DOM, rendering, D8 or
- * particles. Usage: node tests/physics-benchmark.js [steps] [repetitions]
+/**
+ * CATEGORY: BENCHMARK
+ *
+ * PURPOSE:
+ * Measures deterministic physical-engine throughput without browser rendering.
+ *
+ * STATUS:
+ * ACTIVE
+ *
+ * RESULT:
+ * Measures generic engine performance.
+ *
+ * PRODUCTION:
+ * Does not modify production physics.
+ *
+ * RUN:
+ * node tests/benchmarks/physics-benchmark.js [steps] [repetitions]
  */
 const fs = require("fs");
 const path = require("path");
 
-const root = path.resolve(__dirname, "..");
+const root = path.resolve(__dirname, "../..");
 const steps = Number.parseInt(process.argv[2] || "1000", 10);
 const repetitions = Number.parseInt(process.argv[3] || "7", 10);
 const warmups = 3;

@@ -1,7 +1,24 @@
-/** Benchmark-only throughput comparison. Usage: node tests/conservative-sediment-performance.js */
+/**
+ * CATEGORY: EXPERIMENT
+ *
+ * PURPOSE:
+ * Measures throughput of conservative suspended-sediment transport.
+ *
+ * STATUS:
+ * ACCEPTED MECHANISM / REJECTED AS COMPLETE SOLUTION
+ *
+ * RESULT:
+ * TRANSPORT B — conservation fixed, downstream morphology insufficient.
+ *
+ * PRODUCTION:
+ * Does not modify production physics.
+ *
+ * RUN:
+ * node tests/experiments/sediment/conservative-sediment-performance.js
+ */
 const fs = require("fs");
 const path = require("path");
-const root = path.resolve(__dirname, "..");
+const root = path.resolve(__dirname, "../../..");
 const files = ["js/core/config.js", "js/core/math.js", "js/core/state.js", "js/simulation/terrain.js", "js/simulation/simulation.js", "js/simulation/drainage.js"];
 const currentSource = files.map((file) => fs.readFileSync(path.join(root, file), "utf8")).join("\n");
 const { conservativeSource: buildConservativeSource } = require("./conservative-sediment-transport.js");

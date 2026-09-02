@@ -1,13 +1,25 @@
 /**
- * Benchmark-only audit of flux-form suspended-sediment transport.  Production
- * keeps its historical semi-Lagrangian transport; this file injects the
- * conservative alternative into an isolated engine source.
- * Usage: node tests/conservative-sediment-transport.js
+ * CATEGORY: EXPERIMENT
+ *
+ * PURPOSE:
+ * Audits flux-form suspended-sediment transport in isolated benchmark source.
+ *
+ * STATUS:
+ * ACCEPTED MECHANISM / REJECTED AS COMPLETE SOLUTION
+ *
+ * RESULT:
+ * TRANSPORT B — conservation fixed, downstream morphology insufficient.
+ *
+ * PRODUCTION:
+ * Does not modify production physics.
+ *
+ * RUN:
+ * node tests/experiments/sediment/conservative-sediment-transport.js
  */
 const fs = require("fs");
 const path = require("path");
 
-const root = path.resolve(__dirname, "..");
+const root = path.resolve(__dirname, "../../..");
 const engineFiles = ["js/core/config.js", "js/core/math.js", "js/core/state.js", "js/simulation/terrain.js", "js/simulation/simulation.js", "js/simulation/drainage.js"];
 const currentSource = engineFiles.map((file) => fs.readFileSync(path.join(root, file), "utf8")).join("\n");
 const checkpoints = [1000, 5000, 10000];

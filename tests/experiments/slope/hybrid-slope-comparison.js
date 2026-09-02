@@ -1,7 +1,24 @@
-/* Benchmark-only comparison of magnitude, directional and hybrid slope models. */
+/**
+ * CATEGORY: EXPERIMENT
+ *
+ * PURPOSE:
+ * Compares magnitude, directional, and hybrid slope-capacity models.
+ *
+ * STATUS:
+ * REJECTED
+ *
+ * RESULT:
+ * No factor satisfies long-run hydraulic/morphological criteria.
+ *
+ * PRODUCTION:
+ * Does not modify production physics.
+ *
+ * RUN:
+ * node tests/experiments/slope/hybrid-slope-comparison.js [checkpoints]
+ */
 const fs = require("fs");
 const path = require("path");
-const root = path.resolve(__dirname, "..");
+const root = path.resolve(__dirname, "../../..");
 const files = ["js/core/config.js", "js/core/math.js", "js/core/state.js", "js/simulation/terrain.js", "js/simulation/simulation.js", "js/simulation/drainage.js"];
 const magnitudeSource = files.map((file) => fs.readFileSync(path.join(root, file), "utf8")).join("\n");
 const factors = [0.25, 0.35, 0.5, 0.65, 0.75];

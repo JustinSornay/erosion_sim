@@ -1,14 +1,25 @@
-/*
- * Runs the physical engine twice with identical inputs. The browser-only
- * rendering and UI scripts are intentionally excluded: this verifies that
- * terrain, sources and physical buffers stay deterministic for a step count.
+/**
+ * CATEGORY: REGRESSION
  *
- * Usage: node tests/physics-determinism.js [steps]
+ * PURPOSE:
+ * Verifies deterministic terrain, source, and physical-buffer evolution.
+ *
+ * STATUS:
+ * ACTIVE
+ *
+ * RESULT:
+ * Protects expected production physics.
+ *
+ * PRODUCTION:
+ * Does not modify production physics.
+ *
+ * RUN:
+ * node tests/regression/physics-determinism.js [steps]
  */
 const fs = require("fs");
 const path = require("path");
 
-const root = path.resolve(__dirname, "..");
+const root = path.resolve(__dirname, "../..");
 const physicalScripts = [
   "js/core/config.js",
   "js/core/math.js",

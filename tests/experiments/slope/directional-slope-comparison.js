@@ -1,7 +1,24 @@
-/* Compares historical terrain-magnitude capacity with directional capacity. */
+/**
+ * CATEGORY: EXPERIMENT
+ *
+ * PURPOSE:
+ * Compares historical terrain-magnitude capacity with directional slope capacity.
+ *
+ * STATUS:
+ * REJECTED
+ *
+ * RESULT:
+ * Improves early source distribution but globally weakens erosion.
+ *
+ * PRODUCTION:
+ * Does not modify production physics.
+ *
+ * RUN:
+ * node tests/experiments/slope/directional-slope-comparison.js [checkpoints]
+ */
 const fs = require("fs");
 const path = require("path");
-const root = path.resolve(__dirname, "..");
+const root = path.resolve(__dirname, "../../..");
 const files = ["js/core/config.js", "js/core/math.js", "js/core/state.js", "js/simulation/terrain.js", "js/simulation/simulation.js", "js/simulation/drainage.js"];
 const directionalSource = files.map((file) => fs.readFileSync(path.join(root, file), "utf8")).join("\n");
 const currentSource = directionalSource.replace(

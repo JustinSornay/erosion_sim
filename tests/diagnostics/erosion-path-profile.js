@@ -1,12 +1,25 @@
-/*
- * Profiles erosion and sediment capacity along the dominant simulated flow
- * leaving one fixed source mouth. Usage: node tests/erosion-path-profile.js
- * [1000 5000 10000 20000]
+/**
+ * CATEGORY: DIAGNOSTIC
+ *
+ * PURPOSE:
+ * Profiles erosion and sediment capacity along dominant simulated flow paths.
+ *
+ * STATUS:
+ * ACTIVE
+ *
+ * RESULT:
+ * Provides supporting path-level observations.
+ *
+ * PRODUCTION:
+ * Does not modify production physics.
+ *
+ * RUN:
+ * node tests/diagnostics/erosion-path-profile.js [checkpoints]
  */
 const fs = require("fs");
 const path = require("path");
 
-const root = path.resolve(__dirname, "..");
+const root = path.resolve(__dirname, "../..");
 const scripts = [
   "js/core/config.js",
   "js/core/math.js",

@@ -1,12 +1,25 @@
 /**
- * Separates longitudinal incision from lateral widening around the historical
- * realised flow path. Production physics remains unchanged.
- * Usage: node tests/erosion-orientation-diagnostic.js
+ * CATEGORY: DIAGNOSTIC
+ *
+ * PURPOSE:
+ * Separates longitudinal incision from lateral widening along realised flow paths.
+ *
+ * STATUS:
+ * REJECTED
+ *
+ * RESULT:
+ * CASE A2 — NOT EXPLAINED BY LATERAL WIDENING.
+ *
+ * PRODUCTION:
+ * Does not modify production physics.
+ *
+ * RUN:
+ * node tests/diagnostics/erosion-orientation-diagnostic.js
  */
 const fs = require("fs");
 const path = require("path");
 
-const root = path.resolve(__dirname, "..");
+const root = path.resolve(__dirname, "../..");
 const engineFiles = ["js/core/config.js", "js/core/math.js", "js/core/state.js", "js/simulation/terrain.js", "js/simulation/simulation.js", "js/simulation/drainage.js"];
 const currentSource = engineFiles.map((file) => fs.readFileSync(path.join(root, file), "utf8")).join("\n");
 const checkpoints = [500, 1000, 2500, 5000, 10000];

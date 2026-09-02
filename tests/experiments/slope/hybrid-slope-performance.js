@@ -1,16 +1,36 @@
-/* Isolated throughput comparison for historical and discharge-based capacity. */
+/**
+ * CATEGORY: EXPERIMENT
+ *
+ * PURPOSE:
+ * Measures isolated throughput of rejected hybrid slope-capacity variants.
+ *
+ * STATUS:
+ * REJECTED
+ *
+ * RESULT:
+ * No factor satisfies long-run hydraulic/morphological criteria.
+ *
+ * PRODUCTION:
+ * Does not modify production physics.
+ *
+ * RUN:
+ * node tests/experiments/slope/hybrid-slope-performance.js [options]
+ */
 const fs = require("fs");
 const path = require("path");
 
-const root = path.resolve(__dirname, "..");
+const root = path.resolve(__dirname, "../../..");
 const files = ["js/core/config.js", "js/core/math.js", "js/core/state.js", "js/simulation/terrain.js", "js/simulation/simulation.js", "js/simulation/drainage.js"];
 const magnitudeSource = files.map((file) => fs.readFileSync(path.join(root, file), "utf8")).join("\n");
-const coefficient = Number(process.argv.find((argument) => argument.startsWith("--kcq="))?.slice(6) ?? 0.4);
+const factor = Number(process.argv.find((argument) => argument.startsWith("--hybrid="))?.slice(9) ?? 0.25);
 const steps = Number(process.argv.find((argument) => argument.startsWith("--steps="))?.slice(8) ?? 5000);
 const repetitions = Number(process.argv.find((argument) => argument.startsWith("--repetitions="))?.slice(14) ?? 11);
-if (!Number.isFinite(coefficient) || coefficient <= 0) throw new Error("--kcq requires a positive coefficient");
+if (!Number.isFinite(factor) || factor < 0 || factor > 1) throw new Error("--hybrid requires a factor in [0, 1]");
 
-const dischargeSource = magnitudeSource.replace("const C = KC * sinA * vel * dNorm;", `const C = ${coefficient} * sinA * d[i] * vel;`);
+const hybridSource = magnitudeSource.replace(
+  "const sinA = slope / Math.sqrt(1 + slope * slope);",
+  `let alignment = 0; if (slope > 1e-6 && vel > 1e-6) alignment = Math.max(0, Math.min(1, -(dzx * ui + dzy * vi) / (slope * vel))); const effectiveSlope = slope * (${factor} + ${(1 - factor)} * alignment); const sinA = effectiveSlope / Math.sqrt(1 + effectiveSlope * effectiveSlope);`,
+);
 
 function run(source) {
   const math = Object.create(Math); math.random = () => 0.3141592653;
@@ -28,6 +48,6 @@ function measure(variant, source) {
 }
 
 const magnitude = measure("MAGNITUDE", magnitudeSource);
-const discharge = measure(`Q ${coefficient}`, dischargeSource);
-discharge.deltaPercent = (discharge.stepsPerSecond / magnitude.stepsPerSecond - 1) * 100;
-console.table([magnitude, discharge]);
+const hybrid = measure(`HYBRID ${factor}`, hybridSource);
+hybrid.deltaPercent = (hybrid.stepsPerSecond / magnitude.stepsPerSecond - 1) * 100;
+console.table([magnitude, hybrid]);

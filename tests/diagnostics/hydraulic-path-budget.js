@@ -1,12 +1,25 @@
 /**
- * Measures the water budget across transverse sections of a fixed hydraulic
- * reference path. It isolates routing and channel spreading from erosion
- * capacity changes. Usage: node tests/hydraulic-path-budget.js
+ * CATEGORY: DIAGNOSTIC
+ *
+ * PURPOSE:
+ * Measures water budgets across sections of a fixed hydraulic reference path.
+ *
+ * STATUS:
+ * ACCEPTED
+ *
+ * RESULT:
+ * CASE A — MORPHODYNAMIC FEEDBACK.
+ *
+ * PRODUCTION:
+ * Does not modify production physics.
+ *
+ * RUN:
+ * node tests/diagnostics/hydraulic-path-budget.js
  */
 const fs = require("fs");
 const path = require("path");
 
-const root = path.resolve(__dirname, "..");
+const root = path.resolve(__dirname, "../..");
 const engineFiles = [
   "js/core/config.js",
   "js/core/math.js",
