@@ -1,0 +1,1373 @@
+{
+  "referenceFlowPath": [
+    8304,
+    8113,
+    7922,
+    7731,
+    7540,
+    7349,
+    7158,
+    6967,
+    6776,
+    6969,
+    7162,
+    7355,
+    7548,
+    7741,
+    7934,
+    8127,
+    8320,
+    8513,
+    8706,
+    8899,
+    9092,
+    9285,
+    9478,
+    9671,
+    9864,
+    10055,
+    10246,
+    10437,
+    10628,
+    10819,
+    11010
+  ],
+  "corridorHalfWidth": 5,
+  "controls": {
+    "allEnabledEquality": {
+      "passes": true,
+      "maxAbsoluteDifference": {
+        "1000": {
+          "b": 0,
+          "d": 0,
+          "s": 0,
+          "u": 0,
+          "v": 0
+        },
+        "5000": {
+          "b": 0,
+          "d": 0,
+          "s": 0,
+          "u": 0,
+          "v": 0
+        },
+        "10000": {
+          "b": 0,
+          "d": 0,
+          "s": 0,
+          "u": 0,
+          "v": 0
+        }
+      }
+    },
+    "noErosion": "morphologyMask=0 everywhere"
+  },
+  "variants": [
+    {
+      "name": "CURRENT",
+      "checkpoints": {
+        "1000": {
+          "nearErosion": 0.004332244396209717,
+          "midErosion": 0.01732003688812256,
+          "downstreamErosion": 0.021570712327957153,
+          "totalErosion": 0.04322299361228943,
+          "mouthDischarge": 0.7204517422843212,
+          "midDischarge": 0.5306511261372118,
+          "downstreamDischarge": 0.21310131560475307,
+          "downstreamVsMouth": 0.29578846589929425,
+          "wetWidth": 4.311111111111111,
+          "directionalCoherence": 0.9260306182357034,
+          "p95Slope": 0.008948564529418945,
+          "p99Slope": 0.01155464281295862,
+          "maxSlope": 0.021474409372179662,
+          "terrainDeltaMin": -0.012516260147094727,
+          "enabledMorphCellFraction": 1,
+          "enabledMorphWetCellFraction": 1
+        },
+        "2500": {
+          "nearErosion": 0.02145618200302124,
+          "midErosion": 0.08714324235916138,
+          "downstreamErosion": 0.04408860206604004,
+          "totalErosion": 0.15268802642822266,
+          "mouthDischarge": 0.599144019417099,
+          "midDischarge": 0.42342664004956765,
+          "downstreamDischarge": 0.17777727554034436,
+          "downstreamVsMouth": 0.2967187684078062,
+          "wetWidth": 3.488888888888889,
+          "directionalCoherence": 0.8457690277671519,
+          "p95Slope": 0.009059127912628584,
+          "p99Slope": 0.011885970830917358,
+          "maxSlope": 0.06040409207344055,
+          "terrainDeltaMin": -0.05758732557296753,
+          "enabledMorphCellFraction": 1,
+          "enabledMorphWetCellFraction": 1
+        },
+        "5000": {
+          "nearErosion": 0.003276646137237549,
+          "midErosion": 0.25501182675361633,
+          "downstreamErosion": 0,
+          "totalErosion": 0.2582884728908539,
+          "mouthDischarge": 0.010417272259058634,
+          "midDischarge": 0.07862049509277626,
+          "downstreamDischarge": 0.005426339139730569,
+          "downstreamVsMouth": 0.5208982740190881,
+          "wetWidth": 2.733333333333333,
+          "directionalCoherence": 0.8382080582688246,
+          "p95Slope": 0.009601950645446777,
+          "p99Slope": 0.015094240518024778,
+          "maxSlope": 0.4315636456012726,
+          "terrainDeltaMin": -0.2042919099330902,
+          "enabledMorphCellFraction": 1,
+          "enabledMorphWetCellFraction": 1
+        },
+        "10000": {
+          "nearErosion": 0,
+          "midErosion": 0.31631526350975037,
+          "downstreamErosion": 0,
+          "totalErosion": 0.31631526350975037,
+          "mouthDischarge": 0.14424987791297458,
+          "midDischarge": 0.0686855102484654,
+          "downstreamDischarge": 0.006431009790011403,
+          "downstreamVsMouth": 0.04458242795804103,
+          "wetWidth": 2.6666666666666665,
+          "directionalCoherence": 0.7382862811690747,
+          "p95Slope": 0.012389123439788818,
+          "p99Slope": 0.045525550842285156,
+          "maxSlope": 2.1480686888098717,
+          "terrainDeltaMin": -0.4639529213309288,
+          "enabledMorphCellFraction": 1,
+          "enabledMorphWetCellFraction": 1
+        }
+      },
+      "hydraulicRecovery": {
+        "5000": 0,
+        "10000": 0
+      },
+      "coherenceRecovery": {
+        "5000": null,
+        "10000": 0
+      },
+      "erosionRetention": {
+        "5000": 1,
+        "10000": 1
+      },
+      "downstreamErosionRetention": {
+        "5000": null,
+        "10000": null
+      }
+    },
+    {
+      "name": "ALL_ENABLED",
+      "checkpoints": {
+        "1000": {
+          "nearErosion": 0.004332244396209717,
+          "midErosion": 0.01732003688812256,
+          "downstreamErosion": 0.021570712327957153,
+          "totalErosion": 0.04322299361228943,
+          "mouthDischarge": 0.7204517422843212,
+          "midDischarge": 0.5306511261372118,
+          "downstreamDischarge": 0.21310131560475307,
+          "downstreamVsMouth": 0.29578846589929425,
+          "wetWidth": 4.311111111111111,
+          "directionalCoherence": 0.9260306182357034,
+          "p95Slope": 0.008948564529418945,
+          "p99Slope": 0.01155464281295862,
+          "maxSlope": 0.021474409372179662,
+          "terrainDeltaMin": -0.012516260147094727,
+          "enabledMorphCellFraction": 1,
+          "enabledMorphWetCellFraction": 1
+        },
+        "2500": {
+          "nearErosion": 0.02145618200302124,
+          "midErosion": 0.08714324235916138,
+          "downstreamErosion": 0.04408860206604004,
+          "totalErosion": 0.15268802642822266,
+          "mouthDischarge": 0.599144019417099,
+          "midDischarge": 0.42342664004956765,
+          "downstreamDischarge": 0.17777727554034436,
+          "downstreamVsMouth": 0.2967187684078062,
+          "wetWidth": 3.488888888888889,
+          "directionalCoherence": 0.8457690277671519,
+          "p95Slope": 0.009059127912628584,
+          "p99Slope": 0.011885970830917358,
+          "maxSlope": 0.06040409207344055,
+          "terrainDeltaMin": -0.05758732557296753,
+          "enabledMorphCellFraction": 1,
+          "enabledMorphWetCellFraction": 1
+        },
+        "5000": {
+          "nearErosion": 0.003276646137237549,
+          "midErosion": 0.25501182675361633,
+          "downstreamErosion": 0,
+          "totalErosion": 0.2582884728908539,
+          "mouthDischarge": 0.010417272259058634,
+          "midDischarge": 0.07862049509277626,
+          "downstreamDischarge": 0.005426339139730569,
+          "downstreamVsMouth": 0.5208982740190881,
+          "wetWidth": 2.733333333333333,
+          "directionalCoherence": 0.8382080582688246,
+          "p95Slope": 0.009601950645446777,
+          "p99Slope": 0.015094240518024778,
+          "maxSlope": 0.4315636456012726,
+          "terrainDeltaMin": -0.2042919099330902,
+          "enabledMorphCellFraction": 1,
+          "enabledMorphWetCellFraction": 1
+        },
+        "10000": {
+          "nearErosion": 0,
+          "midErosion": 0.31631526350975037,
+          "downstreamErosion": 0,
+          "totalErosion": 0.31631526350975037,
+          "mouthDischarge": 0.14424987791297458,
+          "midDischarge": 0.0686855102484654,
+          "downstreamDischarge": 0.006431009790011403,
+          "downstreamVsMouth": 0.04458242795804103,
+          "wetWidth": 2.6666666666666665,
+          "directionalCoherence": 0.7382862811690747,
+          "p95Slope": 0.012389123439788818,
+          "p99Slope": 0.045525550842285156,
+          "maxSlope": 2.1480686888098717,
+          "terrainDeltaMin": -0.4639529213309288,
+          "enabledMorphCellFraction": 1,
+          "enabledMorphWetCellFraction": 1
+        }
+      },
+      "hydraulicRecovery": {
+        "5000": 0,
+        "10000": 0
+      },
+      "coherenceRecovery": {
+        "5000": null,
+        "10000": 0
+      },
+      "erosionRetention": {
+        "5000": 1,
+        "10000": 1
+      },
+      "downstreamErosionRetention": {
+        "5000": null,
+        "10000": null
+      }
+    },
+    {
+      "name": "NO_EROSION",
+      "checkpoints": {
+        "1000": {
+          "nearErosion": 0,
+          "midErosion": 0,
+          "downstreamErosion": 0,
+          "totalErosion": 0,
+          "mouthDischarge": 0.7691285039849576,
+          "midDischarge": 0.5367493405462822,
+          "downstreamDischarge": 0.2066269344030302,
+          "downstreamVsMouth": 0.26865073044682186,
+          "wetWidth": 4.366666666666666,
+          "directionalCoherence": 0.9186416311588763,
+          "p95Slope": 0.008934078213096762,
+          "p99Slope": 0.01153719401767511,
+          "maxSlope": 0.021474409372179662,
+          "terrainDeltaMin": 0,
+          "enabledMorphCellFraction": 0,
+          "enabledMorphWetCellFraction": 0
+        },
+        "2500": {
+          "nearErosion": 0,
+          "midErosion": 0,
+          "downstreamErosion": 0,
+          "totalErosion": 0,
+          "mouthDischarge": 0.7378074940186646,
+          "midDischarge": 0.460695559016024,
+          "downstreamDischarge": 0.1722499208554117,
+          "downstreamVsMouth": 0.2334618748817618,
+          "wetWidth": 3.4555555555555557,
+          "directionalCoherence": 0.8437602584647553,
+          "p95Slope": 0.008934078213096762,
+          "p99Slope": 0.01153719401767511,
+          "maxSlope": 0.021474409372179662,
+          "terrainDeltaMin": 0,
+          "enabledMorphCellFraction": 0,
+          "enabledMorphWetCellFraction": 0
+        },
+        "5000": {
+          "nearErosion": 0,
+          "midErosion": 0,
+          "downstreamErosion": 0,
+          "totalErosion": 0,
+          "mouthDischarge": 0.7064770917583232,
+          "midDischarge": 0.43211486158930634,
+          "downstreamDischarge": 0.1598084424591926,
+          "downstreamVsMouth": 0.22620470546532742,
+          "wetWidth": 3.4555555555555557,
+          "directionalCoherence": 0.8367186594520492,
+          "p95Slope": 0.008934078213096762,
+          "p99Slope": 0.01153719401767511,
+          "maxSlope": 0.021474409372179662,
+          "terrainDeltaMin": 0,
+          "enabledMorphCellFraction": 0,
+          "enabledMorphWetCellFraction": 0
+        },
+        "10000": {
+          "nearErosion": 0,
+          "midErosion": 0,
+          "downstreamErosion": 0,
+          "totalErosion": 0,
+          "mouthDischarge": 0.7062850106061034,
+          "midDischarge": 0.4325619564719254,
+          "downstreamDischarge": 0.159643383569489,
+          "downstreamVsMouth": 0.22603252394170156,
+          "wetWidth": 3.477777777777778,
+          "directionalCoherence": 0.8342533895414719,
+          "p95Slope": 0.008934078213096762,
+          "p99Slope": 0.01153719401767511,
+          "maxSlope": 0.021474409372179662,
+          "terrainDeltaMin": 0,
+          "enabledMorphCellFraction": 0,
+          "enabledMorphWetCellFraction": 0
+        }
+      },
+      "hydraulicRecovery": {
+        "5000": 1,
+        "10000": 1
+      },
+      "coherenceRecovery": {
+        "5000": null,
+        "10000": 1
+      },
+      "erosionRetention": {
+        "5000": 0,
+        "10000": 0
+      },
+      "downstreamErosionRetention": {
+        "5000": null,
+        "10000": null
+      }
+    },
+    {
+      "name": "FREEZE_MOUTH",
+      "checkpoints": {
+        "1000": {
+          "nearErosion": 0,
+          "midErosion": 0.019440174102783203,
+          "downstreamErosion": 0.026835083961486816,
+          "totalErosion": 0.04627525806427002,
+          "mouthDischarge": 0.7882380879851043,
+          "midDischarge": 0.5497388932245535,
+          "downstreamDischarge": 0.22884154212078753,
+          "downstreamVsMouth": 0.29032033037854427,
+          "wetWidth": 4.344444444444444,
+          "directionalCoherence": 0.9238357789141084,
+          "p95Slope": 0.008945015320285339,
+          "p99Slope": 0.011548280715942383,
+          "maxSlope": 0.021474409372179662,
+          "terrainDeltaMin": -0.011845976114273071,
+          "enabledMorphCellFraction": 0.9938693576388888,
+          "enabledMorphWetCellFraction": 0.9426481909160893
+        },
+        "2500": {
+          "nearErosion": 0,
+          "midErosion": 0.1254042387008667,
+          "downstreamErosion": 0.05087295174598694,
+          "totalErosion": 0.17627719044685364,
+          "mouthDischarge": 0.8029408925159996,
+          "midDischarge": 0.5588480434786071,
+          "downstreamDischarge": 0.21268698498065663,
+          "downstreamVsMouth": 0.26488498339423977,
+          "wetWidth": 3.6444444444444444,
+          "directionalCoherence": 0.85382860923978,
+          "p95Slope": 0.009050234927592786,
+          "p99Slope": 0.011845916509628296,
+          "maxSlope": 0.06314507126808167,
+          "terrainDeltaMin": -0.05967876315116882,
+          "enabledMorphCellFraction": 0.9938693576388888,
+          "enabledMorphWetCellFraction": 0.9747386759581882
+        },
+        "5000": {
+          "nearErosion": 0,
+          "midErosion": 0.28916922211647034,
+          "downstreamErosion": 0,
+          "totalErosion": 0.28916922211647034,
+          "mouthDischarge": 0.7119447550103094,
+          "midDischarge": 0.27268957236267644,
+          "downstreamDischarge": 0.08535822674602542,
+          "downstreamVsMouth": 0.11989445268796085,
+          "wetWidth": 4.5,
+          "directionalCoherence": 0.892896620278815,
+          "p95Slope": 0.009501332647204885,
+          "p99Slope": 0.014011025428771973,
+          "maxSlope": 0.31197389960289,
+          "terrainDeltaMin": -0.20539161562919617,
+          "enabledMorphCellFraction": 0.9938693576388888,
+          "enabledMorphWetCellFraction": 0.9658872517616912
+        },
+        "10000": {
+          "nearErosion": 0,
+          "midErosion": 0.33191365003585815,
+          "downstreamErosion": 0.006543546915054321,
+          "totalErosion": 0.3384571969509125,
+          "mouthDischarge": 0.4195941415957574,
+          "midDischarge": 0.14722274088522794,
+          "downstreamDischarge": 0.004327395545049352,
+          "downstreamVsMouth": 0.01031328876183029,
+          "wetWidth": 3.5888888888888886,
+          "directionalCoherence": 0.7000315969494396,
+          "p95Slope": 0.01065826416015625,
+          "p99Slope": 0.03591102361679077,
+          "maxSlope": 0.3578450232744217,
+          "terrainDeltaMin": -0.3058304935693741,
+          "enabledMorphCellFraction": 0.9938693576388888,
+          "enabledMorphWetCellFraction": 0.9719010319532513
+        }
+      },
+      "hydraulicRecovery": {
+        "5000": 0.5177535859897714,
+        "10000": -0.013730054518898293
+      },
+      "coherenceRecovery": {
+        "5000": null,
+        "10000": -0.3986228705692479
+      },
+      "erosionRetention": {
+        "5000": 1.1195591459424745,
+        "10000": 1.069999573196314
+      },
+      "downstreamErosionRetention": {
+        "5000": null,
+        "10000": null
+      }
+    },
+    {
+      "name": "FREEZE_MID",
+      "checkpoints": {
+        "1000": {
+          "nearErosion": 0,
+          "midErosion": 0,
+          "downstreamErosion": 0.000500023365020752,
+          "totalErosion": 0.000500023365020752,
+          "mouthDischarge": 0.7119387925830084,
+          "midDischarge": 0.5132499107705497,
+          "downstreamDischarge": 0.1919384538044918,
+          "downstreamVsMouth": 0.2695996563245467,
+          "wetWidth": 4.366666666666666,
+          "directionalCoherence": 0.9197874715983438,
+          "p95Slope": 0.008943796157836914,
+          "p99Slope": 0.01155135535877477,
+          "maxSlope": 0.021474409372179662,
+          "terrainDeltaMin": -0.012541711330413818,
+          "enabledMorphCellFraction": 0.9920247395833334,
+          "enabledMorphWetCellFraction": 0.9370899266692396
+        },
+        "2500": {
+          "nearErosion": 0,
+          "midErosion": 0,
+          "downstreamErosion": 0.0010718703269958496,
+          "totalErosion": 0.0010718703269958496,
+          "mouthDischarge": 0.5824803970149969,
+          "midDischarge": 0.36200829232780934,
+          "downstreamDischarge": 0.12621740248798802,
+          "downstreamVsMouth": 0.2166895283254285,
+          "wetWidth": 3.611111111111111,
+          "directionalCoherence": 0.8635822417067668,
+          "p95Slope": 0.00903818092891867,
+          "p99Slope": 0.011822823210033438,
+          "maxSlope": 0.06380453705787659,
+          "terrainDeltaMin": -0.06046375632286072,
+          "enabledMorphCellFraction": 0.9920247395833334,
+          "enabledMorphWetCellFraction": 0.9706144256455922
+        },
+        "5000": {
+          "nearErosion": 0,
+          "midErosion": 0,
+          "downstreamErosion": 0,
+          "totalErosion": 0,
+          "mouthDischarge": 1.2788858626507342,
+          "midDischarge": 1.0594648294416944,
+          "downstreamDischarge": 0.5903394350778545,
+          "downstreamVsMouth": 0.4616044733298276,
+          "wetWidth": 4.577777777777778,
+          "directionalCoherence": 0.9822943072942939,
+          "p95Slope": 0.00949019193649292,
+          "p99Slope": 0.013897746801376343,
+          "maxSlope": 0.27964240312576294,
+          "terrainDeltaMin": -0.267090380191803,
+          "enabledMorphCellFraction": 0.9920247395833334,
+          "enabledMorphWetCellFraction": 0.9657774657774658
+        },
+        "10000": {
+          "nearErosion": 0,
+          "midErosion": 0,
+          "downstreamErosion": 0,
+          "totalErosion": 0,
+          "mouthDischarge": 0.4671384957898284,
+          "midDischarge": 0.45804831573200094,
+          "downstreamDischarge": 0.05191826857750079,
+          "downstreamVsMouth": 0.11114106211631825,
+          "wetWidth": 4.566666666666667,
+          "directionalCoherence": 0.7987500394588011,
+          "p95Slope": 0.010476917028427124,
+          "p99Slope": 0.02967987394164434,
+          "maxSlope": 0.7362970858812332,
+          "terrainDeltaMin": -0.7155383974313736,
+          "enabledMorphCellFraction": 0.9920247395833334,
+          "enabledMorphWetCellFraction": 0.9637171417993335
+        }
+      },
+      "hydraulicRecovery": {
+        "5000": 3.788736410254539,
+        "10000": 0.2968902423831663
+      },
+      "coherenceRecovery": {
+        "5000": null,
+        "10000": 0.6300466828186463
+      },
+      "erosionRetention": {
+        "5000": 0,
+        "10000": 0
+      },
+      "downstreamErosionRetention": {
+        "5000": null,
+        "10000": null
+      }
+    },
+    {
+      "name": "FREEZE_DOWNSTREAM",
+      "checkpoints": {
+        "1000": {
+          "nearErosion": 0.00421983003616333,
+          "midErosion": 0.00682222843170166,
+          "downstreamErosion": 0,
+          "totalErosion": 0.01104205846786499,
+          "mouthDischarge": 0.7076123325237212,
+          "midDischarge": 0.5113144289956646,
+          "downstreamDischarge": 0.19563415984751586,
+          "downstreamVsMouth": 0.27647081721962163,
+          "wetWidth": 4.311111111111111,
+          "directionalCoherence": 0.9189117094191981,
+          "p95Slope": 0.008946637973953009,
+          "p99Slope": 0.011550954963713916,
+          "maxSlope": 0.021474409372179662,
+          "terrainDeltaMin": -0.012518465518951416,
+          "enabledMorphCellFraction": 0.9894205729166666,
+          "enabledMorphWetCellFraction": 0.9042101197373503
+        },
+        "2500": {
+          "nearErosion": 0.021021783351898193,
+          "midErosion": 0.014914274215698242,
+          "downstreamErosion": 0,
+          "totalErosion": 0.035936057567596436,
+          "mouthDischarge": 0.5527201477939223,
+          "midDischarge": 0.3488931212201458,
+          "downstreamDischarge": 0.13255480426215704,
+          "downstreamVsMouth": 0.23982263861960598,
+          "wetWidth": 3.611111111111111,
+          "directionalCoherence": 0.8590013706133502,
+          "p95Slope": 0.009043633937835693,
+          "p99Slope": 0.011825604902035158,
+          "maxSlope": 0.06278231739997864,
+          "terrainDeltaMin": -0.06078013777732849,
+          "enabledMorphCellFraction": 0.9894205729166666,
+          "enabledMorphWetCellFraction": 0.9598134991119005
+        },
+        "5000": {
+          "nearErosion": 0.05948859453201294,
+          "midErosion": 0,
+          "downstreamErosion": 0,
+          "totalErosion": 0.05948859453201294,
+          "mouthDischarge": 0.27228976170279096,
+          "midDischarge": 0.19914112779128035,
+          "downstreamDischarge": 0.2966489439196069,
+          "downstreamVsMouth": 1.0894605146535197,
+          "wetWidth": 4.644444444444445,
+          "directionalCoherence": 0.9398772892659032,
+          "p95Slope": 0.009529709815979004,
+          "p99Slope": 0.014198929071426392,
+          "maxSlope": 0.28922295570373535,
+          "terrainDeltaMin": -0.19485825300216675,
+          "enabledMorphCellFraction": 0.9894205729166666,
+          "enabledMorphWetCellFraction": 0.9419844861021331
+        },
+        "10000": {
+          "nearErosion": 0.18623918294906616,
+          "midErosion": 0,
+          "downstreamErosion": 0,
+          "totalErosion": 0.18623918294906616,
+          "mouthDischarge": 0.027577071473209484,
+          "midDischarge": 0.0180031334850764,
+          "downstreamDischarge": 0.134683590881115,
+          "downstreamVsMouth": 4.883897516527712,
+          "wetWidth": 2.7222222222222228,
+          "directionalCoherence": 0.6264005970590785,
+          "p95Slope": 0.011204233914439046,
+          "p99Slope": 0.04402428865432739,
+          "maxSlope": 2.2964424043893814,
+          "terrainDeltaMin": -0.4765402227640152,
+          "enabledMorphCellFraction": 0.9894205729166666,
+          "enabledMorphWetCellFraction": 0.9584927536231884
+        }
+      },
+      "hydraulicRecovery": {
+        "5000": 1.8863754186406634,
+        "10000": 0.8370902292506788
+      },
+      "coherenceRecovery": {
+        "5000": null,
+        "10000": -1.1658753296580273
+      },
+      "erosionRetention": {
+        "5000": 0.23031842600715402,
+        "10000": 0.588777098147606
+      },
+      "downstreamErosionRetention": {
+        "5000": null,
+        "10000": null
+      }
+    },
+    {
+      "name": "FREEZE_MOUTH_MID",
+      "checkpoints": {
+        "1000": {
+          "nearErosion": 0,
+          "midErosion": 0,
+          "downstreamErosion": 0.0009350776672363281,
+          "totalErosion": 0.0009350776672363281,
+          "mouthDischarge": 0.764010948108202,
+          "midDischarge": 0.5235135545074695,
+          "downstreamDischarge": 0.2013876824032293,
+          "downstreamVsMouth": 0.26359266565733563,
+          "wetWidth": 4.366666666666666,
+          "directionalCoherence": 0.9169798197980737,
+          "p95Slope": 0.008941888809204102,
+          "p99Slope": 0.011544443275618984,
+          "maxSlope": 0.021474409372179662,
+          "terrainDeltaMin": -0.006627023220062256,
+          "enabledMorphCellFraction": 0.9888509114583334,
+          "enabledMorphWetCellFraction": 0.9089857308137292
+        },
+        "2500": {
+          "nearErosion": 0,
+          "midErosion": 0,
+          "downstreamErosion": 0.0022807717323303223,
+          "totalErosion": 0.0022807717323303223,
+          "mouthDischarge": 0.7229089124291331,
+          "midDischarge": 0.44770570698944684,
+          "downstreamDischarge": 0.1587935274344008,
+          "downstreamVsMouth": 0.21965910878151937,
+          "wetWidth": 3.7222222222222228,
+          "directionalCoherence": 0.8467489142354404,
+          "p95Slope": 0.009028360713215632,
+          "p99Slope": 0.011760890483856201,
+          "maxSlope": 0.05638951063156128,
+          "terrainDeltaMin": -0.05515861511230469,
+          "enabledMorphCellFraction": 0.9888509114583334,
+          "enabledMorphWetCellFraction": 0.9562252529696437
+        },
+        "5000": {
+          "nearErosion": 0,
+          "midErosion": 0,
+          "downstreamErosion": 0.006105303764343262,
+          "totalErosion": 0.006105303764343262,
+          "mouthDischarge": 1.1397244409751222,
+          "midDischarge": 1.1028823467368705,
+          "downstreamDischarge": 0.45292277959677524,
+          "downstreamVsMouth": 0.39739674197849517,
+          "wetWidth": 4.811111111111111,
+          "directionalCoherence": 0.9698100028003284,
+          "p95Slope": 0.009413330027514138,
+          "p99Slope": 0.013306975364685059,
+          "maxSlope": 0.27251946926116943,
+          "terrainDeltaMin": -0.23666620254516602,
+          "enabledMorphCellFraction": 0.9888509114583334,
+          "enabledMorphWetCellFraction": 0.954045626128344
+        },
+        "10000": {
+          "nearErosion": 0,
+          "midErosion": 0,
+          "downstreamErosion": 0.03772839903831482,
+          "totalErosion": 0.03772839903831482,
+          "mouthDischarge": 1.205030598814523,
+          "midDischarge": 1.0633905020607652,
+          "downstreamDischarge": 0.48385124697917575,
+          "downstreamVsMouth": 0.4015261085114152,
+          "wetWidth": 4.7444444444444445,
+          "directionalCoherence": 0.9464396560187431,
+          "p95Slope": 0.01009981789605958,
+          "p99Slope": 0.02433645725250244,
+          "maxSlope": 0.35505346953868866,
+          "terrainDeltaMin": -0.2890949994325638,
+          "enabledMorphCellFraction": 0.9888509114583334,
+          "enabledMorphWetCellFraction": 0.9621034077555817
+        }
+      },
+      "hydraulicRecovery": {
+        "5000": 2.898628991542127,
+        "10000": 3.1160684049992415
+      },
+      "coherenceRecovery": {
+        "5000": null,
+        "10000": 2.1690074691209427
+      },
+      "erosionRetention": {
+        "5000": 0.023637538663690994,
+        "10000": 0.11927467116095031
+      },
+      "downstreamErosionRetention": {
+        "5000": null,
+        "10000": null
+      }
+    },
+    {
+      "name": "FREEZE_MID_DOWNSTREAM",
+      "checkpoints": {
+        "1000": {
+          "nearErosion": 0,
+          "midErosion": 0,
+          "downstreamErosion": 0,
+          "totalErosion": 0,
+          "mouthDischarge": 0.7119308789096185,
+          "midDischarge": 0.5132461508596544,
+          "downstreamDischarge": 0.19362054213357408,
+          "downstreamVsMouth": 0.2719653661182952,
+          "wetWidth": 4.344444444444444,
+          "directionalCoherence": 0.9201280408534461,
+          "p95Slope": 0.008943796157836914,
+          "p99Slope": 0.011550954963713916,
+          "maxSlope": 0.021474409372179662,
+          "terrainDeltaMin": -0.012541711330413818,
+          "enabledMorphCellFraction": 0.9841579861111112,
+          "enabledMorphWetCellFraction": 0.8737939019683519
+        },
+        "2500": {
+          "nearErosion": 0,
+          "midErosion": 0,
+          "downstreamErosion": 0,
+          "totalErosion": 0,
+          "mouthDischarge": 0.5824745113105025,
+          "midDischarge": 0.3620129694239481,
+          "downstreamDischarge": 0.12806666162305946,
+          "downstreamVsMouth": 0.21986655061510552,
+          "wetWidth": 3.611111111111111,
+          "directionalCoherence": 0.8636082953441733,
+          "p95Slope": 0.009035989292796103,
+          "p99Slope": 0.01181703805923462,
+          "maxSlope": 0.06386274099349976,
+          "terrainDeltaMin": -0.06052091717720032,
+          "enabledMorphCellFraction": 0.9841579861111112,
+          "enabledMorphWetCellFraction": 0.9467706013363029
+        },
+        "5000": {
+          "nearErosion": 0,
+          "midErosion": 0,
+          "downstreamErosion": 0,
+          "totalErosion": 0,
+          "mouthDischarge": 1.278894467991299,
+          "midDischarge": 1.0583654839796504,
+          "downstreamDischarge": 0.5222521953096912,
+          "downstreamVsMouth": 0.4083622287693283,
+          "wetWidth": 4.577777777777778,
+          "directionalCoherence": 0.9822405292865533,
+          "p95Slope": 0.009527385234832764,
+          "p99Slope": 0.014164149761199951,
+          "maxSlope": 0.2796490490436554,
+          "terrainDeltaMin": -0.26709529757499695,
+          "enabledMorphCellFraction": 0.9841579861111112,
+          "enabledMorphWetCellFraction": 0.9238849664198381
+        },
+        "10000": {
+          "nearErosion": 0,
+          "midErosion": 0,
+          "downstreamErosion": 0,
+          "totalErosion": 0,
+          "mouthDischarge": 0.8345764402637151,
+          "midDischarge": 0.660475804732991,
+          "downstreamDischarge": 0.3491398165639122,
+          "downstreamVsMouth": 0.4183437246965522,
+          "wetWidth": 4.777777777777778,
+          "directionalCoherence": 0.9261151588406653,
+          "p95Slope": 0.010192330228540993,
+          "p99Slope": 0.028497934341430664,
+          "maxSlope": 0.8645913600921631,
+          "terrainDeltaMin": -0.8438202738761902,
+          "enabledMorphCellFraction": 0.9841579861111112,
+          "enabledMorphWetCellFraction": 0.9010504913588614
+        }
+      },
+      "hydraulicRecovery": {
+        "5000": 3.3477057577101137,
+        "10000": 2.236821989764157
+      },
+      "coherenceRecovery": {
+        "5000": null,
+        "10000": 1.9572213944670176
+      },
+      "erosionRetention": {
+        "5000": 0,
+        "10000": 0
+      },
+      "downstreamErosionRetention": {
+        "5000": null,
+        "10000": null
+      }
+    },
+    {
+      "name": "FREEZE_CORRIDOR",
+      "checkpoints": {
+        "1000": {
+          "nearErosion": 0,
+          "midErosion": 0,
+          "downstreamErosion": 0,
+          "totalErosion": 0,
+          "mouthDischarge": 0.7640008227381209,
+          "midDischarge": 0.5235145590684553,
+          "downstreamDischarge": 0.20305803950824824,
+          "downstreamVsMouth": 0.26578248800898363,
+          "wetWidth": 4.366666666666666,
+          "directionalCoherence": 0.9167155674599239,
+          "p95Slope": 0.008941888809204102,
+          "p99Slope": 0.011539340019226074,
+          "maxSlope": 0.021474409372179662,
+          "terrainDeltaMin": -0.006627798080444336,
+          "enabledMorphCellFraction": 0.9809841579861112,
+          "enabledMorphWetCellFraction": 0.843484965304549
+        },
+        "2500": {
+          "nearErosion": 0,
+          "midErosion": 0,
+          "downstreamErosion": 0,
+          "totalErosion": 0,
+          "mouthDischarge": 0.7228958652280513,
+          "midDischarge": 0.44769496693025673,
+          "downstreamDischarge": 0.16088985109697224,
+          "downstreamVsMouth": 0.22256297045801537,
+          "wetWidth": 3.7222222222222228,
+          "directionalCoherence": 0.850483137554761,
+          "p95Slope": 0.009026318788528442,
+          "p99Slope": 0.011746257543563843,
+          "maxSlope": 0.056366562843322754,
+          "terrainDeltaMin": -0.05512511730194092,
+          "enabledMorphCellFraction": 0.9809841579861112,
+          "enabledMorphWetCellFraction": 0.9287598944591029
+        },
+        "5000": {
+          "nearErosion": 0,
+          "midErosion": 0,
+          "downstreamErosion": 0,
+          "totalErosion": 0,
+          "mouthDischarge": 1.140091782335807,
+          "midDischarge": 1.1027327549831345,
+          "downstreamDischarge": 0.46146261524178683,
+          "downstreamVsMouth": 0.4047591802620904,
+          "wetWidth": 4.811111111111111,
+          "directionalCoherence": 0.9698097006152367,
+          "p95Slope": 0.009404394895629829,
+          "p99Slope": 0.013249844312667847,
+          "maxSlope": 0.27264490723609924,
+          "terrainDeltaMin": -0.23652032017707825,
+          "enabledMorphCellFraction": 0.9809841579861112,
+          "enabledMorphWetCellFraction": 0.9160930842346772
+        },
+        "10000": {
+          "nearErosion": 0,
+          "midErosion": 0,
+          "downstreamErosion": 0,
+          "totalErosion": 0,
+          "mouthDischarge": 1.2049955981297535,
+          "midDischarge": 1.0648483214076045,
+          "downstreamDischarge": 0.38634033931580025,
+          "downstreamVsMouth": 0.32061556068373226,
+          "wetWidth": 4.7444444444444445,
+          "directionalCoherence": 0.9660115770912658,
+          "p95Slope": 0.009986442873565276,
+          "p99Slope": 0.02142473931120957,
+          "maxSlope": 0.36565567553043365,
+          "terrainDeltaMin": -0.3126603811979294,
+          "enabledMorphCellFraction": 0.9809841579861112,
+          "enabledMorphWetCellFraction": 0.9258027191206248
+        }
+      },
+      "hydraulicRecovery": {
+        "5000": 2.953945219663078,
+        "10000": 2.479625634366855
+      },
+      "coherenceRecovery": {
+        "5000": null,
+        "10000": 2.3729515224998825
+      },
+      "erosionRetention": {
+        "5000": 0,
+        "10000": 0
+      },
+      "downstreamErosionRetention": {
+        "5000": null,
+        "10000": null
+      }
+    },
+    {
+      "name": "ONLY_MOUTH",
+      "checkpoints": {
+        "1000": {
+          "nearErosion": 0.004207968711853027,
+          "midErosion": 0.007140815258026123,
+          "downstreamErosion": 0,
+          "totalErosion": 0.01134878396987915,
+          "mouthDischarge": 0.7101952635338211,
+          "midDischarge": 0.5087614348240788,
+          "downstreamDischarge": 0.19541242565307815,
+          "downstreamVsMouth": 0.2751530961791217,
+          "wetWidth": 4.311111111111111,
+          "directionalCoherence": 0.9196823376212354,
+          "p95Slope": 0.008942097425460815,
+          "p99Slope": 0.011549115180969238,
+          "maxSlope": 0.021474409372179662,
+          "terrainDeltaMin": -0.012531459331512451,
+          "enabledMorphCellFraction": 0.006130642361111111,
+          "enabledMorphWetCellFraction": 0.05640828856485035
+        },
+        "2500": {
+          "nearErosion": 0.02069753408432007,
+          "midErosion": 0.017191529273986816,
+          "downstreamErosion": 0,
+          "totalErosion": 0.037889063358306885,
+          "mouthDischarge": 0.5910089523313166,
+          "midDischarge": 0.3850692115558887,
+          "downstreamDischarge": 0.15564388954057087,
+          "downstreamVsMouth": 0.263352845886026,
+          "wetWidth": 3.422222222222222,
+          "directionalCoherence": 0.8477205092870324,
+          "p95Slope": 0.008958041667938232,
+          "p99Slope": 0.01160439716762573,
+          "maxSlope": 0.0547519326210022,
+          "terrainDeltaMin": -0.049208998680114746,
+          "enabledMorphCellFraction": 0.006130642361111111,
+          "enabledMorphWetCellFraction": 0.028788216915866995
+        },
+        "5000": {
+          "nearErosion": 0,
+          "midErosion": 0,
+          "downstreamErosion": 0,
+          "totalErosion": 0,
+          "mouthDischarge": 0.06550167649582822,
+          "midDischarge": 0.039559375822508305,
+          "downstreamDischarge": 0.08304410214947708,
+          "downstreamVsMouth": 1.267816437565016,
+          "wetWidth": 3.6555555555555554,
+          "directionalCoherence": 0.9255451107769271,
+          "p95Slope": 0.009017486826299822,
+          "p99Slope": 0.011835098266601562,
+          "maxSlope": 0.4037075340747833,
+          "terrainDeltaMin": -0.25800344347953796,
+          "enabledMorphCellFraction": 0.006130642361111111,
+          "enabledMorphWetCellFraction": 0.02983883835966172
+        },
+        "10000": {
+          "nearErosion": 0.4106479063630104,
+          "midErosion": 0,
+          "downstreamErosion": 0,
+          "totalErosion": 0.4106479063630104,
+          "mouthDischarge": 0.00023075819876291838,
+          "midDischarge": 0.00006608801368630233,
+          "downstreamDischarge": 0.0005026180148630778,
+          "downstreamVsMouth": 2.178115523338215,
+          "wetWidth": 0.4777777777777777,
+          "directionalCoherence": 0.28504086752305374,
+          "p95Slope": 0.009019613265991211,
+          "p99Slope": 0.011859996730420047,
+          "maxSlope": 1.9628451764583588,
+          "terrainDeltaMin": -1.261224091053009,
+          "enabledMorphCellFraction": 0.006130642361111111,
+          "enabledMorphWetCellFraction": 0.005318316909119349
+        }
+      },
+      "hydraulicRecovery": {
+        "5000": 0.5027639949245445,
+        "10000": -0.038693948986660884
+      },
+      "coherenceRecovery": {
+        "5000": null,
+        "10000": -4.722924565854554
+      },
+      "erosionRetention": {
+        "5000": 0,
+        "10000": 1.2982234932534398
+      },
+      "downstreamErosionRetention": {
+        "5000": null,
+        "10000": null
+      }
+    },
+    {
+      "name": "ONLY_MID",
+      "checkpoints": {
+        "1000": {
+          "nearErosion": 0.007173299789428711,
+          "midErosion": 0.018695473670959473,
+          "downstreamErosion": 0.02270728349685669,
+          "totalErosion": 0.04857605695724487,
+          "mouthDischarge": 0.7807996704894758,
+          "midDischarge": 0.5586744690311137,
+          "downstreamDischarge": 0.2331488291002223,
+          "downstreamVsMouth": 0.29860262230139456,
+          "wetWidth": 4.333333333333333,
+          "directionalCoherence": 0.9223403372803457,
+          "p95Slope": 0.008941441774368286,
+          "p99Slope": 0.011544885817528348,
+          "maxSlope": 0.021474409372179662,
+          "terrainDeltaMin": -0.010143965482711792,
+          "enabledMorphCellFraction": 0.007975260416666666,
+          "enabledMorphWetCellFraction": 0.0618042226487524
+        },
+        "2500": {
+          "nearErosion": 0.04630964994430542,
+          "midErosion": 0.12635430693626404,
+          "downstreamErosion": 0.04381608963012695,
+          "totalErosion": 0.2164800465106964,
+          "mouthDischarge": 0.8244690395059767,
+          "midDischarge": 0.5853446648927084,
+          "downstreamDischarge": 0.23526630924496597,
+          "downstreamVsMouth": 0.285354935081538,
+          "wetWidth": 3.511111111111111,
+          "directionalCoherence": 0.8575380140676314,
+          "p95Slope": 0.008973896503448486,
+          "p99Slope": 0.011672794818878174,
+          "maxSlope": 0.07249531149864197,
+          "terrainDeltaMin": -0.06787309050559998,
+          "enabledMorphCellFraction": 0.007975260416666666,
+          "enabledMorphWetCellFraction": 0.028027151302824613
+        },
+        "5000": {
+          "nearErosion": 0.35651732981204987,
+          "midErosion": 0.25127163529396057,
+          "downstreamErosion": 0,
+          "totalErosion": 0.6077889651060104,
+          "mouthDischarge": 0.30996408643598905,
+          "midDischarge": 0.030880828770957536,
+          "downstreamDischarge": 0.0005962826669358526,
+          "downstreamVsMouth": 0.0019237153368056124,
+          "wetWidth": 2.588888888888889,
+          "directionalCoherence": 0.6153365726925893,
+          "p95Slope": 0.009032398462295532,
+          "p99Slope": 0.011927962303161621,
+          "maxSlope": 0.28803084790706635,
+          "terrainDeltaMin": -0.2864670008420944,
+          "enabledMorphCellFraction": 0.007975260416666666,
+          "enabledMorphWetCellFraction": 0.016808149405772497
+        },
+        "10000": {
+          "nearErosion": 1.2453745603561401,
+          "midErosion": 0.412165105342865,
+          "downstreamErosion": 0,
+          "totalErosion": 1.6575396656990051,
+          "mouthDischarge": 0.2936393643614949,
+          "midDischarge": 0.028262354206465827,
+          "downstreamDischarge": 0.00045886067185753077,
+          "downstreamVsMouth": 0.0015626674334188874,
+          "wetWidth": 1.6666666666666667,
+          "directionalCoherence": 0.5247668702012106,
+          "p95Slope": 0.009034366639128434,
+          "p99Slope": 0.01194220781326294,
+          "maxSlope": 0.8322760164737701,
+          "terrainDeltaMin": -0.8307121694087982,
+          "enabledMorphCellFraction": 0.007975260416666666,
+          "enabledMorphWetCellFraction": 0.009108850766661606
+        }
+      },
+      "hydraulicRecovery": {
+        "5000": -0.03128637561570143,
+        "10000": -0.038979548262529605
+      },
+      "coherenceRecovery": {
+        "5000": null,
+        "10000": -2.2249228364713156
+      },
+      "erosionRetention": {
+        "5000": 2.353140108435449,
+        "10000": 5.240150751207463
+      },
+      "downstreamErosionRetention": {
+        "5000": null,
+        "10000": null
+      }
+    },
+    {
+      "name": "ONLY_DOWNSTREAM",
+      "checkpoints": {
+        "1000": {
+          "nearErosion": 0,
+          "midErosion": 0.021138012409210205,
+          "downstreamErosion": 0.02687278389930725,
+          "totalErosion": 0.048010796308517456,
+          "mouthDischarge": 0.792279728993253,
+          "midDischarge": 0.5646000634493051,
+          "downstreamDischarge": 0.2306337248451234,
+          "downstreamVsMouth": 0.2911013830155529,
+          "wetWidth": 4.311111111111111,
+          "directionalCoherence": 0.9247850452698291,
+          "p95Slope": 0.008937656879425049,
+          "p99Slope": 0.011544885817528348,
+          "maxSlope": 0.021474409372179662,
+          "terrainDeltaMin": -0.01186266541481018,
+          "enabledMorphCellFraction": 0.010579427083333334,
+          "enabledMorphWetCellFraction": 0.09551208285385501
+        },
+        "2500": {
+          "nearErosion": 0,
+          "midErosion": 0.1649247705936432,
+          "downstreamErosion": 0.04957801103591919,
+          "totalErosion": 0.21450278162956238,
+          "mouthDischarge": 0.8100130947284624,
+          "midDischarge": 0.5559078251383853,
+          "downstreamDischarge": 0.2130710693113854,
+          "downstreamVsMouth": 0.26304645035746294,
+          "wetWidth": 3.4333333333333336,
+          "directionalCoherence": 0.8360230353772954,
+          "p95Slope": 0.008961052196143734,
+          "p99Slope": 0.011639654636383057,
+          "maxSlope": 0.05483454465866089,
+          "terrainDeltaMin": -0.05485454201698303,
+          "enabledMorphCellFraction": 0.010579427083333334,
+          "enabledMorphWetCellFraction": 0.037354427598330034
+        },
+        "5000": {
+          "nearErosion": 0,
+          "midErosion": 0.970461443066597,
+          "downstreamErosion": 0.12048840522766113,
+          "totalErosion": 1.0909498482942581,
+          "mouthDischarge": 0.5469041413029788,
+          "midDischarge": 0.15244607537614557,
+          "downstreamDischarge": 0.042342381046463366,
+          "downstreamVsMouth": 0.0774219426197509,
+          "wetWidth": 3.277777777777778,
+          "directionalCoherence": 0.7396051171459157,
+          "p95Slope": 0.009000501646349931,
+          "p99Slope": 0.011786043643951416,
+          "maxSlope": 0.3332745283842087,
+          "terrainDeltaMin": -0.3056977838277817,
+          "enabledMorphCellFraction": 0.010579427083333334,
+          "enabledMorphWetCellFraction": 0.017942583732057416
+        },
+        "10000": {
+          "nearErosion": 0,
+          "midErosion": 1.1862642541527748,
+          "downstreamErosion": 0.12486279010772705,
+          "totalErosion": 1.3111270442605019,
+          "mouthDischarge": 0.4468261300688499,
+          "midDischarge": 0.08710435612224302,
+          "downstreamDischarge": 1.3845268547310652e-7,
+          "downstreamVsMouth": 3.098580771267178e-7,
+          "wetWidth": 2.6666666666666665,
+          "directionalCoherence": 0.4887808879606867,
+          "p95Slope": 0.009001553058624268,
+          "p99Slope": 0.011789590419982598,
+          "maxSlope": 0.4917702153325081,
+          "terrainDeltaMin": -0.4641934707760811,
+          "enabledMorphCellFraction": 0.010579427083333334,
+          "enabledMorphWetCellFraction": 0.004503828254015914
+        }
+      },
+      "hydraulicRecovery": {
+        "5000": 0.23912125248314978,
+        "10000": -0.04197357679858184
+      },
+      "coherenceRecovery": {
+        "5000": null,
+        "10000": -2.599905295053703
+      },
+      "erosionRetention": {
+        "5000": 4.223765141680425,
+        "10000": 4.145000875748402
+      },
+      "downstreamErosionRetention": {
+        "5000": null,
+        "10000": null
+      }
+    },
+    {
+      "name": "OUTSIDE_CORRIDOR_ONLY",
+      "checkpoints": {
+        "1000": {
+          "nearErosion": 0,
+          "midErosion": 0,
+          "downstreamErosion": 0,
+          "totalErosion": 0,
+          "mouthDischarge": 0.7640008227381209,
+          "midDischarge": 0.5235145590684553,
+          "downstreamDischarge": 0.20305803950824824,
+          "downstreamVsMouth": 0.26578248800898363,
+          "wetWidth": 4.366666666666666,
+          "directionalCoherence": 0.9167155674599239,
+          "p95Slope": 0.008941888809204102,
+          "p99Slope": 0.011539340019226074,
+          "maxSlope": 0.021474409372179662,
+          "terrainDeltaMin": -0.006627798080444336,
+          "enabledMorphCellFraction": 0.9809841579861112,
+          "enabledMorphWetCellFraction": 0.843484965304549
+        },
+        "2500": {
+          "nearErosion": 0,
+          "midErosion": 0,
+          "downstreamErosion": 0,
+          "totalErosion": 0,
+          "mouthDischarge": 0.7228958652280513,
+          "midDischarge": 0.44769496693025673,
+          "downstreamDischarge": 0.16088985109697224,
+          "downstreamVsMouth": 0.22256297045801537,
+          "wetWidth": 3.7222222222222228,
+          "directionalCoherence": 0.850483137554761,
+          "p95Slope": 0.009026318788528442,
+          "p99Slope": 0.011746257543563843,
+          "maxSlope": 0.056366562843322754,
+          "terrainDeltaMin": -0.05512511730194092,
+          "enabledMorphCellFraction": 0.9809841579861112,
+          "enabledMorphWetCellFraction": 0.9287598944591029
+        },
+        "5000": {
+          "nearErosion": 0,
+          "midErosion": 0,
+          "downstreamErosion": 0,
+          "totalErosion": 0,
+          "mouthDischarge": 1.140091782335807,
+          "midDischarge": 1.1027327549831345,
+          "downstreamDischarge": 0.46146261524178683,
+          "downstreamVsMouth": 0.4047591802620904,
+          "wetWidth": 4.811111111111111,
+          "directionalCoherence": 0.9698097006152367,
+          "p95Slope": 0.009404394895629829,
+          "p99Slope": 0.013249844312667847,
+          "maxSlope": 0.27264490723609924,
+          "terrainDeltaMin": -0.23652032017707825,
+          "enabledMorphCellFraction": 0.9809841579861112,
+          "enabledMorphWetCellFraction": 0.9160930842346772
+        },
+        "10000": {
+          "nearErosion": 0,
+          "midErosion": 0,
+          "downstreamErosion": 0,
+          "totalErosion": 0,
+          "mouthDischarge": 1.2049955981297535,
+          "midDischarge": 1.0648483214076045,
+          "downstreamDischarge": 0.38634033931580025,
+          "downstreamVsMouth": 0.32061556068373226,
+          "wetWidth": 4.7444444444444445,
+          "directionalCoherence": 0.9660115770912658,
+          "p95Slope": 0.009986442873565276,
+          "p99Slope": 0.02142473931120957,
+          "maxSlope": 0.36565567553043365,
+          "terrainDeltaMin": -0.3126603811979294,
+          "enabledMorphCellFraction": 0.9809841579861112,
+          "enabledMorphWetCellFraction": 0.9258027191206248
+        }
+      },
+      "hydraulicRecovery": {
+        "5000": 2.953945219663078,
+        "10000": 2.479625634366855
+      },
+      "coherenceRecovery": {
+        "5000": null,
+        "10000": 2.3729515224998825
+      },
+      "erosionRetention": {
+        "5000": 0,
+        "10000": 0
+      },
+      "downstreamErosionRetention": {
+        "5000": null,
+        "10000": null
+      }
+    },
+    {
+      "name": "CORRIDOR_ONLY",
+      "checkpoints": {
+        "1000": {
+          "nearErosion": 0.004343211650848389,
+          "midErosion": 0.01740396022796631,
+          "downstreamErosion": 0.02159780263900757,
+          "totalErosion": 0.043344974517822266,
+          "mouthDischarge": 0.7232990105936365,
+          "midDischarge": 0.5327482838624882,
+          "downstreamDischarge": 0.21296868238235095,
+          "downstreamVsMouth": 0.29444072128283455,
+          "wetWidth": 4.311111111111111,
+          "directionalCoherence": 0.9263390831649546,
+          "p95Slope": 0.008944034576416016,
+          "p99Slope": 0.01155135535877477,
+          "maxSlope": 0.021474409372179662,
+          "terrainDeltaMin": -0.01252758502960205,
+          "enabledMorphCellFraction": 0.019015842013888888,
+          "enabledMorphWetCellFraction": 0.15284178187403993
+        },
+        "2500": {
+          "nearErosion": 0.02115190029144287,
+          "midErosion": 0.09564042091369629,
+          "downstreamErosion": 0.04416951537132263,
+          "totalErosion": 0.1609618365764618,
+          "mouthDischarge": 0.6299742968741894,
+          "midDischarge": 0.45738075292941804,
+          "downstreamDischarge": 0.19569592394972288,
+          "downstreamVsMouth": 0.3106411244406767,
+          "wetWidth": 3.222222222222222,
+          "directionalCoherence": 0.8445523181466478,
+          "p95Slope": 0.008978039026260376,
+          "p99Slope": 0.01168192629546152,
+          "maxSlope": 0.0650964081287384,
+          "terrainDeltaMin": -0.060504525899887085,
+          "enabledMorphCellFraction": 0.019015842013888888,
+          "enabledMorphWetCellFraction": 0.061805246776345045
+        },
+        "5000": {
+          "nearErosion": 0.004320740699768066,
+          "midErosion": 0.27860379219055176,
+          "downstreamErosion": 0.025068283081054688,
+          "totalErosion": 0.3079928159713745,
+          "mouthDischarge": 0.07016050317772264,
+          "midDischarge": 0.08500513815771901,
+          "downstreamDischarge": 0.01344356831753802,
+          "downstreamVsMouth": 0.19161162917381444,
+          "wetWidth": 2.6555555555555554,
+          "directionalCoherence": 0.821381947718273,
+          "p95Slope": 0.009103044928776937,
+          "p99Slope": 0.01217559233206962,
+          "maxSlope": 0.4508998692035675,
+          "terrainDeltaMin": -0.27785733342170715,
+          "enabledMorphCellFraction": 0.019015842013888888,
+          "enabledMorphWetCellFraction": 0.05453339963533897
+        },
+        "10000": {
+          "nearErosion": 0.42822840064764023,
+          "midErosion": 0.5542633235454559,
+          "downstreamErosion": 0.11266359686851501,
+          "totalErosion": 1.0951553210616112,
+          "mouthDischarge": 0.0004921479214535853,
+          "midDischarge": 0.0136686627691124,
+          "downstreamDischarge": 0.000006334768354611231,
+          "downstreamVsMouth": 0.012871675523694488,
+          "wetWidth": 0.5111111111111111,
+          "directionalCoherence": 0.28998656582694116,
+          "p95Slope": 0.009107133173082493,
+          "p99Slope": 0.01220309315072298,
+          "maxSlope": 2.0397779643535614,
+          "terrainDeltaMin": -1.263929843902588,
+          "enabledMorphCellFraction": 0.019015842013888888,
+          "enabledMorphWetCellFraction": 0.009103751373410768
+        }
+      },
+      "hydraulicRecovery": {
+        "5000": 0.05193107883248256,
+        "10000": -0.04193313414035336
+      },
+      "coherenceRecovery": {
+        "5000": null,
+        "10000": -4.671389218090445
+      },
+      "erosionRetention": {
+        "5000": 1.1924373260804575,
+        "10000": 3.462227237819819
+      },
+      "downstreamErosionRetention": {
+        "5000": null,
+        "10000": null
+      }
+    }
+  ],
+  "recoveryDenominatorTolerance": "1% of the larger CURRENT/NO_EROSION metric magnitude, minimum 1e-12",
+  "classification": "SPATIAL F — NONLOCAL / INTERACTION",
+  "classificationRule": "A-C require >=50% discharge recovery at both causal checkpoints and >=15 percentage-point lead; D requires no single-zone result and >=70% corridor/combination recovery; E requires CORRIDOR_ONLY >=70% and >=15-point lead over OUTSIDE_CORRIDOR_ONLY; otherwise F.",
+  "completedAt": "2026-09-03T10:26:24.829Z"
+}
