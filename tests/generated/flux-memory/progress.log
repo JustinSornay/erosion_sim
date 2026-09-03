@@ -1,0 +1,46 @@
+[start] 2026-09-03T14:23:58.240Z
+2026-09-03T14:24:00.795Z [reference path] CURRENT@1000 31 cells
+2026-09-03T14:24:26.955Z [sanity] {"0":{"stepsWithTriggeredFaces":999,"meanTriggeredFaceCount":5616.02,"maxTriggeredFaceCount":10572,"meanTriggeredFluxFraction":0.9240694025721159},"0.00001":{"stepsWithTriggeredFaces":868,"meanTriggeredFaceCount":91.502,"maxTriggeredFaceCount":210,"meanTriggeredFluxFraction":0.03607475211589916},"0.0001":{"stepsWithTriggeredFaces":0,"meanTriggeredFaceCount":0,"maxTriggeredFaceCount":0,"meanTriggeredFluxFraction":0},"0.001":{"stepsWithTriggeredFaces":0,"meanTriggeredFaceCount":0,"maxTriggeredFaceCount":0,"meanTriggeredFluxFraction":0},"0.01":{"stepsWithTriggeredFaces":0,"meanTriggeredFaceCount":0,"maxTriggeredFaceCount":0,"meanTriggeredFluxFraction":0}}
+2026-09-03T14:25:00.668Z [run] BED_CHANGE threshold=0 decay=0
+2026-09-03T14:25:22.641Z [run] BED_CHANGE threshold=0 decay=0.25
+2026-09-03T14:25:44.087Z [run] BED_CHANGE threshold=0 decay=0.5
+2026-09-03T14:26:05.606Z [run] BED_CHANGE threshold=0 decay=0.75
+2026-09-03T14:26:28.270Z [run] BED_CHANGE threshold=0 decay=0.9
+2026-09-03T14:26:50.098Z [run] BED_CHANGE threshold=0 decay=0.99
+2026-09-03T14:27:11.759Z [run] BED_CHANGE threshold=0 decay=1
+2026-09-03T14:27:33.653Z [run] BED_CHANGE threshold=0.000001 decay=0
+2026-09-03T14:27:56.420Z [run] BED_CHANGE threshold=0.000001 decay=0.25
+2026-09-03T14:28:17.754Z [run] BED_CHANGE threshold=0.000001 decay=0.5
+2026-09-03T14:28:38.887Z [run] BED_CHANGE threshold=0.000001 decay=0.75
+2026-09-03T14:28:59.314Z [run] BED_CHANGE threshold=0.000001 decay=0.9
+2026-09-03T14:29:19.386Z [run] BED_CHANGE threshold=0.000001 decay=0.99
+2026-09-03T14:29:39.797Z [run] BED_CHANGE threshold=0.000001 decay=1
+2026-09-03T14:30:00.523Z [run] BED_CHANGE threshold=0.00001 decay=0
+2026-09-03T14:30:23.329Z [run] BED_CHANGE threshold=0.00001 decay=0.25
+2026-09-03T14:30:45.300Z [run] BED_CHANGE threshold=0.00001 decay=0.5
+2026-09-03T14:31:06.864Z [run] BED_CHANGE threshold=0.00001 decay=0.75
+2026-09-03T14:31:28.776Z [run] BED_CHANGE threshold=0.00001 decay=0.9
+2026-09-03T14:31:50.023Z [run] BED_CHANGE threshold=0.00001 decay=0.99
+2026-09-03T14:32:11.882Z [run] BED_CHANGE threshold=0.00001 decay=1
+2026-09-03T14:32:33.906Z [run] BED_CHANGE threshold=0.0001 decay=0
+2026-09-03T14:32:55.182Z [run] BED_CHANGE threshold=0.0001 decay=0.25
+2026-09-03T14:33:17.079Z [run] BED_CHANGE threshold=0.0001 decay=0.5
+2026-09-03T14:33:38.628Z [run] BED_CHANGE threshold=0.0001 decay=0.75
+2026-09-03T14:33:59.628Z [run] BED_CHANGE threshold=0.0001 decay=0.9
+2026-09-03T14:34:21.938Z [run] BED_CHANGE threshold=0.0001 decay=0.99
+2026-09-03T14:34:44.005Z [run] BED_CHANGE threshold=0.0001 decay=1
+2026-09-03T14:35:06.169Z [run] BED_CHANGE threshold=0.001 decay=0
+2026-09-03T14:35:28.793Z [run] BED_CHANGE threshold=0.001 decay=0.25
+2026-09-03T14:35:51.230Z [run] BED_CHANGE threshold=0.001 decay=0.5
+2026-09-03T14:36:14.238Z [run] BED_CHANGE threshold=0.001 decay=0.75
+2026-09-03T14:36:37.088Z [run] BED_CHANGE threshold=0.001 decay=0.9
+2026-09-03T14:36:59.328Z [run] BED_CHANGE threshold=0.001 decay=0.99
+2026-09-03T14:37:21.386Z [run] BED_CHANGE threshold=0.001 decay=1
+2026-09-03T14:37:43.917Z [run] BED_CHANGE threshold=0.01 decay=0
+2026-09-03T14:38:06.763Z [run] BED_CHANGE threshold=0.01 decay=0.25
+2026-09-03T14:38:30.230Z [run] BED_CHANGE threshold=0.01 decay=0.5
+2026-09-03T14:38:52.352Z [run] BED_CHANGE threshold=0.01 decay=0.75
+2026-09-03T14:39:14.572Z [run] BED_CHANGE threshold=0.01 decay=0.9
+2026-09-03T14:39:36.804Z [run] BED_CHANGE threshold=0.01 decay=0.99
+2026-09-03T14:39:59.402Z [run] BED_CHANGE threshold=0.01 decay=1
+2026-09-03T14:40:22.027Z [complete] BED-FLUX B — local adaptation delays collapse but fails long-run
