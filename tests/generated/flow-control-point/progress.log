@@ -1,0 +1,10 @@
+[start] 2026-09-07T14:45:42.024Z CURRENT deterministic flow-control-point diagnostic
+2026-09-07T14:45:43.896Z [observe] step=1000
+2026-09-07T14:45:46.601Z [observe] step=2500
+2026-09-07T14:45:49.668Z [observe] step=4000
+2026-09-07T14:45:51.172Z [observe] step=4500
+2026-09-07T14:45:52.176Z [observe] step=4750
+2026-09-07T14:45:53.156Z [observe] step=5000
+2026-09-07T14:45:53.992Z [observe] step=5250
+2026-09-07T14:45:54.548Z [observe] step=5500
+2026-09-07T14:45:54.761Z [complete] CONTROL-POINT A — SINGLE LOCAL ROUTE SWITCH; earliestShift=4400
