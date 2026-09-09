@@ -1,0 +1,5213 @@
+{
+  "purpose": "Causal frozen-bed routing experiment through 5000 steps; source, terrain initialization, outlets, transport, capacity and exchange constants unchanged.",
+  "controls": {
+    "currentInstrumentedBitIdenticalProduction": {
+      "passes": true,
+      "differences": {
+        "1000": {
+          "b": 0,
+          "d": 0,
+          "s": 0,
+          "u": 0,
+          "v": 0,
+          "fL": 0,
+          "fR": 0,
+          "fT": 0,
+          "fB": 0
+        },
+        "2500": {
+          "b": 0,
+          "d": 0,
+          "s": 0,
+          "u": 0,
+          "v": 0,
+          "fL": 0,
+          "fR": 0,
+          "fT": 0,
+          "fB": 0
+        },
+        "5000": {
+          "b": 0,
+          "d": 0,
+          "s": 0,
+          "u": 0,
+          "v": 0,
+          "fL": 0,
+          "fR": 0,
+          "fT": 0,
+          "fB": 0
+        }
+      }
+    },
+    "noMorphFrozenBed": {
+      "passes": true,
+      "maxAbsBedMinusInitialByCheckpoint": {
+        "100": 0,
+        "250": 0,
+        "500": 0,
+        "1000": 0,
+        "1500": 0,
+        "2500": 0,
+        "3500": 0,
+        "5000": 0
+      }
+    },
+    "erosionOnlyNoDeposition": {
+      "passes": true,
+      "grossDepositionByWindow": {
+        "1..250": 0,
+        "251..500": 0,
+        "501..1000": 0,
+        "1001..1500": 0,
+        "1501..2500": 0,
+        "2501..3500": 0,
+        "3501..5000": 0
+      }
+    },
+    "simulationJsUnchanged": true
+  },
+  "methodology": {
+    "surfaces": "Absolute source-centred control surfaces reused from routing audit.",
+    "perStepPersistentNorth": "NET_NORTH for at least 100 consecutive post-step surface observations.",
+    "sourceAndEvaporation": "Source injection and evaporation retained; sourceWaterInjected is volume, evaporation/storage are depth sums."
+  },
+  "variants": {
+    "CURRENT": {
+      "checkpoints": {
+        "100": {
+          "maxAbsBedMinusInitial": 0.0006173849105834961,
+          "grossDepositionCumulative": 0.00005627978941821379
+        },
+        "250": {
+          "maxAbsBedMinusInitial": 0.002266407012939453,
+          "grossDepositionCumulative": 0.00024299422358304274
+        },
+        "500": {
+          "maxAbsBedMinusInitial": 0.00543290376663208,
+          "grossDepositionCumulative": 0.0005637372567484861
+        },
+        "1000": {
+          "maxAbsBedMinusInitial": 0.012516260147094727,
+          "grossDepositionCumulative": 0.0008138169728851471
+        },
+        "1500": {
+          "maxAbsBedMinusInitial": 0.020944654941558838,
+          "grossDepositionCumulative": 0.0011738769369809207
+        },
+        "2500": {
+          "maxAbsBedMinusInitial": 0.05758732557296753,
+          "grossDepositionCumulative": 0.0055006537321278005
+        },
+        "3500": {
+          "maxAbsBedMinusInitial": 0.14161330461502075,
+          "grossDepositionCumulative": 0.0354189719726463
+        },
+        "5000": {
+          "maxAbsBedMinusInitial": 0.2342095971107483,
+          "grossDepositionCumulative": 0.027041436907727395
+        }
+      },
+      "windows": {
+        "1..250": {
+          "surfaces": {
+            "8": {
+              "north": {
+                "netOutward": 326.72953072126296,
+                "positiveOutward": 326.7325233220497
+              },
+              "south": {
+                "netOutward": 0.6847734325988734,
+                "positiveOutward": 0.6847734325988734
+              },
+              "west": {
+                "netOutward": 12.397919007423639,
+                "positiveOutward": 13.27046589577375
+              },
+              "east": {
+                "netOutward": 71.18739341932151,
+                "positiveOutward": 71.187393738577
+              },
+              "northMinusSouthNet": 326.0447572886641,
+              "netTotalOutward": 410.999616580607,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 0.03739237189302003,
+                "endDepthSum": 2.239283384477858,
+                "approxStorageChangeRatio": 59.886101659570336,
+                "changeDepthSum": 2.201891012584838
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.1237232858269477
+            },
+            "12": {
+              "north": {
+                "netOutward": 156.36686673692628,
+                "positiveOutward": 156.39246703179168
+              },
+              "south": {
+                "netOutward": 0.5015460177605725,
+                "positiveOutward": 0.5025070412291952
+              },
+              "west": {
+                "netOutward": 5.696648053117111,
+                "positiveOutward": 5.69795706588644
+              },
+              "east": {
+                "netOutward": 40.47561173662233,
+                "positiveOutward": 40.47736323569006
+              },
+              "northMinusSouthNet": 155.8653207191657,
+              "netTotalOutward": 203.0406725444263,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 0.03739237189302003,
+                "endDepthSum": 5.694653520511256,
+                "approxStorageChangeRatio": 152.29452511875203,
+                "changeDepthSum": 5.657261148618236
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.2036552241314237
+            },
+            "16": {
+              "north": {
+                "netOutward": 44.805079468046685,
+                "positiveOutward": 44.805079468046685
+              },
+              "south": {
+                "netOutward": 0.000014419837678746611,
+                "positiveOutward": 0.00002424646928352017
+              },
+              "west": {
+                "netOutward": 1.855021726570053,
+                "positiveOutward": 1.855021726570053
+              },
+              "east": {
+                "netOutward": 26.9713549540185,
+                "positiveOutward": 26.9713549540185
+              },
+              "northMinusSouthNet": 44.80506504820901,
+              "netTotalOutward": 73.6314705684729,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 0.03739237189302003,
+                "endDepthSum": 7.86974157064753,
+                "approxStorageChangeRatio": 210.46382382917417,
+                "changeDepthSum": 7.83234919875451
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.2285236727722374
+            },
+            "24": {
+              "north": {
+                "netOutward": 2.1753644411518844,
+                "positiveOutward": 2.1753644411518844
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0.0000017473573457939964,
+                "positiveOutward": 0.0000017475363158968968
+              },
+              "east": {
+                "netOutward": 0.14371364632892267,
+                "positiveOutward": 0.14375798269961623
+              },
+              "northMinusSouthNet": 2.1753644411518844,
+              "netTotalOutward": 2.319079834838153,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 0.03739237189302003,
+                "endDepthSum": 9.075338569722625,
+                "approxStorageChangeRatio": 242.70561374622784,
+                "changeDepthSum": 9.037946197829605
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.23523733215336406
+            },
+            "32": {
+              "north": {
+                "netOutward": 6.936055540902446e-10,
+                "positiveOutward": 6.936055540902446e-10
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 2.0002923797604463e-13,
+                "positiveOutward": 2.0002923797604463e-13
+              },
+              "east": {
+                "netOutward": 0.035260768819626497,
+                "positiveOutward": 0.035260768819626497
+              },
+              "northMinusSouthNet": 6.936055540902446e-10,
+              "netTotalOutward": 0.03526076951343208,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 0.03739237189302003,
+                "endDepthSum": 9.11402599036489,
+                "approxStorageChangeRatio": 243.74024778209352,
+                "changeDepthSum": 9.07663361847187
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.235374836869202
+            },
+            "48": {
+              "north": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "northMinusSouthNet": 0,
+              "netTotalOutward": 0,
+              "localDirection": "MIXED",
+              "storage": {
+                "startDepthSum": 0.03739237189302003,
+                "endDepthSum": 9.11462396378531,
+                "approxStorageChangeRatio": 243.75623963792256,
+                "changeDepthSum": 9.07723159189229
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.23537629650860792
+            }
+          },
+          "majorityDirectionR16R24R32": "NET_NORTH",
+          "multiscaleDirectionR16R24R32R48": "NET_NORTH",
+          "bedChangeByHalfPlane": {
+            "UPSTREAM": {
+              "grossErosion": 0.013126087204402883,
+              "grossDeposition": 0.016268158490994288,
+              "netBedChange": 0.0031420712865913554
+            },
+            "DOWNSTREAM": {
+              "grossErosion": 0.00014612518673175084,
+              "grossDeposition": 0.0004271955684081214,
+              "netBedChange": 0.0002810703816763695
+            },
+            "SOURCE_BAND": {
+              "grossErosion": 0.0285600115774523,
+              "grossDeposition": 0.006570359196178764,
+              "netBedChange": -0.021989652381273626
+            }
+          }
+        },
+        "251..500": {
+          "surfaces": {
+            "8": {
+              "north": {
+                "netOutward": 382.21066800989047,
+                "positiveOutward": 384.56942806504503
+              },
+              "south": {
+                "netOutward": 1.0434941374305862e-37,
+                "positiveOutward": 1.0434941374305862e-37
+              },
+              "west": {
+                "netOutward": 6.252418910743938,
+                "positiveOutward": 6.427558177150786
+              },
+              "east": {
+                "netOutward": 208.00868682174286,
+                "positiveOutward": 208.00868682174286
+              },
+              "northMinusSouthNet": 382.21066800989047,
+              "netTotalOutward": 596.4717737423773,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 2.2289606905796973,
+                "endDepthSum": 1.359502383828684,
+                "approxStorageChangeRatio": 0.6099265857735298,
+                "changeDepthSum": -0.8694583067510133
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.0897611191049099
+            },
+            "12": {
+              "north": {
+                "netOutward": 320.0651023715492,
+                "positiveOutward": 345.37414764315866
+              },
+              "south": {
+                "netOutward": 0.2569343193931895,
+                "positiveOutward": 0.37677390707340375
+              },
+              "west": {
+                "netOutward": 9.463334045351683,
+                "positiveOutward": 9.550296217415791
+              },
+              "east": {
+                "netOutward": 367.59428969821505,
+                "positiveOutward": 367.59428969821505
+              },
+              "northMinusSouthNet": 319.808168052156,
+              "netTotalOutward": 697.3796604345091,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 5.677004588217323,
+                "endDepthSum": 2.971265348002661,
+                "approxStorageChangeRatio": 0.5233861100217447,
+                "changeDepthSum": -2.705739240214662
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.2179341461992111
+            },
+            "16": {
+              "north": {
+                "netOutward": 390.40907677232383,
+                "positiveOutward": 390.67829734861766
+              },
+              "south": {
+                "netOutward": 0.00007378858095467256,
+                "positiveOutward": 0.0003146610095343841
+              },
+              "west": {
+                "netOutward": 1.5854282425567456,
+                "positiveOutward": 1.9050819902200842
+              },
+              "east": {
+                "netOutward": 381.2254674980638,
+                "positiveOutward": 381.2254674980638
+              },
+              "northMinusSouthNet": 390.4090029837429,
+              "netTotalOutward": 773.2200463015254,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 7.873140420201038,
+                "endDepthSum": 3.7668059955011453,
+                "approxStorageChangeRatio": 0.4784375477206288,
+                "changeDepthSum": -4.1063344246998925
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.30819492630669926
+            },
+            "24": {
+              "north": {
+                "netOutward": 301.8849793079755,
+                "positiveOutward": 301.9417279406373
+              },
+              "south": {
+                "netOutward": 0.2882830562398671,
+                "positiveOutward": 0.2882830562398671
+              },
+              "west": {
+                "netOutward": 1.5594962861393968,
+                "positiveOutward": 1.5594962861393968
+              },
+              "east": {
+                "netOutward": 270.1974493148491,
+                "positiveOutward": 270.26193547986304
+              },
+              "northMinusSouthNet": 301.59669625173564,
+              "netTotalOutward": 573.9302079652039,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 9.108799316948208,
+                "endDepthSum": 8.144904397028984,
+                "approxStorageChangeRatio": 0.8941798050017679,
+                "changeDepthSum": -0.9638949199192233
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.5236208001297916
+            },
+            "32": {
+              "north": {
+                "netOutward": 89.2069234304317,
+                "positiveOutward": 89.2069234304317
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 95.77600624615454,
+                "positiveOutward": 95.7760062461677
+              },
+              "northMinusSouthNet": 89.2069234304317,
+              "netTotalOutward": 184.98292967658625,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 9.149511898744006,
+                "endDepthSum": 14.66197669417055,
+                "approxStorageChangeRatio": 1.6024873082227769,
+                "changeDepthSum": 5.512464795426544
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.6573398053641647
+            },
+            "48": {
+              "north": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "northMinusSouthNet": 0,
+              "netTotalOutward": 0,
+              "localDirection": "MIXED",
+              "storage": {
+                "startDepthSum": 9.15015695795191,
+                "endDepthSum": 17.776011650146934,
+                "approxStorageChangeRatio": 1.94270018884198,
+                "changeDepthSum": 8.625854692195023
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.6886125803669562
+            }
+          },
+          "majorityDirectionR16R24R32": "NET_NORTH",
+          "multiscaleDirectionR16R24R32R48": "NET_NORTH",
+          "bedChangeByHalfPlane": {
+            "UPSTREAM": {
+              "grossErosion": 0.10326970127823519,
+              "grossDeposition": 0.055623140964281996,
+              "netBedChange": -0.04764656031395347
+            },
+            "DOWNSTREAM": {
+              "grossErosion": 0.0005875548299752124,
+              "grossDeposition": 0.0004891146511484114,
+              "netBedChange": -0.0000984401788267974
+            },
+            "SOURCE_BAND": {
+              "grossErosion": 0.11817496085222452,
+              "grossDeposition": 0.03181003760766906,
+              "netBedChange": -0.08636492324455525
+            }
+          }
+        },
+        "501..1000": {
+          "surfaces": {
+            "8": {
+              "north": {
+                "netOutward": 878.2356919776836,
+                "positiveOutward": 878.2356919776836
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0.9113103905467442,
+                "positiveOutward": 0.9121236221399158
+              },
+              "east": {
+                "netOutward": 265.2239144087677,
+                "positiveOutward": 265.23045593931914
+              },
+              "northMinusSouthNet": 878.2356919776836,
+              "netTotalOutward": 1144.370916776998,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 1.3509149845788853,
+                "endDepthSum": 0.5369561453276087,
+                "approxStorageChangeRatio": 0.3974758970454323,
+                "changeDepthSum": -0.8139588392512765
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 0.06824110311800805
+            },
+            "12": {
+              "north": {
+                "netOutward": 600.728853837945,
+                "positiveOutward": 627.7944181575156
+              },
+              "south": {
+                "netOutward": -0.000006196583032491839,
+                "positiveOutward": 0.0008818901225779996
+              },
+              "west": {
+                "netOutward": -2.0586266031733903e-17,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 584.1025030840178,
+                "positiveOutward": 584.1027946747292
+              },
+              "northMinusSouthNet": 600.7288600345281,
+              "netTotalOutward": 1184.8313507253797,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 2.9590824612617506,
+                "endDepthSum": 1.3520402714652713,
+                "approxStorageChangeRatio": 0.45691199524353987,
+                "changeDepthSum": -1.6070421897964793
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 0.1770927010638949
+            },
+            "16": {
+              "north": {
+                "netOutward": 626.7120739755235,
+                "positiveOutward": 627.3284384304702
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": -0.04950939601067647,
+                "positiveOutward": 0.02119976876747387
+              },
+              "east": {
+                "netOutward": 586.2690766709582,
+                "positiveOutward": 586.2947205466446
+              },
+              "northMinusSouthNet": 626.7120739755235,
+              "netTotalOutward": 1212.9316412504709,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 3.7508272035125922,
+                "endDepthSum": 1.6270658879750366,
+                "approxStorageChangeRatio": 0.43378854841708364,
+                "changeDepthSum": -2.1237613155375556
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 0.21990279219052067
+            },
+            "24": {
+              "north": {
+                "netOutward": 725.7344027869858,
+                "positiveOutward": 726.5113430713236
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 606.4506230741376,
+                "positiveOutward": 617.5134539920907
+              },
+              "northMinusSouthNet": 725.7344027869858,
+              "netTotalOutward": 1332.1850258611234,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 8.117979721415516,
+                "endDepthSum": 3.771148510211039,
+                "approxStorageChangeRatio": 0.4645427359546879,
+                "changeDepthSum": -4.346831211204477
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 0.4266108479879042
+            },
+            "32": {
+              "north": {
+                "netOutward": 857.96532773302,
+                "positiveOutward": 857.9821125284712
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 593.0243712660199,
+                "positiveOutward": 628.1886627510031
+              },
+              "northMinusSouthNet": 857.96532773302,
+              "netTotalOutward": 1450.9896989990398,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 14.645256093691966,
+                "endDepthSum": 7.826005031395994,
+                "approxStorageChangeRatio": 0.5343713337158253,
+                "changeDepthSum": -6.819251062295972
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 0.8691472910287213
+            },
+            "48": {
+              "north": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 76.42051538945347,
+                "positiveOutward": 76.42089025803838
+              },
+              "northMinusSouthNet": 0,
+              "netTotalOutward": 76.42051538945347,
+              "localDirection": "MIXED",
+              "storage": {
+                "startDepthSum": 17.80977772223305,
+                "endDepthSum": 32.55162116245565,
+                "approxStorageChangeRatio": 1.827738766319326,
+                "changeDepthSum": 14.741843440222603
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 2.6252431086430015
+            }
+          },
+          "majorityDirectionR16R24R32": "NET_NORTH",
+          "multiscaleDirectionR16R24R32R48": "NET_NORTH",
+          "bedChangeByHalfPlane": {
+            "UPSTREAM": {
+              "grossErosion": 0.5957654934037756,
+              "grossDeposition": 0.3128615373023758,
+              "netBedChange": -0.28290395610138824
+            },
+            "DOWNSTREAM": {
+              "grossErosion": 0.00834800349468171,
+              "grossDeposition": 0.009606170844786826,
+              "netBedChange": 0.0012581673501053953
+            },
+            "SOURCE_BAND": {
+              "grossErosion": 0.2193946562933684,
+              "grossDeposition": 0.07729310392640107,
+              "netBedChange": -0.14210155236697658
+            }
+          }
+        },
+        "1001..1500": {
+          "surfaces": {
+            "8": {
+              "north": {
+                "netOutward": 899.1126156111533,
+                "positiveOutward": 899.1126156111533
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 201.82301550463131,
+                "positiveOutward": 201.8230276425623
+              },
+              "northMinusSouthNet": 899.1126156111533,
+              "netTotalOutward": 1100.9356311157846,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 0.535544828053051,
+                "endDepthSum": 0.4761498174511944,
+                "approxStorageChangeRatio": 0.889094231723263,
+                "changeDepthSum": -0.059395010601856646
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 0.04490103170933279
+            },
+            "12": {
+              "north": {
+                "netOutward": 601.5449276259958,
+                "positiveOutward": 606.2555016743638
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 499.7196912711381,
+                "positiveOutward": 499.7196912711381
+              },
+              "northMinusSouthNet": 601.5449276259958,
+              "netTotalOutward": 1101.264618897134,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 1.3497910712973211,
+                "endDepthSum": 1.21176033836219,
+                "approxStorageChangeRatio": 0.8977391865524299,
+                "changeDepthSum": -0.13803073293513113
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 0.11878198475685596
+            },
+            "16": {
+              "north": {
+                "netOutward": 601.9746696755725,
+                "positiveOutward": 601.9746696755725
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 499.97499291121625,
+                "positiveOutward": 499.9882182702474
+              },
+              "northMinusSouthNet": 601.9746696755725,
+              "netTotalOutward": 1101.9496625867887,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 1.6248910993716694,
+                "endDepthSum": 1.4507511036599754,
+                "approxStorageChangeRatio": 0.8928297436184909,
+                "changeDepthSum": -0.17413999571169403
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 0.1431711035552626
+            },
+            "24": {
+              "north": {
+                "netOutward": 609.7330013758334,
+                "positiveOutward": 610.1289090314973
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 551.9837002434522,
+                "positiveOutward": 553.0401909101452
+              },
+              "northMinusSouthNet": 609.7330013758334,
+              "netTotalOutward": 1161.7167016192857,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 3.772980370575688,
+                "endDepthSum": 2.440598919486767,
+                "approxStorageChangeRatio": 0.6468623421739076,
+                "changeDepthSum": -1.3323814510889207
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 0.2813660937488593
+            },
+            "32": {
+              "north": {
+                "netOutward": 646.2079574754392,
+                "positiveOutward": 646.586784376424
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 577.5513080104027,
+                "positiveOutward": 600.4699185348569
+              },
+              "northMinusSouthNet": 646.2079574754392,
+              "netTotalOutward": 1223.759265485842,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 7.823157890264026,
+                "endDepthSum": 5.125601471161369,
+                "approxStorageChangeRatio": 0.6551831808917234,
+                "changeDepthSum": -2.697556419102657
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 0.596496626729459
+            },
+            "48": {
+              "north": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 655.7104341508591,
+                "positiveOutward": 656.420002690219
+              },
+              "northMinusSouthNet": 0,
+              "netTotalOutward": 655.7104341508591,
+              "localDirection": "MIXED",
+              "storage": {
+                "startDepthSum": 32.571275321331754,
+                "endDepthSum": 36.49168408243252,
+                "approxStorageChangeRatio": 1.1203639931941256,
+                "changeDepthSum": 3.9204087611007665
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 3.6128609419636954
+            }
+          },
+          "majorityDirectionR16R24R32": "NET_NORTH",
+          "multiscaleDirectionR16R24R32R48": "NET_NORTH",
+          "bedChangeByHalfPlane": {
+            "UPSTREAM": {
+              "grossErosion": 0.7798846506939737,
+              "grossDeposition": 0.4365408451695799,
+              "netBedChange": -0.3433438055244088
+            },
+            "DOWNSTREAM": {
+              "grossErosion": 0.019959440058264163,
+              "grossDeposition": 0.01687450333353458,
+              "netBedChange": -0.0030849367247290874
+            },
+            "SOURCE_BAND": {
+              "grossErosion": 0.19124781831546697,
+              "grossDeposition": 0.0521383537398538,
+              "netBedChange": -0.13910946457561485
+            }
+          }
+        },
+        "1501..2500": {
+          "surfaces": {
+            "8": {
+              "north": {
+                "netOutward": 1828.333571809047,
+                "positiveOutward": 1828.333571809047
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 353.9072950561531,
+                "positiveOutward": 353.9072950561531
+              },
+              "northMinusSouthNet": 1828.333571809047,
+              "netTotalOutward": 2182.2408668652,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 0.47581966581125557,
+                "endDepthSum": 0.6706144767745005,
+                "approxStorageChangeRatio": 1.4093878941113682,
+                "changeDepthSum": 0.1947948109632449
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 0.10744134010639642
+            },
+            "12": {
+              "north": {
+                "netOutward": 1286.544906809114,
+                "positiveOutward": 1286.7183494296103
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 903.6946524405095,
+                "positiveOutward": 903.6946524405095
+              },
+              "northMinusSouthNet": 1286.544906809114,
+              "netTotalOutward": 2190.2395592496237,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 1.2117784122710564,
+                "endDepthSum": 1.1487428121110155,
+                "approxStorageChangeRatio": 0.9479809183579176,
+                "changeDepthSum": -0.06303560016004095
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 0.22894573305627364
+            },
+            "16": {
+              "north": {
+                "netOutward": 1282.4550523477342,
+                "positiveOutward": 1282.4550523477342
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 899.3096601027199,
+                "positiveOutward": 899.3096601027199
+              },
+              "northMinusSouthNet": 1282.4550523477342,
+              "netTotalOutward": 2181.764712450454,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 1.4508243914351315,
+                "endDepthSum": 1.4778907112123874,
+                "approxStorageChangeRatio": 1.0186558207437375,
+                "changeDepthSum": 0.02706631977725582
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 0.2828608779634203
+            },
+            "24": {
+              "north": {
+                "netOutward": 1270.5108527683196,
+                "positiveOutward": 1270.5108527683196
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 883.7801461143025,
+                "positiveOutward": 889.5572014193214
+              },
+              "northMinusSouthNet": 1270.5108527683196,
+              "netTotalOutward": 2154.2909988826223,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 2.4421890421735357,
+                "endDepthSum": 2.7044913153794052,
+                "approxStorageChangeRatio": 1.1074045737968023,
+                "changeDepthSum": 0.2623022732058695
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 0.5131610816811694
+            },
+            "32": {
+              "north": {
+                "netOutward": 1266.9267663422218,
+                "positiveOutward": 1268.9984989143754
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 842.1789800939292,
+                "positiveOutward": 896.3412078781474
+              },
+              "northMinusSouthNet": 1266.9267663422218,
+              "netTotalOutward": 2109.105746436151,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 5.127759058629955,
+                "endDepthSum": 5.610555624913373,
+                "approxStorageChangeRatio": 1.0941535202343171,
+                "changeDepthSum": 0.48279656628341794
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 1.0602488634340141
+            },
+            "48": {
+              "north": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 1578.6593691147914,
+                "positiveOutward": 1586.9046337231036
+              },
+              "northMinusSouthNet": 0,
+              "netTotalOutward": 1578.6593691147914,
+              "localDirection": "MIXED",
+              "storage": {
+                "startDepthSum": 36.49431763560684,
+                "endDepthSum": 39.34105958708023,
+                "approxStorageChangeRatio": 1.0780050741021632,
+                "changeDepthSum": 2.8467419514733905
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 7.7134159092061445
+            }
+          },
+          "majorityDirectionR16R24R32": "NET_NORTH",
+          "multiscaleDirectionR16R24R32R48": "NET_NORTH",
+          "bedChangeByHalfPlane": {
+            "UPSTREAM": {
+              "grossErosion": 2.385963731666711,
+              "grossDeposition": 2.1571560277834076,
+              "netBedChange": -0.22880770388284116
+            },
+            "DOWNSTREAM": {
+              "grossErosion": 0.019292674008498302,
+              "grossDeposition": 0.01616710127886784,
+              "netBedChange": -0.003125572729629088
+            },
+            "SOURCE_BAND": {
+              "grossErosion": 0.3792752058805987,
+              "grossDeposition": 0.15061465724794101,
+              "netBedChange": -0.22866054863265906
+            }
+          }
+        },
+        "2501..3500": {
+          "surfaces": {
+            "8": {
+              "north": {
+                "netOutward": 1668.6936030561378,
+                "positiveOutward": 1668.720564160606
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 434.2615395538887,
+                "positiveOutward": 434.2615395538887
+              },
+              "northMinusSouthNet": 1668.6936030561378,
+              "netTotalOutward": 2102.9551426100265,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 0.6709767045133871,
+                "endDepthSum": 2.069730828878669,
+                "approxStorageChangeRatio": 3.084653781504533,
+                "changeDepthSum": 1.398754124365282
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 0.25064630532175713
+            },
+            "12": {
+              "north": {
+                "netOutward": 1068.420220644869,
+                "positiveOutward": 1078.330404541815
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 1001.7508382090427,
+                "positiveOutward": 1001.8340307456701
+              },
+              "northMinusSouthNet": 1068.420220644869,
+              "netTotalOutward": 2070.1710588539117,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 1.148460484651332,
+                "endDepthSum": 2.9894961471495596,
+                "approxStorageChangeRatio": 2.603046588979645,
+                "changeDepthSum": 1.8410356624982276
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 0.36633871613399416
+            },
+            "16": {
+              "north": {
+                "netOutward": 1068.099016021355,
+                "positiveOutward": 1068.1024988584386
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 945.2587064056069,
+                "positiveOutward": 1055.1770590693347
+              },
+              "northMinusSouthNet": 1068.099016021355,
+              "netTotalOutward": 2013.357722426962,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 1.4778337138808637,
+                "endDepthSum": 4.157500671087092,
+                "approxStorageChangeRatio": 2.813239833437885,
+                "changeDepthSum": 2.6796669572062286
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 0.4933089653751792
+            },
+            "24": {
+              "north": {
+                "netOutward": 1029.7675634427455,
+                "positiveOutward": 1036.64942582264
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 949.2932767109012,
+                "positiveOutward": 952.6540711790947
+              },
+              "northMinusSouthNet": 1029.7675634427455,
+              "netTotalOutward": 1979.0608401536467,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 2.7054226038297826,
+                "endDepthSum": 5.7005276908254965,
+                "approxStorageChangeRatio": 2.1070747626473803,
+                "changeDepthSum": 2.995105086995714
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 0.7599295987575052
+            },
+            "32": {
+              "north": {
+                "netOutward": 915.1660958546051,
+                "positiveOutward": 957.2414969930675
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 971.7967007908611,
+                "positiveOutward": 1009.9899001948714
+              },
+              "northMinusSouthNet": 915.1660958546051,
+              "netTotalOutward": 1886.9627966454664,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 5.610669367228829,
+                "endDepthSum": 9.531528113531376,
+                "approxStorageChangeRatio": 1.6988219211782036,
+                "changeDepthSum": 3.920858746302547
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 1.4006604429745955
+            },
+            "48": {
+              "north": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 2329.1566467839752,
+                "positiveOutward": 2330.846654740455
+              },
+              "northMinusSouthNet": 0,
+              "netTotalOutward": 2329.1566467839752,
+              "localDirection": "MIXED",
+              "storage": {
+                "startDepthSum": 39.337123581145576,
+                "endDepthSum": 30.237847475321722,
+                "approxStorageChangeRatio": 0.7686847619385885,
+                "changeDepthSum": -9.099276105823854
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 6.907550452561304
+            }
+          },
+          "majorityDirectionR16R24R32": "NET_NORTH",
+          "multiscaleDirectionR16R24R32R48": "NET_NORTH",
+          "bedChangeByHalfPlane": {
+            "UPSTREAM": {
+              "grossErosion": 4.733910598852361,
+              "grossDeposition": 13.388252252390613,
+              "netBedChange": 8.65434165354022
+            },
+            "DOWNSTREAM": {
+              "grossErosion": 0.039790769516616975,
+              "grossDeposition": 0.03800790410901319,
+              "netBedChange": -0.0017828654075997625
+            },
+            "SOURCE_BAND": {
+              "grossErosion": 0.5453167110435673,
+              "grossDeposition": 2.9110452253257106,
+              "netBedChange": 2.3657285142821145
+            }
+          }
+        },
+        "3501..5000": {
+          "surfaces": {
+            "8": {
+              "north": {
+                "netOutward": 1056.417186428743,
+                "positiveOutward": 1071.3399090127969
+              },
+              "south": {
+                "netOutward": 11.715074902359612,
+                "positiveOutward": 11.715074902359612
+              },
+              "west": {
+                "netOutward": 292.0451131149678,
+                "positiveOutward": 293.6512153061226
+              },
+              "east": {
+                "netOutward": 1811.3693511947372,
+                "positiveOutward": 1813.9987682889148
+              },
+              "northMinusSouthNet": 1044.7021115263833,
+              "netTotalOutward": 3171.5467256408074,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 2.072567334241442,
+                "endDepthSum": 3.3688217412002506,
+                "approxStorageChangeRatio": 1.6254341586606338,
+                "changeDepthSum": 1.2962544069588087
+              },
+              "sourceWaterInjected": 56.09999999999944,
+              "estimatedEvaporationLossDepthSum": 0.8846147272194217
+            },
+            "12": {
+              "north": {
+                "netOutward": 972.9200517039922,
+                "positiveOutward": 989.7900102245508
+              },
+              "south": {
+                "netOutward": 12.371928329838324,
+                "positiveOutward": 12.371944843816053
+              },
+              "west": {
+                "netOutward": 117.75931788887206,
+                "positiveOutward": 120.3808036529316
+              },
+              "east": {
+                "netOutward": 2034.480942373136,
+                "positiveOutward": 2394.154049069549
+              },
+              "northMinusSouthNet": 960.5481233741539,
+              "netTotalOutward": 3137.5322402958386,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 2.994058016681479,
+                "endDepthSum": 4.45541204122533,
+                "approxStorageChangeRatio": 1.4880847386396239,
+                "changeDepthSum": 1.4613540245438505
+              },
+              "sourceWaterInjected": 56.09999999999944,
+              "estimatedEvaporationLossDepthSum": 1.2960354821341953
+            },
+            "16": {
+              "north": {
+                "netOutward": 915.801633549587,
+                "positiveOutward": 917.0710898915388
+              },
+              "south": {
+                "netOutward": 0.2476821610798764,
+                "positiveOutward": 0.29918285231137975
+              },
+              "west": {
+                "netOutward": 77.97696867065511,
+                "positiveOutward": 78.18487527223935
+              },
+              "east": {
+                "netOutward": 2048.3798001255345,
+                "positiveOutward": 2094.295304256294
+              },
+              "northMinusSouthNet": 915.5539513885071,
+              "netTotalOutward": 3042.4060845068566,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 4.164173913085059,
+                "endDepthSum": 6.5885481928650655,
+                "approxStorageChangeRatio": 1.5821981335030004,
+                "changeDepthSum": 2.4243742797800065
+              },
+              "sourceWaterInjected": 56.09999999999944,
+              "estimatedEvaporationLossDepthSum": 1.9480495896313468
+            },
+            "24": {
+              "north": {
+                "netOutward": 816.4032923946861,
+                "positiveOutward": 860.7607543796789
+              },
+              "south": {
+                "netOutward": 14.923723716528889,
+                "positiveOutward": 16.59862943936714
+              },
+              "west": {
+                "netOutward": 33.51574266397364,
+                "positiveOutward": 35.30398098177148
+              },
+              "east": {
+                "netOutward": 2029.5303705174238,
+                "positiveOutward": 2029.5744105604426
+              },
+              "northMinusSouthNet": 801.4795686781572,
+              "netTotalOutward": 2894.3731292926122,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 5.708127695732122,
+                "endDepthSum": 9.812665285209802,
+                "approxStorageChangeRatio": 1.7190689851852086,
+                "changeDepthSum": 4.10453758947768
+              },
+              "sourceWaterInjected": 56.09999999999944,
+              "estimatedEvaporationLossDepthSum": 2.783519461522084
+            },
+            "32": {
+              "north": {
+                "netOutward": 720.320376609117,
+                "positiveOutward": 973.7474244434449
+              },
+              "south": {
+                "netOutward": 1.431406684976272,
+                "positiveOutward": 1.431406684976272
+              },
+              "west": {
+                "netOutward": 2.1525204620471656e-10,
+                "positiveOutward": 2.1525204620471656e-10
+              },
+              "east": {
+                "netOutward": 1905.719982565253,
+                "positiveOutward": 1964.5157300186597
+              },
+              "northMinusSouthNet": 718.8889699241407,
+              "netTotalOutward": 2627.471765859562,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 9.539701240741827,
+                "endDepthSum": 16.473047818449405,
+                "approxStorageChangeRatio": 1.7267886491137563,
+                "changeDepthSum": 6.933346577707578
+              },
+              "sourceWaterInjected": 56.09999999999944,
+              "estimatedEvaporationLossDepthSum": 4.491460500346345
+            },
+            "48": {
+              "north": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "south": {
+                "netOutward": 0.02715788792054595,
+                "positiveOutward": 0.02715788792054595
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 1626.7667237928067,
+                "positiveOutward": 1673.665436011106
+              },
+              "northMinusSouthNet": -0.02715788792054595,
+              "netTotalOutward": 1626.7938816807273,
+              "localDirection": "NET_SOUTH",
+              "storage": {
+                "startDepthSum": 30.2388566542842,
+                "endDepthSum": 46.61119622625239,
+                "approxStorageChangeRatio": 1.5414338167329016,
+                "changeDepthSum": 16.37233957196819
+              },
+              "sourceWaterInjected": 56.09999999999944,
+              "estimatedEvaporationLossDepthSum": 12.071154271147373
+            }
+          },
+          "majorityDirectionR16R24R32": "NET_NORTH",
+          "multiscaleDirectionR16R24R32R48": "NET_NORTH",
+          "bedChangeByHalfPlane": {
+            "UPSTREAM": {
+              "grossErosion": 6.032732624588114,
+              "grossDeposition": 20.10469901382093,
+              "netBedChange": 14.071966389242766
+            },
+            "DOWNSTREAM": {
+              "grossErosion": 1.0943251740641224,
+              "grossDeposition": 1.3317364770421394,
+              "netBedChange": 0.23741130297797977
+            },
+            "SOURCE_BAND": {
+              "grossErosion": 0.9580901454579199,
+              "grossDeposition": 8.804189153573438,
+              "netBedChange": 7.846099008115838
+            }
+          }
+        }
+      },
+      "firstWindowNetNorth": {
+        "8": "1..250",
+        "12": "1..250",
+        "16": "1..250",
+        "24": "1..250",
+        "32": "1..250",
+        "48": null
+      },
+      "firstStepPersistentNetNorth": {
+        "8": 5,
+        "12": 83,
+        "16": 112,
+        "24": 167,
+        "32": 235,
+        "48": null
+      },
+      "morphologyOnset": {
+        "r16": {
+          "0.001": 34,
+          "0.01": 111,
+          "0.1": 369
+        },
+        "r32": {
+          "0.001": 34,
+          "0.01": 111,
+          "0.1": 310
+        }
+      },
+      "initialTerrainAndOutlets": {
+        "terrain": {
+          "8": {
+            "meanDzDy": 0.003640460181357292,
+            "medianDzDy": 0.004166692495346069,
+            "fractionCellsLocallyDescendingNorth": 0.868020304568528,
+            "fractionCellsLocallyDescendingSouth": 0.18274111675126903
+          },
+          "16": {
+            "meanDzDy": 0.0005516521679412765,
+            "medianDzDy": 0.00012826919555664062,
+            "fractionCellsLocallyDescendingNorth": 0.5119196988707654,
+            "fractionCellsLocallyDescendingSouth": 0.4880803011292346
+          },
+          "24": {
+            "meanDzDy": -0.000406159861953446,
+            "medianDzDy": -0.0006456375122070312,
+            "fractionCellsLocallyDescendingNorth": 0.4472950362520915,
+            "fractionCellsLocallyDescendingSouth": 0.5588399330730619
+          },
+          "32": {
+            "meanDzDy": -0.0002058754321309628,
+            "medianDzDy": -0.0004145801067352295,
+            "fractionCellsLocallyDescendingNorth": 0.46556559675911496,
+            "fractionCellsLocallyDescendingSouth": 0.5428482393268931
+          }
+        },
+        "initialHead": "No initial water: initial hydraulic head equals terrain bed.",
+        "sourceOutlets": [
+          {
+            "rank": 0,
+            "x": 48,
+            "y": 43,
+            "dx": 0,
+            "dy": -5,
+            "weight": 0.6000000238418579,
+            "terrainB": 0.5291581153869629,
+            "initialLocalHead": 0.5291581153869629
+          },
+          {
+            "rank": 1,
+            "x": 45,
+            "y": 44,
+            "dx": -3,
+            "dy": -4,
+            "weight": 0.20000000298023224,
+            "terrainB": 0.5476221442222595,
+            "initialLocalHead": 0.5476221442222595
+          },
+          {
+            "rank": 2,
+            "x": 46,
+            "y": 44,
+            "dx": -2,
+            "dy": -4,
+            "weight": 0.20000000298023224,
+            "terrainB": 0.5445596575737,
+            "initialLocalHead": 0.5445596575737
+          }
+        ]
+      }
+    },
+    "NO_MORPH": {
+      "checkpoints": {
+        "100": {
+          "maxAbsBedMinusInitial": 0,
+          "grossDepositionCumulative": 0
+        },
+        "250": {
+          "maxAbsBedMinusInitial": 0,
+          "grossDepositionCumulative": 0
+        },
+        "500": {
+          "maxAbsBedMinusInitial": 0,
+          "grossDepositionCumulative": 0
+        },
+        "1000": {
+          "maxAbsBedMinusInitial": 0,
+          "grossDepositionCumulative": 0
+        },
+        "1500": {
+          "maxAbsBedMinusInitial": 0,
+          "grossDepositionCumulative": 0
+        },
+        "2500": {
+          "maxAbsBedMinusInitial": 0,
+          "grossDepositionCumulative": 0
+        },
+        "3500": {
+          "maxAbsBedMinusInitial": 0,
+          "grossDepositionCumulative": 0
+        },
+        "5000": {
+          "maxAbsBedMinusInitial": 0,
+          "grossDepositionCumulative": 0
+        }
+      },
+      "windows": {
+        "1..250": {
+          "surfaces": {
+            "8": {
+              "north": {
+                "netOutward": 327.3652955308629,
+                "positiveOutward": 327.3682899065736
+              },
+              "south": {
+                "netOutward": 0.6918223655761744,
+                "positiveOutward": 0.6918223655761744
+              },
+              "west": {
+                "netOutward": 12.54830001347043,
+                "positiveOutward": 13.402974633622065
+              },
+              "east": {
+                "netOutward": 71.34965561018464,
+                "positiveOutward": 71.34965593588282
+              },
+              "northMinusSouthNet": 326.67347316528674,
+              "netTotalOutward": 411.9550735200942,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 0.03739237189302003,
+                "endDepthSum": 2.2232722303467654,
+                "approxStorageChangeRatio": 59.457908599849475,
+                "changeDepthSum": 2.1858798584537453
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.12349189825314448
+            },
+            "12": {
+              "north": {
+                "netOutward": 156.6441308847543,
+                "positiveOutward": 156.66987913830258
+              },
+              "south": {
+                "netOutward": 0.5042950533134729,
+                "positiveOutward": 0.5052707241728661
+              },
+              "west": {
+                "netOutward": 5.758065121965813,
+                "positiveOutward": 5.759332967413874
+              },
+              "east": {
+                "netOutward": 40.47072690748105,
+                "positiveOutward": 40.47248592552236
+              },
+              "northMinusSouthNet": 156.13983583144082,
+              "netTotalOutward": 203.37721796751464,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 0.03739237189302003,
+                "endDepthSum": 5.6889746226713065,
+                "approxStorageChangeRatio": 152.1426519544554,
+                "changeDepthSum": 5.6515822507782865
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.2036130686253718
+            },
+            "16": {
+              "north": {
+                "netOutward": 44.796787098652615,
+                "positiveOutward": 44.796787098652615
+              },
+              "south": {
+                "netOutward": 0.000014477853677636174,
+                "positiveOutward": 0.00002435447957159907
+              },
+              "west": {
+                "netOutward": 1.882169039019548,
+                "positiveOutward": 1.882169039019548
+              },
+              "east": {
+                "netOutward": 26.9750477908266,
+                "positiveOutward": 26.9750477908266
+              },
+              "northMinusSouthNet": 44.79677262079894,
+              "netTotalOutward": 73.65401840635244,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 0.03739237189302003,
+                "endDepthSum": 7.869354565942627,
+                "approxStorageChangeRatio": 210.4534739988395,
+                "changeDepthSum": 7.831962194049607
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.228527561817137
+            },
+            "24": {
+              "north": {
+                "netOutward": 2.163191017827385,
+                "positiveOutward": 2.163191017827385
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0.0000019580718872652307,
+                "positiveOutward": 0.0000019582724634968756
+              },
+              "east": {
+                "netOutward": 0.141579833417503,
+                "positiveOutward": 0.141624466995528
+              },
+              "northMinusSouthNet": 2.163191017827385,
+              "netTotalOutward": 2.3047728093167756,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 0.03739237189302003,
+                "endDepthSum": 9.075580957599968,
+                "approxStorageChangeRatio": 242.7120960276417,
+                "changeDepthSum": 9.038188585706948
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.2352383392327205
+            },
+            "32": {
+              "north": {
+                "netOutward": 6.634723728045075e-10,
+                "positiveOutward": 6.634723728045075e-10
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 2.2417773310991883e-13,
+                "positiveOutward": 2.2417773310991883e-13
+              },
+              "east": {
+                "netOutward": 0.034798278384376616,
+                "positiveOutward": 0.034798278384376616
+              },
+              "northMinusSouthNet": 6.634723728045075e-10,
+              "netTotalOutward": 0.034798279048073165,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 0.03739237189302003,
+                "endDepthSum": 9.114034003908046,
+                "approxStorageChangeRatio": 243.7404620916639,
+                "changeDepthSum": 9.076641632015026
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.23537486112914743
+            },
+            "48": {
+              "north": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "northMinusSouthNet": 0,
+              "netTotalOutward": 0,
+              "localDirection": "MIXED",
+              "storage": {
+                "startDepthSum": 0.03739237189302003,
+                "endDepthSum": 9.114624136429331,
+                "approxStorageChangeRatio": 243.75624425501456,
+                "changeDepthSum": 9.077231764536311
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.2353762993344831
+            }
+          },
+          "majorityDirectionR16R24R32": "NET_NORTH",
+          "multiscaleDirectionR16R24R32R48": "NET_NORTH",
+          "bedChangeByHalfPlane": {
+            "UPSTREAM": {
+              "grossErosion": 0,
+              "grossDeposition": 0,
+              "netBedChange": 0
+            },
+            "DOWNSTREAM": {
+              "grossErosion": 0,
+              "grossDeposition": 0,
+              "netBedChange": 0
+            },
+            "SOURCE_BAND": {
+              "grossErosion": 0,
+              "grossDeposition": 0,
+              "netBedChange": 0
+            }
+          }
+        },
+        "251..500": {
+          "surfaces": {
+            "8": {
+              "north": {
+                "netOutward": 382.8303649346385,
+                "positiveOutward": 385.1810776009265
+              },
+              "south": {
+                "netOutward": 2.8060360233667494e-37,
+                "positiveOutward": 2.8060360233667494e-37
+              },
+              "west": {
+                "netOutward": 6.146457640621261,
+                "positiveOutward": 6.308500382117927
+              },
+              "east": {
+                "netOutward": 209.71123826228614,
+                "positiveOutward": 209.71123826228614
+              },
+              "northMinusSouthNet": 382.8303649346385,
+              "netTotalOutward": 598.6880608375459,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 2.212838599343513,
+                "endDepthSum": 1.3076977702629158,
+                "approxStorageChangeRatio": 0.5909593996827752,
+                "changeDepthSum": -0.9051408290805973
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.08787769815182796
+            },
+            "12": {
+              "north": {
+                "netOutward": 320.30392127401905,
+                "positiveOutward": 345.65018204384
+              },
+              "south": {
+                "netOutward": 0.2624735523146955,
+                "positiveOutward": 0.38404667498523665
+              },
+              "west": {
+                "netOutward": 9.560878337545946,
+                "positiveOutward": 9.661248823685417
+              },
+              "east": {
+                "netOutward": 369.339490190383,
+                "positiveOutward": 369.339490190383
+              },
+              "northMinusSouthNet": 320.04144772170434,
+              "netTotalOutward": 699.4667633542626,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 5.671128372021154,
+                "endDepthSum": 2.9313780295622784,
+                "approxStorageChangeRatio": 0.5168950228713575,
+                "changeDepthSum": -2.7397503424588754
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.2166619685447744
+            },
+            "16": {
+              "north": {
+                "netOutward": 390.3840703025129,
+                "positiveOutward": 390.67083389714463
+              },
+              "south": {
+                "netOutward": 0.00007581674446657138,
+                "positiveOutward": 0.00032248660572809076
+              },
+              "west": {
+                "netOutward": 1.6015334810421498,
+                "positiveOutward": 1.925057515552187
+              },
+              "east": {
+                "netOutward": 383.04635096935914,
+                "positiveOutward": 383.04635096935914
+              },
+              "northMinusSouthNet": 390.3839944857684,
+              "netTotalOutward": 775.0320305696587,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 7.872722643965175,
+                "endDepthSum": 3.736442443425985,
+                "approxStorageChangeRatio": 0.4746061321352595,
+                "changeDepthSum": -4.13628020053919
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.30736789898552624
+            },
+            "24": {
+              "north": {
+                "netOutward": 302.4539148176069,
+                "positiveOutward": 302.5034737756529
+              },
+              "south": {
+                "netOutward": 0.2949268835145445,
+                "positiveOutward": 0.2949268835145445
+              },
+              "west": {
+                "netOutward": 1.5875264399446383,
+                "positiveOutward": 1.5875264399446383
+              },
+              "east": {
+                "netOutward": 271.274817420771,
+                "positiveOutward": 271.3339539122604
+              },
+              "northMinusSouthNet": 302.15898793409235,
+              "netTotalOutward": 575.6111855618371,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 9.109052648442024,
+                "endDepthSum": 8.116796852278423,
+                "approxStorageChangeRatio": 0.8910692654374643,
+                "changeDepthSum": -0.9922557961636009
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.5233940579108141
+            },
+            "32": {
+              "north": {
+                "netOutward": 89.01175236062642,
+                "positiveOutward": 89.01175236062642
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 95.90290027424552,
+                "positiveOutward": 95.90290027425831
+              },
+              "northMinusSouthNet": 89.01175236062642,
+              "netTotalOutward": 184.91465263487194,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 9.14952031736002,
+                "endDepthSum": 14.663087211511293,
+                "approxStorageChangeRatio": 1.6026072081276217,
+                "changeDepthSum": 5.513566894151273
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.6573979801248984
+            },
+            "48": {
+              "north": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "northMinusSouthNet": 0,
+              "netTotalOutward": 0,
+              "localDirection": "MIXED",
+              "storage": {
+                "startDepthSum": 9.150157111595496,
+                "endDepthSum": 17.776011810364356,
+                "approxStorageChangeRatio": 1.9427001737312013,
+                "changeDepthSum": 8.62585469876886
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.688612591011897
+            }
+          },
+          "majorityDirectionR16R24R32": "NET_NORTH",
+          "multiscaleDirectionR16R24R32R48": "NET_NORTH",
+          "bedChangeByHalfPlane": {
+            "UPSTREAM": {
+              "grossErosion": 0,
+              "grossDeposition": 0,
+              "netBedChange": 0
+            },
+            "DOWNSTREAM": {
+              "grossErosion": 0,
+              "grossDeposition": 0,
+              "netBedChange": 0
+            },
+            "SOURCE_BAND": {
+              "grossErosion": 0,
+              "grossDeposition": 0,
+              "netBedChange": 0
+            }
+          }
+        },
+        "501..1000": {
+          "surfaces": {
+            "8": {
+              "north": {
+                "netOutward": 878.8855149600483,
+                "positiveOutward": 878.9287861499417
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0.7078123464425199,
+                "positiveOutward": 0.7085800055647269
+              },
+              "east": {
+                "netOutward": 262.63089368282783,
+                "positiveOutward": 262.63195874901
+              },
+              "northMinusSouthNet": 878.8855149600483,
+              "netTotalOutward": 1142.2242209893188,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 1.2991927361746771,
+                "endDepthSum": 0.5212408715141572,
+                "approxStorageChangeRatio": 0.40120365285361026,
+                "changeDepthSum": -0.7779518646605199
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 0.06864552988526154
+            },
+            "12": {
+              "north": {
+                "netOutward": 590.8896588646362,
+                "positiveOutward": 623.4853534000423
+              },
+              "south": {
+                "netOutward": -0.00000562300827543612,
+                "positiveOutward": 0.0008943308487445734
+              },
+              "west": {
+                "netOutward": -3.454275512362114e-9,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 590.5128659869242,
+                "positiveOutward": 590.5130091425889
+              },
+              "northMinusSouthNet": 590.8896644876445,
+              "netTotalOutward": 1181.4025192250979,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 2.91898970452728,
+                "endDepthSum": 1.3663741501131077,
+                "approxStorageChangeRatio": 0.46809831086210946,
+                "changeDepthSum": -1.5526155544141722
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 0.1811612437337946
+            },
+            "16": {
+              "north": {
+                "netOutward": 615.7994736897906,
+                "positiveOutward": 616.4261120398148
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": -0.05051151736745383,
+                "positiveOutward": 0.020813783516587137
+              },
+              "east": {
+                "netOutward": 592.8129969320684,
+                "positiveOutward": 592.8346371128874
+              },
+              "northMinusSouthNet": 615.7994736897906,
+              "netTotalOutward": 1208.5619591044915,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 3.7202739023209657,
+                "endDepthSum": 1.665642309459979,
+                "approxStorageChangeRatio": 0.4477203434996642,
+                "changeDepthSum": -2.0546315928609866
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 0.22524699712172835
+            },
+            "24": {
+              "north": {
+                "netOutward": 713.3769350127759,
+                "positiveOutward": 714.1739201938553
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 609.9818838399419,
+                "positiveOutward": 622.338741278123
+              },
+              "northMinusSouthNet": 713.3769350127759,
+              "netTotalOutward": 1323.3588188527178,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 8.089333531038221,
+                "endDepthSum": 3.886022715394378,
+                "approxStorageChangeRatio": 0.4803884894205405,
+                "changeDepthSum": -4.203310815643843
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 0.43367434443596903
+            },
+            "32": {
+              "north": {
+                "netOutward": 842.9116722845422,
+                "positiveOutward": 842.9284511540237
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 595.686615001751,
+                "positiveOutward": 631.8081195964469
+              },
+              "northMinusSouthNet": 842.9116722845422,
+              "netTotalOutward": 1438.5982872862933,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 14.646271956315642,
+                "endDepthSum": 8.029538544953997,
+                "approxStorageChangeRatio": 0.5482308787453293,
+                "changeDepthSum": -6.616733411361645
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 0.8773778102953683
+            },
+            "48": {
+              "north": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 77.83032741922031,
+                "positiveOutward": 77.83070185927686
+              },
+              "northMinusSouthNet": 0,
+              "netTotalOutward": 77.83032741922031,
+              "localDirection": "MIXED",
+              "storage": {
+                "startDepthSum": 17.80977788943069,
+                "endDepthSum": 32.52812312789115,
+                "approxStorageChangeRatio": 1.8264193596257672,
+                "changeDepthSum": 14.718345238460458
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 2.624773473024523
+            }
+          },
+          "majorityDirectionR16R24R32": "NET_NORTH",
+          "multiscaleDirectionR16R24R32R48": "NET_NORTH",
+          "bedChangeByHalfPlane": {
+            "UPSTREAM": {
+              "grossErosion": 0,
+              "grossDeposition": 0,
+              "netBedChange": 0
+            },
+            "DOWNSTREAM": {
+              "grossErosion": 0,
+              "grossDeposition": 0,
+              "netBedChange": 0
+            },
+            "SOURCE_BAND": {
+              "grossErosion": 0,
+              "grossDeposition": 0,
+              "netBedChange": 0
+            }
+          }
+        },
+        "1001..1500": {
+          "surfaces": {
+            "8": {
+              "north": {
+                "netOutward": 916.6527493393579,
+                "positiveOutward": 916.6527493393579
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 189.48300169611892,
+                "positiveOutward": 189.48300169645398
+              },
+              "northMinusSouthNet": 916.6527493393579,
+              "netTotalOutward": 1106.135751035477,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 0.5199474704456392,
+                "endDepthSum": 0.3745709613344187,
+                "approxStorageChangeRatio": 0.7204015455895565,
+                "changeDepthSum": -0.14537650911122046
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 0.04236255608794942
+            },
+            "12": {
+              "north": {
+                "netOutward": 598.614233683586,
+                "positiveOutward": 614.8266236063405
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 511.67794508218793,
+                "positiveOutward": 511.67794508218793
+              },
+              "northMinusSouthNet": 598.614233683586,
+              "netTotalOutward": 1110.292178765774,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 1.3637524949114765,
+                "endDepthSum": 1.0706547368376302,
+                "approxStorageChangeRatio": 0.7850799473016753,
+                "changeDepthSum": -0.2930977580738463
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 0.12075280755831716
+            },
+            "16": {
+              "north": {
+                "netOutward": 601.5704234660927,
+                "positiveOutward": 601.5704234660927
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 511.6759259260139,
+                "positiveOutward": 511.6759259260139
+              },
+              "northMinusSouthNet": 601.5704234660927,
+              "netTotalOutward": 1113.2463493921066,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 1.6631630199864946,
+                "endDepthSum": 1.2942624305682582,
+                "approxStorageChangeRatio": 0.7781933671052691,
+                "changeDepthSum": -0.36890058941823645
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 0.1461923840222677
+            },
+            "24": {
+              "north": {
+                "netOutward": 610.0453945193151,
+                "positiveOutward": 610.4237230489078
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 565.7212228405112,
+                "positiveOutward": 567.1547660063062
+              },
+              "northMinusSouthNet": 610.0453945193151,
+              "netTotalOutward": 1175.7666173598263,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 3.887925962832492,
+                "endDepthSum": 2.3090112846113566,
+                "approxStorageChangeRatio": 0.5938928124364693,
+                "changeDepthSum": -1.5789146782211354
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 0.28897936932253193
+            },
+            "32": {
+              "north": {
+                "netOutward": 640.2298941608478,
+                "positiveOutward": 640.5263082866911
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 603.1829779979611,
+                "positiveOutward": 625.1616776258888
+              },
+              "northMinusSouthNet": 640.2298941608478,
+              "netTotalOutward": 1243.412872158809,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 8.026628218474869,
+                "endDepthSum": 4.9849491235214325,
+                "approxStorageChangeRatio": 0.6210514537159686,
+                "changeDepthSum": -3.0416790949534365
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 0.6065712326055113
+            },
+            "48": {
+              "north": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 669.311826469207,
+                "positiveOutward": 670.0732582414663
+              },
+              "northMinusSouthNet": 0,
+              "netTotalOutward": 669.311826469207,
+              "localDirection": "MIXED",
+              "storage": {
+                "startDepthSum": 32.54765718359426,
+                "endDepthSum": 36.247371378070866,
+                "approxStorageChangeRatio": 1.1136706760061814,
+                "changeDepthSum": 3.6997141944766057
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 3.6024510985022937
+            }
+          },
+          "majorityDirectionR16R24R32": "NET_NORTH",
+          "multiscaleDirectionR16R24R32R48": "NET_NORTH",
+          "bedChangeByHalfPlane": {
+            "UPSTREAM": {
+              "grossErosion": 0,
+              "grossDeposition": 0,
+              "netBedChange": 0
+            },
+            "DOWNSTREAM": {
+              "grossErosion": 0,
+              "grossDeposition": 0,
+              "netBedChange": 0
+            },
+            "SOURCE_BAND": {
+              "grossErosion": 0,
+              "grossDeposition": 0,
+              "netBedChange": 0
+            }
+          }
+        },
+        "1501..2500": {
+          "surfaces": {
+            "8": {
+              "north": {
+                "netOutward": 1872.45586235901,
+                "positiveOutward": 1872.45586235901
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 326.4460208750679,
+                "positiveOutward": 326.4460208750679
+              },
+              "northMinusSouthNet": 1872.45586235901,
+              "netTotalOutward": 2198.901883234078,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 0.37427314148664603,
+                "endDepthSum": 0.3243997845588066,
+                "approxStorageChangeRatio": 0.8667460969020163,
+                "changeDepthSum": -0.04987335692783945
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 0.06883971634365421
+            },
+            "12": {
+              "north": {
+                "netOutward": 1259.6130816578761,
+                "positiveOutward": 1279.9502081989804
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 935.202237874466,
+                "positiveOutward": 935.2022603620899
+              },
+              "northMinusSouthNet": 1259.6130816578761,
+              "netTotalOutward": 2194.815319532342,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 1.0704961780618936,
+                "endDepthSum": 0.9560908719162736,
+                "approxStorageChangeRatio": 0.8931287112554219,
+                "changeDepthSum": -0.11440530614561994
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 0.20270396873323335
+            },
+            "16": {
+              "north": {
+                "netOutward": 1258.6714685373202,
+                "positiveOutward": 1258.6714685373202
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 934.7180523080751,
+                "positiveOutward": 934.7180523080751
+              },
+              "northMinusSouthNet": 1258.6714685373202,
+              "netTotalOutward": 2193.389520845395,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 1.2941050090478887,
+                "endDepthSum": 1.1607742366806517,
+                "approxStorageChangeRatio": 0.8969706697408332,
+                "changeDepthSum": -0.133330772367237
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 0.24586694270968867
+            },
+            "24": {
+              "north": {
+                "netOutward": 1256.163825701577,
+                "positiveOutward": 1256.208340868176
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 930.1142259700758,
+                "positiveOutward": 932.3290906103728
+              },
+              "northMinusSouthNet": 1256.163825701577,
+              "netTotalOutward": 2186.278051671653,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 2.30970462001532,
+                "endDepthSum": 2.097128486875029,
+                "approxStorageChangeRatio": 0.9079639312758178,
+                "changeDepthSum": -0.2125761331402911
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 0.44515647867001823
+            },
+            "32": {
+              "north": {
+                "netOutward": 1258.6578830019212,
+                "positiveOutward": 1260.9010670461491
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 908.4916467834719,
+                "positiveOutward": 952.840454727147
+              },
+              "northMinusSouthNet": 1258.6578830019212,
+              "netTotalOutward": 2167.149529785393,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 4.9839886694373385,
+                "endDepthSum": 4.600799040450866,
+                "approxStorageChangeRatio": 0.9231158707610521,
+                "changeDepthSum": -0.38318962898647246
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 0.9426086480393939
+            },
+            "48": {
+              "north": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 1698.5261372338882,
+                "positiveOutward": 1709.0042732496431
+              },
+              "northMinusSouthNet": 0,
+              "netTotalOutward": 1698.5261372338882,
+              "localDirection": "MIXED",
+              "storage": {
+                "startDepthSum": 36.248754162859136,
+                "endDepthSum": 37.2786201856123,
+                "approxStorageChangeRatio": 1.0284110736089345,
+                "changeDepthSum": 1.0298660227531613
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 7.493807193984852
+            }
+          },
+          "majorityDirectionR16R24R32": "NET_NORTH",
+          "multiscaleDirectionR16R24R32R48": "NET_NORTH",
+          "bedChangeByHalfPlane": {
+            "UPSTREAM": {
+              "grossErosion": 0,
+              "grossDeposition": 0,
+              "netBedChange": 0
+            },
+            "DOWNSTREAM": {
+              "grossErosion": 0,
+              "grossDeposition": 0,
+              "netBedChange": 0
+            },
+            "SOURCE_BAND": {
+              "grossErosion": 0,
+              "grossDeposition": 0,
+              "netBedChange": 0
+            }
+          }
+        },
+        "2501..3500": {
+          "surfaces": {
+            "8": {
+              "north": {
+                "netOutward": 1900.2848864437628,
+                "positiveOutward": 1900.2848864437628
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 296.04887678846717,
+                "positiveOutward": 296.04887678846717
+              },
+              "northMinusSouthNet": 1900.2848864437628,
+              "netTotalOutward": 2196.33376323223,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 0.324413466829753,
+                "endDepthSum": 0.32091917296701905,
+                "approxStorageChangeRatio": 0.9892288877620246,
+                "changeDepthSum": -0.003494293862733977
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 0.06580698518724593
+            },
+            "12": {
+              "north": {
+                "netOutward": 1316.1451301563227,
+                "positiveOutward": 1332.7207077421447
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 873.4536687710788,
+                "positiveOutward": 873.4536687710788
+              },
+              "northMinusSouthNet": 1316.1451301563227,
+              "netTotalOutward": 2189.5987989274017,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 0.9560941563617572,
+                "endDepthSum": 0.9396270246993434,
+                "approxStorageChangeRatio": 0.9827766632053516,
+                "changeDepthSum": -0.01646713166241376
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 0.1932846226924625
+            },
+            "16": {
+              "north": {
+                "netOutward": 1314.8150528357364,
+                "positiveOutward": 1314.8150528357364
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 872.627788443584,
+                "positiveOutward": 872.627788443584
+              },
+              "northMinusSouthNet": 1314.8150528357364,
+              "netTotalOutward": 2187.4428412793204,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 1.1607989521134525,
+                "endDepthSum": 1.1397001653398273,
+                "approxStorageChangeRatio": 0.9818239095278206,
+                "changeDepthSum": -0.0210987867736252
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 0.23454609692010694
+            },
+            "24": {
+              "north": {
+                "netOutward": 1311.85705558374,
+                "positiveOutward": 1311.85705558374
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 860.885174308101,
+                "positiveOutward": 863.7103034367809
+              },
+              "northMinusSouthNet": 1311.85705558374,
+              "netTotalOutward": 2172.742229891841,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 2.0968089579401745,
+                "endDepthSum": 2.1283454760709817,
+                "approxStorageChangeRatio": 1.015040243896033,
+                "changeDepthSum": 0.031536518130807156
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 0.4321654722088549
+            },
+            "32": {
+              "north": {
+                "netOutward": 1307.18471379886,
+                "positiveOutward": 1307.976274998073
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 843.521402544111,
+                "positiveOutward": 888.1370994735684
+              },
+              "northMinusSouthNet": 1307.18471379886,
+              "netTotalOutward": 2150.7061163429707,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 4.600319564126718,
+                "endDepthSum": 4.514156039786571,
+                "approxStorageChangeRatio": 0.9812701002312862,
+                "changeDepthSum": -0.0861635243401464
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 0.9246389132278735
+            },
+            "48": {
+              "north": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 2427.912459464316,
+                "positiveOutward": 2429.359100769006
+              },
+              "northMinusSouthNet": 0,
+              "netTotalOutward": 2427.912459464316,
+              "localDirection": "MIXED",
+              "storage": {
+                "startDepthSum": 37.273264352523654,
+                "endDepthSum": 26.98712792526875,
+                "approxStorageChangeRatio": 0.7240344626118463,
+                "changeDepthSum": -10.286136427254903
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 6.416979109923805
+            }
+          },
+          "majorityDirectionR16R24R32": "NET_NORTH",
+          "multiscaleDirectionR16R24R32R48": "NET_NORTH",
+          "bedChangeByHalfPlane": {
+            "UPSTREAM": {
+              "grossErosion": 0,
+              "grossDeposition": 0,
+              "netBedChange": 0
+            },
+            "DOWNSTREAM": {
+              "grossErosion": 0,
+              "grossDeposition": 0,
+              "netBedChange": 0
+            },
+            "SOURCE_BAND": {
+              "grossErosion": 0,
+              "grossDeposition": 0,
+              "netBedChange": 0
+            }
+          }
+        },
+        "3501..5000": {
+          "surfaces": {
+            "8": {
+              "north": {
+                "netOutward": 2870.3459017835007,
+                "positiveOutward": 2870.3459017835007
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 423.9983694655821,
+                "positiveOutward": 423.9983694655821
+              },
+              "northMinusSouthNet": 2870.3459017835007,
+              "netTotalOutward": 3294.344271249083,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 0.32092025349626596,
+                "endDepthSum": 0.31915206770139515,
+                "approxStorageChangeRatio": 0.994490264246001,
+                "changeDepthSum": -0.0017681857948708135
+              },
+              "sourceWaterInjected": 56.09999999999944,
+              "estimatedEvaporationLossDepthSum": 0.09791593804222395
+            },
+            "12": {
+              "north": {
+                "netOutward": 2018.528820356355,
+                "positiveOutward": 2041.8400230258712
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 1265.250997832045,
+                "positiveOutward": 1265.250997832045
+              },
+              "northMinusSouthNet": 2018.528820356355,
+              "netTotalOutward": 3283.7798181884,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 0.9396276734296097,
+                "endDepthSum": 0.9295556349956652,
+                "approxStorageChangeRatio": 0.9892808197132148,
+                "changeDepthSum": -0.010072038433944552
+              },
+              "sourceWaterInjected": 56.09999999999944,
+              "estimatedEvaporationLossDepthSum": 0.2858158928789241
+            },
+            "16": {
+              "north": {
+                "netOutward": 2016.4775137403049,
+                "positiveOutward": 2016.4775137403049
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 1263.8743941755965,
+                "positiveOutward": 1263.8743941755965
+              },
+              "northMinusSouthNet": 2016.4775137403049,
+              "netTotalOutward": 3280.3519079159014,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 1.1396934314501241,
+                "endDepthSum": 1.1270979258800364,
+                "approxStorageChangeRatio": 0.9889483388931518,
+                "changeDepthSum": -0.012595505570087706
+              },
+              "sourceWaterInjected": 56.09999999999944,
+              "estimatedEvaporationLossDepthSum": 0.3466212818671792
+            },
+            "24": {
+              "north": {
+                "netOutward": 2012.2436700835824,
+                "positiveOutward": 2012.2436700835824
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 1253.9604659543008,
+                "positiveOutward": 1258.9372885979983
+              },
+              "northMinusSouthNet": 2012.2436700835824,
+              "netTotalOutward": 3266.2041360378835,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 2.12814642430743,
+                "endDepthSum": 2.0639537183369825,
+                "approxStorageChangeRatio": 0.9698363302274475,
+                "changeDepthSum": -0.06419270597044768
+              },
+              "sourceWaterInjected": 56.09999999999944,
+              "estimatedEvaporationLossDepthSum": 0.6389229088547171
+            },
+            "32": {
+              "north": {
+                "netOutward": 2003.3506273329258,
+                "positiveOutward": 2003.3506273329258
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 1221.9839805299152,
+                "positiveOutward": 1287.1378439153139
+              },
+              "northMinusSouthNet": 2003.3506273329258,
+              "netTotalOutward": 3225.334607862841,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 4.51295245857264,
+                "endDepthSum": 4.415197447415891,
+                "approxStorageChangeRatio": 0.9783390115331135,
+                "changeDepthSum": -0.09775501115674867
+              },
+              "sourceWaterInjected": 56.09999999999944,
+              "estimatedEvaporationLossDepthSum": 1.368271565237643
+            },
+            "48": {
+              "north": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 3104.4575562788605,
+                "positiveOutward": 3104.486459496444
+              },
+              "northMinusSouthNet": 0,
+              "netTotalOutward": 3104.4575562788605,
+              "localDirection": "MIXED",
+              "storage": {
+                "startDepthSum": 26.98562990554767,
+                "endDepthSum": 22.747803822467098,
+                "approxStorageChangeRatio": 0.842959897622795,
+                "changeDepthSum": -4.23782608308057
+              },
+              "sourceWaterInjected": 56.09999999999944,
+              "estimatedEvaporationLossDepthSum": 7.563547175844031
+            }
+          },
+          "majorityDirectionR16R24R32": "NET_NORTH",
+          "multiscaleDirectionR16R24R32R48": "NET_NORTH",
+          "bedChangeByHalfPlane": {
+            "UPSTREAM": {
+              "grossErosion": 0,
+              "grossDeposition": 0,
+              "netBedChange": 0
+            },
+            "DOWNSTREAM": {
+              "grossErosion": 0,
+              "grossDeposition": 0,
+              "netBedChange": 0
+            },
+            "SOURCE_BAND": {
+              "grossErosion": 0,
+              "grossDeposition": 0,
+              "netBedChange": 0
+            }
+          }
+        }
+      },
+      "firstWindowNetNorth": {
+        "8": "1..250",
+        "12": "1..250",
+        "16": "1..250",
+        "24": "1..250",
+        "32": "1..250",
+        "48": null
+      },
+      "firstStepPersistentNetNorth": {
+        "8": 5,
+        "12": 83,
+        "16": 112,
+        "24": 168,
+        "32": 235,
+        "48": null
+      },
+      "initialTerrainAndOutlets": {
+        "terrain": {
+          "8": {
+            "meanDzDy": 0.003640460181357292,
+            "medianDzDy": 0.004166692495346069,
+            "fractionCellsLocallyDescendingNorth": 0.868020304568528,
+            "fractionCellsLocallyDescendingSouth": 0.18274111675126903
+          },
+          "16": {
+            "meanDzDy": 0.0005516521679412765,
+            "medianDzDy": 0.00012826919555664062,
+            "fractionCellsLocallyDescendingNorth": 0.5119196988707654,
+            "fractionCellsLocallyDescendingSouth": 0.4880803011292346
+          },
+          "24": {
+            "meanDzDy": -0.000406159861953446,
+            "medianDzDy": -0.0006456375122070312,
+            "fractionCellsLocallyDescendingNorth": 0.4472950362520915,
+            "fractionCellsLocallyDescendingSouth": 0.5588399330730619
+          },
+          "32": {
+            "meanDzDy": -0.0002058754321309628,
+            "medianDzDy": -0.0004145801067352295,
+            "fractionCellsLocallyDescendingNorth": 0.46556559675911496,
+            "fractionCellsLocallyDescendingSouth": 0.5428482393268931
+          }
+        },
+        "initialHead": "No initial water: initial hydraulic head equals terrain bed.",
+        "sourceOutlets": [
+          {
+            "rank": 0,
+            "x": 48,
+            "y": 43,
+            "dx": 0,
+            "dy": -5,
+            "weight": 0.6000000238418579,
+            "terrainB": 0.5291581153869629,
+            "initialLocalHead": 0.5291581153869629
+          },
+          {
+            "rank": 1,
+            "x": 45,
+            "y": 44,
+            "dx": -3,
+            "dy": -4,
+            "weight": 0.20000000298023224,
+            "terrainB": 0.5476221442222595,
+            "initialLocalHead": 0.5476221442222595
+          },
+          {
+            "rank": 2,
+            "x": 46,
+            "y": 44,
+            "dx": -2,
+            "dy": -4,
+            "weight": 0.20000000298023224,
+            "terrainB": 0.5445596575737,
+            "initialLocalHead": 0.5445596575737
+          }
+        ]
+      },
+      "noMorphBedControl": {
+        "passes": true,
+        "maxAbsBedMinusInitialByCheckpoint": {
+          "100": 0,
+          "250": 0,
+          "500": 0,
+          "1000": 0,
+          "1500": 0,
+          "2500": 0,
+          "3500": 0,
+          "5000": 0
+        }
+      }
+    },
+    "EROSION_ONLY": {
+      "checkpoints": {
+        "100": {
+          "maxAbsBedMinusInitial": 0.0006173849105834961,
+          "grossDepositionCumulative": 0
+        },
+        "250": {
+          "maxAbsBedMinusInitial": 0.002264678478240967,
+          "grossDepositionCumulative": 0
+        },
+        "500": {
+          "maxAbsBedMinusInitial": 0.005414605140686035,
+          "grossDepositionCumulative": 0
+        },
+        "1000": {
+          "maxAbsBedMinusInitial": 0.012517690658569336,
+          "grossDepositionCumulative": 0
+        },
+        "1500": {
+          "maxAbsBedMinusInitial": 0.021029770374298096,
+          "grossDepositionCumulative": 0
+        },
+        "2500": {
+          "maxAbsBedMinusInitial": 0.07082879543304443,
+          "grossDepositionCumulative": 0
+        },
+        "3500": {
+          "maxAbsBedMinusInitial": 0.2084583044052124,
+          "grossDepositionCumulative": 0
+        },
+        "5000": {
+          "maxAbsBedMinusInitial": 0.42075496166944504,
+          "grossDepositionCumulative": 0
+        }
+      },
+      "windows": {
+        "1..250": {
+          "surfaces": {
+            "8": {
+              "north": {
+                "netOutward": 326.6956661594587,
+                "positiveOutward": 326.6986595661332
+              },
+              "south": {
+                "netOutward": 0.6818481457259589,
+                "positiveOutward": 0.6818481457259589
+              },
+              "west": {
+                "netOutward": 12.35962965192069,
+                "positiveOutward": 13.240901901030867
+              },
+              "east": {
+                "netOutward": 71.18119550370346,
+                "positiveOutward": 71.18119582886496
+              },
+              "northMinusSouthNet": 326.01381801373276,
+              "netTotalOutward": 410.9183394608088,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 0.03739237189302003,
+                "endDepthSum": 2.2406490348814714,
+                "approxStorageChangeRatio": 59.92262382530833,
+                "changeDepthSum": 2.2032566629884514
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.12373951632270067
+            },
+            "12": {
+              "north": {
+                "netOutward": 156.2705807821294,
+                "positiveOutward": 156.29630464902425
+              },
+              "south": {
+                "netOutward": 0.5001904737332723,
+                "positiveOutward": 0.5011422693252385
+              },
+              "west": {
+                "netOutward": 5.665387924192969,
+                "positiveOutward": 5.666719493791998
+              },
+              "east": {
+                "netOutward": 40.415370483855426,
+                "positiveOutward": 40.41712817160345
+              },
+              "northMinusSouthNet": 155.77039030839612,
+              "netTotalOutward": 202.8515296639111,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 0.03739237189302003,
+                "endDepthSum": 5.697835431052745,
+                "approxStorageChangeRatio": 152.37962029673628,
+                "changeDepthSum": 5.660443059159725
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.2036886917407472
+            },
+            "16": {
+              "north": {
+                "netOutward": 44.69525988375966,
+                "positiveOutward": 44.69525988375966
+              },
+              "south": {
+                "netOutward": 0.000014365834521827014,
+                "positiveOutward": 0.000024149380000234033
+              },
+              "west": {
+                "netOutward": 1.846446169041935,
+                "positiveOutward": 1.846446169041935
+              },
+              "east": {
+                "netOutward": 26.914471946087428,
+                "positiveOutward": 26.914471946087428
+              },
+              "northMinusSouthNet": 44.69524551792514,
+              "netTotalOutward": 73.45619236472355,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 0.03739237189302003,
+                "endDepthSum": 7.872700388570131,
+                "approxStorageChangeRatio": 210.5429527469937,
+                "changeDepthSum": 7.835308016677111
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.22854448422049944
+            },
+            "24": {
+              "north": {
+                "netOutward": 2.1589566948869034,
+                "positiveOutward": 2.1589566948869034
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0.0000014844837126600268,
+                "positiveOutward": 0.000001484659224532997
+              },
+              "east": {
+                "netOutward": 0.14122684353268228,
+                "positiveOutward": 0.1412712030597016
+              },
+              "northMinusSouthNet": 2.1589566948869034,
+              "netTotalOutward": 2.3001850229032987,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 0.03739237189302003,
+                "endDepthSum": 9.075658401671278,
+                "approxStorageChangeRatio": 242.71416714716128,
+                "changeDepthSum": 9.038266029778258
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.23523860421764767
+            },
+            "32": {
+              "north": {
+                "netOutward": 6.599254735350925e-10,
+                "positiveOutward": 6.599254735350925e-10
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 1.9616407751846277e-13,
+                "positiveOutward": 1.9616407751846277e-13
+              },
+              "east": {
+                "netOutward": 0.034740704167908476,
+                "positiveOutward": 0.034740704167908476
+              },
+              "northMinusSouthNet": 6.599254735350925e-10,
+              "netTotalOutward": 0.034740704828030114,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 0.03739237189302003,
+                "endDepthSum": 9.114034699754654,
+                "approxStorageChangeRatio": 243.74048070098374,
+                "changeDepthSum": 9.076642327861634
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.23537485763209373
+            },
+            "48": {
+              "north": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "northMinusSouthNet": 0,
+              "netTotalOutward": 0,
+              "localDirection": "MIXED",
+              "storage": {
+                "startDepthSum": 0.03739237189302003,
+                "endDepthSum": 9.114623856150853,
+                "approxStorageChangeRatio": 243.7562367594088,
+                "changeDepthSum": 9.077231484257833
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.23537629320933745
+            }
+          },
+          "majorityDirectionR16R24R32": "NET_NORTH",
+          "multiscaleDirectionR16R24R32R48": "NET_NORTH",
+          "bedChangeByHalfPlane": {
+            "UPSTREAM": {
+              "grossErosion": 0.009519944341421324,
+              "grossDeposition": 0,
+              "netBedChange": -0.009519944341421324
+            },
+            "DOWNSTREAM": {
+              "grossErosion": 0.00004590325023929759,
+              "grossDeposition": 0,
+              "netBedChange": -0.00004590325023929759
+            },
+            "SOURCE_BAND": {
+              "grossErosion": 0.026299540506190024,
+              "grossDeposition": 0,
+              "netBedChange": -0.026299540506190024
+            }
+          }
+        },
+        "251..500": {
+          "surfaces": {
+            "8": {
+              "north": {
+                "netOutward": 381.91584347509524,
+                "positiveOutward": 384.32312694512984
+              },
+              "south": {
+                "netOutward": 8.669051113715164e-38,
+                "positiveOutward": 8.669051113715164e-38
+              },
+              "west": {
+                "netOutward": 6.261030999148603,
+                "positiveOutward": 6.435534743592143
+              },
+              "east": {
+                "netOutward": 208.53936673995526,
+                "positiveOutward": 208.53936673995526
+              },
+              "northMinusSouthNet": 381.91584347509524,
+              "netTotalOutward": 596.716241214199,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 2.2303541205405963,
+                "endDepthSum": 1.3567541600662663,
+                "approxStorageChangeRatio": 0.6083133380350445,
+                "changeDepthSum": -0.8735999604743301
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.08971913133498832
+            },
+            "12": {
+              "north": {
+                "netOutward": 319.4840518486706,
+                "positiveOutward": 344.80910688880243
+              },
+              "south": {
+                "netOutward": 0.25516021051671933,
+                "positiveOutward": 0.3738046081297121
+              },
+              "west": {
+                "netOutward": 9.536339409459051,
+                "positiveOutward": 9.623178363265602
+              },
+              "east": {
+                "netOutward": 367.9436685114589,
+                "positiveOutward": 367.9436685114589
+              },
+              "northMinusSouthNet": 319.2288916381539,
+              "netTotalOutward": 697.2192199801052,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 5.680233970199528,
+                "endDepthSum": 2.9769198052638965,
+                "approxStorageChangeRatio": 0.5240840114829508,
+                "changeDepthSum": -2.7033141649356316
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.21818919243651516
+            },
+            "16": {
+              "north": {
+                "netOutward": 389.6883309604729,
+                "positiveOutward": 389.96100048234194
+              },
+              "south": {
+                "netOutward": 0.00007362364929227919,
+                "positiveOutward": 0.00031393287015252344
+              },
+              "west": {
+                "netOutward": 1.5600882647900758,
+                "positiveOutward": 1.8661524705665475
+              },
+              "east": {
+                "netOutward": 381.48590282173916,
+                "positiveOutward": 381.48590282173916
+              },
+              "northMinusSouthNet": 389.6882573368236,
+              "netTotalOutward": 772.7343956706515,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 7.87616226190294,
+                "endDepthSum": 3.7775894831200723,
+                "approxStorageChangeRatio": 0.4796231156120669,
+                "changeDepthSum": -4.098572778782868
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.3086263521678571
+            },
+            "24": {
+              "north": {
+                "netOutward": 301.66115530295275,
+                "positiveOutward": 301.7182201724302
+              },
+              "south": {
+                "netOutward": 0.2859192284753514,
+                "positiveOutward": 0.2859192284753514
+              },
+              "west": {
+                "netOutward": 1.5477886598433994,
+                "positiveOutward": 1.5477886598433994
+              },
+              "east": {
+                "netOutward": 269.33011759668483,
+                "positiveOutward": 269.3949476683818
+              },
+              "northMinusSouthNet": 301.3752360744774,
+              "netTotalOutward": 572.8249807879563,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 9.10913450353476,
+                "endDepthSum": 8.163662403183798,
+                "approxStorageChangeRatio": 0.8962061543844725,
+                "changeDepthSum": -0.9454721003509619
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.5239715694243003
+            },
+            "32": {
+              "north": {
+                "netOutward": 88.87512474462602,
+                "positiveOutward": 88.87512474462602
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 95.69542212379864,
+                "positiveOutward": 95.69542212381079
+              },
+              "northMinusSouthNet": 88.87512474462602,
+              "netTotalOutward": 184.57054686842466,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 9.149521079382502,
+                "endDepthSum": 14.668892446888531,
+                "approxStorageChangeRatio": 1.6032415598170882,
+                "changeDepthSum": 5.519371367506029
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.6574430482913279
+            },
+            "48": {
+              "north": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "northMinusSouthNet": 0,
+              "netTotalOutward": 0,
+              "localDirection": "MIXED",
+              "storage": {
+                "startDepthSum": 9.150156844086624,
+                "endDepthSum": 17.776011445688745,
+                "approxStorageChangeRatio": 1.942700190672323,
+                "changeDepthSum": 8.625854601602121
+              },
+              "sourceWaterInjected": 9.349999999999978,
+              "estimatedEvaporationLossDepthSum": 0.6886125736952371
+            }
+          },
+          "majorityDirectionR16R24R32": "NET_NORTH",
+          "multiscaleDirectionR16R24R32R48": "NET_NORTH",
+          "bedChangeByHalfPlane": {
+            "UPSTREAM": {
+              "grossErosion": 0.059619750670338964,
+              "grossDeposition": 0,
+              "netBedChange": -0.059619750670338964
+            },
+            "DOWNSTREAM": {
+              "grossErosion": 0.0003020664021202496,
+              "grossDeposition": 0,
+              "netBedChange": -0.0003020664021202496
+            },
+            "SOURCE_BAND": {
+              "grossErosion": 0.10710046534416003,
+              "grossDeposition": 0,
+              "netBedChange": -0.10710046534416003
+            }
+          }
+        },
+        "501..1000": {
+          "surfaces": {
+            "8": {
+              "north": {
+                "netOutward": 877.4911429898712,
+                "positiveOutward": 877.4911429898712
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0.9359520310414489,
+                "positiveOutward": 0.936983966967091
+              },
+              "east": {
+                "netOutward": 264.9955843540612,
+                "positiveOutward": 264.9968694886315
+              },
+              "northMinusSouthNet": 877.4911429898712,
+              "netTotalOutward": 1143.4226793749738,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 1.3481435923641314,
+                "endDepthSum": 0.5498483801596108,
+                "approxStorageChangeRatio": 0.4078559459644694,
+                "changeDepthSum": -0.7982952122045206
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 0.06872064015458093
+            },
+            "12": {
+              "north": {
+                "netOutward": 599.9007712111469,
+                "positiveOutward": 626.5208556886698
+              },
+              "south": {
+                "netOutward": -0.000006171273978612963,
+                "positiveOutward": 0.0008451284935091508
+              },
+              "west": {
+                "netOutward": -6.975507789871321e-13,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 582.9610185325289,
+                "positiveOutward": 582.9612965629701
+              },
+              "northMinusSouthNet": 599.9007773824209,
+              "netTotalOutward": 1182.8617835724012,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 2.964542121928453,
+                "endDepthSum": 1.3894046502312363,
+                "approxStorageChangeRatio": 0.46867428192500094,
+                "changeDepthSum": -1.5751374716972166
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 0.17886521978614198
+            },
+            "16": {
+              "north": {
+                "netOutward": 625.4968524599018,
+                "positiveOutward": 626.1120460941188
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": -0.049670637944626755,
+                "positiveOutward": 0.017242834162743748
+              },
+              "east": {
+                "netOutward": 585.2292992565306,
+                "positiveOutward": 585.2468277219698
+              },
+              "northMinusSouthNet": 625.4968524599018,
+              "netTotalOutward": 1210.6764810784878,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 3.761520398890375,
+                "endDepthSum": 1.6738785572557986,
+                "approxStorageChangeRatio": 0.4450005263163221,
+                "changeDepthSum": -2.0876418416345763
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 0.2222110341894314
+            },
+            "24": {
+              "north": {
+                "netOutward": 723.7162979669228,
+                "positiveOutward": 724.4999729074269
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 603.0860186846055,
+                "positiveOutward": 614.3213420955605
+              },
+              "northMinusSouthNet": 723.7162979669228,
+              "netTotalOutward": 1326.8023166515281,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 8.13682210307092,
+                "endDepthSum": 3.875535895913471,
+                "approxStorageChangeRatio": 0.476296009279938,
+                "changeDepthSum": -4.261286207157449
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 0.4324874161731191
+            },
+            "32": {
+              "north": {
+                "netOutward": 854.7178286308854,
+                "positiveOutward": 854.7350156235257
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 590.6935094592934,
+                "positiveOutward": 626.1641193619407
+              },
+              "northMinusSouthNet": 854.7178286308854,
+              "netTotalOutward": 1445.4113380901788,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 14.65221769301961,
+                "endDepthSum": 7.923831461041635,
+                "approxStorageChangeRatio": 0.5407940031369168,
+                "changeDepthSum": -6.728386231977975
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 0.8730685154844663
+            },
+            "48": {
+              "north": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 76.1166967690732,
+                "positiveOutward": 76.11708639747474
+              },
+              "northMinusSouthNet": 0,
+              "netTotalOutward": 76.1166967690732,
+              "localDirection": "MIXED",
+              "storage": {
+                "startDepthSum": 17.809777499044454,
+                "endDepthSum": 32.55668106620113,
+                "approxStorageChangeRatio": 1.8280228974195714,
+                "changeDepthSum": 14.746903567156675
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 2.6253469974040513
+            }
+          },
+          "majorityDirectionR16R24R32": "NET_NORTH",
+          "multiscaleDirectionR16R24R32R48": "NET_NORTH",
+          "bedChangeByHalfPlane": {
+            "UPSTREAM": {
+              "grossErosion": 0.3922808600364049,
+              "grossDeposition": 0,
+              "netBedChange": -0.3922808600364049
+            },
+            "DOWNSTREAM": {
+              "grossErosion": 0.000009592056957423594,
+              "grossDeposition": 0,
+              "netBedChange": -0.000009592056957423594
+            },
+            "SOURCE_BAND": {
+              "grossErosion": 0.1861079165653385,
+              "grossDeposition": 0,
+              "netBedChange": -0.1861079165653385
+            }
+          }
+        },
+        "1001..1500": {
+          "surfaces": {
+            "8": {
+              "north": {
+                "netOutward": 896.6713027736819,
+                "positiveOutward": 896.6713027736819
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 206.9773550142106,
+                "positiveOutward": 206.97736329589185
+              },
+              "northMinusSouthNet": 896.6713027736819,
+              "netTotalOutward": 1103.6486577878925,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 0.5484296376618554,
+                "endDepthSum": 0.4435534288240578,
+                "approxStorageChangeRatio": 0.8087699831742846,
+                "changeDepthSum": -0.10487620883779758
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 0.04426820268070988
+            },
+            "12": {
+              "north": {
+                "netOutward": 597.8264642508176,
+                "positiveOutward": 601.9107635932752
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 509.3324610737568,
+                "positiveOutward": 509.3324610737568
+              },
+              "northMinusSouthNet": 597.8264642508176,
+              "netTotalOutward": 1107.1589253245743,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 1.3874300185236175,
+                "endDepthSum": 1.1497747163358245,
+                "approxStorageChangeRatio": 0.8287082598654705,
+                "changeDepthSum": -0.23765530218779296
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 0.11792863503485475
+            },
+            "16": {
+              "north": {
+                "netOutward": 599.7867392374033,
+                "positiveOutward": 599.7867392374033
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 509.5532290743787,
+                "positiveOutward": 509.56717087592835
+              },
+              "northMinusSouthNet": 599.7867392374033,
+              "netTotalOutward": 1109.3399683117818,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 1.6719907803810665,
+                "endDepthSum": 1.3729297917544567,
+                "approxStorageChangeRatio": 0.8211347860671515,
+                "changeDepthSum": -0.2990609886266098
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 0.14216973962648663
+            },
+            "24": {
+              "north": {
+                "netOutward": 608.036075026399,
+                "positiveOutward": 608.5282401988716
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 561.9217808636632,
+                "positiveOutward": 562.7246641287456
+              },
+              "northMinusSouthNet": 608.036075026399,
+              "netTotalOutward": 1169.957855890062,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 3.8778217576745364,
+                "endDepthSum": 2.3981352411575028,
+                "approxStorageChangeRatio": 0.6184232775555996,
+                "changeDepthSum": -1.4796865165170336
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 0.2881173959040889
+            },
+            "32": {
+              "north": {
+                "netOutward": 646.1706341329516,
+                "positiveOutward": 646.5441525890843
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 594.8363948679394,
+                "positiveOutward": 616.86598737742
+              },
+              "northMinusSouthNet": 646.1706341329516,
+              "netTotalOutward": 1241.007029000891,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 7.9210593265469225,
+                "endDepthSum": 4.928096952556434,
+                "approxStorageChangeRatio": 0.6221512488917023,
+                "changeDepthSum": -2.9929623739904887
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 0.598615093642734
+            },
+            "48": {
+              "north": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 662.7957980016407,
+                "positiveOutward": 663.4820471491793
+              },
+              "northMinusSouthNet": 0,
+              "netTotalOutward": 662.7957980016407,
+              "localDirection": "MIXED",
+              "storage": {
+                "startDepthSum": 32.57638769612748,
+                "endDepthSum": 36.378484365572895,
+                "approxStorageChangeRatio": 1.116713268055113,
+                "changeDepthSum": 3.8020966694454117
+              },
+              "sourceWaterInjected": 18.700000000000077,
+              "estimatedEvaporationLossDepthSum": 3.610668614395436
+            }
+          },
+          "majorityDirectionR16R24R32": "NET_NORTH",
+          "multiscaleDirectionR16R24R32R48": "NET_NORTH",
+          "bedChangeByHalfPlane": {
+            "UPSTREAM": {
+              "grossErosion": 0.47983081299814984,
+              "grossDeposition": 0,
+              "netBedChange": -0.47983081299814984
+            },
+            "DOWNSTREAM": {
+              "grossErosion": 0.00009799049515020762,
+              "grossDeposition": 0,
+              "netBedChange": -0.00009799049515020762
+            },
+            "SOURCE_BAND": {
+              "grossErosion": 0.16518677835874815,
+              "grossDeposition": 0,
+              "netBedChange": -0.16518677835874815
+            }
+          }
+        },
+        "1501..2500": {
+          "surfaces": {
+            "8": {
+              "north": {
+                "netOutward": 1790.7332599033416,
+                "positiveOutward": 1790.8926742431522
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 390.96650377381593,
+                "positiveOutward": 390.96650377381593
+              },
+              "northMinusSouthNet": 1790.7332599033416,
+              "netTotalOutward": 2181.6997636771575,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 0.4432503497021889,
+                "endDepthSum": 0.6490766231261027,
+                "approxStorageChangeRatio": 1.4643567084881137,
+                "changeDepthSum": 0.2058262734239138
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 0.10558161534686869
+            },
+            "12": {
+              "north": {
+                "netOutward": 1247.2914081703732,
+                "positiveOutward": 1247.337265008239
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 935.0489819807259,
+                "positiveOutward": 935.0489819807259
+              },
+              "northMinusSouthNet": 1247.2914081703732,
+              "netTotalOutward": 2182.340390151099,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 1.1497990260250708,
+                "endDepthSum": 1.215621797335853,
+                "approxStorageChangeRatio": 1.0572471969630517,
+                "changeDepthSum": 0.06582277131078218
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 0.23436701073023203
+            },
+            "16": {
+              "north": {
+                "netOutward": 1244.8171592569483,
+                "positiveOutward": 1244.8171592569483
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 932.1760839176617,
+                "positiveOutward": 932.1761101442784
+              },
+              "northMinusSouthNet": 1244.8171592569483,
+              "netTotalOutward": 2176.99324317461,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 1.3729363960000773,
+                "endDepthSum": 1.4818970322287264,
+                "approxStorageChangeRatio": 1.0793632076082298,
+                "changeDepthSum": 0.10896063622864904
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 0.28214839400254543
+            },
+            "24": {
+              "north": {
+                "netOutward": 1238.693186793807,
+                "positiveOutward": 1238.716730843163
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 923.9106635327522,
+                "positiveOutward": 927.4875409999021
+              },
+              "northMinusSouthNet": 1238.693186793807,
+              "netTotalOutward": 2162.603850326559,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 2.3997190714644416,
+                "endDepthSum": 2.5382117536721904,
+                "approxStorageChangeRatio": 1.057712039652722,
+                "changeDepthSum": 0.1384926822077488
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 0.49565886434832074
+            },
+            "32": {
+              "north": {
+                "netOutward": 1236.3561927138157,
+                "positiveOutward": 1238.4802335529453
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 906.9828249676524,
+                "positiveOutward": 947.9867252224467
+              },
+              "northMinusSouthNet": 1236.3561927138157,
+              "netTotalOutward": 2143.3390176814682,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 4.929495632896001,
+                "endDepthSum": 4.916064778379889,
+                "approxStorageChangeRatio": 0.9972754099980364,
+                "changeDepthSum": -0.013430854516111701
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 0.9752691809149272
+            },
+            "48": {
+              "north": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 1695.4510673785364,
+                "positiveOutward": 1704.5806372720454
+              },
+              "northMinusSouthNet": 0,
+              "netTotalOutward": 1695.4510673785364,
+              "localDirection": "MIXED",
+              "storage": {
+                "startDepthSum": 36.38023175857178,
+                "endDepthSum": 37.44918361736501,
+                "approxStorageChangeRatio": 1.029382766604871,
+                "changeDepthSum": 1.068951858793227
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 7.5066332795073425
+            }
+          },
+          "majorityDirectionR16R24R32": "NET_NORTH",
+          "multiscaleDirectionR16R24R32R48": "NET_NORTH",
+          "bedChangeByHalfPlane": {
+            "UPSTREAM": {
+              "grossErosion": 1.3097015462409245,
+              "grossDeposition": 0,
+              "netBedChange": -1.3097015462409245
+            },
+            "DOWNSTREAM": {
+              "grossErosion": 0.0004405585049095755,
+              "grossDeposition": 0,
+              "netBedChange": -0.0004405585049095755
+            },
+            "SOURCE_BAND": {
+              "grossErosion": 0.38941028206608064,
+              "grossDeposition": 0,
+              "netBedChange": -0.38941028206608064
+            }
+          }
+        },
+        "2501..3500": {
+          "surfaces": {
+            "8": {
+              "north": {
+                "netOutward": 1747.7199676302666,
+                "positiveOutward": 1759.24556387639
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 411.1904806346849,
+                "positiveOutward": 411.1904806346849
+              },
+              "northMinusSouthNet": 1747.7199676302666,
+              "netTotalOutward": 2158.9104482649514,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 0.6493892827469967,
+                "endDepthSum": 1.1666757286426073,
+                "approxStorageChangeRatio": 1.7965737341820998,
+                "changeDepthSum": 0.5172864458956106
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 0.18092412956896828
+            },
+            "12": {
+              "north": {
+                "netOutward": 1291.7878946900064,
+                "positiveOutward": 1291.7878946900064
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 862.6741526745717,
+                "positiveOutward": 862.674152676527
+              },
+              "northMinusSouthNet": 1291.7878946900064,
+              "netTotalOutward": 2154.462047364578,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 1.2156943244239662,
+                "endDepthSum": 1.6978630207728056,
+                "approxStorageChangeRatio": 1.3966200110190576,
+                "changeDepthSum": 0.4821686963488394
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 0.29190487720421543
+            },
+            "16": {
+              "north": {
+                "netOutward": 1290.095892719667,
+                "positiveOutward": 1290.095892719667
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 850.5809104354748,
+                "positiveOutward": 850.5809104354748
+              },
+              "northMinusSouthNet": 1290.095892719667,
+              "netTotalOutward": 2140.676803155142,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 1.4820019779885476,
+                "endDepthSum": 2.132152316398864,
+                "approxStorageChangeRatio": 1.4386973486315688,
+                "changeDepthSum": 0.6501503384103164
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 0.35823991446618264
+            },
+            "24": {
+              "north": {
+                "netOutward": 1284.4702029526234,
+                "positiveOutward": 1284.4702029526234
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 838.7540226435526,
+                "positiveOutward": 846.9899479152496
+              },
+              "northMinusSouthNet": 1284.4702029526234,
+              "netTotalOutward": 2123.224225596176,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 2.5383732219219537,
+                "endDepthSum": 3.2618626724150848,
+                "approxStorageChangeRatio": 1.2850209119151257,
+                "changeDepthSum": 0.7234894504931311
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 0.5815380170651997
+            },
+            "32": {
+              "north": {
+                "netOutward": 1211.423314480804,
+                "positiveOutward": 1211.990892232488
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 818.4655100116742,
+                "positiveOutward": 860.6930695775224
+              },
+              "northMinusSouthNet": 1211.423314480804,
+              "netTotalOutward": 2029.8888244924783,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 4.917286531744647,
+                "endDepthSum": 6.6496124050131105,
+                "approxStorageChangeRatio": 1.3522930506662658,
+                "changeDepthSum": 1.7323258732684632
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 1.1583431361987728
+            },
+            "48": {
+              "north": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 2364.9249671736043,
+                "positiveOutward": 2365.9074841686206
+              },
+              "northMinusSouthNet": 0,
+              "netTotalOutward": 2364.9249671736043,
+              "localDirection": "MIXED",
+              "storage": {
+                "startDepthSum": 37.44478268122236,
+                "endDepthSum": 28.136302184519714,
+                "approxStorageChangeRatio": 0.7514078109105806,
+                "changeDepthSum": -9.308480496702643
+              },
+              "sourceWaterInjected": 37.40000000000039,
+              "estimatedEvaporationLossDepthSum": 6.5091577086591474
+            }
+          },
+          "majorityDirectionR16R24R32": "NET_NORTH",
+          "multiscaleDirectionR16R24R32R48": "NET_NORTH",
+          "bedChangeByHalfPlane": {
+            "UPSTREAM": {
+              "grossErosion": 2.72191191485999,
+              "grossDeposition": 0,
+              "netBedChange": -2.72191191485999
+            },
+            "DOWNSTREAM": {
+              "grossErosion": 0.005832606031887281,
+              "grossDeposition": 0,
+              "netBedChange": -0.005832606031887281
+            },
+            "SOURCE_BAND": {
+              "grossErosion": 0.6157455554928593,
+              "grossDeposition": 0,
+              "netBedChange": -0.6157455554928593
+            }
+          }
+        },
+        "3501..5000": {
+          "surfaces": {
+            "8": {
+              "north": {
+                "netOutward": 2497.9748903122554,
+                "positiveOutward": 2568.3822486215677
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 702.5197988321192,
+                "positiveOutward": 702.5197988321192
+              },
+              "northMinusSouthNet": 2497.9748903122554,
+              "netTotalOutward": 3200.4946891443747,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 1.1673202011011559,
+                "endDepthSum": 2.3307385381996952,
+                "approxStorageChangeRatio": 1.9966574175629481,
+                "changeDepthSum": 1.1634183370985394
+              },
+              "sourceWaterInjected": 56.09999999999944,
+              "estimatedEvaporationLossDepthSum": 0.5275285165102596
+            },
+            "12": {
+              "north": {
+                "netOutward": 1962.970011212602,
+                "positiveOutward": 1962.970011212602
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 1224.7542752079175,
+                "positiveOutward": 1224.7542752079175
+              },
+              "northMinusSouthNet": 1962.970011212602,
+              "netTotalOutward": 3187.7242864205195,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 1.698458548657563,
+                "endDepthSum": 2.9178600579347873,
+                "approxStorageChangeRatio": 1.7179459929952494,
+                "changeDepthSum": 1.2194015092772243
+              },
+              "sourceWaterInjected": 56.09999999999944,
+              "estimatedEvaporationLossDepthSum": 0.6886911976543962
+            },
+            "16": {
+              "north": {
+                "netOutward": 1960.4555631255535,
+                "positiveOutward": 1960.4555631255535
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 1178.6294924310284,
+                "positiveOutward": 1178.6294924310284
+              },
+              "northMinusSouthNet": 1960.4555631255535,
+              "netTotalOutward": 3139.085055556582,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 2.13307065849066,
+                "endDepthSum": 3.9624831020468734,
+                "approxStorageChangeRatio": 1.8576426834592943,
+                "changeDepthSum": 1.8294124435562136
+              },
+              "sourceWaterInjected": 56.09999999999944,
+              "estimatedEvaporationLossDepthSum": 0.9052244802956448
+            },
+            "24": {
+              "north": {
+                "netOutward": 1941.0499266802958,
+                "positiveOutward": 1941.0499266802958
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 1169.0281047391732,
+                "positiveOutward": 1184.23809536404
+              },
+              "northMinusSouthNet": 1941.0499266802958,
+              "netTotalOutward": 3110.078031419469,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 3.262154075426291,
+                "endDepthSum": 5.234283570510309,
+                "approxStorageChangeRatio": 1.6045482369885622,
+                "changeDepthSum": 1.9721294950840176
+              },
+              "sourceWaterInjected": 56.09999999999944,
+              "estimatedEvaporationLossDepthSum": 1.2562537050435079
+            },
+            "32": {
+              "north": {
+                "netOutward": 1730.7668658615364,
+                "positiveOutward": 1730.7669026946755
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 1141.1420561569425,
+                "positiveOutward": 1199.0361268732906
+              },
+              "northMinusSouthNet": 1730.7668658615364,
+              "netTotalOutward": 2871.9089220184787,
+              "localDirection": "NET_NORTH",
+              "storage": {
+                "startDepthSum": 6.651910738674857,
+                "endDepthSum": 11.225795736401967,
+                "approxStorageChangeRatio": 1.6876046864450684,
+                "changeDepthSum": 4.573884997727109
+              },
+              "sourceWaterInjected": 56.09999999999944,
+              "estimatedEvaporationLossDepthSum": 2.701365632120821
+            },
+            "48": {
+              "north": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 2757.5330990503467,
+                "positiveOutward": 2757.5356600393025
+              },
+              "northMinusSouthNet": 0,
+              "netTotalOutward": 2757.5330990503467,
+              "localDirection": "MIXED",
+              "storage": {
+                "startDepthSum": 28.13601029211468,
+                "endDepthSum": 28.917638444905588,
+                "approxStorageChangeRatio": 1.02778034784164,
+                "changeDepthSum": 0.7816281527909084
+              },
+              "sourceWaterInjected": 56.09999999999944,
+              "estimatedEvaporationLossDepthSum": 8.440601848498524
+            }
+          },
+          "majorityDirectionR16R24R32": "NET_NORTH",
+          "multiscaleDirectionR16R24R32R48": "NET_NORTH",
+          "bedChangeByHalfPlane": {
+            "UPSTREAM": {
+              "grossErosion": 6.246986362853045,
+              "grossDeposition": 0,
+              "netBedChange": -6.246986362853045
+            },
+            "DOWNSTREAM": {
+              "grossErosion": 0.10567399010085518,
+              "grossDeposition": 0,
+              "netBedChange": -0.10567399010085518
+            },
+            "SOURCE_BAND": {
+              "grossErosion": 1.4540934819956677,
+              "grossDeposition": 0,
+              "netBedChange": -1.4540934819956677
+            }
+          }
+        }
+      },
+      "firstWindowNetNorth": {
+        "8": "1..250",
+        "12": "1..250",
+        "16": "1..250",
+        "24": "1..250",
+        "32": "1..250",
+        "48": null
+      },
+      "firstStepPersistentNetNorth": {
+        "8": 5,
+        "12": 83,
+        "16": 112,
+        "24": 168,
+        "32": 235,
+        "48": null
+      },
+      "initialTerrainAndOutlets": {
+        "terrain": {
+          "8": {
+            "meanDzDy": 0.003640460181357292,
+            "medianDzDy": 0.004166692495346069,
+            "fractionCellsLocallyDescendingNorth": 0.868020304568528,
+            "fractionCellsLocallyDescendingSouth": 0.18274111675126903
+          },
+          "16": {
+            "meanDzDy": 0.0005516521679412765,
+            "medianDzDy": 0.00012826919555664062,
+            "fractionCellsLocallyDescendingNorth": 0.5119196988707654,
+            "fractionCellsLocallyDescendingSouth": 0.4880803011292346
+          },
+          "24": {
+            "meanDzDy": -0.000406159861953446,
+            "medianDzDy": -0.0006456375122070312,
+            "fractionCellsLocallyDescendingNorth": 0.4472950362520915,
+            "fractionCellsLocallyDescendingSouth": 0.5588399330730619
+          },
+          "32": {
+            "meanDzDy": -0.0002058754321309628,
+            "medianDzDy": -0.0004145801067352295,
+            "fractionCellsLocallyDescendingNorth": 0.46556559675911496,
+            "fractionCellsLocallyDescendingSouth": 0.5428482393268931
+          }
+        },
+        "initialHead": "No initial water: initial hydraulic head equals terrain bed.",
+        "sourceOutlets": [
+          {
+            "rank": 0,
+            "x": 48,
+            "y": 43,
+            "dx": 0,
+            "dy": -5,
+            "weight": 0.6000000238418579,
+            "terrainB": 0.5291581153869629,
+            "initialLocalHead": 0.5291581153869629
+          },
+          {
+            "rank": 1,
+            "x": 45,
+            "y": 44,
+            "dx": -3,
+            "dy": -4,
+            "weight": 0.20000000298023224,
+            "terrainB": 0.5476221442222595,
+            "initialLocalHead": 0.5476221442222595
+          },
+          {
+            "rank": 2,
+            "x": 46,
+            "y": 44,
+            "dx": -2,
+            "dy": -4,
+            "weight": 0.20000000298023224,
+            "terrainB": 0.5445596575737,
+            "initialLocalHead": 0.5445596575737
+          }
+        ]
+      },
+      "erosionOnlyControl": {
+        "passes": true,
+        "grossDepositionByWindow": {
+          "1..250": 0,
+          "251..500": 0,
+          "501..1000": 0,
+          "1001..1500": 0,
+          "1501..2500": 0,
+          "2501..3500": 0,
+          "3501..5000": 0
+        }
+      }
+    }
+  },
+  "currentVsNoMorphByWindow": {
+    "1..250": {
+      "comparisons": {
+        "8": {
+          "currentNorthNetOutward": 326.72953072126296,
+          "noMorphNorthNetOutward": 327.3652955308629,
+          "ratioNorth": 0.9980579346122533,
+          "diffNorth": -0.635764809599948,
+          "currentSouthNetOutward": 0.6847734325988734,
+          "noMorphSouthNetOutward": 0.6918223655761744,
+          "ratioSouth": 0.9898110651981735,
+          "diffSouth": -0.007048932977301026
+        },
+        "12": {
+          "currentNorthNetOutward": 156.36686673692628,
+          "noMorphNorthNetOutward": 156.6441308847543,
+          "ratioNorth": 0.9982299742335574,
+          "diffNorth": -0.27726414782802067,
+          "currentSouthNetOutward": 0.5015460177605725,
+          "noMorphSouthNetOutward": 0.5042950533134729,
+          "ratioSouth": 0.9945487556642925,
+          "diffSouth": -0.002749035552900403
+        },
+        "16": {
+          "currentNorthNetOutward": 44.805079468046685,
+          "noMorphNorthNetOutward": 44.796787098652615,
+          "ratioNorth": 1.0001851108066258,
+          "diffNorth": 0.008292369394069965,
+          "currentSouthNetOutward": 0.000014419837678746611,
+          "noMorphSouthNetOutward": 0.000014477853677636174,
+          "ratioSouth": 0.9959927762649529,
+          "diffSouth": -5.801599888956239e-8
+        },
+        "24": {
+          "currentNorthNetOutward": 2.1753644411518844,
+          "noMorphNorthNetOutward": 2.163191017827385,
+          "ratioNorth": 1.00562753045116,
+          "diffNorth": 0.012173423324499222,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        },
+        "32": {
+          "currentNorthNetOutward": 6.936055540902446e-10,
+          "noMorphNorthNetOutward": 6.634723728045075e-10,
+          "ratioNorth": 1.0454173866477119,
+          "diffNorth": 3.013318128573716e-11,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        },
+        "48": {
+          "currentNorthNetOutward": 0,
+          "noMorphNorthNetOutward": 0,
+          "ratioNorth": 0,
+          "diffNorth": 0,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        }
+      },
+      "currentMajority": "NET_NORTH",
+      "noMorphMajority": "NET_NORTH",
+      "erosionOnlyMajority": "NET_NORTH",
+      "classification": "FROZEN_NORTH"
+    },
+    "251..500": {
+      "comparisons": {
+        "8": {
+          "currentNorthNetOutward": 382.21066800989047,
+          "noMorphNorthNetOutward": 382.8303649346385,
+          "ratioNorth": 0.9983812754120122,
+          "diffNorth": -0.6196969247480411,
+          "currentSouthNetOutward": 1.0434941374305862e-37,
+          "noMorphSouthNetOutward": 2.8060360233667494e-37,
+          "ratioSouth": 1.0434941374305861e-7,
+          "diffSouth": -1.7625418859361632e-37
+        },
+        "12": {
+          "currentNorthNetOutward": 320.0651023715492,
+          "noMorphNorthNetOutward": 320.30392127401905,
+          "ratioNorth": 0.999254399067236,
+          "diffNorth": -0.23881890246985904,
+          "currentSouthNetOutward": 0.2569343193931895,
+          "noMorphSouthNetOutward": 0.2624735523146955,
+          "ratioSouth": 0.9788960340093059,
+          "diffSouth": -0.005539232921505988
+        },
+        "16": {
+          "currentNorthNetOutward": 390.40907677232383,
+          "noMorphNorthNetOutward": 390.3840703025129,
+          "ratioNorth": 1.0000640560712213,
+          "diffNorth": 0.025006469810932686,
+          "currentSouthNetOutward": 0.00007378858095467256,
+          "noMorphSouthNetOutward": 0.00007581674446657138,
+          "ratioSouth": 0.9732491347898344,
+          "diffSouth": -0.0000020281635118988195
+        },
+        "24": {
+          "currentNorthNetOutward": 301.8849793079755,
+          "noMorphNorthNetOutward": 302.4539148176069,
+          "ratioNorth": 0.9981189348797999,
+          "diffNorth": -0.5689355096313875,
+          "currentSouthNetOutward": 0.2882830562398671,
+          "noMorphSouthNetOutward": 0.2949268835145445,
+          "ratioSouth": 0.9774729682302775,
+          "diffSouth": -0.006643827274677383
+        },
+        "32": {
+          "currentNorthNetOutward": 89.2069234304317,
+          "noMorphNorthNetOutward": 89.01175236062642,
+          "ratioNorth": 1.0021926438321824,
+          "diffNorth": 0.19517106980528354,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        },
+        "48": {
+          "currentNorthNetOutward": 0,
+          "noMorphNorthNetOutward": 0,
+          "ratioNorth": 0,
+          "diffNorth": 0,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        }
+      },
+      "currentMajority": "NET_NORTH",
+      "noMorphMajority": "NET_NORTH",
+      "erosionOnlyMajority": "NET_NORTH",
+      "classification": "FROZEN_NORTH"
+    },
+    "501..1000": {
+      "comparisons": {
+        "8": {
+          "currentNorthNetOutward": 878.2356919776836,
+          "noMorphNorthNetOutward": 878.8855149600483,
+          "ratioNorth": 0.9992606284080193,
+          "diffNorth": -0.6498229823647534,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        },
+        "12": {
+          "currentNorthNetOutward": 600.728853837945,
+          "noMorphNorthNetOutward": 590.8896588646362,
+          "ratioNorth": 1.0166514929237624,
+          "diffNorth": 9.83919497330885,
+          "currentSouthNetOutward": -0.000006196583032491839,
+          "noMorphSouthNetOutward": -0.00000562300827543612,
+          "ratioSouth": -1.1020049640619163,
+          "diffSouth": -5.735747570557192e-7
+        },
+        "16": {
+          "currentNorthNetOutward": 626.7120739755235,
+          "noMorphNorthNetOutward": 615.7994736897906,
+          "ratioNorth": 1.0177210289257734,
+          "diffNorth": 10.912600285732879,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        },
+        "24": {
+          "currentNorthNetOutward": 725.7344027869858,
+          "noMorphNorthNetOutward": 713.3769350127759,
+          "ratioNorth": 1.017322494136972,
+          "diffNorth": 12.357467774209908,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        },
+        "32": {
+          "currentNorthNetOutward": 857.96532773302,
+          "noMorphNorthNetOutward": 842.9116722845422,
+          "ratioNorth": 1.0178591137641717,
+          "diffNorth": 15.053655448477798,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        },
+        "48": {
+          "currentNorthNetOutward": 0,
+          "noMorphNorthNetOutward": 0,
+          "ratioNorth": 0,
+          "diffNorth": 0,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        }
+      },
+      "currentMajority": "NET_NORTH",
+      "noMorphMajority": "NET_NORTH",
+      "erosionOnlyMajority": "NET_NORTH",
+      "classification": "FROZEN_NORTH"
+    },
+    "1001..1500": {
+      "comparisons": {
+        "8": {
+          "currentNorthNetOutward": 899.1126156111533,
+          "noMorphNorthNetOutward": 916.6527493393579,
+          "ratioNorth": 0.9808650181425344,
+          "diffNorth": -17.540133728204637,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        },
+        "12": {
+          "currentNorthNetOutward": 601.5449276259958,
+          "noMorphNorthNetOutward": 598.614233683586,
+          "ratioNorth": 1.0048957972889747,
+          "diffNorth": 2.930693942409789,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        },
+        "16": {
+          "currentNorthNetOutward": 601.9746696755725,
+          "noMorphNorthNetOutward": 601.5704234660927,
+          "ratioNorth": 1.0006719848478431,
+          "diffNorth": 0.40424620947976564,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        },
+        "24": {
+          "currentNorthNetOutward": 609.7330013758334,
+          "noMorphNorthNetOutward": 610.0453945193151,
+          "ratioNorth": 0.9994879182003695,
+          "diffNorth": -0.31239314348169955,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        },
+        "32": {
+          "currentNorthNetOutward": 646.2079574754392,
+          "noMorphNorthNetOutward": 640.2298941608478,
+          "ratioNorth": 1.0093373698559123,
+          "diffNorth": 5.978063314591395,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        },
+        "48": {
+          "currentNorthNetOutward": 0,
+          "noMorphNorthNetOutward": 0,
+          "ratioNorth": 0,
+          "diffNorth": 0,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        }
+      },
+      "currentMajority": "NET_NORTH",
+      "noMorphMajority": "NET_NORTH",
+      "erosionOnlyMajority": "NET_NORTH",
+      "classification": "FROZEN_NORTH"
+    },
+    "1501..2500": {
+      "comparisons": {
+        "8": {
+          "currentNorthNetOutward": 1828.333571809047,
+          "noMorphNorthNetOutward": 1872.45586235901,
+          "ratioNorth": 0.976436138529655,
+          "diffNorth": -44.122290549963054,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        },
+        "12": {
+          "currentNorthNetOutward": 1286.544906809114,
+          "noMorphNorthNetOutward": 1259.6130816578761,
+          "ratioNorth": 1.0213810300507444,
+          "diffNorth": 26.931825151237945,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        },
+        "16": {
+          "currentNorthNetOutward": 1282.4550523477342,
+          "noMorphNorthNetOutward": 1258.6714685373202,
+          "ratioNorth": 1.0188957836933037,
+          "diffNorth": 23.78358381041403,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        },
+        "24": {
+          "currentNorthNetOutward": 1270.5108527683196,
+          "noMorphNorthNetOutward": 1256.163825701577,
+          "ratioNorth": 1.0114213025189844,
+          "diffNorth": 14.347027066742612,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        },
+        "32": {
+          "currentNorthNetOutward": 1266.9267663422218,
+          "noMorphNorthNetOutward": 1258.6578830019212,
+          "ratioNorth": 1.006569603584875,
+          "diffNorth": 8.26888334030059,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        },
+        "48": {
+          "currentNorthNetOutward": 0,
+          "noMorphNorthNetOutward": 0,
+          "ratioNorth": 0,
+          "diffNorth": 0,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        }
+      },
+      "currentMajority": "NET_NORTH",
+      "noMorphMajority": "NET_NORTH",
+      "erosionOnlyMajority": "NET_NORTH",
+      "classification": "FROZEN_NORTH"
+    },
+    "2501..3500": {
+      "comparisons": {
+        "8": {
+          "currentNorthNetOutward": 1668.6936030561378,
+          "noMorphNorthNetOutward": 1900.2848864437628,
+          "ratioNorth": 0.8781281243461183,
+          "diffNorth": -231.59128338762503,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        },
+        "12": {
+          "currentNorthNetOutward": 1068.420220644869,
+          "noMorphNorthNetOutward": 1316.1451301563227,
+          "ratioNorth": 0.8117799444488082,
+          "diffNorth": -247.7249095114537,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        },
+        "16": {
+          "currentNorthNetOutward": 1068.099016021355,
+          "noMorphNorthNetOutward": 1314.8150528357364,
+          "ratioNorth": 0.8123568510397908,
+          "diffNorth": -246.71603681438137,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        },
+        "24": {
+          "currentNorthNetOutward": 1029.7675634427455,
+          "noMorphNorthNetOutward": 1311.85705558374,
+          "ratioNorth": 0.7849693372152712,
+          "diffNorth": -282.0894921409945,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        },
+        "32": {
+          "currentNorthNetOutward": 915.1660958546051,
+          "noMorphNorthNetOutward": 1307.18471379886,
+          "ratioNorth": 0.7001046494760527,
+          "diffNorth": -392.01861794425486,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        },
+        "48": {
+          "currentNorthNetOutward": 0,
+          "noMorphNorthNetOutward": 0,
+          "ratioNorth": 0,
+          "diffNorth": 0,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        }
+      },
+      "currentMajority": "NET_NORTH",
+      "noMorphMajority": "NET_NORTH",
+      "erosionOnlyMajority": "NET_NORTH",
+      "classification": "FROZEN_NORTH"
+    },
+    "3501..5000": {
+      "comparisons": {
+        "8": {
+          "currentNorthNetOutward": 1056.417186428743,
+          "noMorphNorthNetOutward": 2870.3459017835007,
+          "ratioNorth": 0.36804525397873966,
+          "diffNorth": -1813.9287153547577,
+          "currentSouthNetOutward": 11.715074902359612,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 1.171507490235961e+31,
+          "diffSouth": 11.715074902359612
+        },
+        "12": {
+          "currentNorthNetOutward": 972.9200517039922,
+          "noMorphNorthNetOutward": 2018.528820356355,
+          "ratioNorth": 0.48199462989695185,
+          "diffNorth": -1045.6087686523629,
+          "currentSouthNetOutward": 12.371928329838324,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 1.2371928329838324e+31,
+          "diffSouth": 12.371928329838324
+        },
+        "16": {
+          "currentNorthNetOutward": 915.801633549587,
+          "noMorphNorthNetOutward": 2016.4775137403049,
+          "ratioNorth": 0.45415911028479233,
+          "diffNorth": -1100.6758801907179,
+          "currentSouthNetOutward": 0.2476821610798764,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 2.476821610798764e+29,
+          "diffSouth": 0.2476821610798764
+        },
+        "24": {
+          "currentNorthNetOutward": 816.4032923946861,
+          "noMorphNorthNetOutward": 2012.2436700835824,
+          "ratioNorth": 0.40571790809051234,
+          "diffNorth": -1195.8403776888963,
+          "currentSouthNetOutward": 14.923723716528889,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 1.4923723716528886e+31,
+          "diffSouth": 14.923723716528889
+        },
+        "32": {
+          "currentNorthNetOutward": 720.320376609117,
+          "noMorphNorthNetOutward": 2003.3506273329258,
+          "ratioNorth": 0.35955781618122656,
+          "diffNorth": -1283.0302507238089,
+          "currentSouthNetOutward": 1.431406684976272,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 1.431406684976272e+30,
+          "diffSouth": 1.431406684976272
+        },
+        "48": {
+          "currentNorthNetOutward": 0,
+          "noMorphNorthNetOutward": 0,
+          "ratioNorth": 0,
+          "diffNorth": 0,
+          "currentSouthNetOutward": 0.02715788792054595,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 2.715788792054595e+28,
+          "diffSouth": 0.02715788792054595
+        }
+      },
+      "currentMajority": "NET_NORTH",
+      "noMorphMajority": "NET_NORTH",
+      "erosionOnlyMajority": "NET_NORTH",
+      "classification": "FROZEN_NORTH"
+    }
+  },
+  "currentVsNoMorphByLateWindow": {
+    "2501..3500": {
+      "comparisons": {
+        "8": {
+          "currentNorthNetOutward": 1668.6936030561378,
+          "noMorphNorthNetOutward": 1900.2848864437628,
+          "ratioNorth": 0.8781281243461183,
+          "diffNorth": -231.59128338762503,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        },
+        "12": {
+          "currentNorthNetOutward": 1068.420220644869,
+          "noMorphNorthNetOutward": 1316.1451301563227,
+          "ratioNorth": 0.8117799444488082,
+          "diffNorth": -247.7249095114537,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        },
+        "16": {
+          "currentNorthNetOutward": 1068.099016021355,
+          "noMorphNorthNetOutward": 1314.8150528357364,
+          "ratioNorth": 0.8123568510397908,
+          "diffNorth": -246.71603681438137,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        },
+        "24": {
+          "currentNorthNetOutward": 1029.7675634427455,
+          "noMorphNorthNetOutward": 1311.85705558374,
+          "ratioNorth": 0.7849693372152712,
+          "diffNorth": -282.0894921409945,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        },
+        "32": {
+          "currentNorthNetOutward": 915.1660958546051,
+          "noMorphNorthNetOutward": 1307.18471379886,
+          "ratioNorth": 0.7001046494760527,
+          "diffNorth": -392.01861794425486,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        },
+        "48": {
+          "currentNorthNetOutward": 0,
+          "noMorphNorthNetOutward": 0,
+          "ratioNorth": 0,
+          "diffNorth": 0,
+          "currentSouthNetOutward": 0,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 0,
+          "diffSouth": 0
+        }
+      },
+      "currentMajority": "NET_NORTH",
+      "noMorphMajority": "NET_NORTH",
+      "erosionOnlyMajority": "NET_NORTH",
+      "classification": "FROZEN_NORTH"
+    },
+    "3501..5000": {
+      "comparisons": {
+        "8": {
+          "currentNorthNetOutward": 1056.417186428743,
+          "noMorphNorthNetOutward": 2870.3459017835007,
+          "ratioNorth": 0.36804525397873966,
+          "diffNorth": -1813.9287153547577,
+          "currentSouthNetOutward": 11.715074902359612,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 1.171507490235961e+31,
+          "diffSouth": 11.715074902359612
+        },
+        "12": {
+          "currentNorthNetOutward": 972.9200517039922,
+          "noMorphNorthNetOutward": 2018.528820356355,
+          "ratioNorth": 0.48199462989695185,
+          "diffNorth": -1045.6087686523629,
+          "currentSouthNetOutward": 12.371928329838324,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 1.2371928329838324e+31,
+          "diffSouth": 12.371928329838324
+        },
+        "16": {
+          "currentNorthNetOutward": 915.801633549587,
+          "noMorphNorthNetOutward": 2016.4775137403049,
+          "ratioNorth": 0.45415911028479233,
+          "diffNorth": -1100.6758801907179,
+          "currentSouthNetOutward": 0.2476821610798764,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 2.476821610798764e+29,
+          "diffSouth": 0.2476821610798764
+        },
+        "24": {
+          "currentNorthNetOutward": 816.4032923946861,
+          "noMorphNorthNetOutward": 2012.2436700835824,
+          "ratioNorth": 0.40571790809051234,
+          "diffNorth": -1195.8403776888963,
+          "currentSouthNetOutward": 14.923723716528889,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 1.4923723716528886e+31,
+          "diffSouth": 14.923723716528889
+        },
+        "32": {
+          "currentNorthNetOutward": 720.320376609117,
+          "noMorphNorthNetOutward": 2003.3506273329258,
+          "ratioNorth": 0.35955781618122656,
+          "diffNorth": -1283.0302507238089,
+          "currentSouthNetOutward": 1.431406684976272,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 1.431406684976272e+30,
+          "diffSouth": 1.431406684976272
+        },
+        "48": {
+          "currentNorthNetOutward": 0,
+          "noMorphNorthNetOutward": 0,
+          "ratioNorth": 0,
+          "diffNorth": 0,
+          "currentSouthNetOutward": 0.02715788792054595,
+          "noMorphSouthNetOutward": 0,
+          "ratioSouth": 2.715788792054595e+28,
+          "diffSouth": 0.02715788792054595
+        }
+      },
+      "currentMajority": "NET_NORTH",
+      "noMorphMajority": "NET_NORTH",
+      "erosionOnlyMajority": "NET_NORTH",
+      "classification": "FROZEN_NORTH"
+    }
+  },
+  "causalClassification": "ROUTING-CAUSE A — INITIAL/FROZEN TERRAIN ALREADY ROUTES NORTH",
+  "completedAt": "2026-09-09T15:08:52.103Z"
+}

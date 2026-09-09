@@ -1,0 +1,2029 @@
+{
+  "purpose": "NO_MORPH factorial attribution of raw terrain, source-configured bed, and production mouth orientation. Production files remain unchanged.",
+  "controls": {
+    "deterministicRandom": 0.3141592653,
+    "source": {
+      "x": 48,
+      "y": 48
+    },
+    "noMorphSteps": 1000,
+    "simulationJsUnchanged": true,
+    "configuredProductionNoMorphBitIdenticalReference": {
+      "passes": true,
+      "maxAbsDifferences": {
+        "100": {
+          "b": 0,
+          "d": 0,
+          "s": 0,
+          "u": 0,
+          "v": 0,
+          "fL": 0,
+          "fR": 0,
+          "fT": 0,
+          "fB": 0
+        },
+        "250": {
+          "b": 0,
+          "d": 0,
+          "s": 0,
+          "u": 0,
+          "v": 0,
+          "fL": 0,
+          "fR": 0,
+          "fT": 0,
+          "fB": 0
+        },
+        "500": {
+          "b": 0,
+          "d": 0,
+          "s": 0,
+          "u": 0,
+          "v": 0,
+          "fL": 0,
+          "fR": 0,
+          "fT": 0,
+          "fB": 0
+        },
+        "1000": {
+          "b": 0,
+          "d": 0,
+          "s": 0,
+          "u": 0,
+          "v": 0,
+          "fL": 0,
+          "fR": 0,
+          "fT": 0,
+          "fB": 0
+        }
+      }
+    },
+    "allVariantsFrozenBed": {
+      "RAW_PROD": {
+        "passes": true,
+        "maxAbsBedMinusInitialVariant": {
+          "100": 0,
+          "250": 0,
+          "500": 0,
+          "1000": 0
+        }
+      },
+      "RAW_MIRRORED_Y": {
+        "passes": true,
+        "maxAbsBedMinusInitialVariant": {
+          "100": 0,
+          "250": 0,
+          "500": 0,
+          "1000": 0
+        }
+      }
+    }
+  },
+  "initializationSnapshots": {
+    "configureSourceOutletsModifiesB": "NO",
+    "bedConfigurationEffect": "NONE",
+    "configuredMinusRaw": {
+      "maxAbsDiff": 0,
+      "meanAbsDiff": 0,
+      "changedCellCountGreaterThan0": 0,
+      "changedCellCountGreaterThan1e8": 0,
+      "changedCellCountGreaterThan1e6": 0,
+      "map": {
+        "sumPositive": 0,
+        "sumNegative": 0,
+        "sumAbs": 0,
+        "maxPositive": 0,
+        "minNegative": 0,
+        "centroidDx": null,
+        "centroidDy": null,
+        "sumAbsNorth": 0,
+        "sumAbsSouth": 0,
+        "ratioNorthSouthAbs": null,
+        "quadrants": {
+          "NW": 0,
+          "NE": 0,
+          "SW": 0,
+          "SE": 0
+        },
+        "modifiedCells": []
+      }
+    },
+    "afterMaskMinusConfigured": {
+      "maxAbsDiff": 0,
+      "meanAbsDiff": 0,
+      "changedCellCountGreaterThan0": 0,
+      "changedCellCountGreaterThan1e8": 0,
+      "changedCellCountGreaterThan1e6": 0,
+      "map": {
+        "sumPositive": 0,
+        "sumNegative": 0,
+        "sumAbs": 0,
+        "maxPositive": 0,
+        "minNegative": 0,
+        "centroidDx": null,
+        "centroidDy": null,
+        "sumAbsNorth": 0,
+        "sumAbsSouth": 0,
+        "ratioNorthSouthAbs": null,
+        "quadrants": {
+          "NW": 0,
+          "NE": 0,
+          "SW": 0,
+          "SE": 0
+        },
+        "modifiedCells": []
+      }
+    }
+  },
+  "topologyRawVsConfigured": {
+    "raw": {
+      "inverseRMeanDzdy": {
+        "R8": 0.004844178408710525,
+        "R16": 0.0021465342050347707
+      },
+      "escapeBarrier": {
+        "16": {
+          "north": 0.5291581153869629,
+          "south": 0.5291581153869629
+        },
+        "24": {
+          "north": 0.5291581153869629,
+          "south": 0.5291581153869629
+        },
+        "32": {
+          "north": 0.5291581153869629,
+          "south": 0.5291581153869629
+        },
+        "48": {
+          "north": 0.5291581153869629,
+          "south": 0.5308391451835632
+        }
+      },
+      "monotonic": {
+        "maxMonotonicNorthReach": 12,
+        "maxMonotonicSouthReach": 0
+      },
+      "steepestDescentByOutlet": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+      }
+    },
+    "configured": {
+      "inverseRMeanDzdy": {
+        "R8": 0.004844178408710525,
+        "R16": 0.0021465342050347707
+      },
+      "escapeBarrier": {
+        "16": {
+          "north": 0.5291581153869629,
+          "south": 0.5291581153869629
+        },
+        "24": {
+          "north": 0.5291581153869629,
+          "south": 0.5291581153869629
+        },
+        "32": {
+          "north": 0.5291581153869629,
+          "south": 0.5291581153869629
+        },
+        "48": {
+          "north": 0.5291581153869629,
+          "south": 0.5308391451835632
+        }
+      },
+      "monotonic": {
+        "maxMonotonicNorthReach": 12,
+        "maxMonotonicSouthReach": 0
+      },
+      "steepestDescentByOutlet": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+      }
+    }
+  },
+  "mouths": {
+    "production": {
+      "outlets": [
+        {
+          "rank": 0,
+          "index": 8304,
+          "x": 48,
+          "y": 43,
+          "dx": 0,
+          "dy": -5,
+          "r": 5,
+          "weight": 0.6000000238418579
+        },
+        {
+          "rank": 1,
+          "index": 8493,
+          "x": 45,
+          "y": 44,
+          "dx": -3,
+          "dy": -4,
+          "r": 5,
+          "weight": 0.20000000298023224
+        },
+        {
+          "rank": 2,
+          "index": 8494,
+          "x": 46,
+          "y": 44,
+          "dx": -2,
+          "dy": -4,
+          "r": 4.47213595499958,
+          "weight": 0.20000000298023224
+        }
+      ],
+      "weightedCentroidDx": -0.9999999850988393,
+      "weightedCentroidDy": -4.600000005960465
+    },
+    "mirroredY": {
+      "name": "MIRRORED_Y_MOUTH",
+      "outlets": [
+        {
+          "rank": 0,
+          "index": 10224,
+          "x": 48,
+          "y": 53,
+          "dx": 0,
+          "dy": 5,
+          "r": 5,
+          "weight": 0.6000000238418579
+        },
+        {
+          "rank": 1,
+          "index": 10029,
+          "x": 45,
+          "y": 52,
+          "dx": -3,
+          "dy": 4,
+          "r": 5,
+          "weight": 0.20000000298023224
+        },
+        {
+          "rank": 2,
+          "index": 10030,
+          "x": 46,
+          "y": 52,
+          "dx": -2,
+          "dy": 4,
+          "r": 4.47213595499958,
+          "weight": 0.20000000298023224
+        }
+      ],
+      "weightedCentroidDx": -0.9999999850988393,
+      "weightedCentroidDy": 4.600000005960465,
+      "validation": {
+        "indicesValid": true,
+        "noDuplicates": true,
+        "sameDistancePerOutlet": true,
+        "sameWeightSum": true
+      }
+    }
+  },
+  "variants": {
+    "RAW_PROD": {
+      "bed": "RAW",
+      "mouth": "PROD",
+      "initialControl": {
+        "maxAbsBedMinusExpected": 0,
+        "maxAbsBedMinusInitialVariant": 0
+      },
+      "frozenBedControl": {
+        "passes": true,
+        "maxAbsBedMinusInitialVariant": {
+          "100": 0,
+          "250": 0,
+          "500": 0,
+          "1000": 0
+        }
+      },
+      "first100StepPersistentNetNorth": {
+        "8": 5,
+        "12": 83,
+        "16": 112,
+        "24": 168,
+        "32": 235,
+        "48": null
+      },
+      "windows": {
+        "1..100": {
+          "surfaces": {
+            "8": {
+              "north": {
+                "netOutward": 49.2039903040567,
+                "positiveOutward": 49.2069846797674
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0.07494707374166598,
+                "positiveOutward": 0.08529669402924611
+              },
+              "east": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "steps": 100,
+              "northMinusSouthNet": 49.2039903040567,
+              "meanMarginPerStep": 0.49203990304056705,
+              "cumulativeMargin": 49.2039903040567
+            },
+            "12": {
+              "north": {
+                "netOutward": 0.10198562373966524,
+                "positiveOutward": 0.10198660233618284
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "steps": 100,
+              "northMinusSouthNet": 0.10198562373966524,
+              "meanMarginPerStep": 0.0010198562373966524,
+              "cumulativeMargin": 0.10198562373966524
+            },
+            "16": {
+              "north": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "steps": 100,
+              "northMinusSouthNet": 0,
+              "meanMarginPerStep": 0,
+              "cumulativeMargin": 0
+            },
+            "24": {
+              "north": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "steps": 100,
+              "northMinusSouthNet": 0,
+              "meanMarginPerStep": 0,
+              "cumulativeMargin": 0
+            },
+            "32": {
+              "north": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "steps": 100,
+              "northMinusSouthNet": 0,
+              "meanMarginPerStep": 0,
+              "cumulativeMargin": 0
+            },
+            "48": {
+              "north": {
+                "netOutward": null,
+                "positiveOutward": null
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": null,
+                "positiveOutward": null
+              },
+              "east": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "steps": 100,
+              "northMinusSouthNet": null,
+              "meanMarginPerStep": null,
+              "cumulativeMargin": null
+            }
+          },
+          "majorityR16R24R32": "MIXED",
+          "multiscaleDirection": "MIXED"
+        },
+        "101..250": {
+          "surfaces": {
+            "8": {
+              "north": {
+                "netOutward": 278.1613052268062,
+                "positiveOutward": 278.1613052268062
+              },
+              "south": {
+                "netOutward": 0.6918223655761744,
+                "positiveOutward": 0.6918223655761744
+              },
+              "west": {
+                "netOutward": 12.473352939728764,
+                "positiveOutward": 13.31767793959282
+              },
+              "east": {
+                "netOutward": 71.34965561018464,
+                "positiveOutward": 71.34965593588282
+              },
+              "steps": 150,
+              "northMinusSouthNet": 277.46948286123,
+              "meanMarginPerStep": 1.8497965524082,
+              "cumulativeMargin": 277.46948286123
+            },
+            "12": {
+              "north": {
+                "netOutward": 156.54214526101464,
+                "positiveOutward": 156.5678925359664
+              },
+              "south": {
+                "netOutward": 0.5042950533134729,
+                "positiveOutward": 0.5052707241728661
+              },
+              "west": {
+                "netOutward": 5.758065121965813,
+                "positiveOutward": 5.759332967413874
+              },
+              "east": {
+                "netOutward": 40.47072690748106,
+                "positiveOutward": 40.47248592552238
+              },
+              "steps": 150,
+              "northMinusSouthNet": 156.03785020770115,
+              "meanMarginPerStep": 1.0402523347180077,
+              "cumulativeMargin": 156.03785020770115
+            },
+            "16": {
+              "north": {
+                "netOutward": 44.796787098652615,
+                "positiveOutward": 44.796787098652615
+              },
+              "south": {
+                "netOutward": 0.000014477853677636175,
+                "positiveOutward": 0.00002435447957159907
+              },
+              "west": {
+                "netOutward": 1.882169039019548,
+                "positiveOutward": 1.882169039019548
+              },
+              "east": {
+                "netOutward": 26.9750477908266,
+                "positiveOutward": 26.9750477908266
+              },
+              "steps": 150,
+              "northMinusSouthNet": 44.79677262079894,
+              "meanMarginPerStep": 0.2986451508053263,
+              "cumulativeMargin": 44.79677262079894
+            },
+            "24": {
+              "north": {
+                "netOutward": 2.163191017827385,
+                "positiveOutward": 2.163191017827385
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0.0000019580718872652307,
+                "positiveOutward": 0.0000019582724634968756
+              },
+              "east": {
+                "netOutward": 0.14157983341750305,
+                "positiveOutward": 0.14162446699552803
+              },
+              "steps": 150,
+              "northMinusSouthNet": 2.163191017827385,
+              "meanMarginPerStep": 0.014421273452182568,
+              "cumulativeMargin": 2.163191017827385
+            },
+            "32": {
+              "north": {
+                "netOutward": 6.634723728045075e-10,
+                "positiveOutward": 6.634723728045075e-10
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 2.2417773310991883e-13,
+                "positiveOutward": 2.2417773310991883e-13
+              },
+              "east": {
+                "netOutward": 0.034798278384376616,
+                "positiveOutward": 0.034798278384376616
+              },
+              "steps": 150,
+              "northMinusSouthNet": 6.634723728045075e-10,
+              "meanMarginPerStep": 4.4231491520300496e-12,
+              "cumulativeMargin": 6.634723728045075e-10
+            },
+            "48": {
+              "north": {
+                "netOutward": null,
+                "positiveOutward": null
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": null,
+                "positiveOutward": null
+              },
+              "east": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "steps": 150,
+              "northMinusSouthNet": null,
+              "meanMarginPerStep": null,
+              "cumulativeMargin": null
+            }
+          },
+          "majorityR16R24R32": "NET_NORTH",
+          "multiscaleDirection": "MULTISCALE_NET_NORTH"
+        },
+        "251..500": {
+          "surfaces": {
+            "8": {
+              "north": {
+                "netOutward": 382.8303649346385,
+                "positiveOutward": 385.1810776009265
+              },
+              "south": {
+                "netOutward": 2.8060360233667494e-37,
+                "positiveOutward": 2.8060360233667494e-37
+              },
+              "west": {
+                "netOutward": 6.146457640621261,
+                "positiveOutward": 6.308500382117927
+              },
+              "east": {
+                "netOutward": 209.71123826228617,
+                "positiveOutward": 209.71123826228617
+              },
+              "steps": 250,
+              "northMinusSouthNet": 382.8303649346385,
+              "meanMarginPerStep": 1.531321459738554,
+              "cumulativeMargin": 382.8303649346385
+            },
+            "12": {
+              "north": {
+                "netOutward": 320.30392127401905,
+                "positiveOutward": 345.65018204384
+              },
+              "south": {
+                "netOutward": 0.2624735523146955,
+                "positiveOutward": 0.38404667498523665
+              },
+              "west": {
+                "netOutward": 9.560878337545946,
+                "positiveOutward": 9.661248823685417
+              },
+              "east": {
+                "netOutward": 369.339490190383,
+                "positiveOutward": 369.339490190383
+              },
+              "steps": 250,
+              "northMinusSouthNet": 320.04144772170434,
+              "meanMarginPerStep": 1.2801657908868174,
+              "cumulativeMargin": 320.04144772170434
+            },
+            "16": {
+              "north": {
+                "netOutward": 390.38407030251284,
+                "positiveOutward": 390.67083389714463
+              },
+              "south": {
+                "netOutward": 0.00007581674446657138,
+                "positiveOutward": 0.00032248660572809076
+              },
+              "west": {
+                "netOutward": 1.6015334810421493,
+                "positiveOutward": 1.925057515552187
+              },
+              "east": {
+                "netOutward": 383.04635096935914,
+                "positiveOutward": 383.04635096935914
+              },
+              "steps": 250,
+              "northMinusSouthNet": 390.38399448576837,
+              "meanMarginPerStep": 1.5615359779430735,
+              "cumulativeMargin": 390.38399448576837
+            },
+            "24": {
+              "north": {
+                "netOutward": 302.4539148176069,
+                "positiveOutward": 302.5034737756529
+              },
+              "south": {
+                "netOutward": 0.2949268835145445,
+                "positiveOutward": 0.2949268835145445
+              },
+              "west": {
+                "netOutward": 1.5875264399446385,
+                "positiveOutward": 1.5875264399446385
+              },
+              "east": {
+                "netOutward": 271.274817420771,
+                "positiveOutward": 271.33395391226037
+              },
+              "steps": 250,
+              "northMinusSouthNet": 302.15898793409235,
+              "meanMarginPerStep": 1.2086359517363694,
+              "cumulativeMargin": 302.15898793409235
+            },
+            "32": {
+              "north": {
+                "netOutward": 89.01175236062642,
+                "positiveOutward": 89.01175236062642
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 95.90290027424552,
+                "positiveOutward": 95.90290027425831
+              },
+              "steps": 250,
+              "northMinusSouthNet": 89.01175236062642,
+              "meanMarginPerStep": 0.35604700944250567,
+              "cumulativeMargin": 89.01175236062642
+            },
+            "48": {
+              "north": {
+                "netOutward": null,
+                "positiveOutward": null
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": null,
+                "positiveOutward": null
+              },
+              "east": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "steps": 250,
+              "northMinusSouthNet": null,
+              "meanMarginPerStep": null,
+              "cumulativeMargin": null
+            }
+          },
+          "majorityR16R24R32": "NET_NORTH",
+          "multiscaleDirection": "MULTISCALE_NET_NORTH"
+        },
+        "501..750": {
+          "surfaces": {
+            "8": {
+              "north": {
+                "netOutward": 431.49439350722264,
+                "positiveOutward": 431.50060133483544
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0.7078123464425199,
+                "positiveOutward": 0.7085800055647269
+              },
+              "east": {
+                "netOutward": 151.92450850026836,
+                "positiveOutward": 151.9255735664505
+              },
+              "steps": 250,
+              "northMinusSouthNet": 431.49439350722264,
+              "meanMarginPerStep": 1.7259775740288905,
+              "cumulativeMargin": 431.49439350722264
+            },
+            "12": {
+              "north": {
+                "netOutward": 300.58383602649667,
+                "positiveOutward": 319.9941792881769
+              },
+              "south": {
+                "netOutward": -0.00000562300827543612,
+                "positiveOutward": 0.0008943308487445734
+              },
+              "west": {
+                "netOutward": -3.454275512362114e-9,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 316.77130088311026,
+                "positiveOutward": 316.7713434211679
+              },
+              "steps": 250,
+              "northMinusSouthNet": 300.58384164950496,
+              "meanMarginPerStep": 1.2023353665980199,
+              "cumulativeMargin": 300.58384164950496
+            },
+            "16": {
+              "north": {
+                "netOutward": 322.7921964598319,
+                "positiveOutward": 323.41883480985615
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": -0.05051151736745383,
+                "positiveOutward": 0.020813783516587137
+              },
+              "east": {
+                "netOutward": 319.7053099297325,
+                "positiveOutward": 319.72695011055157
+              },
+              "steps": 250,
+              "northMinusSouthNet": 322.7921964598319,
+              "meanMarginPerStep": 1.2911687858393277,
+              "cumulativeMargin": 322.7921964598319
+            },
+            "24": {
+              "north": {
+                "netOutward": 429.0607483233618,
+                "positiveOutward": 429.1020219508502
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 395.55579614978103,
+                "positiveOutward": 397.5942647811127
+              },
+              "steps": 250,
+              "northMinusSouthNet": 429.0607483233618,
+              "meanMarginPerStep": 1.716242993293447,
+              "cumulativeMargin": 429.0607483233618
+            },
+            "32": {
+              "north": {
+                "netOutward": 618.8496351027833,
+                "positiveOutward": 618.8663801334809
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 416.01582837595595,
+                "positiveOutward": 416.2533678660903
+              },
+              "steps": 250,
+              "northMinusSouthNet": 618.8496351027833,
+              "meanMarginPerStep": 2.475398540411133,
+              "cumulativeMargin": 618.8496351027833
+            },
+            "48": {
+              "north": {
+                "netOutward": null,
+                "positiveOutward": null
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": null,
+                "positiveOutward": null
+              },
+              "east": {
+                "netOutward": 0.29952393762024343,
+                "positiveOutward": 0.29989578438789977
+              },
+              "steps": 250,
+              "northMinusSouthNet": null,
+              "meanMarginPerStep": null,
+              "cumulativeMargin": null
+            }
+          },
+          "majorityR16R24R32": "NET_NORTH",
+          "multiscaleDirection": "MULTISCALE_NET_NORTH"
+        },
+        "751..1000": {
+          "surfaces": {
+            "8": {
+              "north": {
+                "netOutward": 447.3911214528256,
+                "positiveOutward": 447.4281848151062
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 110.70638518255944,
+                "positiveOutward": 110.70638518255944
+              },
+              "steps": 250,
+              "northMinusSouthNet": 447.3911214528256,
+              "meanMarginPerStep": 1.7895644858113025,
+              "cumulativeMargin": 447.3911214528256
+            },
+            "12": {
+              "north": {
+                "netOutward": 290.3058228381396,
+                "positiveOutward": 303.49117411186546
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 273.74156510381397,
+                "positiveOutward": 273.741665721421
+              },
+              "steps": 250,
+              "northMinusSouthNet": 290.3058228381396,
+              "meanMarginPerStep": 1.1612232913525584,
+              "cumulativeMargin": 290.3058228381396
+            },
+            "16": {
+              "north": {
+                "netOutward": 293.00727722995873,
+                "positiveOutward": 293.00727722995873
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 273.10768700233587,
+                "positiveOutward": 273.10768700233587
+              },
+              "steps": 250,
+              "northMinusSouthNet": 293.00727722995873,
+              "meanMarginPerStep": 1.172029108919835,
+              "cumulativeMargin": 293.00727722995873
+            },
+            "24": {
+              "north": {
+                "netOutward": 284.31618668941417,
+                "positiveOutward": 285.0718982430052
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 214.42608769016087,
+                "positiveOutward": 224.74447649701028
+              },
+              "steps": 250,
+              "northMinusSouthNet": 284.31618668941417,
+              "meanMarginPerStep": 1.1372647467576567,
+              "cumulativeMargin": 284.31618668941417
+            },
+            "32": {
+              "north": {
+                "netOutward": 224.06203718175888,
+                "positiveOutward": 224.06207102054265
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 179.67078662579516,
+                "positiveOutward": 215.55475173035703
+              },
+              "steps": 250,
+              "northMinusSouthNet": 224.06203718175888,
+              "meanMarginPerStep": 0.8962481487270355,
+              "cumulativeMargin": 224.06203718175888
+            },
+            "48": {
+              "north": {
+                "netOutward": null,
+                "positiveOutward": null
+              },
+              "south": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "west": {
+                "netOutward": null,
+                "positiveOutward": null
+              },
+              "east": {
+                "netOutward": 77.53080348160007,
+                "positiveOutward": 77.53080607488896
+              },
+              "steps": 250,
+              "northMinusSouthNet": null,
+              "meanMarginPerStep": null,
+              "cumulativeMargin": null
+            }
+          },
+          "majorityR16R24R32": "NET_NORTH",
+          "multiscaleDirection": "MULTISCALE_NET_NORTH"
+        }
+      },
+      "checkpoints": {
+        "100": {
+          "maxAbsBedMinusInitialVariant": 0,
+          "wetFront": {
+            "farthestWetNorth": 13,
+            "farthestWetSouth": 1,
+            "depthMassNorth": 3.5541883644327754,
+            "depthMassSouth": 0.011313528542359563,
+            "wetCountNorth": 201,
+            "wetCountSouth": 9
+          },
+          "head": {
+            "8": {
+              "northMeanHead": 0.5521108662480188,
+              "southMeanHead": 0.573803558069117,
+              "northMinusSouthMeanHead": -0.02169269182109823
+            },
+            "16": {
+              "northMeanHead": 0.5443593408122207,
+              "southMeanHead": 0.5470998269138914,
+              "northMinusSouthMeanHead": -0.0027404861016706583
+            },
+            "24": {
+              "northMeanHead": 0.5422207263051247,
+              "southMeanHead": 0.5246304918308647,
+              "northMinusSouthMeanHead": 0.017590234474260003
+            },
+            "32": {
+              "northMeanHead": 0.5067511769441458,
+              "southMeanHead": 0.5135616041146792,
+              "northMinusSouthMeanHead": -0.006810427170533373
+            }
+          }
+        },
+        "250": {
+          "maxAbsBedMinusInitialVariant": 0,
+          "wetFront": {
+            "farthestWetNorth": 29,
+            "farthestWetSouth": 20,
+            "depthMassNorth": 8.89485588167065,
+            "depthMassSouth": 0.12229950194796402,
+            "wetCountNorth": 751,
+            "wetCountSouth": 269
+          },
+          "head": {
+            "8": {
+              "northMeanHead": 0.5566851863199297,
+              "southMeanHead": 0.573803558069117,
+              "northMinusSouthMeanHead": -0.01711837174918729
+            },
+            "16": {
+              "northMeanHead": 0.5551022490652747,
+              "southMeanHead": 0.5471002691989962,
+              "northMinusSouthMeanHead": 0.008001979866278486
+            },
+            "24": {
+              "northMeanHead": 0.5424675568191855,
+              "southMeanHead": 0.5246304918308647,
+              "northMinusSouthMeanHead": 0.017837064988320717
+            },
+            "32": {
+              "northMeanHead": 0.5067511769441865,
+              "southMeanHead": 0.5135616041146792,
+              "northMinusSouthMeanHead": -0.006810427170492739
+            }
+          }
+        },
+        "500": {
+          "maxAbsBedMinusInitialVariant": 0,
+          "wetFront": {
+            "farthestWetNorth": 48,
+            "farthestWetSouth": 28,
+            "depthMassNorth": 16.14589531781826,
+            "depthMassSouth": 1.2253746605676952,
+            "wetCountNorth": 1337,
+            "wetCountSouth": 159
+          },
+          "head": {
+            "8": {
+              "northMeanHead": 0.5444452172857436,
+              "southMeanHead": 0.573803558069117,
+              "northMinusSouthMeanHead": -0.029358340783373404
+            },
+            "16": {
+              "northMeanHead": 0.549007047528972,
+              "southMeanHead": 0.5470998269138914,
+              "northMinusSouthMeanHead": 0.0019072206150806403
+            },
+            "24": {
+              "northMeanHead": 0.5507005603398358,
+              "southMeanHead": 0.5246304918308647,
+              "northMinusSouthMeanHead": 0.02607006850897109
+            },
+            "32": {
+              "northMeanHead": 0.5110395300117628,
+              "southMeanHead": 0.5135616041146792,
+              "northMinusSouthMeanHead": -0.002522074102916383
+            }
+          }
+        },
+        "1000": {
+          "maxAbsBedMinusInitialVariant": 0,
+          "wetFront": {
+            "farthestWetNorth": 48,
+            "farthestWetSouth": 31,
+            "depthMassNorth": 29.427790572923072,
+            "depthMassSouth": 3.8198717719369597,
+            "wetCountNorth": 2079,
+            "wetCountSouth": 506
+          },
+          "head": {
+            "8": {
+              "northMeanHead": 0.535977432738633,
+              "southMeanHead": 0.573803558069117,
+              "northMinusSouthMeanHead": -0.03782612533048402
+            },
+            "16": {
+              "northMeanHead": 0.5454924188728579,
+              "southMeanHead": 0.5470998269138914,
+              "northMinusSouthMeanHead": -0.0016074080410334313
+            },
+            "24": {
+              "northMeanHead": 0.5447835892460271,
+              "southMeanHead": 0.5246304918308647,
+              "northMinusSouthMeanHead": 0.020153097415162358
+            },
+            "32": {
+              "northMeanHead": 0.5077157272885625,
+              "southMeanHead": 0.5135616041146792,
+              "northMinusSouthMeanHead": -0.005845876826116703
+            }
+          }
+        }
+      }
+    },
+    "RAW_MIRRORED_Y": {
+      "bed": "RAW",
+      "mouth": "MIRRORED_Y",
+      "initialControl": {
+        "maxAbsBedMinusExpected": 0,
+        "maxAbsBedMinusInitialVariant": 0
+      },
+      "frozenBedControl": {
+        "passes": true,
+        "maxAbsBedMinusInitialVariant": {
+          "100": 0,
+          "250": 0,
+          "500": 0,
+          "1000": 0
+        }
+      },
+      "first100StepPersistentNetNorth": {
+        "8": 159,
+        "12": 235,
+        "16": 262,
+        "24": 386,
+        "32": 551,
+        "48": null
+      },
+      "windows": {
+        "1..100": {
+          "surfaces": {
+            "8": {
+              "north": {
+                "netOutward": 5.957152505577541,
+                "positiveOutward": 5.957152734385076
+              },
+              "south": {
+                "netOutward": 57.5516571020039,
+                "positiveOutward": 57.5516571020039
+              },
+              "west": {
+                "netOutward": 4.80073897297331,
+                "positiveOutward": 4.95305900381073
+              },
+              "east": {
+                "netOutward": 3.1124377556782434,
+                "positiveOutward": 3.1183827619989017
+              },
+              "steps": 100,
+              "northMinusSouthNet": -51.59450459642636,
+              "meanMarginPerStep": -0.5159450459642636,
+              "cumulativeMargin": -51.59450459642636
+            },
+            "12": {
+              "north": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "south": {
+                "netOutward": 11.319944360864142,
+                "positiveOutward": 11.356938947148972
+              },
+              "west": {
+                "netOutward": 2.2810154754487004,
+                "positiveOutward": 2.2810154754487004
+              },
+              "east": {
+                "netOutward": 1.580809439351063,
+                "positiveOutward": 1.580809439351063
+              },
+              "steps": 100,
+              "northMinusSouthNet": -11.319944360864142,
+              "meanMarginPerStep": -0.11319944360864141,
+              "cumulativeMargin": -11.319944360864142
+            },
+            "16": {
+              "north": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "south": {
+                "netOutward": 0.09351352564997725,
+                "positiveOutward": 0.0958983446252115
+              },
+              "west": {
+                "netOutward": 5.104921437390455,
+                "positiveOutward": 5.104921437390455
+              },
+              "east": {
+                "netOutward": 1.8822510142645954,
+                "positiveOutward": 1.8822510142645954
+              },
+              "steps": 100,
+              "northMinusSouthNet": -0.09351352564997725,
+              "meanMarginPerStep": -0.0009351352564997725,
+              "cumulativeMargin": -0.09351352564997725
+            },
+            "24": {
+              "north": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "south": {
+                "netOutward": 0.031046023145593293,
+                "positiveOutward": 0.032470506442501636
+              },
+              "west": {
+                "netOutward": 0.0045064652810027,
+                "positiveOutward": 0.0045064652810027
+              },
+              "east": {
+                "netOutward": 0.003996081530307605,
+                "positiveOutward": 0.004646043633775198
+              },
+              "steps": 100,
+              "northMinusSouthNet": -0.031046023145593293,
+              "meanMarginPerStep": -0.00031046023145593296,
+              "cumulativeMargin": -0.031046023145593293
+            },
+            "32": {
+              "north": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "south": {
+                "netOutward": 0.001475369605694848,
+                "positiveOutward": 0.0014753783553762396
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 3.722649897587431e-11,
+                "positiveOutward": 3.722649897587431e-11
+              },
+              "steps": 100,
+              "northMinusSouthNet": -0.001475369605694848,
+              "meanMarginPerStep": -0.000014753696056948481,
+              "cumulativeMargin": -0.001475369605694848
+            },
+            "48": {
+              "north": {
+                "netOutward": null,
+                "positiveOutward": null
+              },
+              "south": {
+                "netOutward": 0.0000035867469572203483,
+                "positiveOutward": 0.0000035867469572203483
+              },
+              "west": {
+                "netOutward": null,
+                "positiveOutward": null
+              },
+              "east": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "steps": 100,
+              "northMinusSouthNet": null,
+              "meanMarginPerStep": null,
+              "cumulativeMargin": null
+            }
+          },
+          "majorityR16R24R32": "NET_SOUTH",
+          "multiscaleDirection": "MULTISCALE_NET_SOUTH"
+        },
+        "101..250": {
+          "surfaces": {
+            "8": {
+              "north": {
+                "netOutward": 138.75053951623022,
+                "positiveOutward": 138.75985213708236
+              },
+              "south": {
+                "netOutward": 135.09400684084358,
+                "positiveOutward": 135.09400684084358
+              },
+              "west": {
+                "netOutward": 7.244361293196334,
+                "positiveOutward": 10.37224143997264
+              },
+              "east": {
+                "netOutward": 85.95752163339861,
+                "positiveOutward": 85.9698569553276
+              },
+              "steps": 150,
+              "northMinusSouthNet": 3.656532675386643,
+              "meanMarginPerStep": 0.02437688450257762,
+              "cumulativeMargin": 3.656532675386643
+            },
+            "12": {
+              "north": {
+                "netOutward": 33.83013335275946,
+                "positiveOutward": 33.830836863336984
+              },
+              "south": {
+                "netOutward": 122.94916679189282,
+                "positiveOutward": 123.08556849089018
+              },
+              "west": {
+                "netOutward": 31.93205641485015,
+                "positiveOutward": 31.9325498820931
+              },
+              "east": {
+                "netOutward": 95.42735243804017,
+                "positiveOutward": 95.42962671647732
+              },
+              "steps": 150,
+              "northMinusSouthNet": -89.11903343913336,
+              "meanMarginPerStep": -0.5941268895942224,
+              "cumulativeMargin": -89.11903343913336
+            },
+            "16": {
+              "north": {
+                "netOutward": 5.021497964456927,
+                "positiveOutward": 5.021497964456927
+              },
+              "south": {
+                "netOutward": 30.006594916000026,
+                "positiveOutward": 30.252683862130255
+              },
+              "west": {
+                "netOutward": 73.53987750834213,
+                "positiveOutward": 73.53987750834213
+              },
+              "east": {
+                "netOutward": 113.80955567136253,
+                "positiveOutward": 113.80955567136253
+              },
+              "steps": 150,
+              "northMinusSouthNet": -24.9850969515431,
+              "meanMarginPerStep": -0.16656731301028732,
+              "cumulativeMargin": -24.9850969515431
+            },
+            "24": {
+              "north": {
+                "netOutward": 0.18093260029271221,
+                "positiveOutward": 0.18093260029271221
+              },
+              "south": {
+                "netOutward": 11.363181996835522,
+                "positiveOutward": 11.492936173802775
+              },
+              "west": {
+                "netOutward": 21.096738464772987,
+                "positiveOutward": 21.09673846603244
+              },
+              "east": {
+                "netOutward": 12.241728864629339,
+                "positiveOutward": 12.309693119553943
+              },
+              "steps": 150,
+              "northMinusSouthNet": -11.18224939654281,
+              "meanMarginPerStep": -0.0745483293102854,
+              "cumulativeMargin": -11.18224939654281
+            },
+            "32": {
+              "north": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "south": {
+                "netOutward": 1.4792319615484104,
+                "positiveOutward": 1.4792344048408286
+              },
+              "west": {
+                "netOutward": 1.4197361174835095e-12,
+                "positiveOutward": 1.4197361174835095e-12
+              },
+              "east": {
+                "netOutward": 1.1599957296756633,
+                "positiveOutward": 1.159995736528499
+              },
+              "steps": 150,
+              "northMinusSouthNet": -1.4792319615484104,
+              "meanMarginPerStep": -0.009861546410322736,
+              "cumulativeMargin": -1.4792319615484104
+            },
+            "48": {
+              "north": {
+                "netOutward": null,
+                "positiveOutward": null
+              },
+              "south": {
+                "netOutward": 0.45575976603863205,
+                "positiveOutward": 0.45575976603863205
+              },
+              "west": {
+                "netOutward": null,
+                "positiveOutward": null
+              },
+              "east": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "steps": 150,
+              "northMinusSouthNet": null,
+              "meanMarginPerStep": null,
+              "cumulativeMargin": null
+            }
+          },
+          "majorityR16R24R32": "NET_SOUTH",
+          "multiscaleDirection": "MULTISCALE_NET_SOUTH"
+        },
+        "251..500": {
+          "surfaces": {
+            "8": {
+              "north": {
+                "netOutward": 219.66081734980725,
+                "positiveOutward": 220.37709611204355
+              },
+              "south": {
+                "netOutward": 229.96336125954986,
+                "positiveOutward": 229.96336125954986
+              },
+              "west": {
+                "netOutward": 0.3915439894760335,
+                "positiveOutward": 0.46538486364371984
+              },
+              "east": {
+                "netOutward": 122.7044750892931,
+                "positiveOutward": 122.72676145674109
+              },
+              "steps": 250,
+              "northMinusSouthNet": -10.30254390974261,
+              "meanMarginPerStep": -0.04121017563897044,
+              "cumulativeMargin": -10.30254390974261
+            },
+            "12": {
+              "north": {
+                "netOutward": 179.412390803191,
+                "positiveOutward": 196.37845936283054
+              },
+              "south": {
+                "netOutward": 177.70163393995767,
+                "positiveOutward": 178.4463763969486
+              },
+              "west": {
+                "netOutward": 24.677259374963292,
+                "positiveOutward": 24.677259374963292
+              },
+              "east": {
+                "netOutward": 235.52007293621878,
+                "positiveOutward": 235.52017492184552
+              },
+              "steps": 250,
+              "northMinusSouthNet": 1.710756863233314,
+              "meanMarginPerStep": 0.006843027452933257,
+              "cumulativeMargin": 1.710756863233314
+            },
+            "16": {
+              "north": {
+                "netOutward": 182.52125886649458,
+                "positiveOutward": 183.20005404194606
+              },
+              "south": {
+                "netOutward": 18.02734609454821,
+                "positiveOutward": 18.198787311519276
+              },
+              "west": {
+                "netOutward": 114.24984420845017,
+                "positiveOutward": 114.24984420845017
+              },
+              "east": {
+                "netOutward": 332.21373794139765,
+                "positiveOutward": 332.21373794139765
+              },
+              "steps": 250,
+              "northMinusSouthNet": 164.49391277194636,
+              "meanMarginPerStep": 0.6579756510877854,
+              "cumulativeMargin": 164.49391277194636
+            },
+            "24": {
+              "north": {
+                "netOutward": 129.69324136332517,
+                "positiveOutward": 129.70543772813772
+              },
+              "south": {
+                "netOutward": 89.69361950909841,
+                "positiveOutward": 93.73212394716771
+              },
+              "west": {
+                "netOutward": 70.44588648523546,
+                "positiveOutward": 73.55060170717215
+              },
+              "east": {
+                "netOutward": 333.38066234823015,
+                "positiveOutward": 333.3979259859846
+              },
+              "steps": 250,
+              "northMinusSouthNet": 39.99962185422676,
+              "meanMarginPerStep": 0.15999848741690703,
+              "cumulativeMargin": 39.99962185422676
+            },
+            "32": {
+              "north": {
+                "netOutward": 23.32448209433808,
+                "positiveOutward": 23.32448209433808
+              },
+              "south": {
+                "netOutward": 84.95268938497516,
+                "positiveOutward": 84.95268963935894
+              },
+              "west": {
+                "netOutward": 0.001387756397731299,
+                "positiveOutward": 0.15058479649133005
+              },
+              "east": {
+                "netOutward": 199.2152707912984,
+                "positiveOutward": 199.2175141583757
+              },
+              "steps": 250,
+              "northMinusSouthNet": -61.62820729063708,
+              "meanMarginPerStep": -0.24651282916254832,
+              "cumulativeMargin": -61.62820729063708
+            },
+            "48": {
+              "north": {
+                "netOutward": null,
+                "positiveOutward": null
+              },
+              "south": {
+                "netOutward": 16.666810025717098,
+                "positiveOutward": 16.666810025717098
+              },
+              "west": {
+                "netOutward": null,
+                "positiveOutward": null
+              },
+              "east": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "steps": 250,
+              "northMinusSouthNet": null,
+              "meanMarginPerStep": null,
+              "cumulativeMargin": null
+            }
+          },
+          "majorityR16R24R32": "NET_NORTH",
+          "multiscaleDirection": "NET_NORTH"
+        },
+        "501..750": {
+          "surfaces": {
+            "8": {
+              "north": {
+                "netOutward": 254.79382708740204,
+                "positiveOutward": 254.81621307206123
+              },
+              "south": {
+                "netOutward": 235.92563623003662,
+                "positiveOutward": 235.92563623003662
+              },
+              "west": {
+                "netOutward": 0.31951208556984056,
+                "positiveOutward": 0.31951208556984056
+              },
+              "east": {
+                "netOutward": 96.45759414630008,
+                "positiveOutward": 96.50783661968347
+              },
+              "steps": 250,
+              "northMinusSouthNet": 18.86819085736542,
+              "meanMarginPerStep": 0.07547276342946167,
+              "cumulativeMargin": 18.86819085736542
+            },
+            "12": {
+              "north": {
+                "netOutward": 185.34986206036345,
+                "positiveOutward": 193.38930197426623
+              },
+              "south": {
+                "netOutward": 206.57623361392797,
+                "positiveOutward": 206.9081109905357
+              },
+              "west": {
+                "netOutward": 19.054529009372914,
+                "positiveOutward": 19.054529009372914
+              },
+              "east": {
+                "netOutward": 212.08900899653779,
+                "positiveOutward": 212.089050692857
+              },
+              "steps": 250,
+              "northMinusSouthNet": -21.22637155356452,
+              "meanMarginPerStep": -0.08490548621425807,
+              "cumulativeMargin": -21.22637155356452
+            },
+            "16": {
+              "north": {
+                "netOutward": 198.12594768533884,
+                "positiveOutward": 198.12595657646787
+              },
+              "south": {
+                "netOutward": 8.69672520993616,
+                "positiveOutward": 9.648286551109988
+              },
+              "west": {
+                "netOutward": 110.5514802094979,
+                "positiveOutward": 110.5514802094979
+              },
+              "east": {
+                "netOutward": 319.91366769603906,
+                "positiveOutward": 319.91366769603906
+              },
+              "steps": 250,
+              "northMinusSouthNet": 189.4292224754027,
+              "meanMarginPerStep": 0.7577168899016108,
+              "cumulativeMargin": 189.4292224754027
+            },
+            "24": {
+              "north": {
+                "netOutward": 239.51608437367608,
+                "positiveOutward": 240.23395956751332
+              },
+              "south": {
+                "netOutward": 69.16064292855684,
+                "positiveOutward": 69.97657092369754
+              },
+              "west": {
+                "netOutward": 49.02442792167095,
+                "positiveOutward": 51.3176976073637
+              },
+              "east": {
+                "netOutward": 373.108581699991,
+                "positiveOutward": 374.7230041073174
+              },
+              "steps": 250,
+              "northMinusSouthNet": 170.35544144511925,
+              "meanMarginPerStep": 0.681421765780477,
+              "cumulativeMargin": 170.35544144511925
+            },
+            "32": {
+              "north": {
+                "netOutward": 330.14105799370844,
+                "positiveOutward": 330.14301653190347
+              },
+              "south": {
+                "netOutward": 181.0921080735425,
+                "positiveOutward": 181.10540448113179
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 356.5932892390382,
+                "positiveOutward": 359.02738189445967
+              },
+              "steps": 250,
+              "northMinusSouthNet": 149.04894992016594,
+              "meanMarginPerStep": 0.5961957996806637,
+              "cumulativeMargin": 149.04894992016594
+            },
+            "48": {
+              "north": {
+                "netOutward": null,
+                "positiveOutward": null
+              },
+              "south": {
+                "netOutward": 224.02335218459893,
+                "positiveOutward": 224.02335218459893
+              },
+              "west": {
+                "netOutward": null,
+                "positiveOutward": null
+              },
+              "east": {
+                "netOutward": 1.6729128121875192,
+                "positiveOutward": 1.6734135542254762
+              },
+              "steps": 250,
+              "northMinusSouthNet": null,
+              "meanMarginPerStep": null,
+              "cumulativeMargin": null
+            }
+          },
+          "majorityR16R24R32": "NET_NORTH",
+          "multiscaleDirection": "MULTISCALE_NET_NORTH"
+        },
+        "751..1000": {
+          "surfaces": {
+            "8": {
+              "north": {
+                "netOutward": 247.52583556274985,
+                "positiveOutward": 247.52613758777304
+              },
+              "south": {
+                "netOutward": 236.12084668222815,
+                "positiveOutward": 236.12084668222815
+              },
+              "west": {
+                "netOutward": 0.31414846836378274,
+                "positiveOutward": 0.31414846836378274
+              },
+              "east": {
+                "netOutward": 66.65001275264729,
+                "positiveOutward": 66.7015687228726
+              },
+              "steps": 250,
+              "northMinusSouthNet": 11.4049888805217,
+              "meanMarginPerStep": 0.0456199555220868,
+              "cumulativeMargin": 11.4049888805217
+            },
+            "12": {
+              "north": {
+                "netOutward": 158.77949661813398,
+                "positiveOutward": 159.67696084904665
+              },
+              "south": {
+                "netOutward": 210.92671722869852,
+                "positiveOutward": 211.25304337984414
+              },
+              "west": {
+                "netOutward": 18.9233082935624,
+                "positiveOutward": 18.9233082935624
+              },
+              "east": {
+                "netOutward": 162.90103047484718,
+                "positiveOutward": 162.9011322078759
+              },
+              "steps": 250,
+              "northMinusSouthNet": -52.147220610564545,
+              "meanMarginPerStep": -0.20858888244225818,
+              "cumulativeMargin": -52.147220610564545
+            },
+            "16": {
+              "north": {
+                "netOutward": 161.34403738640452,
+                "positiveOutward": 161.34833289780858
+              },
+              "south": {
+                "netOutward": 7.711744499152427,
+                "positiveOutward": 9.54489266332298
+              },
+              "west": {
+                "netOutward": 110.30734560162162,
+                "positiveOutward": 110.30734560162162
+              },
+              "east": {
+                "netOutward": 273.60162548150583,
+                "positiveOutward": 273.60162548150583
+              },
+              "steps": 250,
+              "northMinusSouthNet": 153.6322928872521,
+              "meanMarginPerStep": 0.6145291715490084,
+              "cumulativeMargin": 153.6322928872521
+            },
+            "24": {
+              "north": {
+                "netOutward": 163.83581294047852,
+                "positiveOutward": 164.37951279130996
+              },
+              "south": {
+                "netOutward": 54.022559327708656,
+                "positiveOutward": 54.754571938000964
+              },
+              "west": {
+                "netOutward": 56.65120410876261,
+                "positiveOutward": 58.05516659099521
+              },
+              "east": {
+                "netOutward": 225.99001189453554,
+                "positiveOutward": 236.01507999753025
+              },
+              "steps": 250,
+              "northMinusSouthNet": 109.81325361276987,
+              "meanMarginPerStep": 0.4392530144510795,
+              "cumulativeMargin": 109.81325361276987
+            },
+            "32": {
+              "north": {
+                "netOutward": 131.1487620122017,
+                "positiveOutward": 131.14876208450147
+              },
+              "south": {
+                "netOutward": 98.71811892533468,
+                "positiveOutward": 98.71811920764613
+              },
+              "west": {
+                "netOutward": 0,
+                "positiveOutward": 0
+              },
+              "east": {
+                "netOutward": 212.6150308138818,
+                "positiveOutward": 242.4433122074402
+              },
+              "steps": 250,
+              "northMinusSouthNet": 32.43064308686702,
+              "meanMarginPerStep": 0.1297225723474681,
+              "cumulativeMargin": 32.43064308686702
+            },
+            "48": {
+              "north": {
+                "netOutward": null,
+                "positiveOutward": null
+              },
+              "south": {
+                "netOutward": 92.4904296682932,
+                "positiveOutward": 97.12619541115205
+              },
+              "west": {
+                "netOutward": null,
+                "positiveOutward": null
+              },
+              "east": {
+                "netOutward": 98.706842544267,
+                "positiveOutward": 98.70718028749289
+              },
+              "steps": 250,
+              "northMinusSouthNet": null,
+              "meanMarginPerStep": null,
+              "cumulativeMargin": null
+            }
+          },
+          "majorityR16R24R32": "NET_NORTH",
+          "multiscaleDirection": "MULTISCALE_NET_NORTH"
+        }
+      },
+      "checkpoints": {
+        "100": {
+          "maxAbsBedMinusInitialVariant": 0,
+          "wetFront": {
+            "farthestWetNorth": 12,
+            "farthestWetSouth": 45,
+            "depthMassNorth": 1.1808110733093145,
+            "depthMassSouth": 2.246337621116936,
+            "wetCountNorth": 232,
+            "wetCountSouth": 907
+          },
+          "head": {
+            "8": {
+              "northMeanHead": 0.5311615446419028,
+              "southMeanHead": 0.5871704197351766,
+              "northMinusSouthMeanHead": -0.05600887509327379
+            },
+            "16": {
+              "northMeanHead": 0.5443593408122207,
+              "southMeanHead": 0.5471275095669018,
+              "northMinusSouthMeanHead": -0.0027681687546811107
+            },
+            "24": {
+              "northMeanHead": 0.5422207263051247,
+              "southMeanHead": 0.5246324250316641,
+              "northMinusSouthMeanHead": 0.01758830127346067
+            },
+            "32": {
+              "northMeanHead": 0.5067511769441458,
+              "southMeanHead": 0.5135617096563633,
+              "northMinusSouthMeanHead": -0.006810532712217432
+            }
+          }
+        },
+        "250": {
+          "maxAbsBedMinusInitialVariant": 0,
+          "wetFront": {
+            "farthestWetNorth": 28,
+            "farthestWetSouth": 73,
+            "depthMassNorth": 4.903632903004791,
+            "depthMassSouth": 4.059888683509598,
+            "wetCountNorth": 571,
+            "wetCountSouth": 1333
+          },
+          "head": {
+            "8": {
+              "northMeanHead": 0.550223521217156,
+              "southMeanHead": 0.5756898427121889,
+              "northMinusSouthMeanHead": -0.025466321495032918
+            },
+            "16": {
+              "northMeanHead": 0.5458453954297989,
+              "southMeanHead": 0.5504490943197707,
+              "northMinusSouthMeanHead": -0.004603698889971808
+            },
+            "24": {
+              "northMeanHead": 0.54222941988599,
+              "southMeanHead": 0.5251033173567898,
+              "northMinusSouthMeanHead": 0.017126102529200216
+            },
+            "32": {
+              "northMeanHead": 0.5067511769441458,
+              "southMeanHead": 0.5135680830213482,
+              "northMinusSouthMeanHead": -0.0068169060772023116
+            }
+          }
+        },
+        "500": {
+          "maxAbsBedMinusInitialVariant": 0,
+          "wetFront": {
+            "farthestWetNorth": 48,
+            "farthestWetSouth": 73,
+            "depthMassNorth": 11.198896093516964,
+            "depthMassSouth": 6.097878441179887,
+            "wetCountNorth": 1029,
+            "wetCountSouth": 1652
+          },
+          "head": {
+            "8": {
+              "northMeanHead": 0.5414362670579815,
+              "southMeanHead": 0.575732170151348,
+              "northMinusSouthMeanHead": -0.0342959030933665
+            },
+            "16": {
+              "northMeanHead": 0.5463843079073051,
+              "southMeanHead": 0.5474251493152607,
+              "northMinusSouthMeanHead": -0.0010408414079555728
+            },
+            "24": {
+              "northMeanHead": 0.5474327390737908,
+              "southMeanHead": 0.5258958269494458,
+              "northMinusSouthMeanHead": 0.021536912124344942
+            },
+            "32": {
+              "northMeanHead": 0.5073528539611813,
+              "southMeanHead": 0.515180446849942,
+              "northMinusSouthMeanHead": -0.00782759288876067
+            }
+          }
+        },
+        "1000": {
+          "maxAbsBedMinusInitialVariant": 0,
+          "wetFront": {
+            "farthestWetNorth": 48,
+            "farthestWetSouth": 95,
+            "depthMassNorth": 21.473846386185983,
+            "depthMassSouth": 11.761278705573659,
+            "wetCountNorth": 1923,
+            "wetCountSouth": 2328
+          },
+          "head": {
+            "8": {
+              "northMeanHead": 0.5327625264180824,
+              "southMeanHead": 0.5757341329812976,
+              "northMinusSouthMeanHead": -0.04297160656321519
+            },
+            "16": {
+              "northMeanHead": 0.5448704030821759,
+              "southMeanHead": 0.5474242553727253,
+              "northMinusSouthMeanHead": -0.0025538522905493855
+            },
+            "24": {
+              "northMeanHead": 0.5430545594518124,
+              "southMeanHead": 0.5250116280382369,
+              "northMinusSouthMeanHead": 0.01804293141357549
+            },
+            "32": {
+              "northMeanHead": 0.5070378668005525,
+              "southMeanHead": 0.5137332513641931,
+              "northMinusSouthMeanHead": -0.006695384563640605
+            }
+          }
+        }
+      }
+    }
+  },
+  "causal": {
+    "aliases": {
+      "CONFIGURED_PROD": "RAW_PROD (bit-identical configured and raw beds)",
+      "CONFIGURED_MIRRORED_Y": "RAW_MIRRORED_Y (bit-identical configured and raw beds)"
+    },
+    "lateMargins": {
+      "baselineProductionLateMargin": 1.4480587206580724,
+      "rawProdLateMargin": 1.4480587206580724,
+      "rawMirrorLateMargin": 0.5364732022850512,
+      "configuredMirrorLateMargin": 0.5364732022850512
+    },
+    "effects": {
+      "bedEffectProdMouth": 0,
+      "bedEffectMirrorMouth": 0,
+      "meanBedEffect": 0,
+      "mouthEffectRawBed": 0.9115855183730212,
+      "mouthEffectConfiguredBed": 0.9115855183730212,
+      "meanMouthEffect": 0.9115855183730212,
+      "interaction": 0,
+      "absoluteInteraction": 0,
+      "interactionNormalized": 0
+    },
+    "mouthFlip": {
+      "value": false,
+      "rawBed": false,
+      "configuredBed": false
+    },
+    "bedFlip": {
+      "value": false,
+      "productionMouth": false,
+      "mirroredMouth": false
+    },
+    "rawTerrainCausalTest": {
+      "rawProdMultiscaleNorthAfter250": true,
+      "rawMirrorMultiscaleNorthAfter250": false
+    },
+    "classification": "INITIAL-FACTOR B — MOUTH ORIENTATION DOMINATES"
+  },
+  "completedAt": "2026-09-09T15:42:21.299Z"
+}

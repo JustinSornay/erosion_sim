@@ -1,0 +1,648 @@
+{
+  "purpose": "Read-only audit of initial-routing-factorial summary. No simulation, source, terrain, or production file was executed or changed.",
+  "input": "tests/generated/initial-routing-factorial/summary.json",
+  "simulationJsUnchanged": true,
+  "effectiveFactorial": {
+    "configureSourceOutletsModifiesB": "NO",
+    "bedConfigurationEffect": "NONE",
+    "configuredMinusRawMaxAbsDiff": 0,
+    "afterMaskMinusConfiguredMaxAbsDiff": 0,
+    "effectiveFactorial": "EFFECTIVE_FACTORIAL = MOUTH_ONLY_ON_FIXED_RAW_TERRAIN",
+    "aliases": {
+      "RAW_PROD_EQUALS_CONFIGURED_PROD": true,
+      "RAW_MIRRORED_EQUALS_CONFIGURED_MIRRORED": true
+    }
+  },
+  "exactMargins": {
+    "baselineProductionLateMargin": 1.4480587206580724,
+    "rawProdLateMargin": 1.4480587206580724,
+    "rawMirrorLateMargin": 0.5364732022850512,
+    "configuredMirrorLateMargin": 0.5364732022850512,
+    "meanBedEffect": 0,
+    "meanMouthEffect": 0.9115855183730212,
+    "interaction": 0,
+    "mouthEffectNormalized": 0.6295224809383074
+  },
+  "directionsByWindow": [
+    {
+      "window": "1..100",
+      "rawProd": {
+        "majorityR16R24R32": "MIXED",
+        "multiscaleDirection": "MIXED"
+      },
+      "rawMirroredY": {
+        "majorityR16R24R32": "NET_SOUTH",
+        "multiscaleDirection": "MULTISCALE_NET_SOUTH"
+      }
+    },
+    {
+      "window": "101..250",
+      "rawProd": {
+        "majorityR16R24R32": "NET_NORTH",
+        "multiscaleDirection": "MULTISCALE_NET_NORTH"
+      },
+      "rawMirroredY": {
+        "majorityR16R24R32": "NET_SOUTH",
+        "multiscaleDirection": "MULTISCALE_NET_SOUTH"
+      }
+    },
+    {
+      "window": "251..500",
+      "rawProd": {
+        "majorityR16R24R32": "NET_NORTH",
+        "multiscaleDirection": "MULTISCALE_NET_NORTH"
+      },
+      "rawMirroredY": {
+        "majorityR16R24R32": "NET_NORTH",
+        "multiscaleDirection": "NET_NORTH"
+      }
+    },
+    {
+      "window": "501..750",
+      "rawProd": {
+        "majorityR16R24R32": "NET_NORTH",
+        "multiscaleDirection": "MULTISCALE_NET_NORTH"
+      },
+      "rawMirroredY": {
+        "majorityR16R24R32": "NET_NORTH",
+        "multiscaleDirection": "MULTISCALE_NET_NORTH"
+      }
+    },
+    {
+      "window": "751..1000",
+      "rawProd": {
+        "majorityR16R24R32": "NET_NORTH",
+        "multiscaleDirection": "MULTISCALE_NET_NORTH"
+      },
+      "rawMirroredY": {
+        "majorityR16R24R32": "NET_NORTH",
+        "multiscaleDirection": "MULTISCALE_NET_NORTH"
+      }
+    }
+  ],
+  "directionsByRadius": {
+    "251..500": {
+      "8": {
+        "rawProd": {
+          "northNetOutward": 382.8303649346385,
+          "southNetOutward": 2.8060360233667494e-37,
+          "northMinusSouthNet": 382.8303649346385,
+          "direction": "NET_NORTH"
+        },
+        "rawMirroredY": {
+          "northNetOutward": 219.66081734980725,
+          "southNetOutward": 229.96336125954986,
+          "northMinusSouthNet": -10.30254390974261,
+          "direction": "NET_SOUTH"
+        }
+      },
+      "12": {
+        "rawProd": {
+          "northNetOutward": 320.30392127401905,
+          "southNetOutward": 0.2624735523146955,
+          "northMinusSouthNet": 320.04144772170434,
+          "direction": "NET_NORTH"
+        },
+        "rawMirroredY": {
+          "northNetOutward": 179.412390803191,
+          "southNetOutward": 177.70163393995767,
+          "northMinusSouthNet": 1.710756863233314,
+          "direction": "NET_NORTH"
+        }
+      },
+      "16": {
+        "rawProd": {
+          "northNetOutward": 390.38407030251284,
+          "southNetOutward": 0.00007581674446657138,
+          "northMinusSouthNet": 390.38399448576837,
+          "direction": "NET_NORTH"
+        },
+        "rawMirroredY": {
+          "northNetOutward": 182.52125886649458,
+          "southNetOutward": 18.02734609454821,
+          "northMinusSouthNet": 164.49391277194636,
+          "direction": "NET_NORTH"
+        }
+      },
+      "24": {
+        "rawProd": {
+          "northNetOutward": 302.4539148176069,
+          "southNetOutward": 0.2949268835145445,
+          "northMinusSouthNet": 302.15898793409235,
+          "direction": "NET_NORTH"
+        },
+        "rawMirroredY": {
+          "northNetOutward": 129.69324136332517,
+          "southNetOutward": 89.69361950909841,
+          "northMinusSouthNet": 39.99962185422676,
+          "direction": "NET_NORTH"
+        }
+      },
+      "32": {
+        "rawProd": {
+          "northNetOutward": 89.01175236062642,
+          "southNetOutward": 0,
+          "northMinusSouthNet": 89.01175236062642,
+          "direction": "NET_NORTH"
+        },
+        "rawMirroredY": {
+          "northNetOutward": 23.32448209433808,
+          "southNetOutward": 84.95268938497516,
+          "northMinusSouthNet": -61.62820729063708,
+          "direction": "NET_SOUTH"
+        }
+      },
+      "48": {
+        "rawProd": {
+          "northNetOutward": null,
+          "southNetOutward": 0,
+          "northMinusSouthNet": null,
+          "direction": "UNAVAILABLE"
+        },
+        "rawMirroredY": {
+          "northNetOutward": null,
+          "southNetOutward": 16.666810025717098,
+          "northMinusSouthNet": null,
+          "direction": "UNAVAILABLE"
+        }
+      }
+    },
+    "501..750": {
+      "8": {
+        "rawProd": {
+          "northNetOutward": 431.49439350722264,
+          "southNetOutward": 0,
+          "northMinusSouthNet": 431.49439350722264,
+          "direction": "NET_NORTH"
+        },
+        "rawMirroredY": {
+          "northNetOutward": 254.79382708740204,
+          "southNetOutward": 235.92563623003662,
+          "northMinusSouthNet": 18.86819085736542,
+          "direction": "NET_NORTH"
+        }
+      },
+      "12": {
+        "rawProd": {
+          "northNetOutward": 300.58383602649667,
+          "southNetOutward": -0.00000562300827543612,
+          "northMinusSouthNet": 300.58384164950496,
+          "direction": "NET_NORTH"
+        },
+        "rawMirroredY": {
+          "northNetOutward": 185.34986206036345,
+          "southNetOutward": 206.57623361392797,
+          "northMinusSouthNet": -21.22637155356452,
+          "direction": "NET_SOUTH"
+        }
+      },
+      "16": {
+        "rawProd": {
+          "northNetOutward": 322.7921964598319,
+          "southNetOutward": 0,
+          "northMinusSouthNet": 322.7921964598319,
+          "direction": "NET_NORTH"
+        },
+        "rawMirroredY": {
+          "northNetOutward": 198.12594768533884,
+          "southNetOutward": 8.69672520993616,
+          "northMinusSouthNet": 189.4292224754027,
+          "direction": "NET_NORTH"
+        }
+      },
+      "24": {
+        "rawProd": {
+          "northNetOutward": 429.0607483233618,
+          "southNetOutward": 0,
+          "northMinusSouthNet": 429.0607483233618,
+          "direction": "NET_NORTH"
+        },
+        "rawMirroredY": {
+          "northNetOutward": 239.51608437367608,
+          "southNetOutward": 69.16064292855684,
+          "northMinusSouthNet": 170.35544144511925,
+          "direction": "NET_NORTH"
+        }
+      },
+      "32": {
+        "rawProd": {
+          "northNetOutward": 618.8496351027833,
+          "southNetOutward": 0,
+          "northMinusSouthNet": 618.8496351027833,
+          "direction": "NET_NORTH"
+        },
+        "rawMirroredY": {
+          "northNetOutward": 330.14105799370844,
+          "southNetOutward": 181.0921080735425,
+          "northMinusSouthNet": 149.04894992016594,
+          "direction": "NET_NORTH"
+        }
+      },
+      "48": {
+        "rawProd": {
+          "northNetOutward": null,
+          "southNetOutward": 0,
+          "northMinusSouthNet": null,
+          "direction": "UNAVAILABLE"
+        },
+        "rawMirroredY": {
+          "northNetOutward": null,
+          "southNetOutward": 224.02335218459893,
+          "northMinusSouthNet": null,
+          "direction": "UNAVAILABLE"
+        }
+      }
+    },
+    "751..1000": {
+      "8": {
+        "rawProd": {
+          "northNetOutward": 447.3911214528256,
+          "southNetOutward": 0,
+          "northMinusSouthNet": 447.3911214528256,
+          "direction": "NET_NORTH"
+        },
+        "rawMirroredY": {
+          "northNetOutward": 247.52583556274985,
+          "southNetOutward": 236.12084668222815,
+          "northMinusSouthNet": 11.4049888805217,
+          "direction": "NET_NORTH"
+        }
+      },
+      "12": {
+        "rawProd": {
+          "northNetOutward": 290.3058228381396,
+          "southNetOutward": 0,
+          "northMinusSouthNet": 290.3058228381396,
+          "direction": "NET_NORTH"
+        },
+        "rawMirroredY": {
+          "northNetOutward": 158.77949661813398,
+          "southNetOutward": 210.92671722869852,
+          "northMinusSouthNet": -52.147220610564545,
+          "direction": "NET_SOUTH"
+        }
+      },
+      "16": {
+        "rawProd": {
+          "northNetOutward": 293.00727722995873,
+          "southNetOutward": 0,
+          "northMinusSouthNet": 293.00727722995873,
+          "direction": "NET_NORTH"
+        },
+        "rawMirroredY": {
+          "northNetOutward": 161.34403738640452,
+          "southNetOutward": 7.711744499152427,
+          "northMinusSouthNet": 153.6322928872521,
+          "direction": "NET_NORTH"
+        }
+      },
+      "24": {
+        "rawProd": {
+          "northNetOutward": 284.31618668941417,
+          "southNetOutward": 0,
+          "northMinusSouthNet": 284.31618668941417,
+          "direction": "NET_NORTH"
+        },
+        "rawMirroredY": {
+          "northNetOutward": 163.83581294047852,
+          "southNetOutward": 54.022559327708656,
+          "northMinusSouthNet": 109.81325361276987,
+          "direction": "NET_NORTH"
+        }
+      },
+      "32": {
+        "rawProd": {
+          "northNetOutward": 224.06203718175888,
+          "southNetOutward": 0,
+          "northMinusSouthNet": 224.06203718175888,
+          "direction": "NET_NORTH"
+        },
+        "rawMirroredY": {
+          "northNetOutward": 131.1487620122017,
+          "southNetOutward": 98.71811892533468,
+          "northMinusSouthNet": 32.43064308686702,
+          "direction": "NET_NORTH"
+        }
+      },
+      "48": {
+        "rawProd": {
+          "northNetOutward": null,
+          "southNetOutward": 0,
+          "northMinusSouthNet": null,
+          "direction": "UNAVAILABLE"
+        },
+        "rawMirroredY": {
+          "northNetOutward": null,
+          "southNetOutward": 92.4904296682932,
+          "northMinusSouthNet": null,
+          "direction": "UNAVAILABLE"
+        }
+      }
+    }
+  },
+  "persistence": {
+    "8": {
+      "rawProd": 5,
+      "rawMirroredY": 159
+    },
+    "12": {
+      "rawProd": 83,
+      "rawMirroredY": 235
+    },
+    "16": {
+      "rawProd": 112,
+      "rawMirroredY": 262
+    },
+    "24": {
+      "rawProd": 168,
+      "rawMirroredY": 386
+    },
+    "32": {
+      "rawProd": 235,
+      "rawMirroredY": 551
+    },
+    "48": {
+      "rawProd": null,
+      "rawMirroredY": null
+    }
+  },
+  "signControl": {
+    "mouthSignControl": false,
+    "priorMouthFlip": false,
+    "mirrorRemainsNorth": false,
+    "mirrorMostlyNorth": true,
+    "mirrorMultiscaleNorthWindowCount": 2
+  },
+  "amplification": {
+    "perWindow": [
+      {
+        "window": "251..500",
+        "prodLateMargin": 1.0420729797073163,
+        "mirrorLateMargin": 0.19048710311404804,
+        "mouthEffect": 0.8515858765932682,
+        "relativeEffect": 0.8172036826369401
+      },
+      {
+        "window": "501..750",
+        "prodLateMargin": 1.8276034398479692,
+        "mirrorLateMargin": 0.6784448184542505,
+        "mouthEffect": 1.1491586213937186,
+        "relativeEffect": 0.6287789770680845
+      },
+      {
+        "window": "751..1000",
+        "prodLateMargin": 1.0685140014681758,
+        "mirrorLateMargin": 0.394501586115852,
+        "mouthEffect": 0.6740124153523237,
+        "relativeEffect": 0.6307941818508761
+      }
+    ],
+    "meanRelativeEffect": 0.6922589471853002,
+    "mouthStrongAmplifier": true
+  },
+  "rawTerrainStaticSignal": {
+    "inverseRMeanDzdy": {
+      "R8": 0.004844178408710525,
+      "R16": 0.0021465342050347707
+    },
+    "escapeBarrier": {
+      "16": {
+        "north": 0.5291581153869629,
+        "south": 0.5291581153869629
+      },
+      "24": {
+        "north": 0.5291581153869629,
+        "south": 0.5291581153869629
+      },
+      "32": {
+        "north": 0.5291581153869629,
+        "south": 0.5291581153869629
+      },
+      "48": {
+        "north": 0.5291581153869629,
+        "south": 0.5308391451835632
+      }
+    },
+    "maxMonotonicNorthReach": 12,
+    "maxMonotonicSouthReach": 0,
+    "steepestDescentByOutlet": {
+      "0": 0,
+      "1": 0,
+      "2": 0
+    },
+    "descriptiveAssessment": "Positive inverse-R dzdy and north monotonic reach exceed south; R16-R32 escape barriers tie, R48 north is lower. Static RAW indicators remain compatible with north preference; no static vote applied."
+  },
+  "wetFrontAndHead": {
+    "100": {
+      "wetFront": {
+        "farthestWetNorth": {
+          "rawProd": 13,
+          "rawMirroredY": 12,
+          "mirrorOverProd": 0.9230769230769231
+        },
+        "farthestWetSouth": {
+          "rawProd": 1,
+          "rawMirroredY": 45,
+          "mirrorOverProd": 45
+        },
+        "depthMassNorth": {
+          "rawProd": 3.5541883644327754,
+          "rawMirroredY": 1.1808110733093145,
+          "mirrorOverProd": 0.3322308646119728
+        },
+        "depthMassSouth": {
+          "rawProd": 0.011313528542359563,
+          "rawMirroredY": 2.246337621116936,
+          "mirrorOverProd": 198.553228792088
+        },
+        "wetCountNorth": {
+          "rawProd": 201,
+          "rawMirroredY": 232,
+          "mirrorOverProd": 1.154228855721393
+        },
+        "wetCountSouth": {
+          "rawProd": 9,
+          "rawMirroredY": 907,
+          "mirrorOverProd": 100.77777777777777
+        }
+      },
+      "head": {
+        "8": {
+          "rawProdNorthMinusSouthMeanHead": -0.02169269182109823,
+          "rawMirroredYNorthMinusSouthMeanHead": -0.05600887509327379
+        },
+        "16": {
+          "rawProdNorthMinusSouthMeanHead": -0.0027404861016706583,
+          "rawMirroredYNorthMinusSouthMeanHead": -0.0027681687546811107
+        },
+        "24": {
+          "rawProdNorthMinusSouthMeanHead": 0.017590234474260003,
+          "rawMirroredYNorthMinusSouthMeanHead": 0.01758830127346067
+        },
+        "32": {
+          "rawProdNorthMinusSouthMeanHead": -0.006810427170533373,
+          "rawMirroredYNorthMinusSouthMeanHead": -0.006810532712217432
+        }
+      }
+    },
+    "250": {
+      "wetFront": {
+        "farthestWetNorth": {
+          "rawProd": 29,
+          "rawMirroredY": 28,
+          "mirrorOverProd": 0.9655172413793104
+        },
+        "farthestWetSouth": {
+          "rawProd": 20,
+          "rawMirroredY": 73,
+          "mirrorOverProd": 3.65
+        },
+        "depthMassNorth": {
+          "rawProd": 8.89485588167065,
+          "rawMirroredY": 4.903632903004791,
+          "mirrorOverProd": 0.5512886288702612
+        },
+        "depthMassSouth": {
+          "rawProd": 0.12229950194796402,
+          "rawMirroredY": 4.059888683509598,
+          "mirrorOverProd": 33.1962814144329
+        },
+        "wetCountNorth": {
+          "rawProd": 751,
+          "rawMirroredY": 571,
+          "mirrorOverProd": 0.7603195739014648
+        },
+        "wetCountSouth": {
+          "rawProd": 269,
+          "rawMirroredY": 1333,
+          "mirrorOverProd": 4.955390334572491
+        }
+      },
+      "head": {
+        "8": {
+          "rawProdNorthMinusSouthMeanHead": -0.01711837174918729,
+          "rawMirroredYNorthMinusSouthMeanHead": -0.025466321495032918
+        },
+        "16": {
+          "rawProdNorthMinusSouthMeanHead": 0.008001979866278486,
+          "rawMirroredYNorthMinusSouthMeanHead": -0.004603698889971808
+        },
+        "24": {
+          "rawProdNorthMinusSouthMeanHead": 0.017837064988320717,
+          "rawMirroredYNorthMinusSouthMeanHead": 0.017126102529200216
+        },
+        "32": {
+          "rawProdNorthMinusSouthMeanHead": -0.006810427170492739,
+          "rawMirroredYNorthMinusSouthMeanHead": -0.0068169060772023116
+        }
+      }
+    },
+    "500": {
+      "wetFront": {
+        "farthestWetNorth": {
+          "rawProd": 48,
+          "rawMirroredY": 48,
+          "mirrorOverProd": 1
+        },
+        "farthestWetSouth": {
+          "rawProd": 28,
+          "rawMirroredY": 73,
+          "mirrorOverProd": 2.607142857142857
+        },
+        "depthMassNorth": {
+          "rawProd": 16.14589531781826,
+          "rawMirroredY": 11.198896093516964,
+          "mirrorOverProd": 0.6936063855906527
+        },
+        "depthMassSouth": {
+          "rawProd": 1.2253746605676952,
+          "rawMirroredY": 6.097878441179887,
+          "mirrorOverProd": 4.976337962101194
+        },
+        "wetCountNorth": {
+          "rawProd": 1337,
+          "rawMirroredY": 1029,
+          "mirrorOverProd": 0.7696335078534031
+        },
+        "wetCountSouth": {
+          "rawProd": 159,
+          "rawMirroredY": 1652,
+          "mirrorOverProd": 10.38993710691824
+        }
+      },
+      "head": {
+        "8": {
+          "rawProdNorthMinusSouthMeanHead": -0.029358340783373404,
+          "rawMirroredYNorthMinusSouthMeanHead": -0.0342959030933665
+        },
+        "16": {
+          "rawProdNorthMinusSouthMeanHead": 0.0019072206150806403,
+          "rawMirroredYNorthMinusSouthMeanHead": -0.0010408414079555728
+        },
+        "24": {
+          "rawProdNorthMinusSouthMeanHead": 0.02607006850897109,
+          "rawMirroredYNorthMinusSouthMeanHead": 0.021536912124344942
+        },
+        "32": {
+          "rawProdNorthMinusSouthMeanHead": -0.002522074102916383,
+          "rawMirroredYNorthMinusSouthMeanHead": -0.00782759288876067
+        }
+      }
+    },
+    "1000": {
+      "wetFront": {
+        "farthestWetNorth": {
+          "rawProd": 48,
+          "rawMirroredY": 48,
+          "mirrorOverProd": 1
+        },
+        "farthestWetSouth": {
+          "rawProd": 31,
+          "rawMirroredY": 95,
+          "mirrorOverProd": 3.064516129032258
+        },
+        "depthMassNorth": {
+          "rawProd": 29.427790572923072,
+          "rawMirroredY": 21.473846386185983,
+          "mirrorOverProd": 0.7297131713973924
+        },
+        "depthMassSouth": {
+          "rawProd": 3.8198717719369597,
+          "rawMirroredY": 11.761278705573659,
+          "mirrorOverProd": 3.078972124661089
+        },
+        "wetCountNorth": {
+          "rawProd": 2079,
+          "rawMirroredY": 1923,
+          "mirrorOverProd": 0.924963924963925
+        },
+        "wetCountSouth": {
+          "rawProd": 506,
+          "rawMirroredY": 2328,
+          "mirrorOverProd": 4.600790513833992
+        }
+      },
+      "head": {
+        "8": {
+          "rawProdNorthMinusSouthMeanHead": -0.03782612533048402,
+          "rawMirroredYNorthMinusSouthMeanHead": -0.04297160656321519
+        },
+        "16": {
+          "rawProdNorthMinusSouthMeanHead": -0.0016074080410334313,
+          "rawMirroredYNorthMinusSouthMeanHead": -0.0025538522905493855
+        },
+        "24": {
+          "rawProdNorthMinusSouthMeanHead": 0.020153097415162358,
+          "rawMirroredYNorthMinusSouthMeanHead": 0.01804293141357549
+        },
+        "32": {
+          "rawProdNorthMinusSouthMeanHead": -0.005845876826116703,
+          "rawMirroredYNorthMinusSouthMeanHead": -0.006695384563640605
+        }
+      }
+    }
+  },
+  "classification": "INITIAL-FACTOR-AUDIT C — RAW TERRAIN KEEPS NORTH SIGN; MOUTH STRONGLY AMPLIFIES",
+  "interpretation": "RAW terrain probably determines north sign; production mouth strongly amplifies that bias without creating it.",
+  "completedAt": "2026-09-09T16:23:00.059Z"
+}

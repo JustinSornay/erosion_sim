@@ -1,0 +1,5 @@
+[start] 2026-09-09T15:42:16.251Z initial-routing factorial
+2026-09-09T15:42:16.252Z [snapshot] genTerrain, configureSourceOutlets, refreshSourceProtectionMask
+2026-09-09T15:42:17.171Z [factorial] configuredBedChanges=false
+2026-09-09T15:42:19.909Z [control] independent source-routing-causal-freeze NO_MORPH reference
+2026-09-09T15:42:21.301Z [complete] configureSourceOutlets modifies b: NO; INITIAL-FACTOR B — MOUTH ORIENTATION DOMINATES

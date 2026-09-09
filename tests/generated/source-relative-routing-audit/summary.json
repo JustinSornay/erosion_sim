@@ -1,0 +1,4715 @@
+{
+  "purpose": "Net-flux routing audit derived solely from source-relative-morphology/summary.json; no simulation was run.",
+  "instrumentationValidity": {
+    "invalidForQuantitativeClassification": [
+      "hydraulicExposure.erosion",
+      "hydraulicExposure.deposition",
+      "erosionPerWetCellStep",
+      "depositionPerWetCellStep",
+      "erosionPerDepthExposure",
+      "depositionPerDepthExposure"
+    ],
+    "reason": "e-priorE and d-priorD are accumulated at every step while priorE/priorD advance only at a window boundary.",
+    "validInputs": [
+      "morphology by window",
+      "morphology checkpoints",
+      "waterControlSurfaces",
+      "sedimentControlSurfaces",
+      "fullGridAt10000",
+      "identity controls"
+    ]
+  },
+  "sourceAuditConclusions": {
+    "earlyTransientDominated": false,
+    "persistentUpstreamMorphology": {
+      "current": {
+        "erosion": false,
+        "deposition": false
+      },
+      "positiveLegacy": {
+        "erosion": true,
+        "deposition": false
+      }
+    },
+    "fractionFinalUpstreamProducedBy2500": {
+      "erosion": 0.12390977056154283,
+      "deposition": 0.01364685439691116
+    },
+    "bulkWaterDirection": "BULK_UPSTREAM_HYDRAULICS",
+    "sedimentDirection": "UPSTREAM_SEDIMENT_ROUTING",
+    "classification": "SOURCE-REL B — PERSISTENT BULK UPSTREAM HYDRAULIC ROUTING",
+    "reductionCurrentToLegacy": true,
+    "lateDirections": {
+      "water": {
+        "north": 0.9999008952935474,
+        "south": 0
+      },
+      "sediment": {
+        "north": 0.999037142931896,
+        "south": 0
+      }
+    }
+  },
+  "identityControls": {
+    "currentBitIdenticalProduction": {
+      "passes": true,
+      "differences": {
+        "1000": {
+          "b": 0,
+          "d": 0,
+          "s": 0,
+          "u": 0,
+          "v": 0,
+          "fL": 0,
+          "fR": 0,
+          "fT": 0,
+          "fB": 0
+        },
+        "5000": {
+          "b": 0,
+          "d": 0,
+          "s": 0,
+          "u": 0,
+          "v": 0,
+          "fL": 0,
+          "fR": 0,
+          "fT": 0,
+          "fB": 0
+        },
+        "10000": {
+          "b": 0,
+          "d": 0,
+          "s": 0,
+          "u": 0,
+          "v": 0,
+          "fL": 0,
+          "fR": 0,
+          "fT": 0,
+          "fB": 0
+        }
+      }
+    },
+    "positiveLegacyBitIdenticalValidatedVariant": {
+      "passes": true,
+      "differences": {
+        "1000": {
+          "b": 0,
+          "d": 0,
+          "s": 0,
+          "u": 0,
+          "v": 0,
+          "fL": 0,
+          "fR": 0,
+          "fT": 0,
+          "fB": 0
+        },
+        "5000": {
+          "b": 0,
+          "d": 0,
+          "s": 0,
+          "u": 0,
+          "v": 0,
+          "fL": 0,
+          "fR": 0,
+          "fT": 0,
+          "fB": 0
+        },
+        "10000": {
+          "b": 0,
+          "d": 0,
+          "s": 0,
+          "u": 0,
+          "v": 0,
+          "fL": 0,
+          "fR": 0,
+          "fT": 0,
+          "fB": 0
+        }
+      }
+    }
+  },
+  "variants": {
+    "CURRENT": {
+      "windows": {
+        "0..1000": {
+          "morphology": {
+            "halfPlanes": {
+              "UPSTREAM": {
+                "erosionShare": 0.6549376779743185,
+                "depositionShare": 0.7530163937903528
+              },
+              "DOWNSTREAM": {
+                "erosionShare": 0.008351951815312456,
+                "depositionShare": 0.020594002143224772
+              },
+              "SOURCE_BAND": {
+                "erosionShare": 0.3367103702103687,
+                "depositionShare": 0.22638960406642072
+              }
+            },
+            "sectors": {
+              "UPSTREAM_WEDGE": {
+                "erosionShare": 0.5487017028326981,
+                "depositionShare": 0.5936542266145279
+              },
+              "DOWNSTREAM_WEDGE": {
+                "erosionShare": 0.00013040857155464667,
+                "depositionShare": 0.0005742409748073288
+              },
+              "LEFT_LATERAL": {
+                "erosionShare": 0.003193499686946139,
+                "depositionShare": 0.009922440255945943
+              },
+              "RIGHT_LATERAL": {
+                "erosionShare": 0.4062445800868144,
+                "depositionShare": 0.3946022890443694
+              }
+            },
+            "annuliNormalisedByWindowTotal": {
+              "r7..12": {
+                "upstream": {
+                  "grossErosion": 0.22054608381058924,
+                  "grossDeposition": 0.030172346884692433,
+                  "erosionShare": 0.10141237925391232,
+                  "depositionShare": 0.029525801596118128
+                },
+                "downstream": {
+                  "grossErosion": 0.000010994539747971437,
+                  "grossDeposition": 0.00024517898295132426,
+                  "erosionShare": 0.000005055553086134457,
+                  "depositionShare": 0.00023992518824684134
+                }
+              },
+              "r13..24": {
+                "upstream": {
+                  "grossErosion": 0.5029584845123648,
+                  "grossDeposition": 0.15387522300095388,
+                  "erosionShare": 0.23127237491165975,
+                  "depositionShare": 0.15057792230241057
+                },
+                "downstream": {
+                  "grossErosion": 0.0007755534806659205,
+                  "grossDeposition": 0.001980768349284669,
+                  "erosionShare": 0.00035661809248234666,
+                  "depositionShare": 0.0019383236415898611
+                }
+              },
+              "r25..48": {
+                "upstream": {
+                  "grossErosion": 0.6202577302164202,
+                  "grossDeposition": 0.5314314781638504,
+                  "erosionShare": 0.28520938157260667,
+                  "depositionShare": 0.5200437488725226
+                },
+                "downstream": {
+                  "grossErosion": 0.01690753722205627,
+                  "grossDeposition": 0.01846439850767265,
+                  "erosionShare": 0.007774491151179914,
+                  "depositionShare": 0.01806873588629563
+                }
+              },
+              "r49..96": {
+                "upstream": {
+                  "grossErosion": 0.08056026523347258,
+                  "grossDeposition": 0.05402662546589464,
+                  "erosionShare": 0.03704354223613934,
+                  "depositionShare": 0.05286892101930204
+                },
+                "downstream": {
+                  "grossErosion": 0.00046928178030721467,
+                  "grossDeposition": 0.0003546162887798976,
+                  "erosionShare": 0.0002157870185640603,
+                  "depositionShare": 0.000347017427092454
+                }
+              },
+              "r97+": {
+                "upstream": {
+                  "grossErosion": 0,
+                  "grossDeposition": 0,
+                  "erosionShare": 0,
+                  "depositionShare": 0
+                },
+                "downstream": {
+                  "grossErosion": 0,
+                  "grossDeposition": 0,
+                  "erosionShare": 0,
+                  "depositionShare": 0
+                }
+              }
+            },
+            "distributions": {
+              "erosion": {
+                "centroidDy": -15.605342727684,
+                "p10Dy": -37,
+                "p25Dy": -25,
+                "p50Dy": -9,
+                "p75Dy": -6,
+                "p90Dy": -4,
+                "centroidR": 22.65234090153826,
+                "p50R": 18.439088914585778,
+                "p90R": 43.046486500061775
+              },
+              "deposition": {
+                "centroidDy": -21.23699626431227,
+                "p10Dy": -42,
+                "p25Dy": -38,
+                "p50Dy": -19,
+                "p75Dy": -7,
+                "p90Dy": -1,
+                "centroidR": 31.526136002362346,
+                "p50R": 33.734255586866006,
+                "p90R": 46.09772228646444
+              }
+            }
+          },
+          "water": {
+            "8": {
+              "positiveOutShares": {
+                "north": 0.7375158015261846,
+                "south": 0.0003177220930345068,
+                "west": 0.009562723890402532,
+                "east": 0.2526037524903784
+              },
+              "net": {
+                "north": 1587.175890708837,
+                "south": 0.6847734325988734,
+                "west": 19.561648308714318,
+                "east": 544.4199946498321
+              },
+              "netTotalOutward": 2151.842307099982,
+              "netFractionSigned": {
+                "north": 0.7375893138042533,
+                "south": 0.00031822658674358727,
+                "west": 0.009090651412592297,
+                "east": 0.253001808196411
+              },
+              "northMinusSouthNet": 1586.4911172762381,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.0014880220079998,
+                "south": 1,
+                "west": 1.0535997462894295,
+                "east": 1.0000120161821227
+              }
+            },
+            "12": {
+              "positiveOutShares": {
+                "north": 0.5283596559390563,
+                "south": 0.000411701998354651,
+                "west": 0.0071324714860556675,
+                "east": 0.4640961705765335
+              },
+              "net": {
+                "north": 1077.1608229464207,
+                "south": 0.7584741405707296,
+                "west": 15.159982098468795,
+                "east": 992.1724045188552
+              },
+              "netTotalOutward": 2085.2516837043154,
+              "netFractionSigned": {
+                "north": 0.516561540922923,
+                "south": 0.0003637326594664818,
+                "west": 0.007270097042452958,
+                "east": 0.4758046293751576
+              },
+              "northMinusSouthNet": 1076.40234880585,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.0486465983256907,
+                "south": 1.1604388222950885,
+                "west": 1.0058226443976046,
+                "east": 1.00000205920843
+              }
+            },
+            "16": {
+              "positiveOutShares": {
+                "north": 0.5156564697320503,
+                "south": 1.644315875923842e-7,
+                "west": 0.00183461792424159,
+                "east": 0.48250874791212056
+              },
+              "net": {
+                "north": 1061.926230215894,
+                "south": 0.00008820841863341917,
+                "west": 3.3909405731161226,
+                "east": 994.4658991230406
+              },
+              "netTotalOutward": 2059.783158120469,
+              "netFractionSigned": {
+                "north": 0.5155524386289724,
+                "south": 4.2824128494141314e-8,
+                "west": 0.0016462609472981228,
+                "east": 0.48280125759960113
+              },
+              "northMinusSouthNet": 1061.9261420074754,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.0008339421383918,
+                "south": 3.842121693920763,
+                "west": 1.1151193611401933,
+                "east": 1.0000257865812283
+              }
+            },
+            "24": {
+              "positiveOutShares": {
+                "north": 0.5366751319934747,
+                "south": 0.00015011651332033475,
+                "west": 0.0008120713384921477,
+                "east": 0.4623626801547128
+              },
+              "net": {
+                "north": 1029.7947465361133,
+                "south": 0.2882830562398671,
+                "west": 1.5594980334967428,
+                "east": 876.7917860353155
+              },
+              "netTotalOutward": 1908.4343136611653,
+              "netFractionSigned": {
+                "north": 0.5396018815866612,
+                "south": 0.00015105736371236227,
+                "west": 0.0008171609692476034,
+                "east": 0.45942990008037876
+              },
+              "northMinusSouthNet": 1029.5064634798734,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.0008095680423734,
+                "south": 1,
+                "west": 1.0000000001147613,
+                "east": 1.0126909964219144
+              }
+            },
+            "32": {
+              "positiveOutShares": {
+                "north": 0.5667755444689352,
+                "south": 0,
+                "west": 1.1969277088255374e-16,
+                "east": 0.43322445553106464
+              },
+              "net": {
+                "north": 947.172251164145,
+                "south": 0,
+                "west": 2.0002923797604463e-13,
+                "east": 688.8356382809941
+              },
+              "netTotalOutward": 1636.0078894451394,
+              "netFractionSigned": {
+                "north": 0.5789533517991673,
+                "south": 0,
+                "west": 1.2226667075785655e-16,
+                "east": 0.4210466482008325
+              },
+              "northMinusSouthNet": 947.172251164145,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.0000177209535337,
+                "south": 0,
+                "west": 1,
+                "east": 1.0510488852939575
+              }
+            },
+            "48": {
+              "positiveOutShares": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 1
+              },
+              "net": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 76.42051538945347
+              },
+              "netTotalOutward": 76.42051538945347,
+              "netFractionSigned": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 1
+              },
+              "northMinusSouthNet": 0,
+              "localDirection": "MIXED/RECIRCULATING",
+              "recirculationIndex": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 1.0000049053396591
+              }
+            }
+          },
+          "waterR16R24R32Summary": {
+            "medianPositiveOutShares": {
+              "north": 0.5366751319934747,
+              "south": 1.644315875923842e-7,
+              "west": 0.0008120713384921477,
+              "east": 0.4623626801547128
+            },
+            "medianNorth": 1029.7947465361133,
+            "medianSouth": 0.00008820841863341917,
+            "directions": {
+              "16": "NET_NORTH",
+              "24": "NET_NORTH",
+              "32": "NET_NORTH"
+            },
+            "majority": "NET_NORTH",
+            "counts": {
+              "NET_NORTH": 3,
+              "NET_SOUTH": 0,
+              "MIXED/RECIRCULATING": 0
+            }
+          }
+        },
+        "1001..2500": {
+          "morphology": {
+            "halfPlanes": {
+              "UPSTREAM": {
+                "erosionShare": 0.8384968376926221,
+                "depositionShare": 0.9166653737768536
+              },
+              "DOWNSTREAM": {
+                "erosionShare": 0.010396193861055248,
+                "depositionShare": 0.011677576958993784
+              },
+              "SOURCE_BAND": {
+                "erosionShare": 0.15110696844632318,
+                "depositionShare": 0.071657049264152
+              }
+            },
+            "sectors": {
+              "UPSTREAM_WEDGE": {
+                "erosionShare": 0.5025472852126389,
+                "depositionShare": 0.6095616681232895
+              },
+              "DOWNSTREAM_WEDGE": {
+                "erosionShare": 0.00000767509536843841,
+                "depositionShare": 0.0000039477253493380744
+              },
+              "LEFT_LATERAL": {
+                "erosionShare": 0.0002558140231315598,
+                "depositionShare": 0.0005840059920329534
+              },
+              "RIGHT_LATERAL": {
+                "erosionShare": 0.4544527345735937,
+                "depositionShare": 0.38981593865191283
+              }
+            },
+            "annuliNormalisedByWindowTotal": {
+              "r7..12": {
+                "upstream": {
+                  "grossErosion": 0.34044642070113074,
+                  "grossDeposition": 0.2615513803237076,
+                  "erosionShare": 0.04508479445070631,
+                  "depositionShare": 0.04621879609494539
+                },
+                "downstream": {
+                  "grossErosion": 0,
+                  "grossDeposition": 0,
+                  "erosionShare": 0,
+                  "depositionShare": 0
+                }
+              },
+              "r13..24": {
+                "upstream": {
+                  "grossErosion": 1.8562681929175728,
+                  "grossDeposition": 0.28889520869670277,
+                  "erosionShare": 0.24582273401705604,
+                  "depositionShare": 0.05105072940939592
+                },
+                "downstream": {
+                  "grossErosion": 0.00017504788765432313,
+                  "grossDeposition": 0.00010766443608727052,
+                  "erosionShare": 0.00002318132179998354,
+                  "depositionShare": 0.000019025403773576604
+                }
+              },
+              "r25..48": {
+                "upstream": {
+                  "grossErosion": 2.175599976644458,
+                  "grossDeposition": 2.8957448657873988,
+                  "erosionShare": 0.28811134965664525,
+                  "depositionShare": 0.5117076473814404
+                },
+                "downstream": {
+                  "grossErosion": 0.043172702422948225,
+                  "grossDeposition": 0.029364121047893713,
+                  "erosionShare": 0.0057172944001336835,
+                  "depositionShare": 0.005188939632206087
+                }
+              },
+              "r49..96": {
+                "upstream": {
+                  "grossErosion": 1.6337309267456028,
+                  "grossDeposition": 1.5073179945468012,
+                  "erosionShare": 0.2163524670589753,
+                  "depositionShare": 0.26635846063583507
+                },
+                "downstream": {
+                  "grossErosion": 0.03447263382269107,
+                  "grossDeposition": 0.036090357039591715,
+                  "erosionShare": 0.004565157732807766,
+                  "depositionShare": 0.006377534123284725
+                }
+              },
+              "r97+": {
+                "upstream": {
+                  "grossErosion": 0.3256512477127257,
+                  "grossDeposition": 0.23388429655265897,
+                  "erosionShare": 0.04312549250924029,
+                  "depositionShare": 0.04132974025523525
+                },
+                "downstream": {
+                  "grossErosion": 0.0006838440002314307,
+                  "grossDeposition": 0.0005210667012382019,
+                  "erosionShare": 0.00009056040631382796,
+                  "depositionShare": 0.00009207779972939923
+                }
+              }
+            },
+            "distributions": {
+              "erosion": {
+                "centroidDy": -20.945238712420075,
+                "p10Dy": -42,
+                "p25Dy": -31,
+                "p50Dy": -21,
+                "p75Dy": -9,
+                "p90Dy": -6,
+                "centroidR": 37.35283178170045,
+                "p50R": 31.40063693621516,
+                "p90R": 80.41144197189851
+              },
+              "deposition": {
+                "centroidDy": -29.162195839880038,
+                "p10Dy": -44,
+                "p25Dy": -40,
+                "p50Dy": -34,
+                "p75Dy": -20,
+                "p90Dy": -8,
+                "centroidR": 46.28373908048678,
+                "p50R": 41.10960958218893,
+                "p90R": 85.44003745317531
+              }
+            }
+          },
+          "water": {
+            "8": {
+              "positiveOutShares": {
+                "north": 0.8307339489710874,
+                "south": 0,
+                "west": 0,
+                "east": 0.1692660510289125
+              },
+              "net": {
+                "north": 2727.4461874202,
+                "south": 0,
+                "west": 0,
+                "east": 555.7303105607843
+              },
+              "netTotalOutward": 3283.1764979809845,
+              "netFractionSigned": {
+                "north": 0.8307339520423178,
+                "south": 0,
+                "west": 0,
+                "east": 0.1692660479576822
+              },
+              "northMinusSouthNet": 2727.4461874202,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1,
+                "south": 0,
+                "west": 0,
+                "east": 1.0000000218414054
+              }
+            },
+            "12": {
+              "positiveOutShares": {
+                "north": 0.5742569561683116,
+                "south": 0,
+                "west": 0,
+                "east": 0.42574304383168843
+              },
+              "net": {
+                "north": 1888.0898344351099,
+                "south": 0,
+                "west": 0,
+                "east": 1403.4143437116477
+              },
+              "netTotalOutward": 3291.5041781467576,
+              "netFractionSigned": {
+                "north": 0.5736252279339886,
+                "south": 0,
+                "west": 0,
+                "east": 0.4263747720660113
+              },
+              "northMinusSouthNet": 1888.0898344351099,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.0025867501534036,
+                "south": 0,
+                "west": 0,
+                "east": 1
+              }
+            },
+            "16": {
+              "positiveOutShares": {
+                "north": 0.5738690754360676,
+                "south": 0,
+                "west": 0,
+                "east": 0.42613092456393237
+              },
+              "net": {
+                "north": 1884.4297220233066,
+                "south": 0,
+                "west": 0,
+                "east": 1399.2846530139361
+              },
+              "netTotalOutward": 3283.7143750372425,
+              "netFractionSigned": {
+                "north": 0.573871386728614,
+                "south": 0,
+                "west": 0,
+                "east": 0.426128613271386
+              },
+              "northMinusSouthNet": 1884.4297220233066,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1,
+                "south": 0,
+                "west": 0,
+                "east": 1.0000094515143882
+              }
+            },
+            "24": {
+              "positiveOutShares": {
+                "north": 0.5659059749807597,
+                "south": 0,
+                "west": 0,
+                "east": 0.4340940250192404
+              },
+              "net": {
+                "north": 1880.2438541441534,
+                "south": 0,
+                "west": 0,
+                "east": 1435.763846357755
+              },
+              "netTotalOutward": 3316.0077005019084,
+              "netFractionSigned": {
+                "north": 0.56702035217215,
+                "south": 0,
+                "west": 0,
+                "east": 0.43297964782785003
+              },
+              "northMinusSouthNet": 1880.2438541441534,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.0002105618666384,
+                "south": 0,
+                "west": 0,
+                "east": 1.0047595194634875
+              }
+            },
+            "32": {
+              "positiveOutShares": {
+                "north": 0.5613607134984273,
+                "south": 0,
+                "west": 0,
+                "east": 0.43863928650157263
+              },
+              "net": {
+                "north": 1913.1347238176609,
+                "south": 0,
+                "west": 0,
+                "east": 1419.7302881043317
+              },
+              "netTotalOutward": 3332.865011921993,
+              "netFractionSigned": {
+                "north": 0.5740210650518955,
+                "south": 0,
+                "west": 0,
+                "east": 0.4259789349481044
+              },
+              "northMinusSouthNet": 1913.1347238176609,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.0012809131749216,
+                "south": 0,
+                "west": 0,
+                "east": 1.0542925927230822
+              }
+            },
+            "48": {
+              "positiveOutShares": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 1
+              },
+              "net": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 2234.369803265651
+              },
+              "netTotalOutward": 2234.369803265651,
+              "netFractionSigned": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 1
+              },
+              "northMinusSouthNet": 0,
+              "localDirection": "MIXED/RECIRCULATING",
+              "recirculationIndex": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 1.004007766813973
+              }
+            }
+          },
+          "waterR16R24R32Summary": {
+            "medianPositiveOutShares": {
+              "north": 0.5659059749807597,
+              "south": 0,
+              "west": 0,
+              "east": 0.4340940250192404
+            },
+            "medianNorth": 1884.4297220233066,
+            "medianSouth": 0,
+            "directions": {
+              "16": "NET_NORTH",
+              "24": "NET_NORTH",
+              "32": "NET_NORTH"
+            },
+            "majority": "NET_NORTH",
+            "counts": {
+              "NET_NORTH": 3,
+              "NET_SOUTH": 0,
+              "MIXED/RECIRCULATING": 0
+            }
+          }
+        },
+        "2501..5000": {
+          "morphology": {
+            "halfPlanes": {
+              "UPSTREAM": {
+                "erosionShare": 0.8032311152029978,
+                "depositionShare": 0.719073416258242
+              },
+              "DOWNSTREAM": {
+                "erosionShare": 0.08460921340355351,
+                "depositionShare": 0.029407583814434153
+              },
+              "SOURCE_BAND": {
+                "erosionShare": 0.11215967139344701,
+                "depositionShare": 0.2515189999273241
+              }
+            },
+            "sectors": {
+              "UPSTREAM_WEDGE": {
+                "erosionShare": 0.29293168843959605,
+                "depositionShare": 0.37052720005952255
+              },
+              "DOWNSTREAM_WEDGE": {
+                "erosionShare": 0.00010258820633342588,
+                "depositionShare": 0.001259442082155787
+              },
+              "LEFT_LATERAL": {
+                "erosionShare": 0.0011253574596796381,
+                "depositionShare": 0.016683614053213645
+              },
+              "RIGHT_LATERAL": {
+                "erosionShare": 0.6714407508563446,
+                "depositionShare": 0.5703689270427752
+              }
+            },
+            "annuliNormalisedByWindowTotal": {
+              "r7..12": {
+                "upstream": {
+                  "grossErosion": 0.27174916762704726,
+                  "grossDeposition": 7.616653898683904,
+                  "erosionShare": 0.010136742828690771,
+                  "depositionShare": 0.0817624773619514
+                },
+                "downstream": {
+                  "grossErosion": 5.622558892527493e-9,
+                  "grossDeposition": 0.050099688124136274,
+                  "erosionShare": 2.0973176856585492e-10,
+                  "depositionShare": 0.0005378050086795096
+                }
+              },
+              "r13..24": {
+                "upstream": {
+                  "grossErosion": 5.494760705877271,
+                  "grossDeposition": 13.80244604209243,
+                  "erosionShare": 0.20496466159232324,
+                  "depositionShare": 0.1481650862790467
+                },
+                "downstream": {
+                  "grossErosion": 0.0038376809040985382,
+                  "grossDeposition": 0.45066315876129887,
+                  "erosionShare": 0.00014315254292448655,
+                  "depositionShare": 0.004837732790044869
+                }
+              },
+              "r25..48": {
+                "upstream": {
+                  "grossErosion": 5.867862117264228,
+                  "grossDeposition": 33.03261327071835,
+                  "erosionShare": 0.21888202917536462,
+                  "depositionShare": 0.3545951188907095
+                },
+                "downstream": {
+                  "grossErosion": 0.199072536785362,
+                  "grossDeposition": 0.29214770881606744,
+                  "erosionShare": 0.007425771078783062,
+                  "depositionShare": 0.0031361173483998163
+                }
+              },
+              "r49..96": {
+                "upstream": {
+                  "grossErosion": 3.5843916685093276,
+                  "grossDeposition": 7.837099586166249,
+                  "erosionShare": 0.13370438944948781,
+                  "depositionShare": 0.08412889518427487
+                },
+                "downstream": {
+                  "grossErosion": 0.13177501417559495,
+                  "grossDeposition": 0.11812678021725806,
+                  "erosionShare": 0.004915449940874584,
+                  "depositionShare": 0.0012680552801569013
+                }
+              },
+              "r97+": {
+                "upstream": {
+                  "grossErosion": 6.314522787602573,
+                  "grossDeposition": 4.697089734837727,
+                  "erosionShare": 0.2355432921571313,
+                  "depositionShare": 0.050421838542261184
+                },
+                "downstream": {
+                  "grossErosion": 1.9335466496741684,
+                  "grossDeposition": 1.8284514263838094,
+                  "erosionShare": 0.07212483963123983,
+                  "depositionShare": 0.019627873387153136
+                }
+              }
+            },
+            "distributions": {
+              "erosion": {
+                "centroidDy": -15.052198420703593,
+                "p10Dy": -33,
+                "p25Dy": -26,
+                "p50Dy": -16,
+                "p75Dy": -9,
+                "p90Dy": -1,
+                "centroidR": 61.72846508292046,
+                "p50R": 41.43669871020133,
+                "p90R": 123.91125856838029
+              },
+              "deposition": {
+                "centroidDy": -14.921312144936158,
+                "p10Dy": -38,
+                "p25Dy": -24,
+                "p50Dy": -12,
+                "p75Dy": -6,
+                "p90Dy": -1,
+                "centroidR": 35.80747265009093,
+                "p50R": 26.68332812825267,
+                "p90R": 65.11528238439882
+              }
+            }
+          },
+          "water": {
+            "8": {
+              "positiveOutShares": {
+                "north": 0.5176090759251275,
+                "south": 0.0022130274692737624,
+                "west": 0.05547196336979295,
+                "east": 0.4247059332358058
+              },
+              "net": {
+                "north": 2725.110789484881,
+                "south": 11.715074902359612,
+                "west": 292.0451131149678,
+                "east": 2245.6308907486255
+              },
+              "netTotalOutward": 5274.501868250834,
+              "netFractionSigned": {
+                "north": 0.5166574697581063,
+                "south": 0.0022210770220552874,
+                "west": 0.05536923114444128,
+                "east": 0.425752222075397
+              },
+              "northMinusSouthNet": 2713.3957145825216,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.0054858994159837,
+                "south": 1,
+                "west": 1.0054995003135783,
+                "east": 1.001170903510906
+              }
+            },
+            "12": {
+              "positiveOutShares": {
+                "north": 0.3695143268602596,
+                "south": 0.002210514841531315,
+                "west": 0.02150862750113865,
+                "east": 0.6067665307970704
+              },
+              "net": {
+                "north": 2041.3402723488623,
+                "south": 12.371928329838324,
+                "west": 117.75931788887206,
+                "east": 3036.2317805821776
+              },
+              "netTotalOutward": 5207.703299149751,
+              "netFractionSigned": {
+                "north": 0.39198474933895466,
+                "south": 0.0023756976193052815,
+                "west": 0.022612524394025738,
+                "east": 0.5830270286477143
+              },
+              "northMinusSouthNet": 2028.968344019024,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.0131189017236641,
+                "south": 1.0000013347941636,
+                "west": 1.0222613871331474,
+                "east": 1.1184877589167646
+              }
+            },
+            "16": {
+              "positiveOutShares": {
+                "north": 0.38080262430933615,
+                "south": 0.00005739025340361552,
+                "west": 0.014997683756066053,
+                "east": 0.6041423016811941
+              },
+              "net": {
+                "north": 1983.9006495709407,
+                "south": 0.2476821610798764,
+                "west": 77.97696867065511,
+                "east": 2993.6385065311424
+              },
+              "netTotalOutward": 5055.763806933818,
+              "netFractionSigned": {
+                "north": 0.39240374458357496,
+                "south": 0.0000489900577911073,
+                "west": 0.015423380452170688,
+                "east": 0.5921238849064632
+              },
+              "northMinusSouthNet": 1983.6529674098608,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.0006416345391644,
+                "south": 1.2079305631336712,
+                "west": 1.0026662565258513,
+                "east": 1.0520550014487418
+              }
+            },
+            "24": {
+              "positiveOutShares": {
+                "north": 0.3847499342316474,
+                "south": 0.003365809697748659,
+                "west": 0.007158812840038388,
+                "east": 0.6047254432305655
+              },
+              "net": {
+                "north": 1846.170855837431,
+                "south": 14.923723716528889,
+                "west": 33.51574266397364,
+                "east": 2978.823647228329
+              },
+              "netTotalOutward": 4873.433969446262,
+              "netFractionSigned": {
+                "north": 0.3788234061263376,
+                "south": 0.0030622603712479515,
+                "west": 0.006877233358264178,
+                "east": 0.6112371001441502
+              },
+              "northMinusSouthNet": 1831.247132120902,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.027754378313834,
+                "south": 1.1122310861988953,
+                "west": 1.0533551750807548,
+                "east": 1.0011430131200887
+              }
+            },
+            "32": {
+              "positiveOutShares": {
+                "north": 0.39352314215306283,
+                "south": 0.0002917114904790418,
+                "west": 4.3866984754288975e-14,
+                "east": 0.6061851463564143
+              },
+              "net": {
+                "north": 1635.4864724637218,
+                "south": 1.431406684976272,
+                "west": 2.1525204620471656e-10,
+                "east": 2877.516683356115
+              },
+              "netTotalOutward": 4514.434562505028,
+              "netFractionSigned": {
+                "north": 0.36227936186014886,
+                "south": 0.00031707330456507815,
+                "west": 4.7680843132052114e-14,
+                "east": 0.6374035648352385
+              },
+              "northMinusSouthNet": 1634.0550657787455,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.1806816833694989,
+                "south": 1,
+                "west": 1,
+                "east": 1.033705780897262
+              }
+            },
+            "48": {
+              "positiveOutShares": {
+                "north": 0,
+                "south": 0.000006781775938336147,
+                "west": 0,
+                "east": 0.9999932182240616
+              },
+              "net": {
+                "north": 0,
+                "south": 0.02715788792054595,
+                "west": 0,
+                "east": 3955.9233705767824
+              },
+              "netTotalOutward": 3955.950528464703,
+              "netFractionSigned": {
+                "north": 0,
+                "south": 0.00000686507268610507,
+                "west": 0,
+                "east": 0.9999931349273139
+              },
+              "northMinusSouthNet": -0.02715788792054595,
+              "localDirection": "NET_SOUTH",
+              "recirculationIndex": {
+                "north": 0,
+                "south": 1,
+                "west": 0,
+                "east": 1.0122825230984427
+              }
+            }
+          },
+          "waterR16R24R32Summary": {
+            "medianPositiveOutShares": {
+              "north": 0.3847499342316474,
+              "south": 0.0002917114904790418,
+              "west": 0.007158812840038388,
+              "east": 0.6047254432305655
+            },
+            "medianNorth": 1846.170855837431,
+            "medianSouth": 1.431406684976272,
+            "directions": {
+              "16": "NET_NORTH",
+              "24": "NET_NORTH",
+              "32": "NET_NORTH"
+            },
+            "majority": "NET_NORTH",
+            "counts": {
+              "NET_NORTH": 3,
+              "NET_SOUTH": 0,
+              "MIXED/RECIRCULATING": 0
+            }
+          }
+        },
+        "5001..7500": {
+          "morphology": {
+            "halfPlanes": {
+              "UPSTREAM": {
+                "erosionShare": 0.584273654835441,
+                "depositionShare": 0.34109242688217195
+              },
+              "DOWNSTREAM": {
+                "erosionShare": 0.26819773576508527,
+                "depositionShare": 0.28708466575296726
+              },
+              "SOURCE_BAND": {
+                "erosionShare": 0.14752860939947815,
+                "depositionShare": 0.37182290736485635
+              }
+            },
+            "sectors": {
+              "UPSTREAM_WEDGE": {
+                "erosionShare": 0.4122535113975358,
+                "depositionShare": 0.24925195410860945
+              },
+              "DOWNSTREAM_WEDGE": {
+                "erosionShare": 0.11559037291758072,
+                "depositionShare": 0.19857270090658005
+              },
+              "LEFT_LATERAL": {
+                "erosionShare": 0.03914169622482083,
+                "depositionShare": 0.3302517533400335
+              },
+              "RIGHT_LATERAL": {
+                "erosionShare": 0.3939245486181256,
+                "depositionShare": 0.12600990776808688
+              }
+            },
+            "annuliNormalisedByWindowTotal": {
+              "r7..12": {
+                "upstream": {
+                  "grossErosion": 1.9718553381710648,
+                  "grossDeposition": 21.32525916532812,
+                  "erosionShare": 0.08536241777851178,
+                  "depositionShare": 0.05124859414427442
+                },
+                "downstream": {
+                  "grossErosion": 2.263623016915195e-7,
+                  "grossDeposition": 18.178622221696802,
+                  "erosionShare": 9.799315899217701e-9,
+                  "depositionShare": 0.043686635886541786
+                }
+              },
+              "r13..24": {
+                "upstream": {
+                  "grossErosion": 3.2939246153324344,
+                  "grossDeposition": 67.10031291129869,
+                  "erosionShare": 0.14259533328937232,
+                  "depositionShare": 0.16125462657616674
+                },
+                "downstream": {
+                  "grossErosion": 0.000010266247451967469,
+                  "grossDeposition": 65.13308691044728,
+                  "erosionShare": 4.4443001829194163e-7,
+                  "depositionShare": 0.1565270138364532
+                }
+              },
+              "r25..48": {
+                "upstream": {
+                  "grossErosion": 4.883086655165197,
+                  "grossDeposition": 48.266884742726496,
+                  "erosionShare": 0.21139080288390089,
+                  "depositionShare": 0.11599436928814466
+                },
+                "downstream": {
+                  "grossErosion": 0.6774380323908953,
+                  "grossDeposition": 32.43472338482536,
+                  "erosionShare": 0.029326567330056265,
+                  "depositionShare": 0.07794671858587683
+                }
+              },
+              "r49..96": {
+                "upstream": {
+                  "grossErosion": 2.0054963861429744,
+                  "grossDeposition": 3.557518798082231,
+                  "erosionShare": 0.08681875239692687,
+                  "depositionShare": 0.008549384353554138
+                },
+                "downstream": {
+                  "grossErosion": 3.2742686260280895,
+                  "grossDeposition": 1.4994483325999135,
+                  "erosionShare": 0.1417444175358852,
+                  "depositionShare": 0.0036034553410099015
+                }
+              },
+              "r97+": {
+                "upstream": {
+                  "grossErosion": 1.342245409946986,
+                  "grossDeposition": 1.68336956108168,
+                  "erosionShare": 0.05810634848672884,
+                  "depositionShare": 0.004045452520031448
+                },
+                "downstream": {
+                  "grossErosion": 2.243598664954407,
+                  "grossDeposition": 2.21407706339534,
+                  "erosionShare": 0.09712629666980899,
+                  "depositionShare": 0.005320842103085825
+                }
+              }
+            },
+            "distributions": {
+              "erosion": {
+                "centroidDy": 1.8860398791224187,
+                "p10Dy": -38,
+                "p25Dy": -23,
+                "p50Dy": -8,
+                "p75Dy": 28,
+                "p90Dy": 55,
+                "centroidR": 51.100312492205695,
+                "p50R": 39.56008088970496,
+                "p90R": 116.1077086157504
+              },
+              "deposition": {
+                "centroidDy": -1.2768808417094584,
+                "p10Dy": -20,
+                "p25Dy": -10,
+                "p50Dy": -1,
+                "p75Dy": 8,
+                "p90Dy": 16,
+                "centroidR": 18.731168999778255,
+                "p50R": 16.1245154965971,
+                "p90R": 31.04834939252005
+              }
+            }
+          },
+          "water": {
+            "8": {
+              "positiveOutShares": {
+                "north": 0.5081597755468071,
+                "south": 0.12129443774449329,
+                "west": 0.22850884526387402,
+                "east": 0.1420369414448256
+              },
+              "net": {
+                "north": 2277.837674478129,
+                "south": 621.9200028272688,
+                "west": 1159.4503071311692,
+                "east": 719.3956887068432
+              },
+              "netTotalOutward": 4778.603673143411,
+              "netFractionSigned": {
+                "north": 0.47667432377369473,
+                "south": 0.1301468055035759,
+                "west": 0.2426337035748503,
+                "east": 0.150545167147879
+              },
+              "northMinusSouthNet": 1655.91767165086,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.1438554676141428,
+                "south": 1,
+                "west": 1.0105190737108127,
+                "east": 1.012341686296203
+              }
+            },
+            "12": {
+              "positiveOutShares": {
+                "north": 0.4448033450135394,
+                "south": 0.1254115580333088,
+                "west": 0.2312205571666774,
+                "east": 0.19856453978647445
+              },
+              "net": {
+                "north": 2138.4850664623386,
+                "south": 610.7021237719669,
+                "west": 1124.7229320868153,
+                "east": 721.1708198541288
+              },
+              "netTotalOutward": 4595.08094217525,
+              "netFractionSigned": {
+                "north": 0.4653857229879412,
+                "south": 0.1329034529439363,
+                "west": 0.24476672908277136,
+                "east": 0.15694409498535103
+              },
+              "northMinusSouthNet": 1527.7829426903718,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.0128702286326114,
+                "south": 1.0000002678080175,
+                "west": 1.0010894315673302,
+                "east": 1.3407738498178097
+              }
+            },
+            "16": {
+              "positiveOutShares": {
+                "north": 0.4394797136058104,
+                "south": 0.0784897074627872,
+                "west": 0.28111973677632673,
+                "east": 0.2009108421550757
+              },
+              "net": {
+                "north": 1864.7084789149753,
+                "south": 346.3808014055967,
+                "west": 1243.023827733055,
+                "east": 824.9331986668734
+              },
+              "netTotalOutward": 4279.0463067205,
+              "netFractionSigned": {
+                "north": 0.435776653313225,
+                "south": 0.08094813109677845,
+                "west": 0.2904908567548828,
+                "east": 0.19278435883511383
+              },
+              "northMinusSouthNet": 1518.3276775093786,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.042368969695003,
+                "south": 1.002195584252046,
+                "west": 1.0002428850973517,
+                "east": 1.07715494484925
+              }
+            },
+            "24": {
+              "positiveOutShares": {
+                "north": 0.4152646820148023,
+                "south": 0.1572454908301017,
+                "west": 0.1901754348350118,
+                "east": 0.23731439232008417
+              },
+              "net": {
+                "north": 1706.8275705856913,
+                "south": 644.2387161144146,
+                "west": 760.9654853459139,
+                "east": 976.3694913608309
+              },
+              "netTotalOutward": 4088.401263406851,
+              "netFractionSigned": {
+                "north": 0.41748044299433507,
+                "south": 0.15757717371840665,
+                "west": 0.18612788626129226,
+                "east": 0.23881449702596597
+              },
+              "northMinusSouthNet": 1062.5888544712766,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.0013191855143573,
+                "south": 1.0045430898664502,
+                "west": 1.0285529388488386,
+                "east": 1.0003386930749651
+              }
+            },
+            "32": {
+              "positiveOutShares": {
+                "north": 0.42313279782408886,
+                "south": 0.2792082872271114,
+                "west": 0.037129995808817,
+                "east": 0.2605289191399829
+              },
+              "net": {
+                "north": 1684.2524965190485,
+                "south": 1319.595395769518,
+                "west": 18.08043237406508,
+                "east": 999.5336637044013
+              },
+              "netTotalOutward": 4021.461988367033,
+              "netFractionSigned": {
+                "north": 0.4188159682700274,
+                "south": 0.32813822425444755,
+                "west": 0.0044959848996128085,
+                "east": 0.24854982257591224
+              },
+              "northMinusSouthNet": 364.6571007495304,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.1873594881526974,
+                "south": 1.0000005759052693,
+                "west": 9.70574385043176,
+                "east": 1.2318880700309864
+              }
+            },
+            "48": {
+              "positiveOutShares": {
+                "north": 0,
+                "south": 0.3784678411695028,
+                "west": 0,
+                "east": 0.6215321588304971
+              },
+              "net": {
+                "north": 0,
+                "south": 1293.6459960996692,
+                "west": 0,
+                "east": 2024.6258218432683
+              },
+              "netTotalOutward": 3318.2718179429376,
+              "netFractionSigned": {
+                "north": 0,
+                "south": 0.3898553425022384,
+                "west": 0,
+                "east": 0.6101446574977616
+              },
+              "northMinusSouthNet": -1293.6459960996692,
+              "localDirection": "NET_SOUTH",
+              "recirculationIndex": {
+                "north": 0,
+                "south": 1.0023809217464006,
+                "west": 0,
+                "east": 1.0518119263835242
+              }
+            }
+          },
+          "waterR16R24R32Summary": {
+            "medianPositiveOutShares": {
+              "north": 0.42313279782408886,
+              "south": 0.1572454908301017,
+              "west": 0.1901754348350118,
+              "east": 0.23731439232008417
+            },
+            "medianNorth": 1706.8275705856913,
+            "medianSouth": 644.2387161144146,
+            "directions": {
+              "16": "NET_NORTH",
+              "24": "NET_NORTH",
+              "32": "NET_NORTH"
+            },
+            "majority": "NET_NORTH",
+            "counts": {
+              "NET_NORTH": 3,
+              "NET_SOUTH": 0,
+              "MIXED/RECIRCULATING": 0
+            }
+          },
+          "scaleDependence": {
+            "directionsByRadius": {
+              "8": "NET_NORTH",
+              "12": "NET_NORTH",
+              "16": "NET_NORTH",
+              "24": "NET_NORTH",
+              "32": "NET_NORTH",
+              "48": "NET_SOUTH"
+            },
+            "classification": "MIXED_SCALE"
+          }
+        },
+        "7501..10000": {
+          "morphology": {
+            "halfPlanes": {
+              "UPSTREAM": {
+                "erosionShare": 0.6695719064047244,
+                "depositionShare": 0.4211962638764316
+              },
+              "DOWNSTREAM": {
+                "erosionShare": 0.1741271802208125,
+                "depositionShare": 0.31122799292718306
+              },
+              "SOURCE_BAND": {
+                "erosionShare": 0.15630091337445848,
+                "depositionShare": 0.2675757431963871
+              }
+            },
+            "sectors": {
+              "UPSTREAM_WEDGE": {
+                "erosionShare": 0.5078853726044247,
+                "depositionShare": 0.2993531714702309
+              },
+              "DOWNSTREAM_WEDGE": {
+                "erosionShare": 0.11614670951549995,
+                "depositionShare": 0.22678021440187124
+              },
+              "LEFT_LATERAL": {
+                "erosionShare": 0.08576383778157327,
+                "depositionShare": 0.32532045505186097
+              },
+              "RIGHT_LATERAL": {
+                "erosionShare": 0.2586371111558938,
+                "depositionShare": 0.09311590352481737
+              }
+            },
+            "annuliNormalisedByWindowTotal": {
+              "r7..12": {
+                "upstream": {
+                  "grossErosion": 4.151795614330802,
+                  "grossDeposition": 16.79105319262143,
+                  "erosionShare": 0.14034233802944293,
+                  "depositionShare": 0.031910905648913045
+                },
+                "downstream": {
+                  "grossErosion": 0.000009356695492855691,
+                  "grossDeposition": 17.710348439464855,
+                  "erosionShare": 3.162825542674441e-7,
+                  "depositionShare": 0.033657999386809474
+                }
+              },
+              "r13..24": {
+                "upstream": {
+                  "grossErosion": 7.489957112531361,
+                  "grossDeposition": 74.16509711771256,
+                  "erosionShare": 0.25318156059624214,
+                  "depositionShare": 0.1409485986028439
+                },
+                "downstream": {
+                  "grossErosion": 0.00009752691651498378,
+                  "grossDeposition": 76.12568858005606,
+                  "erosionShare": 0.00000329668335244418,
+                  "depositionShare": 0.1446746453524546
+                }
+              },
+              "r25..48": {
+                "upstream": {
+                  "grossErosion": 3.86299307299535,
+                  "grossDeposition": 120.67591269443959,
+                  "erosionShare": 0.1305800020079008,
+                  "depositionShare": 0.2293410437042114
+                },
+                "downstream": {
+                  "grossErosion": 0.954291755551849,
+                  "grossDeposition": 63.997888418802304,
+                  "erosionShare": 0.03225773823597887,
+                  "depositionShare": 0.1216261157435611
+                }
+              },
+              "r49..96": {
+                "upstream": {
+                  "grossErosion": 2.010407820132105,
+                  "grossDeposition": 4.593849782873939,
+                  "erosionShare": 0.06795742374603678,
+                  "depositionShare": 0.008730477195497681
+                },
+                "downstream": {
+                  "grossErosion": 2.002358034328416,
+                  "grossDeposition": 3.05479546781322,
+                  "erosionShare": 0.06768531840529542,
+                  "depositionShare": 0.005805549469222782
+                }
+              },
+              "r97+": {
+                "upstream": {
+                  "grossErosion": 2.2930221844283567,
+                  "grossDeposition": 5.401418918103639,
+                  "erosionShare": 0.07751058202510433,
+                  "depositionShare": 0.010265238724965863
+                },
+                "downstream": {
+                  "grossErosion": 2.194507537489393,
+                  "grossDeposition": 2.874910304096906,
+                  "erosionShare": 0.07418051061363198,
+                  "depositionShare": 0.005463682975135738
+                }
+              }
+            },
+            "distributions": {
+              "erosion": {
+                "centroidDy": -1.345608862872857,
+                "p10Dy": -33,
+                "p25Dy": -17,
+                "p50Dy": -10,
+                "p75Dy": -6,
+                "p90Dy": 45,
+                "centroidR": 42.44657722128295,
+                "p50R": 20.248456731316587,
+                "p90R": 115.97413504743201
+              },
+              "deposition": {
+                "centroidDy": -2.8865876079214217,
+                "p10Dy": -29,
+                "p25Dy": -16,
+                "p50Dy": -2,
+                "p75Dy": 10,
+                "p90Dy": 21,
+                "centroidR": 23.887439876358833,
+                "p50R": 21.400934559032695,
+                "p90R": 38.27531841800928
+              }
+            }
+          },
+          "water": {
+            "8": {
+              "positiveOutShares": {
+                "north": 0.6995240956792473,
+                "south": 0.13547508985354775,
+                "west": 0.12938419793518602,
+                "east": 0.03561661653201893
+              },
+              "net": {
+                "north": 2717.3871460075025,
+                "south": 779.2614953107284,
+                "west": 741.6545919504317,
+                "east": 156.80885405639307
+              },
+              "netTotalOutward": 4395.112087325056,
+              "netFractionSigned": {
+                "north": 0.6182748225794062,
+                "south": 0.17730184801384688,
+                "west": 0.16874531916700583,
+                "east": 0.03567801023974107
+              },
+              "northMinusSouthNet": 1938.125650696774,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.4807267826395667,
+                "south": 1,
+                "west": 1.0034675149295298,
+                "east": 1.3064892757461113
+              }
+            },
+            "12": {
+              "positiveOutShares": {
+                "north": 0.5444714003336758,
+                "south": 0.16287100058793433,
+                "west": 0.17713091316570667,
+                "east": 0.1155266859126831
+              },
+              "net": {
+                "north": 2263.31542989839,
+                "south": 739.0102421236902,
+                "west": 803.7131137750042,
+                "east": 244.92304503614895
+              },
+              "netTotalOutward": 4050.9618308332333,
+              "netFractionSigned": {
+                "north": 0.558710628343011,
+                "south": 0.1824283399806028,
+                "west": 0.19840056444315848,
+                "east": 0.06046046723322774
+              },
+              "northMinusSouthNet": 1524.3051877746998,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.0915325249423768,
+                "south": 1,
+                "west": 1,
+                "east": 2.1402246305521695
+              }
+            },
+            "16": {
+              "positiveOutShares": {
+                "north": 0.4835395088864654,
+                "south": 0.15689291768213204,
+                "west": 0.24170831679369273,
+                "east": 0.11785925663770985
+              },
+              "net": {
+                "north": 1704.0516471370424,
+                "south": 611.0669505635642,
+                "west": 941.4061912483303,
+                "east": 385.98350771982746
+              },
+              "netTotalOutward": 3642.508296668764,
+              "netFractionSigned": {
+                "north": 0.46782368311843614,
+                "south": 0.16775993375839723,
+                "west": 0.2584499785791258,
+                "east": 0.10596640454404085
+              },
+              "northMinusSouthNet": 1092.9846965734782,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.1051842006669552,
+                "south": 1,
+                "west": 1,
+                "east": 1.1892698396541572
+              }
+            },
+            "24": {
+              "positiveOutShares": {
+                "north": 0.4324236231758122,
+                "south": 0.16191857152949984,
+                "west": 0.2567946233463448,
+                "east": 0.14886318194834328
+              },
+              "net": {
+                "north": 1481.0900794184463,
+                "south": 558.5887965295218,
+                "west": 886.4795582807574,
+                "east": 514.4165953026394
+              },
+              "netTotalOutward": 3440.575029531365,
+              "netFractionSigned": {
+                "north": 0.4304774831840197,
+                "south": 0.16235332516658013,
+                "west": 0.2576544765546076,
+                "east": 0.14951471509479253
+              },
+              "northMinusSouthNet": 922.5012828889245,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.008980910470304,
+                "south": 1.0017502376587715,
+                "west": 1.0010879002279982,
+                "east": 1.0000629510141708
+              }
+            },
+            "32": {
+              "positiveOutShares": {
+                "north": 0.40289986796222055,
+                "south": 0.2629428518352717,
+                "west": 0.11397582336145856,
+                "east": 0.2201814568410492
+              },
+              "net": {
+                "north": 1376.5418387158334,
+                "south": 1165.2572637636877,
+                "west": 12.170765485130376,
+                "east": 775.7521255597596
+              },
+              "netTotalOutward": 3329.721993524411,
+              "netFractionSigned": {
+                "north": 0.4134104412899664,
+                "south": 0.3499563224887426,
+                "west": 0.0036551896851448507,
+                "east": 0.23297804653614618
+              },
+              "northMinusSouthNet": 211.2845749521457,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.2972449289215295,
+                "south": 1.0001239387578855,
+                "west": 41.505831297229854,
+                "east": 1.257975083547035
+              }
+            },
+            "48": {
+              "positiveOutShares": {
+                "north": 0,
+                "south": 0.4706534389459856,
+                "west": 0,
+                "east": 0.5293465610540145
+              },
+              "net": {
+                "north": 0,
+                "south": 1129.314736754926,
+                "west": 0,
+                "east": 1195.475649860243
+              },
+              "netTotalOutward": 2324.790386615169,
+              "netFractionSigned": {
+                "north": 0,
+                "south": 0.48577056377077377,
+                "west": 0,
+                "east": 0.5142294362292261
+              },
+              "northMinusSouthNet": -1129.314736754926,
+              "localDirection": "NET_SOUTH",
+              "recirculationIndex": {
+                "north": 0,
+                "south": 1.0003315523070204,
+                "west": 0,
+                "east": 1.062813562992793
+              }
+            }
+          },
+          "waterR16R24R32Summary": {
+            "medianPositiveOutShares": {
+              "north": 0.4324236231758122,
+              "south": 0.16191857152949984,
+              "west": 0.24170831679369273,
+              "east": 0.14886318194834328
+            },
+            "medianNorth": 1481.0900794184463,
+            "medianSouth": 611.0669505635642,
+            "directions": {
+              "16": "NET_NORTH",
+              "24": "NET_NORTH",
+              "32": "NET_NORTH"
+            },
+            "majority": "NET_NORTH",
+            "counts": {
+              "NET_NORTH": 3,
+              "NET_SOUTH": 0,
+              "MIXED/RECIRCULATING": 0
+            }
+          },
+          "scaleDependence": {
+            "directionsByRadius": {
+              "8": "NET_NORTH",
+              "12": "NET_NORTH",
+              "16": "NET_NORTH",
+              "24": "NET_NORTH",
+              "32": "NET_NORTH",
+              "48": "NET_SOUTH"
+            },
+            "classification": "MIXED_SCALE"
+          }
+        }
+      },
+      "checkpoints": {
+        "1000": {
+          "erosion": {
+            "centroidDy": -15.605342727684,
+            "fractionDyLessThan0": 0.9784152864614319
+          },
+          "deposition": {
+            "centroidDy": -21.23699626431227,
+            "fractionDyLessThan0": 0.9068055562721017
+          }
+        },
+        "2500": {
+          "erosion": {
+            "centroidDy": -19.751230653961258,
+            "fractionDyLessThan0": 0.9822811799364783
+          },
+          "deposition": {
+            "centroidDy": -27.949969011185186,
+            "fractionDyLessThan0": 0.9684623127888736
+          }
+        },
+        "5000": {
+          "erosion": {
+            "centroidDy": -16.30315219887815,
+            "fractionDyLessThan0": 0.9234295980976904
+          },
+          "deposition": {
+            "centroidDy": -15.793164536205904,
+            "fractionDyLessThan0": 0.9162426235930895
+          }
+        },
+        "7500": {
+          "erosion": {
+            "centroidDy": -9.257408216537048,
+            "fractionDyLessThan0": 0.8457353226716048
+          },
+          "deposition": {
+            "centroidDy": -4.085789222595035,
+            "fractionDyLessThan0": 0.5816381428601924
+          }
+        },
+        "10000": {
+          "erosion": {
+            "centroidDy": -6.6339593853797645,
+            "fractionDyLessThan0": 0.8378710321665507
+          },
+          "deposition": {
+            "centroidDy": -3.480299836824104,
+            "fractionDyLessThan0": 0.5601525246502327
+          }
+        }
+      },
+      "fullGridAt10000QuadrantsExcludingR6": {
+        "erosion": {
+          "NW": {
+            "gross": 36.10997826534406,
+            "share": 0.4224817219476813,
+            "centroidR": 21.270167937628162
+          },
+          "NE": {
+            "gross": 35.15776124776538,
+            "share": 0.4113409153180461,
+            "centroidR": 63.85098012881691
+          },
+          "SW": {
+            "gross": 3.9731766216080593,
+            "share": 0.04648561370944514,
+            "centroidR": 65.01456650054294
+          },
+          "SE": {
+            "gross": 10.230185665553522,
+            "share": 0.11969174902482753,
+            "centroidR": 108.47264413770668
+          }
+        },
+        "deposition": {
+          "NW": {
+            "gross": 389.5047008077493,
+            "share": 0.41660416120185473,
+            "centroidR": 23.9742487321462
+          },
+          "NE": {
+            "gross": 154.65895666824264,
+            "share": 0.1654192228784658,
+            "centroidR": 33.74699540009667
+          },
+          "SW": {
+            "gross": 249.0320802915621,
+            "share": 0.2663582768245632,
+            "centroidR": 20.990567275412708
+          },
+          "SE": {
+            "gross": 141.75579916398638,
+            "share": 0.15161833909511624,
+            "centroidR": 23.58677306324647
+          }
+        }
+      },
+      "earlyTransientRecheck": {
+        "upstreamProducedBy2500Over10000": {
+          "erosion": 0.12390977056154283,
+          "deposition": 0.01364685439691116
+        },
+        "lateWindowUpstreamShares": {
+          "5001..7500": {
+            "erosionShare": 0.584273654835441,
+            "depositionShare": 0.34109242688217195
+          },
+          "7501..10000": {
+            "erosionShare": 0.6695719064047244,
+            "depositionShare": 0.4211962638764316
+          }
+        },
+        "earlyTransientDominated": false
+      }
+    },
+    "POSITIVE_CONSERVATIVE_LEGACY": {
+      "windows": {
+        "0..1000": {
+          "morphology": {
+            "halfPlanes": {
+              "UPSTREAM": {
+                "erosionShare": 0.7468956674288887,
+                "depositionShare": 0
+              },
+              "DOWNSTREAM": {
+                "erosionShare": 0.010342010039828965,
+                "depositionShare": 0
+              },
+              "SOURCE_BAND": {
+                "erosionShare": 0.2427623225312851,
+                "depositionShare": 0
+              }
+            },
+            "sectors": {
+              "UPSTREAM_WEDGE": {
+                "erosionShare": 0.6036596878429317,
+                "depositionShare": 0
+              },
+              "DOWNSTREAM_WEDGE": {
+                "erosionShare": 0.00012184579539590731,
+                "depositionShare": 0
+              },
+              "LEFT_LATERAL": {
+                "erosionShare": 0.0033849176382364627,
+                "depositionShare": 0
+              },
+              "RIGHT_LATERAL": {
+                "erosionShare": 0.3795642240231988,
+                "depositionShare": 0
+              }
+            },
+            "annuliNormalisedByWindowTotal": {
+              "r7..12": {
+                "upstream": {
+                  "grossErosion": 0.31023997083452,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.06932863765239507,
+                  "depositionShare": 0
+                },
+                "downstream": {
+                  "grossErosion": 0.0000723925125321442,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.000016177394088154197,
+                  "depositionShare": 0
+                }
+              },
+              "r13..24": {
+                "upstream": {
+                  "grossErosion": 0.8556592691834709,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.19121227760421575,
+                  "depositionShare": 0
+                },
+                "downstream": {
+                  "grossErosion": 0.0017115291250429587,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.0003824716145454883,
+                  "depositionShare": 0
+                }
+              },
+              "r25..48": {
+                "upstream": {
+                  "grossErosion": 1.795964635889807,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.40134023073556135,
+                  "depositionShare": 0
+                },
+                "downstream": {
+                  "grossErosion": 0.04315513403704568,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.00964378201315244,
+                  "depositionShare": 0
+                }
+              },
+              "r49..96": {
+                "upstream": {
+                  "grossErosion": 0.38043301504463367,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.0850145214367164,
+                  "depositionShare": 0
+                },
+                "downstream": {
+                  "grossErosion": 0.001340591550150684,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.00029957901804288697,
+                  "depositionShare": 0
+                }
+              },
+              "r97+": {
+                "upstream": {
+                  "grossErosion": 0,
+                  "grossDeposition": 0,
+                  "erosionShare": 0,
+                  "depositionShare": 0
+                },
+                "downstream": {
+                  "grossErosion": 0,
+                  "grossDeposition": 0,
+                  "erosionShare": 0,
+                  "depositionShare": 0
+                }
+              }
+            },
+            "distributions": {
+              "erosion": {
+                "centroidDy": -19.860353505696914,
+                "p10Dy": -45,
+                "p25Dy": -35,
+                "p50Dy": -14,
+                "p75Dy": -6,
+                "p90Dy": -3,
+                "centroidR": 28.737743660188467,
+                "p50R": 28.460498941515414,
+                "p90R": 47.12748667179271
+              },
+              "deposition": {
+                "centroidDy": null,
+                "p10Dy": null,
+                "p25Dy": null,
+                "p50Dy": null,
+                "p75Dy": null,
+                "p90Dy": null,
+                "centroidR": null,
+                "p50R": null,
+                "p90R": null
+              }
+            }
+          },
+          "water": {
+            "8": {
+              "positiveOutShares": {
+                "north": 0.7369142197338429,
+                "south": 0.00030769408813456926,
+                "west": 0.009550105815936905,
+                "east": 0.25322798036208566
+              },
+              "net": {
+                "north": 1588.8898858330522,
+                "south": 0.6644706679572439,
+                "west": 19.530667540476077,
+                "east": 546.8493463765263
+              },
+              "netTotalOutward": 2155.934370418012,
+              "netFractionSigned": {
+                "north": 0.7369843477772396,
+                "south": 0.0003082054245595659,
+                "west": 0.00905902693906647,
+                "east": 0.25364841985913433
+              },
+              "northMinusSouthNet": 1588.225415165095,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.0015665202286215,
+                "south": 1,
+                "west": 1.055960708427729,
+                "east": 1.0000015111901583
+              }
+            },
+            "12": {
+              "positiveOutShares": {
+                "north": 0.5287520245003904,
+                "south": 0.00039747030797793794,
+                "west": 0.006660558522316283,
+                "east": 0.4641899466693154
+              },
+              "net": {
+                "north": 1081.112032514856,
+                "south": 0.7365087928031088,
+                "west": 14.144042598352737,
+                "east": 992.5004537603156
+              },
+              "netTotalOutward": 2088.493037666328,
+              "netFractionSigned": {
+                "north": 0.5176517292692944,
+                "south": 0.00035265082503031954,
+                "west": 0.006772367608252706,
+                "east": 0.4752232522974225
+              },
+              "northMinusSouthNet": 1080.375523722053,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.0457244547897817,
+                "south": 1.1538853975224406,
+                "west": 1.006869104727502,
+                "east": 1.000002160850894
+              }
+            },
+            "16": {
+              "positiveOutShares": {
+                "north": 0.5166223454327805,
+                "south": 1.5562657959810545e-7,
+                "west": 0.0016859478706392856,
+                "east": 0.4816915510700005
+              },
+              "net": {
+                "north": 1065.2476636529443,
+                "south": 0.00008353549154212733,
+                "west": 3.1700243763044478,
+                "east": 993.9448152075709
+              },
+              "netTotalOutward": 2062.3625867723113,
+              "netFractionSigned": {
+                "north": 0.5165181285217669,
+                "south": 4.0504755118189024e-8,
+                "west": 0.0015370839233782242,
+                "east": 0.4819447470500997
+              },
+              "northMinusSouthNet": 1065.2475801174528,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.0007275134530855,
+                "south": 3.844200084176646,
+                "west": 1.0974248349997846,
+                "east": 1
+              }
+            },
+            "24": {
+              "positiveOutShares": {
+                "north": 0.5405931879581481,
+                "south": 0.00014518557601897838,
+                "west": 0.000791505304736072,
+                "east": 0.4584701211610968
+              },
+              "net": {
+                "north": 1033.3921136389379,
+                "south": 0.2777108899440681,
+                "west": 1.5139909113502297,
+                "east": 866.2374428268985
+              },
+              "netTotalOutward": 1901.4212582671307,
+              "netFractionSigned": {
+                "north": 0.5434840433943211,
+                "south": 0.0001460543731362093,
+                "west": 0.000796241708547012,
+                "east": 0.45557366052399567
+              },
+              "northMinusSouthNet": 1033.1144027489938,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.0006330984185363,
+                "south": 1,
+                "west": 1.000000000099287,
+                "east": 1.0123799228714205
+              }
+            },
+            "32": {
+              "positiveOutShares": {
+                "north": 0.5741372725179059,
+                "south": 0,
+                "west": 1.0116335396702912e-16,
+                "east": 0.425862727482094
+              },
+              "net": {
+                "north": 953.480840780104,
+                "south": 0,
+                "west": 1.6800727253818345e-13,
+                "east": 672.6699879355624
+              },
+              "netTotalOutward": 1626.1508287156666,
+              "netFractionSigned": {
+                "north": 0.5863421915992644,
+                "south": 0,
+                "west": 1.0331592222037333e-16,
+                "east": 0.41365780840073546
+              },
+              "northMinusSouthNet": 953.480840780104,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.000019878446042,
+                "south": 0,
+                "west": 1,
+                "east": 1.051410819319709
+              }
+            },
+            "48": {
+              "positiveOutShares": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 1
+              },
+              "net": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 68.63132792760572
+              },
+              "netTotalOutward": 68.63132792760572,
+              "netFractionSigned": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 1
+              },
+              "northMinusSouthNet": 0,
+              "localDirection": "MIXED/RECIRCULATING",
+              "recirculationIndex": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 1.00000555853114
+              }
+            }
+          },
+          "waterR16R24R32Summary": {
+            "medianPositiveOutShares": {
+              "north": 0.5405931879581481,
+              "south": 1.5562657959810545e-7,
+              "west": 0.000791505304736072,
+              "east": 0.4584701211610968
+            },
+            "medianNorth": 1033.3921136389379,
+            "medianSouth": 0.00008353549154212733,
+            "directions": {
+              "16": "NET_NORTH",
+              "24": "NET_NORTH",
+              "32": "NET_NORTH"
+            },
+            "majority": "NET_NORTH",
+            "counts": {
+              "NET_NORTH": 3,
+              "NET_SOUTH": 0,
+              "MIXED/RECIRCULATING": 0
+            }
+          },
+          "sediment": {
+            "8": {
+              "net": {
+                "north": 0.010453559303140854,
+                "south": 0.000019941469710404118,
+                "west": 0.00013712754944864624,
+                "east": 0.00880930330378127
+              },
+              "positiveOut": {
+                "north": 0.011310365146071644,
+                "south": 0.000019941469710404118,
+                "west": 0.00026265315314787704,
+                "east": 0.0088701276201148
+              },
+              "incoming": {
+                "north": 0.0008568058429308127,
+                "south": 0,
+                "west": 0.0001255256036992304,
+                "east": 0.00006082431633353004
+              },
+              "sedimentNorthMinusSouthNet": 0.01043361783343045,
+              "localDirection": "NET_NORTH",
+              "sedimentRecirculationNorth": 1.081963072871587
+            },
+            "12": {
+              "net": {
+                "north": 0.004401124687978676,
+                "south": 0.000001147300904097981,
+                "west": 0.00004670052805590801,
+                "east": 0.0179947023428218
+              },
+              "positiveOut": {
+                "north": 0.006841638625386199,
+                "south": 0.0000017749559706833757,
+                "west": 0.00007437050694074591,
+                "east": 0.01828088698717048
+              },
+              "incoming": {
+                "north": 0.0024405139374075765,
+                "south": 6.276550665853946e-7,
+                "west": 0.00002766997888483792,
+                "east": 0.00028618464434866094
+              },
+              "sedimentNorthMinusSouthNet": 0.004399977387074578,
+              "localDirection": "NET_NORTH",
+              "sedimentRecirculationNorth": 1.5545205170109344
+            },
+            "16": {
+              "net": {
+                "north": 0.011247334901448757,
+                "south": 1.3966681131606356e-10,
+                "west": 0.00008163482457020243,
+                "east": 0.05922296138783055
+              },
+              "positiveOut": {
+                "north": 0.011327265238874043,
+                "south": 1.4691793637520615e-10,
+                "west": 0.00008725364950628944,
+                "east": 0.059264246078727024
+              },
+              "incoming": {
+                "north": 0.00007993033742529124,
+                "south": 7.2511250591422425e-12,
+                "west": 0.000005618824936087041,
+                "east": 0.00004128469089648964
+              },
+              "sedimentNorthMinusSouthNet": 0.011247334761781946,
+              "localDirection": "NET_NORTH",
+              "sedimentRecirculationNorth": 1.0071066024196533
+            },
+            "24": {
+              "net": {
+                "north": 0.009908915082760867,
+                "south": 0.000005495123380140038,
+                "west": 0.000054850867933617804,
+                "east": 0.0027462737815993083
+              },
+              "positiveOut": {
+                "north": 0.00999820551292601,
+                "south": 0.000005495123380140038,
+                "west": 0.000054850867933617804,
+                "east": 0.0031886524129633104
+              },
+              "incoming": {
+                "north": 0.00008929043016515963,
+                "south": 0,
+                "west": 3.7107355974454884e-24,
+                "east": 0.0004423786313640121
+              },
+              "sedimentNorthMinusSouthNet": 0.009903419959380726,
+              "localDirection": "NET_NORTH",
+              "sedimentRecirculationNorth": 1.0090111207351538
+            },
+            "32": {
+              "net": {
+                "north": 0.027264122825922887,
+                "south": 0,
+                "west": 5.513985557475437e-34,
+                "east": 0.002717497759665332
+              },
+              "positiveOut": {
+                "north": 0.027316000869130597,
+                "south": 0,
+                "west": 5.513985557475437e-34,
+                "east": 0.003197194271017117
+              },
+              "incoming": {
+                "north": 0.00005187804320772512,
+                "south": 0,
+                "west": 0,
+                "east": 0.00047969651135180454
+              },
+              "sedimentNorthMinusSouthNet": 0.027264122825922887,
+              "localDirection": "NET_NORTH",
+              "sedimentRecirculationNorth": 1.0019027952426323
+            },
+            "48": {
+              "net": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 0.0002146069283240532
+              },
+              "positiveOut": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 0.00022032800029596385
+              },
+              "incoming": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 0.000005721071971910713
+              },
+              "sedimentNorthMinusSouthNet": 0,
+              "localDirection": "MIXED/RECIRCULATING",
+              "sedimentRecirculationNorth": 0
+            }
+          },
+          "sedimentR16R24R32Summary": {
+            "medianPositiveOutShares": {
+              "north": 0.7547408174144692,
+              "south": 2.0786715237339677e-9,
+              "west": 0.0012345101016624166,
+              "east": 0.24070380684805973
+            },
+            "medianNorth": 0.011247334901448757,
+            "medianSouth": 1.3966681131606356e-10,
+            "directions": {
+              "16": "NET_NORTH",
+              "24": "NET_NORTH",
+              "32": "NET_NORTH"
+            },
+            "majority": "NET_NORTH",
+            "counts": {
+              "NET_NORTH": 3,
+              "NET_SOUTH": 0,
+              "MIXED/RECIRCULATING": 0
+            }
+          }
+        },
+        "1001..2500": {
+          "morphology": {
+            "halfPlanes": {
+              "UPSTREAM": {
+                "erosionShare": 0.9012075035624052,
+                "depositionShare": 0
+              },
+              "DOWNSTREAM": {
+                "erosionShare": 0.00910797869980874,
+                "depositionShare": 0
+              },
+              "SOURCE_BAND": {
+                "erosionShare": 0.08968451773778632,
+                "depositionShare": 0
+              }
+            },
+            "sectors": {
+              "UPSTREAM_WEDGE": {
+                "erosionShare": 0.5220853684175927,
+                "depositionShare": 0
+              },
+              "DOWNSTREAM_WEDGE": {
+                "erosionShare": 0.000015128365433056782,
+                "depositionShare": 0
+              },
+              "LEFT_LATERAL": {
+                "erosionShare": 0.00034335397489328493,
+                "depositionShare": 0
+              },
+              "RIGHT_LATERAL": {
+                "erosionShare": 0.46477508266889117,
+                "depositionShare": 0
+              }
+            },
+            "annuliNormalisedByWindowTotal": {
+              "r7..12": {
+                "upstream": {
+                  "grossErosion": 0.5229179926518189,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.0292720253851065,
+                  "depositionShare": 0
+                },
+                "downstream": {
+                  "grossErosion": 0,
+                  "grossDeposition": 0,
+                  "erosionShare": 0,
+                  "depositionShare": 0
+                }
+              },
+              "r13..24": {
+                "upstream": {
+                  "grossErosion": 2.0118872326465445,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.11262189286574066,
+                  "depositionShare": 0
+                },
+                "downstream": {
+                  "grossErosion": 0.0002541540554498527,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.00001422709500801105,
+                  "depositionShare": 0
+                }
+              },
+              "r25..48": {
+                "upstream": {
+                  "grossErosion": 5.726718503069059,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.3205715843608647,
+                  "depositionShare": 0
+                },
+                "downstream": {
+                  "grossErosion": 0.07188423596498875,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.004023952530845884,
+                  "depositionShare": 0
+                }
+              },
+              "r49..96": {
+                "upstream": {
+                  "grossErosion": 6.734147312394553,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.3769656692740966,
+                  "depositionShare": 0
+                },
+                "downstream": {
+                  "grossErosion": 0.09042179784059892,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.005061652494178664,
+                  "depositionShare": 0
+                }
+              },
+              "r97+": {
+                "upstream": {
+                  "grossErosion": 1.1035777309128258,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.061776331676595825,
+                  "depositionShare": 0
+                },
+                "downstream": {
+                  "grossErosion": 0.00014553120556200227,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.000008146579776176429,
+                  "depositionShare": 0
+                }
+              }
+            },
+            "distributions": {
+              "erosion": {
+                "centroidDy": -27.663548770516243,
+                "p10Dy": -46,
+                "p25Dy": -43,
+                "p50Dy": -28,
+                "p75Dy": -16,
+                "p90Dy": -7,
+                "centroidR": 48.7481219283785,
+                "p50R": 45.541190146942796,
+                "p90R": 87.31551981177228
+              },
+              "deposition": {
+                "centroidDy": null,
+                "p10Dy": null,
+                "p25Dy": null,
+                "p50Dy": null,
+                "p75Dy": null,
+                "p90Dy": null,
+                "centroidR": null,
+                "p50R": null,
+                "p90R": null
+              }
+            }
+          },
+          "water": {
+            "8": {
+              "positiveOutShares": {
+                "north": 0.8580786663760307,
+                "south": 0,
+                "west": 0,
+                "east": 0.1419213336239693
+              },
+              "net": {
+                "north": 2806.668656480804,
+                "south": 0,
+                "west": 0,
+                "east": 464.6735164841326
+              },
+              "netTotalOutward": 3271.3421729649367,
+              "netFractionSigned": {
+                "north": 0.8579563090879662,
+                "south": 0,
+                "west": 0,
+                "east": 0.14204369091203384
+              },
+              "northMinusSouthNet": 2806.668656480804,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.0010049110682078,
+                "south": 0,
+                "west": 0,
+                "east": 1.0000000246010474
+              }
+            },
+            "12": {
+              "positiveOutShares": {
+                "north": 0.6464992861349809,
+                "south": 0,
+                "west": 0,
+                "east": 0.35350071386501924
+              },
+              "net": {
+                "north": 2119.6702345456897,
+                "south": 0,
+                "west": 0,
+                "east": 1159.6036193845086
+              },
+              "netTotalOutward": 3279.273853930198,
+              "netFractionSigned": {
+                "north": 0.6463840255382369,
+                "south": 0,
+                "west": 0,
+                "east": 0.3536159744617632
+              },
+              "northMinusSouthNet": 2119.6702345456897,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.000504428892129,
+                "south": 0,
+                "west": 0,
+                "east": 1
+              }
+            },
+            "16": {
+              "positiveOutShares": {
+                "north": 0.6455840783199929,
+                "south": 0,
+                "west": 0,
+                "east": 0.35441592168000724
+              },
+              "net": {
+                "north": 2111.916464098465,
+                "south": 0,
+                "west": 0,
+                "east": 1159.1634097436302
+              },
+              "netTotalOutward": 3271.0798738420954,
+              "netFractionSigned": {
+                "north": 0.6456328018728207,
+                "south": 0,
+                "west": 0,
+                "east": 0.3543671981271792
+              },
+              "northMinusSouthNet": 2111.916464098465,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1,
+                "south": 0,
+                "west": 0,
+                "east": 1.000212976959589
+              }
+            },
+            "24": {
+              "positiveOutShares": {
+                "north": 0.625524832338034,
+                "south": 0,
+                "west": 0,
+                "east": 0.3744751676619661
+              },
+              "net": {
+                "north": 2081.4619155425776,
+                "south": 0,
+                "west": 0,
+                "east": 1242.837496899296
+              },
+              "netTotalOutward": 3324.2994124418738,
+              "netFractionSigned": {
+                "north": 0.626135512268323,
+                "south": 0,
+                "west": 0,
+                "east": 0.373864487731677
+              },
+              "northMinusSouthNet": 2081.4619155425776,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.0003129134448099,
+                "south": 0,
+                "west": 0,
+                "east": 1.0029250191799612
+              }
+            },
+            "32": {
+              "positiveOutShares": {
+                "north": 0.6061408536046228,
+                "south": 0,
+                "west": 0,
+                "east": 0.39385914639537734
+              },
+              "net": {
+                "north": 2112.5225310715646,
+                "south": 0,
+                "west": 0,
+                "east": 1307.1134180040115
+              },
+              "netTotalOutward": 3419.635949075576,
+              "netFractionSigned": {
+                "north": 0.6177624058615476,
+                "south": 0,
+                "west": 0,
+                "east": 0.38223759413845243
+              },
+              "northMinusSouthNet": 2112.5225310715646,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.0006091947346185,
+                "south": 0,
+                "west": 0,
+                "east": 1.0507997122356547
+              }
+            },
+            "48": {
+              "positiveOutShares": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 1
+              },
+              "net": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 2202.349176518293
+              },
+              "netTotalOutward": 2202.349176518293,
+              "netFractionSigned": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 1
+              },
+              "northMinusSouthNet": 0,
+              "localDirection": "MIXED/RECIRCULATING",
+              "recirculationIndex": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 1.0010583230903953
+              }
+            }
+          },
+          "waterR16R24R32Summary": {
+            "medianPositiveOutShares": {
+              "north": 0.625524832338034,
+              "south": 0,
+              "west": 0,
+              "east": 0.3744751676619661
+            },
+            "medianNorth": 2111.916464098465,
+            "medianSouth": 0,
+            "directions": {
+              "16": "NET_NORTH",
+              "24": "NET_NORTH",
+              "32": "NET_NORTH"
+            },
+            "majority": "NET_NORTH",
+            "counts": {
+              "NET_NORTH": 3,
+              "NET_SOUTH": 0,
+              "MIXED/RECIRCULATING": 0
+            }
+          },
+          "sediment": {
+            "8": {
+              "net": {
+                "north": 0.03475551827416407,
+                "south": 0,
+                "west": 0,
+                "east": 0.005535583392789086
+              },
+              "positiveOut": {
+                "north": 0.03585515486377781,
+                "south": 0,
+                "west": 0,
+                "east": 0.006680247576254241
+              },
+              "incoming": {
+                "north": 0.0010996365896136764,
+                "south": 0,
+                "west": 0,
+                "east": 0.0011446641834651368
+              },
+              "sedimentNorthMinusSouthNet": 0.03475551827416407,
+              "localDirection": "NET_NORTH",
+              "sedimentRecirculationNorth": 1.0316391941256469
+            },
+            "12": {
+              "net": {
+                "north": 0.014034000426034605,
+                "south": 0,
+                "west": 0,
+                "east": 0.03356513035139059
+              },
+              "positiveOut": {
+                "north": 0.014362481532510513,
+                "south": 0,
+                "west": 0,
+                "east": 0.033866060087887694
+              },
+              "incoming": {
+                "north": 0.00032848110647590507,
+                "south": 0,
+                "west": 0,
+                "east": 0.0003009297364971032
+              },
+              "sedimentNorthMinusSouthNet": 0.014034000426034605,
+              "localDirection": "NET_NORTH",
+              "sedimentRecirculationNorth": 1.023406092098055
+            },
+            "16": {
+              "net": {
+                "north": 0.05015842210169965,
+                "south": 0,
+                "west": 0,
+                "east": 0.0808172605661532
+              },
+              "positiveOut": {
+                "north": 0.05019637472034228,
+                "south": 0,
+                "west": 0,
+                "east": 0.0812467808988408
+              },
+              "incoming": {
+                "north": 0.00003795261864266566,
+                "south": 0,
+                "west": 0,
+                "east": 0.0004295203326876515
+              },
+              "sedimentNorthMinusSouthNet": 0.05015842210169965,
+              "localDirection": "NET_NORTH",
+              "sedimentRecirculationNorth": 1.0007566549554865
+            },
+            "24": {
+              "net": {
+                "north": 0.053437398227767725,
+                "south": 0,
+                "west": 0,
+                "east": 0.003616913598862442
+              },
+              "positiveOut": {
+                "north": 0.05349129634592449,
+                "south": 0,
+                "west": 0,
+                "east": 0.005201754992025867
+              },
+              "incoming": {
+                "north": 0.000053898118156785115,
+                "south": 0,
+                "west": 0,
+                "east": 0.0015848413931634163
+              },
+              "sedimentNorthMinusSouthNet": 0.053437398227767725,
+              "localDirection": "NET_NORTH",
+              "sedimentRecirculationNorth": 1.00100862167591
+            },
+            "32": {
+              "net": {
+                "north": 0.09477597495105912,
+                "south": 0,
+                "west": 0,
+                "east": 0.003924487240324688
+              },
+              "positiveOut": {
+                "north": 0.09555423425723744,
+                "south": 0,
+                "west": 0,
+                "east": 0.0058136520683207535
+              },
+              "incoming": {
+                "north": 0.0007782593061786224,
+                "south": 0,
+                "west": 0,
+                "east": 0.0018891648279961036
+              },
+              "sedimentNorthMinusSouthNet": 0.09477597495105912,
+              "localDirection": "NET_NORTH",
+              "sedimentRecirculationNorth": 1.0082115673996517
+            },
+            "48": {
+              "net": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 0.012174648286771951
+              },
+              "positiveOut": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 0.013107969145501065
+              },
+              "incoming": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 0.0009333208587290812
+              },
+              "sedimentNorthMinusSouthNet": 0,
+              "localDirection": "MIXED/RECIRCULATING",
+              "sedimentRecirculationNorth": 0
+            }
+          },
+          "sedimentR16R24R32Summary": {
+            "medianPositiveOutShares": {
+              "north": 0.9113735804588768,
+              "south": 0,
+              "west": 0,
+              "east": 0.08862641954112313
+            },
+            "medianNorth": 0.053437398227767725,
+            "medianSouth": 0,
+            "directions": {
+              "16": "NET_NORTH",
+              "24": "NET_NORTH",
+              "32": "NET_NORTH"
+            },
+            "majority": "NET_NORTH",
+            "counts": {
+              "NET_NORTH": 3,
+              "NET_SOUTH": 0,
+              "MIXED/RECIRCULATING": 0
+            }
+          }
+        },
+        "2501..5000": {
+          "morphology": {
+            "halfPlanes": {
+              "UPSTREAM": {
+                "erosionShare": 0.8698873617712392,
+                "depositionShare": 0
+              },
+              "DOWNSTREAM": {
+                "erosionShare": 0.050936741500108046,
+                "depositionShare": 0
+              },
+              "SOURCE_BAND": {
+                "erosionShare": 0.07917589672865226,
+                "depositionShare": 0
+              }
+            },
+            "sectors": {
+              "UPSTREAM_WEDGE": {
+                "erosionShare": 0.7073219337016395,
+                "depositionShare": 0
+              },
+              "DOWNSTREAM_WEDGE": {
+                "erosionShare": 0.0000038065413815648515,
+                "depositionShare": 0
+              },
+              "LEFT_LATERAL": {
+                "erosionShare": 0.0000035377818530205604,
+                "depositionShare": 0
+              },
+              "RIGHT_LATERAL": {
+                "erosionShare": 0.2655968235644541,
+                "depositionShare": 0
+              }
+            },
+            "annuliNormalisedByWindowTotal": {
+              "r7..12": {
+                "upstream": {
+                  "grossErosion": 15.152855514166951,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.14779168801993087,
+                  "depositionShare": 0
+                },
+                "downstream": {
+                  "grossErosion": 0,
+                  "grossDeposition": 0,
+                  "erosionShare": 0,
+                  "depositionShare": 0
+                }
+              },
+              "r13..24": {
+                "upstream": {
+                  "grossErosion": 31.637141634824715,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.3085693361205017,
+                  "depositionShare": 0
+                },
+                "downstream": {
+                  "grossErosion": 0.000022217212224428926,
+                  "grossDeposition": 0,
+                  "erosionShare": 2.1669310412651353e-7,
+                  "depositionShare": 0
+                }
+              },
+              "r25..48": {
+                "upstream": {
+                  "grossErosion": 20.14986027906633,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.19652941725899423,
+                  "depositionShare": 0
+                },
+                "downstream": {
+                  "grossErosion": 0.022588542726641733,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.0002203148348084969,
+                  "depositionShare": 0
+                }
+              },
+              "r49..96": {
+                "upstream": {
+                  "grossErosion": 9.525204593304974,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.09290302176138276,
+                  "depositionShare": 0
+                },
+                "downstream": {
+                  "grossErosion": 0.07574810431950678,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.0007388006960947505,
+                  "depositionShare": 0
+                }
+              },
+              "r97+": {
+                "upstream": {
+                  "grossErosion": 12.723157445633385,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.12409389861042873,
+                  "depositionShare": 0
+                },
+                "downstream": {
+                  "grossErosion": 5.124107261235239,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.049977409276100684,
+                  "depositionShare": 0
+                }
+              }
+            },
+            "distributions": {
+              "erosion": {
+                "centroidDy": -17.43747392870907,
+                "p10Dy": -35,
+                "p25Dy": -26,
+                "p50Dy": -17,
+                "p75Dy": -10,
+                "p90Dy": -6,
+                "centroidR": 43.8221831247168,
+                "p50R": 23.345235059857504,
+                "p90R": 121.06196760337244
+              },
+              "deposition": {
+                "centroidDy": null,
+                "p10Dy": null,
+                "p25Dy": null,
+                "p50Dy": null,
+                "p75Dy": null,
+                "p90Dy": null,
+                "centroidR": null,
+                "p50R": null,
+                "p90R": null
+              }
+            }
+          },
+          "water": {
+            "8": {
+              "positiveOutShares": {
+                "north": 0.9752404994911471,
+                "south": 0,
+                "west": 0,
+                "east": 0.02475950050885287
+              },
+              "net": {
+                "north": 4802.52749150713,
+                "south": 0,
+                "west": 0,
+                "east": 121.33353846428854
+              },
+              "netTotalOutward": 4923.861029971419,
+              "netFractionSigned": {
+                "north": 0.9753580497650656,
+                "south": 0,
+                "west": 0,
+                "east": 0.024641950234934398
+              },
+              "northMinusSouthNet": 4802.52749150713,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.00362573605756,
+                "south": 0,
+                "west": 0,
+                "east": 1.0085349123754956
+              }
+            },
+            "12": {
+              "positiveOutShares": {
+                "north": 0.9574358571083506,
+                "south": 0,
+                "west": 0,
+                "east": 0.04256414289164941
+              },
+              "net": {
+                "north": 4004.090967103361,
+                "south": 0,
+                "west": 0,
+                "east": 181.26876150062913
+              },
+              "netTotalOutward": 4185.35972860399,
+              "netFractionSigned": {
+                "north": 0.9566898012943106,
+                "south": 0,
+                "west": 0,
+                "east": 0.04331019870568941
+              },
+              "northMinusSouthNet": 4004.090967103361,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.0183212998479774,
+                "south": 0,
+                "west": 0,
+                "east": 1
+              }
+            },
+            "16": {
+              "positiveOutShares": {
+                "north": 0.944169719626183,
+                "south": 0,
+                "west": 0,
+                "east": 0.05583028037381695
+              },
+              "net": {
+                "north": 3361.3997290150337,
+                "south": 0,
+                "west": 0,
+                "east": 178.9156566240076
+              },
+              "netTotalOutward": 3540.3153856390413,
+              "netFractionSigned": {
+                "north": 0.9494633564710754,
+                "south": 0,
+                "west": 0,
+                "east": 0.05053664352892464
+              },
+              "northMinusSouthNet": 3361.3997290150337,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.0029093867410706,
+                "south": 0,
+                "west": 0,
+                "east": 1.1141745932341551
+              }
+            },
+            "24": {
+              "positiveOutShares": {
+                "north": 0.9175800885269791,
+                "south": 0,
+                "west": 0,
+                "east": 0.0824199114730208
+              },
+              "net": {
+                "north": 2099.308396024177,
+                "south": 0,
+                "west": 0,
+                "east": 188.33003742126317
+              },
+              "netTotalOutward": 2287.63843344544,
+              "netFractionSigned": {
+                "north": 0.9176749110926515,
+                "south": 0,
+                "west": 0,
+                "east": 0.08232508890734844
+              },
+              "northMinusSouthNet": 2099.308396024177,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.0000879342726943,
+                "south": 0,
+                "west": 0,
+                "east": 1.0013433099227615
+              }
+            },
+            "32": {
+              "positiveOutShares": {
+                "north": 0.7992258443478133,
+                "south": 0,
+                "west": 0,
+                "east": 0.20077415565218665
+              },
+              "net": {
+                "north": 1268.33460963436,
+                "south": 0,
+                "west": 0,
+                "east": 236.69099643844174
+              },
+              "netTotalOutward": 1505.0256060728018,
+              "netFractionSigned": {
+                "north": 0.8427329106671742,
+                "south": 0,
+                "west": 0,
+                "east": 0.15726708933282588
+              },
+              "northMinusSouthNet": 1268.33460963436,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.0631448141652322,
+                "south": 0,
+                "west": 0,
+                "east": 1.4311423044195097
+              }
+            },
+            "48": {
+              "positiveOutShares": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 1
+              },
+              "net": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 2477.83589691647
+              },
+              "netTotalOutward": 2477.83589691647,
+              "netFractionSigned": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 1
+              },
+              "northMinusSouthNet": 0,
+              "localDirection": "MIXED/RECIRCULATING",
+              "recirculationIndex": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 1.026544914501751
+              }
+            }
+          },
+          "waterR16R24R32Summary": {
+            "medianPositiveOutShares": {
+              "north": 0.9175800885269791,
+              "south": 0,
+              "west": 0,
+              "east": 0.0824199114730208
+            },
+            "medianNorth": 2099.308396024177,
+            "medianSouth": 0,
+            "directions": {
+              "16": "NET_NORTH",
+              "24": "NET_NORTH",
+              "32": "NET_NORTH"
+            },
+            "majority": "NET_NORTH",
+            "counts": {
+              "NET_NORTH": 3,
+              "NET_SOUTH": 0,
+              "MIXED/RECIRCULATING": 0
+            }
+          },
+          "sediment": {
+            "8": {
+              "net": {
+                "north": 0.13241307459877696,
+                "south": 0,
+                "west": 0,
+                "east": 0.004294676912039283
+              },
+              "positiveOut": {
+                "north": 0.14744814829076375,
+                "south": 0,
+                "west": 0,
+                "east": 0.005208673141885592
+              },
+              "incoming": {
+                "north": 0.015035073691986131,
+                "south": 0,
+                "west": 0,
+                "east": 0.0009139962298463403
+              },
+              "sedimentNorthMinusSouthNet": 0.13241307459877696,
+              "localDirection": "NET_NORTH",
+              "sedimentRecirculationNorth": 1.113546745572855
+            },
+            "12": {
+              "net": {
+                "north": 0.3251635752933239,
+                "south": 0,
+                "west": 0,
+                "east": 0.014731895843565598
+              },
+              "positiveOut": {
+                "north": 0.33535433801595765,
+                "south": 0,
+                "west": 0,
+                "east": 0.014731895843565598
+              },
+              "incoming": {
+                "north": 0.010190762722634035,
+                "south": 0,
+                "west": 0,
+                "east": 0
+              },
+              "sedimentNorthMinusSouthNet": 0.3251635752933239,
+              "localDirection": "NET_NORTH",
+              "sedimentRecirculationNorth": 1.031340419090425
+            },
+            "16": {
+              "net": {
+                "north": 0.24742977988888315,
+                "south": 0,
+                "west": 0,
+                "east": 0.0046069631842351735
+              },
+              "positiveOut": {
+                "north": 0.2568625690919033,
+                "south": 0,
+                "west": 0,
+                "east": 0.007295599192742189
+              },
+              "incoming": {
+                "north": 0.009432789203020528,
+                "south": 0,
+                "west": 0,
+                "east": 0.0026886360085070335
+              },
+              "sedimentNorthMinusSouthNet": 0.24742977988888315,
+              "localDirection": "NET_NORTH",
+              "sedimentRecirculationNorth": 1.0381230958021959
+            },
+            "24": {
+              "net": {
+                "north": 0.08984949064391559,
+                "south": 0,
+                "west": 0,
+                "east": 0.0008988477903190108
+              },
+              "positiveOut": {
+                "north": 0.10103880318130494,
+                "south": 0,
+                "west": 0,
+                "east": 0.0013880350307021517
+              },
+              "incoming": {
+                "north": 0.011189312537389928,
+                "south": 0,
+                "west": 0,
+                "east": 0.0004891872403831376
+              },
+              "sedimentNorthMinusSouthNet": 0.08984949064391559,
+              "localDirection": "NET_NORTH",
+              "sedimentRecirculationNorth": 1.124533956255066
+            },
+            "32": {
+              "net": {
+                "north": 0.053130346038124214,
+                "south": 0,
+                "west": 0,
+                "east": 0.0013301172821423982
+              },
+              "positiveOut": {
+                "north": 0.0696312795418037,
+                "south": 0,
+                "west": 0,
+                "east": 0.0028299340143360455
+              },
+              "incoming": {
+                "north": 0.016500933503679538,
+                "south": 0,
+                "west": 0,
+                "east": 0.0014998167321936423
+              },
+              "sedimentNorthMinusSouthNet": 0.053130346038124214,
+              "localDirection": "NET_NORTH",
+              "sedimentRecirculationNorth": 1.310574553605186
+            },
+            "48": {
+              "net": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 0.008069647692072388
+              },
+              "positiveOut": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 0.009413071089502642
+              },
+              "incoming": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 0.0013434233974302272
+              },
+              "sedimentNorthMinusSouthNet": 0,
+              "localDirection": "MIXED/RECIRCULATING",
+              "sedimentRecirculationNorth": 0
+            }
+          },
+          "sedimentR16R24R32Summary": {
+            "medianPositiveOutShares": {
+              "north": 0.9723817013113114,
+              "south": 0,
+              "west": 0,
+              "east": 0.027618298688688533
+            },
+            "medianNorth": 0.08984949064391559,
+            "medianSouth": 0,
+            "directions": {
+              "16": "NET_NORTH",
+              "24": "NET_NORTH",
+              "32": "NET_NORTH"
+            },
+            "majority": "NET_NORTH",
+            "counts": {
+              "NET_NORTH": 3,
+              "NET_SOUTH": 0,
+              "MIXED/RECIRCULATING": 0
+            }
+          }
+        },
+        "5001..7500": {
+          "morphology": {
+            "halfPlanes": {
+              "UPSTREAM": {
+                "erosionShare": 0.8481407026948272,
+                "depositionShare": 0
+              },
+              "DOWNSTREAM": {
+                "erosionShare": 0.04360945898994968,
+                "depositionShare": 0
+              },
+              "SOURCE_BAND": {
+                "erosionShare": 0.10824983831522213,
+                "depositionShare": 0
+              }
+            },
+            "sectors": {
+              "UPSTREAM_WEDGE": {
+                "erosionShare": 0.8301202247344684,
+                "depositionShare": 0
+              },
+              "DOWNSTREAM_WEDGE": {
+                "erosionShare": 0.000002679757077263745,
+                "depositionShare": 0
+              },
+              "LEFT_LATERAL": {
+                "erosionShare": 5.064639016390274e-8,
+                "depositionShare": 0
+              },
+              "RIGHT_LATERAL": {
+                "erosionShare": 0.11863389403384594,
+                "depositionShare": 0
+              }
+            },
+            "annuliNormalisedByWindowTotal": {
+              "r7..12": {
+                "upstream": {
+                  "grossErosion": 20.631080747709134,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.27485561719073565,
+                  "depositionShare": 0
+                },
+                "downstream": {
+                  "grossErosion": 0,
+                  "grossDeposition": 0,
+                  "erosionShare": 0,
+                  "depositionShare": 0
+                }
+              },
+              "r13..24": {
+                "upstream": {
+                  "grossErosion": 24.36052260373436,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.3245407527224066,
+                  "depositionShare": 0
+                },
+                "downstream": {
+                  "grossErosion": 0.000014295276789292276,
+                  "grossDeposition": 0,
+                  "erosionShare": 1.904474696639252e-7,
+                  "depositionShare": 0
+                }
+              },
+              "r25..48": {
+                "upstream": {
+                  "grossErosion": 12.852096482367886,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.17122083685549783,
+                  "depositionShare": 0
+                },
+                "downstream": {
+                  "grossErosion": 0.01600865061230655,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.00021327372997291698,
+                  "depositionShare": 0
+                }
+              },
+              "r49..96": {
+                "upstream": {
+                  "grossErosion": 0.9289130344059471,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.012375355828924081,
+                  "depositionShare": 0
+                },
+                "downstream": {
+                  "grossErosion": 0.05377921183532887,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.0007164684507704214,
+                  "depositionShare": 0
+                }
+              },
+              "r97+": {
+                "upstream": {
+                  "grossErosion": 4.89011850166037,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.06514814009726282,
+                  "depositionShare": 0
+                },
+                "downstream": {
+                  "grossErosion": 3.2035901745167212,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.04267952636173667,
+                  "depositionShare": 0
+                }
+              }
+            },
+            "distributions": {
+              "erosion": {
+                "centroidDy": -13.543739670067826,
+                "p10Dy": -29,
+                "p25Dy": -21,
+                "p50Dy": -13,
+                "p75Dy": -8,
+                "p90Dy": -6,
+                "centroidR": 28.734652590288462,
+                "p50R": 15.297058540778355,
+                "p90R": 118.0889495253472
+              },
+              "deposition": {
+                "centroidDy": null,
+                "p10Dy": null,
+                "p25Dy": null,
+                "p50Dy": null,
+                "p75Dy": null,
+                "p90Dy": null,
+                "centroidR": null,
+                "p50R": null,
+                "p90R": null
+              }
+            }
+          },
+          "water": {
+            "8": {
+              "positiveOutShares": {
+                "north": 0.9997802192517494,
+                "south": 0,
+                "west": 0,
+                "east": 0.0002197807482506076
+              },
+              "net": {
+                "north": 4291.100133447209,
+                "south": 0,
+                "west": 0,
+                "east": 0.05720307491719723
+              },
+              "netTotalOutward": 4291.157336522127,
+              "netFractionSigned": {
+                "north": 0.9999866695461315,
+                "south": 0,
+                "west": 0,
+                "east": 0.000013330453868549797
+              },
+              "northMinusSouthNet": 4291.100133447209,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1,
+                "south": 0,
+                "west": 0,
+                "east": 16.490521192522454
+              }
+            },
+            "12": {
+              "positiveOutShares": {
+                "north": 1,
+                "south": 0,
+                "west": 0,
+                "east": 0
+              },
+              "net": {
+                "north": 2984.391436644697,
+                "south": 0,
+                "west": 0,
+                "east": 0
+              },
+              "netTotalOutward": 2984.391436644697,
+              "netFractionSigned": {
+                "north": 1,
+                "south": 0,
+                "west": 0,
+                "east": 0
+              },
+              "northMinusSouthNet": 2984.391436644697,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.0715978829875243,
+                "south": 0,
+                "west": 0,
+                "east": 0
+              }
+            },
+            "16": {
+              "positiveOutShares": {
+                "north": 0.9856880920467863,
+                "south": 0,
+                "west": 0,
+                "east": 0.014311907953213696
+              },
+              "net": {
+                "north": 2129.253965895892,
+                "south": 0,
+                "west": 0,
+                "east": -0.6607484325966
+              },
+              "netTotalOutward": 2128.593217463296,
+              "netFractionSigned": {
+                "north": 0.9996897770468689,
+                "south": 0,
+                "west": 0,
+                "east": -0.0003102229531312094
+              },
+              "northMinusSouthNet": 2129.253965895892,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.0024175087542282,
+                "south": 0,
+                "west": 0,
+                "east": 46.90271591407477
+              }
+            },
+            "24": {
+              "positiveOutShares": {
+                "north": 1,
+                "south": 0,
+                "west": 0,
+                "east": 0
+              },
+              "net": {
+                "north": 924.6399337649345,
+                "south": 0,
+                "west": 0,
+                "east": 0
+              },
+              "netTotalOutward": 924.6399337649345,
+              "netFractionSigned": {
+                "north": 1,
+                "south": 0,
+                "west": 0,
+                "east": 0
+              },
+              "northMinusSouthNet": 924.6399337649345,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1,
+                "south": 0,
+                "west": 0,
+                "east": 0
+              }
+            },
+            "32": {
+              "positiveOutShares": {
+                "north": 0.7856162715152365,
+                "south": 0,
+                "west": 0,
+                "east": 0.21438372848476356
+              },
+              "net": {
+                "north": 61.75125230848789,
+                "south": 0,
+                "west": 0,
+                "east": 0.10274308806902299
+              },
+              "netTotalOutward": 61.85399539655692,
+              "netFractionSigned": {
+                "north": 0.998338941770692,
+                "south": 0,
+                "west": 0,
+                "east": 0.0016610582293078865
+              },
+              "northMinusSouthNet": 61.75125230848789,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 5.475413972002866,
+                "south": 0,
+                "west": 0,
+                "east": 898.0312803577391
+              }
+            },
+            "48": {
+              "positiveOutShares": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 1
+              },
+              "net": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": -10.15575324699925
+              },
+              "netTotalOutward": -10.15575324699925,
+              "netFractionSigned": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": -1
+              },
+              "northMinusSouthNet": 0,
+              "localDirection": "MIXED/RECIRCULATING",
+              "recirculationIndex": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 17.174416286184872
+              }
+            }
+          },
+          "waterR16R24R32Summary": {
+            "medianPositiveOutShares": {
+              "north": 0.9856880920467863,
+              "south": 0,
+              "west": 0,
+              "east": 0.014311907953213696
+            },
+            "medianNorth": 924.6399337649345,
+            "medianSouth": 0,
+            "directions": {
+              "16": "NET_NORTH",
+              "24": "NET_NORTH",
+              "32": "NET_NORTH"
+            },
+            "majority": "NET_NORTH",
+            "counts": {
+              "NET_NORTH": 3,
+              "NET_SOUTH": 0,
+              "MIXED/RECIRCULATING": 0
+            }
+          },
+          "scaleDependence": {
+            "directionsByRadius": {
+              "8": "NET_NORTH",
+              "12": "NET_NORTH",
+              "16": "NET_NORTH",
+              "24": "NET_NORTH",
+              "32": "NET_NORTH",
+              "48": "MIXED/RECIRCULATING"
+            },
+            "classification": "MIXED_SCALE"
+          },
+          "sediment": {
+            "8": {
+              "net": {
+                "north": 0.041909584052167694,
+                "south": 0,
+                "west": 0,
+                "east": 0.00000687219739320221
+              },
+              "positiveOut": {
+                "north": 0.04796865137304048,
+                "south": 0,
+                "west": 0,
+                "east": 0.000022775770311864522
+              },
+              "incoming": {
+                "north": 0.006059067320872855,
+                "south": 0,
+                "west": 0,
+                "east": 0.000015903572918662344
+              },
+              "sedimentNorthMinusSouthNet": 0.041909584052167694,
+              "localDirection": "NET_NORTH",
+              "sedimentRecirculationNorth": 1.1445747424582084
+            },
+            "12": {
+              "net": {
+                "north": 0.013205418342393561,
+                "south": 0,
+                "west": 0,
+                "east": 0
+              },
+              "positiveOut": {
+                "north": 0.017538917311417077,
+                "south": 0,
+                "west": 0,
+                "east": 0
+              },
+              "incoming": {
+                "north": 0.0043334989690234854,
+                "south": 0,
+                "west": 0,
+                "east": 0
+              },
+              "sedimentNorthMinusSouthNet": 0.013205418342393561,
+              "localDirection": "NET_NORTH",
+              "sedimentRecirculationNorth": 1.3281606728892197
+            },
+            "16": {
+              "net": {
+                "north": 0.009000537093985902,
+                "south": 0,
+                "west": 0,
+                "east": -0.0012050964300303986
+              },
+              "positiveOut": {
+                "north": 0.013842604314359463,
+                "south": 0,
+                "west": 0,
+                "east": 0.0006474573198361936
+              },
+              "incoming": {
+                "north": 0.004842067220373583,
+                "south": 0,
+                "west": 0,
+                "east": 0.0018525537498665953
+              },
+              "sedimentNorthMinusSouthNet": 0.009000537093985902,
+              "localDirection": "NET_NORTH",
+              "sedimentRecirculationNorth": 1.537975364115659
+            },
+            "24": {
+              "net": {
+                "north": 0.0030278514040355327,
+                "south": 0,
+                "west": 0,
+                "east": 0
+              },
+              "positiveOut": {
+                "north": 0.007888410654221387,
+                "south": 0,
+                "west": 0,
+                "east": 0
+              },
+              "incoming": {
+                "north": 0.004860559250185844,
+                "south": 0,
+                "west": 0,
+                "east": 0
+              },
+              "sedimentNorthMinusSouthNet": 0.0030278514040355327,
+              "localDirection": "NET_NORTH",
+              "sedimentRecirculationNorth": 2.605283285602352
+            },
+            "32": {
+              "net": {
+                "north": -0.0038628234622208883,
+                "south": 0,
+                "west": 0,
+                "east": 0.00018207379545104202
+              },
+              "positiveOut": {
+                "north": 0.011837919787091837,
+                "south": 0,
+                "west": 0,
+                "east": 0.0012241507533347845
+              },
+              "incoming": {
+                "north": 0.015700743249312647,
+                "south": 0,
+                "west": 0,
+                "east": 0.0010420769578837529
+              },
+              "sedimentNorthMinusSouthNet": -0.0038628234622208883,
+              "localDirection": "MIXED/RECIRCULATING",
+              "sedimentRecirculationNorth": 3.0645769610930533
+            },
+            "48": {
+              "net": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": -0.0002426652835134536
+              },
+              "positiveOut": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 0.0010315627266136624
+              },
+              "incoming": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 0.0012742280101271156
+              },
+              "sedimentNorthMinusSouthNet": 0,
+              "localDirection": "MIXED/RECIRCULATING",
+              "sedimentRecirculationNorth": 0
+            }
+          },
+          "sedimentR16R24R32Summary": {
+            "medianPositiveOutShares": {
+              "north": 0.9553171452143286,
+              "south": 0,
+              "west": 0,
+              "east": 0.044682854785671446
+            },
+            "medianNorth": 0.0030278514040355327,
+            "medianSouth": 0,
+            "directions": {
+              "16": "NET_NORTH",
+              "24": "NET_NORTH",
+              "32": "MIXED/RECIRCULATING"
+            },
+            "majority": "NET_NORTH",
+            "counts": {
+              "NET_NORTH": 2,
+              "NET_SOUTH": 0,
+              "MIXED/RECIRCULATING": 1
+            }
+          },
+          "waterSedimentCoherenceR16R24R32": {
+            "16": "COHERENT_NORTH",
+            "24": "COHERENT_NORTH",
+            "32": "WATER_NORTH_SEDIMENT_NOT"
+          }
+        },
+        "7501..10000": {
+          "morphology": {
+            "halfPlanes": {
+              "UPSTREAM": {
+                "erosionShare": 0.8396605111205397,
+                "depositionShare": 0
+              },
+              "DOWNSTREAM": {
+                "erosionShare": 0.0465440210517637,
+                "depositionShare": 0
+              },
+              "SOURCE_BAND": {
+                "erosionShare": 0.11379546782769707,
+                "depositionShare": 0
+              }
+            },
+            "sectors": {
+              "UPSTREAM_WEDGE": {
+                "erosionShare": 0.833995587793235,
+                "depositionShare": 0
+              },
+              "DOWNSTREAM_WEDGE": {
+                "erosionShare": 3.5091808589249803e-7,
+                "depositionShare": 0
+              },
+              "LEFT_LATERAL": {
+                "erosionShare": 1.1354957889844159e-9,
+                "depositionShare": 0
+              },
+              "RIGHT_LATERAL": {
+                "erosionShare": 0.11212200058945786,
+                "depositionShare": 0
+              }
+            },
+            "annuliNormalisedByWindowTotal": {
+              "r7..12": {
+                "upstream": {
+                  "grossErosion": 17.912158308286518,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.27259495822821805,
+                  "depositionShare": 0
+                },
+                "downstream": {
+                  "grossErosion": 0,
+                  "grossDeposition": 0,
+                  "erosionShare": 0,
+                  "depositionShare": 0
+                }
+              },
+              "r13..24": {
+                "upstream": {
+                  "grossErosion": 20.75459371090599,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.31585236733033667,
+                  "depositionShare": 0
+                },
+                "downstream": {
+                  "grossErosion": 0.000009867058152119044,
+                  "grossDeposition": 0,
+                  "erosionShare": 1.501611507959918e-7,
+                  "depositionShare": 0
+                }
+              },
+              "r25..48": {
+                "upstream": {
+                  "grossErosion": 11.915860611994894,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.18134071114575478,
+                  "depositionShare": 0
+                },
+                "downstream": {
+                  "grossErosion": 0.011861291212653832,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.00018051025046771164,
+                  "depositionShare": 0
+                }
+              },
+              "r49..96": {
+                "upstream": {
+                  "grossErosion": 0.8143840216822398,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.012393647630363908,
+                  "depositionShare": 0
+                },
+                "downstream": {
+                  "grossErosion": 0.04051104221732294,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.0006165145300164061,
+                  "depositionShare": 0
+                }
+              },
+              "r97+": {
+                "upstream": {
+                  "grossErosion": 3.776921816364092,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.057478826785866216,
+                  "depositionShare": 0
+                },
+                "downstream": {
+                  "grossErosion": 3.0060157933787646,
+                  "grossDeposition": 0,
+                  "erosionShare": 0.04574684611012879,
+                  "depositionShare": 0
+                }
+              }
+            },
+            "distributions": {
+              "erosion": {
+                "centroidDy": -13.488488689124004,
+                "p10Dy": -29,
+                "p25Dy": -21,
+                "p50Dy": -13,
+                "p75Dy": -8,
+                "p90Dy": -5,
+                "centroidR": 28.208766409601438,
+                "p50R": 15.297058540778355,
+                "p90R": 118.0889495253472
+              },
+              "deposition": {
+                "centroidDy": null,
+                "p10Dy": null,
+                "p25Dy": null,
+                "p50Dy": null,
+                "p75Dy": null,
+                "p90Dy": null,
+                "centroidR": null,
+                "p50R": null,
+                "p90R": null
+              }
+            }
+          },
+          "water": {
+            "8": {
+              "positiveOutShares": {
+                "north": 0.9999657011132698,
+                "south": 0,
+                "west": 0,
+                "east": 0.00003429888673029037
+              },
+              "net": {
+                "north": 4207.429146199487,
+                "south": 0,
+                "west": 0,
+                "east": 0.017925081027442502
+              },
+              "netTotalOutward": 4207.447071280514,
+              "netFractionSigned": {
+                "north": 0.9999957396775947,
+                "south": 0,
+                "west": 0,
+                "east": 0.000004260322405431258
+              },
+              "northMinusSouthNet": 4207.429146199487,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1,
+                "south": 0,
+                "west": 0,
+                "east": 8.051014404735554
+              }
+            },
+            "12": {
+              "positiveOutShares": {
+                "north": 1,
+                "south": 0,
+                "west": 0,
+                "east": 0
+              },
+              "net": {
+                "north": 2921.7199218651695,
+                "south": 0,
+                "west": 0,
+                "east": 0
+              },
+              "netTotalOutward": 2921.7199218651695,
+              "netFractionSigned": {
+                "north": 1,
+                "south": 0,
+                "west": 0,
+                "east": 0
+              },
+              "northMinusSouthNet": 2921.7199218651695,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1.0773350705698743,
+                "south": 0,
+                "west": 0,
+                "east": 0
+              }
+            },
+            "16": {
+              "positiveOutShares": {
+                "north": 0.9999008952935474,
+                "south": 0,
+                "west": 0,
+                "east": 0.00009910470645259569
+              },
+              "net": {
+                "north": 2042.512837201357,
+                "south": 0,
+                "west": 0,
+                "east": -0.20867548882961273
+              },
+              "netTotalOutward": 2042.3041617125273,
+              "netFractionSigned": {
+                "north": 0.9998978443769583,
+                "south": 0,
+                "west": 0,
+                "east": -0.00010215562304173076
+              },
+              "northMinusSouthNet": 2042.512837201357,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1,
+                "south": 0,
+                "west": 0,
+                "east": 0.9701316590468063
+              }
+            },
+            "24": {
+              "positiveOutShares": {
+                "north": 1,
+                "south": 0,
+                "west": 0,
+                "east": 0
+              },
+              "net": {
+                "north": 881.5580171942711,
+                "south": 0,
+                "west": 0,
+                "east": 0
+              },
+              "netTotalOutward": 881.5580171942711,
+              "netFractionSigned": {
+                "north": 1,
+                "south": 0,
+                "west": 0,
+                "east": 0
+              },
+              "northMinusSouthNet": 881.5580171942711,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 1,
+                "south": 0,
+                "west": 0,
+                "east": 0
+              }
+            },
+            "32": {
+              "positiveOutShares": {
+                "north": 0.8290849328494404,
+                "south": 0,
+                "west": 0,
+                "east": 0.1709150671505596
+              },
+              "net": {
+                "north": 42.050000086426735,
+                "south": 0,
+                "west": 0,
+                "east": -0.6717712096869946
+              },
+              "netTotalOutward": 41.37822887673974,
+              "netFractionSigned": {
+                "north": 0.9842756704765164,
+                "south": 0,
+                "west": 0,
+                "east": -0.01572432952348358
+              },
+              "northMinusSouthNet": 42.050000086426735,
+              "localDirection": "NET_NORTH",
+              "recirculationIndex": {
+                "north": 7.564698379801212,
+                "south": 0,
+                "west": 0,
+                "east": 97.61522453757686
+              }
+            },
+            "48": {
+              "positiveOutShares": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 1
+              },
+              "net": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": -8.489784133736975
+              },
+              "netTotalOutward": -8.489784133736975,
+              "netFractionSigned": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": -1
+              },
+              "northMinusSouthNet": 0,
+              "localDirection": "MIXED/RECIRCULATING",
+              "recirculationIndex": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 17.175230579851227
+              }
+            }
+          },
+          "waterR16R24R32Summary": {
+            "medianPositiveOutShares": {
+              "north": 0.9999008952935474,
+              "south": 0,
+              "west": 0,
+              "east": 0.00009910470645259569
+            },
+            "medianNorth": 881.5580171942711,
+            "medianSouth": 0,
+            "directions": {
+              "16": "NET_NORTH",
+              "24": "NET_NORTH",
+              "32": "NET_NORTH"
+            },
+            "majority": "NET_NORTH",
+            "counts": {
+              "NET_NORTH": 3,
+              "NET_SOUTH": 0,
+              "MIXED/RECIRCULATING": 0
+            }
+          },
+          "scaleDependence": {
+            "directionsByRadius": {
+              "8": "NET_NORTH",
+              "12": "NET_NORTH",
+              "16": "NET_NORTH",
+              "24": "NET_NORTH",
+              "32": "NET_NORTH",
+              "48": "MIXED/RECIRCULATING"
+            },
+            "classification": "MIXED_SCALE"
+          },
+          "sediment": {
+            "8": {
+              "net": {
+                "north": 0.015637003754970603,
+                "south": 0,
+                "west": 0,
+                "east": 0.000005624155214075666
+              },
+              "positiveOut": {
+                "north": 0.018236480062563253,
+                "south": 0,
+                "west": 0,
+                "east": 0.000008583486372804
+              },
+              "incoming": {
+                "north": 0.002599476307592655,
+                "south": 0,
+                "west": 0,
+                "east": 0.0000029593311587283
+              },
+              "sedimentNorthMinusSouthNet": 0.015637003754970603,
+              "localDirection": "NET_NORTH",
+              "sedimentRecirculationNorth": 1.1662387723585692
+            },
+            "12": {
+              "net": {
+                "north": 0.00572903461519835,
+                "south": 0,
+                "west": 0,
+                "east": 0
+              },
+              "positiveOut": {
+                "north": 0.008011124989680846,
+                "south": 0,
+                "west": 0,
+                "east": 0
+              },
+              "incoming": {
+                "north": 0.0022820903744824803,
+                "south": 0,
+                "west": 0,
+                "east": 0
+              },
+              "sedimentNorthMinusSouthNet": 0.00572903461519835,
+              "localDirection": "NET_NORTH",
+              "sedimentRecirculationNorth": 1.398337683006561
+            },
+            "16": {
+              "net": {
+                "north": 0.005090566775028503,
+                "south": 0,
+                "west": 0,
+                "east": -0.000004692183065442372
+              },
+              "positiveOut": {
+                "north": 0.00737005544441608,
+                "south": 0,
+                "west": 0,
+                "east": 0.000007103149294477889
+              },
+              "incoming": {
+                "north": 0.0022794886693875754,
+                "south": 0,
+                "west": 0,
+                "east": 0.000011795332359920269
+              },
+              "sedimentNorthMinusSouthNet": 0.005090566775028503,
+              "localDirection": "NET_NORTH",
+              "sedimentRecirculationNorth": 1.4477868123780409
+            },
+            "24": {
+              "net": {
+                "north": 0.00195855771015331,
+                "south": 0,
+                "west": 0,
+                "east": 0
+              },
+              "positiveOut": {
+                "north": 0.005822025330134327,
+                "south": 0,
+                "west": 0,
+                "east": 0
+              },
+              "incoming": {
+                "north": 0.0038634676199809986,
+                "south": 0,
+                "west": 0,
+                "east": 0
+              },
+              "sedimentNorthMinusSouthNet": 0.00195855771015331,
+              "localDirection": "NET_NORTH",
+              "sedimentRecirculationNorth": 2.972608516947196
+            },
+            "32": {
+              "net": {
+                "north": -0.0032908512809113055,
+                "south": 0,
+                "west": 0,
+                "east": 0.000029539536475468297
+              },
+              "positiveOut": {
+                "north": 0.006618236868389068,
+                "south": 0,
+                "west": 0,
+                "east": 0.0009538271976736901
+              },
+              "incoming": {
+                "north": 0.009909088149300397,
+                "south": 0,
+                "west": 0,
+                "east": 0.0009242876611982124
+              },
+              "sedimentNorthMinusSouthNet": -0.0032908512809113055,
+              "localDirection": "MIXED/RECIRCULATING",
+              "sedimentRecirculationNorth": 2.0111017798884974
+            },
+            "48": {
+              "net": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": -0.00117822465146439
+              },
+              "positiveOut": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 0.0015904206372515932
+              },
+              "incoming": {
+                "north": 0,
+                "south": 0,
+                "west": 0,
+                "east": 0.002768645288715961
+              },
+              "sedimentNorthMinusSouthNet": 0,
+              "localDirection": "MIXED/RECIRCULATING",
+              "sedimentRecirculationNorth": 0
+            }
+          },
+          "sedimentR16R24R32Summary": {
+            "medianPositiveOutShares": {
+              "north": 0.999037142931896,
+              "south": 0,
+              "west": 0,
+              "east": 0.0009628570681039341
+            },
+            "medianNorth": 0.00195855771015331,
+            "medianSouth": 0,
+            "directions": {
+              "16": "NET_NORTH",
+              "24": "NET_NORTH",
+              "32": "MIXED/RECIRCULATING"
+            },
+            "majority": "NET_NORTH",
+            "counts": {
+              "NET_NORTH": 2,
+              "NET_SOUTH": 0,
+              "MIXED/RECIRCULATING": 1
+            }
+          },
+          "waterSedimentCoherenceR16R24R32": {
+            "16": "COHERENT_NORTH",
+            "24": "COHERENT_NORTH",
+            "32": "WATER_NORTH_SEDIMENT_NOT"
+          }
+        }
+      },
+      "checkpoints": {
+        "1000": {
+          "erosion": {
+            "centroidDy": -19.860353505696914,
+            "fractionDyLessThan0": 0.9473307232608055
+          },
+          "deposition": {
+            "centroidDy": null,
+            "fractionDyLessThan0": 0
+          }
+        },
+        "2500": {
+          "erosion": {
+            "centroidDy": -26.10042364558788,
+            "fractionDyLessThan0": 0.9748505679682699
+          },
+          "deposition": {
+            "centroidDy": null,
+            "fractionDyLessThan0": 0
+          }
+        },
+        "5000": {
+          "erosion": {
+            "centroidDy": -18.987290443769975,
+            "fractionDyLessThan0": 0.9453408791466396
+          },
+          "deposition": {
+            "centroidDy": null,
+            "fractionDyLessThan0": 0
+          }
+        },
+        "7500": {
+          "erosion": {
+            "centroidDy": -16.943558855966845,
+            "fractionDyLessThan0": 0.9483270034496627
+          },
+          "deposition": {
+            "centroidDy": null,
+            "fractionDyLessThan0": 0
+          }
+        },
+        "10000": {
+          "erosion": {
+            "centroidDy": -16.08889471742091,
+            "fractionDyLessThan0": 0.9490856458483887
+          },
+          "deposition": {
+            "centroidDy": null,
+            "fractionDyLessThan0": 0
+          }
+        }
+      },
+      "fullGridAt10000QuadrantsExcludingR6": {
+        "erosion": {
+          "NW": {
+            "gross": 178.04894947956262,
+            "share": 0.7258332231130459,
+            "centroidR": 19.10689224146735
+          },
+          "NE": {
+            "gross": 54.091105590505315,
+            "share": 0.2205074594782215,
+            "centroidR": 78.054872427038
+          },
+          "SW": {
+            "gross": 0.0031577157188574694,
+            "share": 0.000012872723959295981,
+            "centroidR": 28.93262564046481
+          },
+          "SE": {
+            "gross": 13.159625124998875,
+            "share": 0.0536464446847733,
+            "centroidR": 128.6463117886966
+          }
+        },
+        "deposition": {
+          "NW": {
+            "gross": 0,
+            "share": 0,
+            "centroidR": 0
+          },
+          "NE": {
+            "gross": 0,
+            "share": 0,
+            "centroidR": 0
+          },
+          "SW": {
+            "gross": 0,
+            "share": 0,
+            "centroidR": 0
+          },
+          "SE": {
+            "gross": 0,
+            "share": 0,
+            "centroidR": 0
+          }
+        }
+      },
+      "earlyTransientRecheck": {
+        "upstreamProducedBy2500Over10000": {
+          "erosion": 0.0854699612041604,
+          "deposition": 0
+        },
+        "lateWindowUpstreamShares": {
+          "5001..7500": {
+            "erosionShare": 0.8481407026948272,
+            "depositionShare": 0
+          },
+          "7501..10000": {
+            "erosionShare": 0.8396605111205397,
+            "depositionShare": 0
+          }
+        },
+        "earlyTransientDominated": false
+      }
+    }
+  },
+  "currentVsPositiveLegacy": {
+    "waterNetDifferenceCurrentMinusLegacy": {
+      "0..1000": {
+        "8": {
+          "northNetOutward": -1.7139951242152165,
+          "southNetOutward": 0.0203027646416295,
+          "currentDirection": "NET_NORTH",
+          "legacyDirection": "NET_NORTH"
+        },
+        "12": {
+          "northNetOutward": -3.951209568435388,
+          "southNetOutward": 0.021965347767620824,
+          "currentDirection": "NET_NORTH",
+          "legacyDirection": "NET_NORTH"
+        },
+        "16": {
+          "northNetOutward": -3.3214334370502456,
+          "southNetOutward": 0.000004672927091291837,
+          "currentDirection": "NET_NORTH",
+          "legacyDirection": "NET_NORTH"
+        },
+        "24": {
+          "northNetOutward": -3.5973671028245917,
+          "southNetOutward": 0.01057216629579899,
+          "currentDirection": "NET_NORTH",
+          "legacyDirection": "NET_NORTH"
+        },
+        "32": {
+          "northNetOutward": -6.308589615959022,
+          "southNetOutward": 0,
+          "currentDirection": "NET_NORTH",
+          "legacyDirection": "NET_NORTH"
+        },
+        "48": {
+          "northNetOutward": 0,
+          "southNetOutward": 0,
+          "currentDirection": "MIXED/RECIRCULATING",
+          "legacyDirection": "MIXED/RECIRCULATING"
+        }
+      },
+      "1001..2500": {
+        "8": {
+          "northNetOutward": -79.222469060604,
+          "southNetOutward": 0,
+          "currentDirection": "NET_NORTH",
+          "legacyDirection": "NET_NORTH"
+        },
+        "12": {
+          "northNetOutward": -231.58040011057983,
+          "southNetOutward": 0,
+          "currentDirection": "NET_NORTH",
+          "legacyDirection": "NET_NORTH"
+        },
+        "16": {
+          "northNetOutward": -227.48674207515842,
+          "southNetOutward": 0,
+          "currentDirection": "NET_NORTH",
+          "legacyDirection": "NET_NORTH"
+        },
+        "24": {
+          "northNetOutward": -201.2180613984242,
+          "southNetOutward": 0,
+          "currentDirection": "NET_NORTH",
+          "legacyDirection": "NET_NORTH"
+        },
+        "32": {
+          "northNetOutward": -199.3878072539037,
+          "southNetOutward": 0,
+          "currentDirection": "NET_NORTH",
+          "legacyDirection": "NET_NORTH"
+        },
+        "48": {
+          "northNetOutward": 0,
+          "southNetOutward": 0,
+          "currentDirection": "MIXED/RECIRCULATING",
+          "legacyDirection": "MIXED/RECIRCULATING"
+        }
+      },
+      "2501..5000": {
+        "8": {
+          "northNetOutward": -2077.4167020222494,
+          "southNetOutward": 11.715074902359612,
+          "currentDirection": "NET_NORTH",
+          "legacyDirection": "NET_NORTH"
+        },
+        "12": {
+          "northNetOutward": -1962.7506947544987,
+          "southNetOutward": 12.371928329838324,
+          "currentDirection": "NET_NORTH",
+          "legacyDirection": "NET_NORTH"
+        },
+        "16": {
+          "northNetOutward": -1377.499079444093,
+          "southNetOutward": 0.2476821610798764,
+          "currentDirection": "NET_NORTH",
+          "legacyDirection": "NET_NORTH"
+        },
+        "24": {
+          "northNetOutward": -253.13754018674604,
+          "southNetOutward": 14.923723716528889,
+          "currentDirection": "NET_NORTH",
+          "legacyDirection": "NET_NORTH"
+        },
+        "32": {
+          "northNetOutward": 367.1518628293618,
+          "southNetOutward": 1.431406684976272,
+          "currentDirection": "NET_NORTH",
+          "legacyDirection": "NET_NORTH"
+        },
+        "48": {
+          "northNetOutward": 0,
+          "southNetOutward": 0.02715788792054595,
+          "currentDirection": "NET_SOUTH",
+          "legacyDirection": "MIXED/RECIRCULATING"
+        }
+      },
+      "5001..7500": {
+        "8": {
+          "northNetOutward": -2013.2624589690804,
+          "southNetOutward": 621.9200028272688,
+          "currentDirection": "NET_NORTH",
+          "legacyDirection": "NET_NORTH"
+        },
+        "12": {
+          "northNetOutward": -845.9063701823584,
+          "southNetOutward": 610.7021237719669,
+          "currentDirection": "NET_NORTH",
+          "legacyDirection": "NET_NORTH"
+        },
+        "16": {
+          "northNetOutward": -264.54548698091685,
+          "southNetOutward": 346.3808014055967,
+          "currentDirection": "NET_NORTH",
+          "legacyDirection": "NET_NORTH"
+        },
+        "24": {
+          "northNetOutward": 782.1876368207568,
+          "southNetOutward": 644.2387161144146,
+          "currentDirection": "NET_NORTH",
+          "legacyDirection": "NET_NORTH"
+        },
+        "32": {
+          "northNetOutward": 1622.5012442105606,
+          "southNetOutward": 1319.595395769518,
+          "currentDirection": "NET_NORTH",
+          "legacyDirection": "NET_NORTH"
+        },
+        "48": {
+          "northNetOutward": 0,
+          "southNetOutward": 1293.6459960996692,
+          "currentDirection": "NET_SOUTH",
+          "legacyDirection": "MIXED/RECIRCULATING"
+        }
+      },
+      "7501..10000": {
+        "8": {
+          "northNetOutward": -1490.0420001919847,
+          "southNetOutward": 779.2614953107284,
+          "currentDirection": "NET_NORTH",
+          "legacyDirection": "NET_NORTH"
+        },
+        "12": {
+          "northNetOutward": -658.4044919667795,
+          "southNetOutward": 739.0102421236902,
+          "currentDirection": "NET_NORTH",
+          "legacyDirection": "NET_NORTH"
+        },
+        "16": {
+          "northNetOutward": -338.46119006431445,
+          "southNetOutward": 611.0669505635642,
+          "currentDirection": "NET_NORTH",
+          "legacyDirection": "NET_NORTH"
+        },
+        "24": {
+          "northNetOutward": 599.5320622241752,
+          "southNetOutward": 558.5887965295218,
+          "currentDirection": "NET_NORTH",
+          "legacyDirection": "NET_NORTH"
+        },
+        "32": {
+          "northNetOutward": 1334.4918386294066,
+          "southNetOutward": 1165.2572637636877,
+          "currentDirection": "NET_NORTH",
+          "legacyDirection": "NET_NORTH"
+        },
+        "48": {
+          "northNetOutward": 0,
+          "southNetOutward": 1129.314736754926,
+          "currentDirection": "NET_SOUTH",
+          "legacyDirection": "MIXED/RECIRCULATING"
+        }
+      }
+    }
+  },
+  "verdict": "ROUTING-AUDIT A — TRUE MULTISCALE NET UPSTREAM EXPORT"
+}

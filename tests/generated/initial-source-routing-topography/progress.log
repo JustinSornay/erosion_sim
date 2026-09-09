@@ -1,0 +1,4 @@
+[start] 2026-09-09T15:18:43.411Z initial source routing topology
+2026-09-09T15:18:43.412Z [terrain] exact deterministic production terrain; no step() invoked
+2026-09-09T15:18:43.674Z [hydraulics] NO_MORPH steps 1..250
+2026-09-09T15:18:44.130Z [complete] INITIAL-ROUTING D — MULTIPLE INITIAL BIASES ALIGN NORTH
