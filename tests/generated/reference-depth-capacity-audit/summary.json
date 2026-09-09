@@ -1,0 +1,1023 @@
+{
+  "purpose": "Offline audit of persisted reference-depth concentration capacity experiment; no simulation executed.",
+  "input": "C:\\Users\\jsornay\\JustinSornay\\erosion_sim\\tests\\generated\\reference-depth-concentration-capacity\\summary.json",
+  "criteria": {
+    "positivity": true,
+    "conservation": true,
+    "erosionRatio_0_5_to_2": true,
+    "turnoverRatio_0_5_to_2": true,
+    "cutRetentionAtLeast70Percent": true,
+    "driftRatioAtMost1_25": true,
+    "transportDistanceImprovement": false
+  },
+  "criteriaFailure": [
+    "transportDistanceImprovement"
+  ],
+  "firstCheckpointWithMaterialMorphDifference": 10000,
+  "checkpointComparison": [
+    {
+      "step": 1000,
+      "ratios": {
+        "grossErosion": 1,
+        "grossDeposition": 1,
+        "grossTurnover": 1,
+        "absoluteNetBedChange": 1,
+        "suspendedSedimentMass": 1,
+        "netErosion": 1
+      },
+      "legacyCentroids": {
+        "erosionCentroidY": 31.859806288971125,
+        "depositionCentroidY": 27.185804615314638,
+        "transportDistanceY": -4.6740016736564876,
+        "erosionCentroidRelativeToSource": -16.140193711028875,
+        "depositionCentroidRelativeToSource": -20.814195384685362
+      },
+      "candidateCentroids": {
+        "erosionCentroidY": 31.859806288971125,
+        "depositionCentroidY": 27.185804615314638,
+        "transportDistanceY": -4.6740016736564876,
+        "erosionCentroidRelativeToSource": -16.140193711028875,
+        "depositionCentroidRelativeToSource": -20.814195384685362
+      },
+      "centroidDeltaCandidateMinusLegacy": {
+        "erosionCentroidY": 0,
+        "depositionCentroidY": 0,
+        "transportDistanceY": 0
+      },
+      "legacyDepthAboveRef": {
+        "fractionWetCellsBelowRef": 1,
+        "fractionWetCellsAboveRef": 0,
+        "fractionFluxAtDepthAboveRef": 0,
+        "fractionErosionAtDepthAboveRef": 0,
+        "fractionDepositionAtDepthAboveRef": 0,
+        "targetRatioDistribution": {
+          "waterFluxWeighted": {
+            "mean": 1,
+            "p50": 1,
+            "p90": 1,
+            "p99": 1,
+            "max": 1
+          },
+          "erosionActivityWeighted": {
+            "mean": 1,
+            "p50": 1,
+            "p90": 1,
+            "p99": 1,
+            "max": 1
+          }
+        }
+      },
+      "candidateDepthAboveRef": {
+        "fractionWetCellsBelowRef": 1,
+        "fractionWetCellsAboveRef": 0,
+        "fractionFluxAtDepthAboveRef": 0,
+        "fractionErosionAtDepthAboveRef": 0,
+        "fractionDepositionAtDepthAboveRef": 0,
+        "targetRatioDistribution": {
+          "waterFluxWeighted": {
+            "mean": 1,
+            "p50": 1,
+            "p90": 1,
+            "p99": 1,
+            "max": 1
+          },
+          "erosionActivityWeighted": {
+            "mean": 1,
+            "p50": 1,
+            "p90": 1,
+            "p99": 1,
+            "max": 1
+          }
+        }
+      },
+      "candidateTargetRatio": {
+        "waterFluxWeighted": {
+          "mean": 1,
+          "p50": 1,
+          "p90": 1,
+          "p99": 1,
+          "max": 1
+        },
+        "erosionActivityWeighted": {
+          "mean": 1,
+          "p50": 1,
+          "p90": 1,
+          "p99": 1,
+          "max": 1
+        }
+      }
+    },
+    {
+      "step": 2500,
+      "ratios": {
+        "grossErosion": 1,
+        "grossDeposition": 1,
+        "grossTurnover": 1,
+        "absoluteNetBedChange": 1,
+        "suspendedSedimentMass": 1,
+        "netErosion": 1
+      },
+      "legacyCentroids": {
+        "erosionCentroidY": 29.396537895345215,
+        "depositionCentroidY": 23.06407931125253,
+        "transportDistanceY": -6.332458584092684,
+        "erosionCentroidRelativeToSource": -18.603462104654785,
+        "depositionCentroidRelativeToSource": -24.93592068874747
+      },
+      "candidateCentroids": {
+        "erosionCentroidY": 29.396537895345215,
+        "depositionCentroidY": 23.06407931125253,
+        "transportDistanceY": -6.332458584092684,
+        "erosionCentroidRelativeToSource": -18.603462104654785,
+        "depositionCentroidRelativeToSource": -24.93592068874747
+      },
+      "centroidDeltaCandidateMinusLegacy": {
+        "erosionCentroidY": 0,
+        "depositionCentroidY": 0,
+        "transportDistanceY": 0
+      },
+      "legacyDepthAboveRef": {
+        "fractionWetCellsBelowRef": 1,
+        "fractionWetCellsAboveRef": 0,
+        "fractionFluxAtDepthAboveRef": 0,
+        "fractionErosionAtDepthAboveRef": 0,
+        "fractionDepositionAtDepthAboveRef": 0,
+        "targetRatioDistribution": {
+          "waterFluxWeighted": {
+            "mean": 1,
+            "p50": 1,
+            "p90": 1,
+            "p99": 1,
+            "max": 1
+          },
+          "erosionActivityWeighted": {
+            "mean": 1,
+            "p50": 1,
+            "p90": 1,
+            "p99": 1,
+            "max": 1
+          }
+        }
+      },
+      "candidateDepthAboveRef": {
+        "fractionWetCellsBelowRef": 1,
+        "fractionWetCellsAboveRef": 0,
+        "fractionFluxAtDepthAboveRef": 0,
+        "fractionErosionAtDepthAboveRef": 0,
+        "fractionDepositionAtDepthAboveRef": 0,
+        "targetRatioDistribution": {
+          "waterFluxWeighted": {
+            "mean": 1,
+            "p50": 1,
+            "p90": 1,
+            "p99": 1,
+            "max": 1
+          },
+          "erosionActivityWeighted": {
+            "mean": 1,
+            "p50": 1,
+            "p90": 1,
+            "p99": 1,
+            "max": 1
+          }
+        }
+      },
+      "candidateTargetRatio": {
+        "waterFluxWeighted": {
+          "mean": 1,
+          "p50": 1,
+          "p90": 1,
+          "p99": 1,
+          "max": 1
+        },
+        "erosionActivityWeighted": {
+          "mean": 1,
+          "p50": 1,
+          "p90": 1,
+          "p99": 1,
+          "max": 1
+        }
+      }
+    },
+    {
+      "step": 5000,
+      "ratios": {
+        "grossErosion": 1.0000906831049474,
+        "grossDeposition": 0.9999996141873636,
+        "grossTurnover": 1.000046016684268,
+        "absoluteNetBedChange": 1.0000551352151517,
+        "suspendedSedimentMass": 1.0024336973301253,
+        "netErosion": 1.00243373839548
+      },
+      "legacyCentroids": {
+        "erosionCentroidY": 33.718952139738484,
+        "depositionCentroidY": 30.397859278491136,
+        "transportDistanceY": -3.3210928612473474,
+        "erosionCentroidRelativeToSource": -14.281047860261516,
+        "depositionCentroidRelativeToSource": -17.602140721508864
+      },
+      "candidateCentroids": {
+        "erosionCentroidY": 33.72036149985052,
+        "depositionCentroidY": 30.397802697381977,
+        "transportDistanceY": -3.322558802468542,
+        "erosionCentroidRelativeToSource": -14.279638500149481,
+        "depositionCentroidRelativeToSource": -17.602197302618023
+      },
+      "centroidDeltaCandidateMinusLegacy": {
+        "erosionCentroidY": 0.001409360112035074,
+        "depositionCentroidY": -0.0000565811091597368,
+        "transportDistanceY": -0.0014659412211948109
+      },
+      "legacyDepthAboveRef": {
+        "fractionWetCellsBelowRef": 0.9996904024767802,
+        "fractionWetCellsAboveRef": 0.00030959752321981426,
+        "fractionFluxAtDepthAboveRef": 0.0011745473151108438,
+        "fractionErosionAtDepthAboveRef": 0.044949798620082755,
+        "fractionDepositionAtDepthAboveRef": 0,
+        "targetRatioDistribution": {
+          "waterFluxWeighted": {
+            "mean": 1.0001345768736012,
+            "p50": 1,
+            "p90": 1,
+            "p99": 1,
+            "max": 1.209940791130066
+          },
+          "erosionActivityWeighted": {
+            "mean": 1.0051424461656784,
+            "p50": 1,
+            "p90": 1,
+            "p99": 1.209940791130066,
+            "max": 1.209940791130066
+          }
+        }
+      },
+      "candidateDepthAboveRef": {
+        "fractionWetCellsBelowRef": 0.9996904024767802,
+        "fractionWetCellsAboveRef": 0.00030959752321981426,
+        "fractionFluxAtDepthAboveRef": 0.0011733586565946218,
+        "fractionErosionAtDepthAboveRef": 0.0504551098259084,
+        "fractionDepositionAtDepthAboveRef": 0,
+        "targetRatioDistribution": {
+          "waterFluxWeighted": {
+            "mean": 1.000148821440213,
+            "p50": 1,
+            "p90": 1,
+            "p99": 1,
+            "max": 1.2335397005081177
+          },
+          "erosionActivityWeighted": {
+            "mean": 1.0068625134504172,
+            "p50": 1,
+            "p90": 1,
+            "p99": 1.2335397005081177,
+            "max": 1.2335397005081177
+          }
+        }
+      },
+      "candidateTargetRatio": {
+        "waterFluxWeighted": {
+          "mean": 1.000148821440213,
+          "p50": 1,
+          "p90": 1,
+          "p99": 1,
+          "max": 1.2335397005081177
+        },
+        "erosionActivityWeighted": {
+          "mean": 1.0068625134504172,
+          "p50": 1,
+          "p90": 1,
+          "p99": 1.2335397005081177,
+          "max": 1.2335397005081177
+        }
+      }
+    },
+    {
+      "step": 7500,
+      "ratios": {
+        "grossErosion": 1.002824373269047,
+        "grossDeposition": 1.0005959832933644,
+        "grossTurnover": 1.0017283601502287,
+        "absoluteNetBedChange": 1.000990791421172,
+        "suspendedSedimentMass": 1.0699888181340138,
+        "netErosion": 1.069988663258088
+      },
+      "legacyCentroids": {
+        "erosionCentroidY": 35.18352546485981,
+        "depositionCentroidY": 31.937089270882126,
+        "transportDistanceY": -3.2464361939776865,
+        "erosionCentroidRelativeToSource": -12.816474535140188,
+        "depositionCentroidRelativeToSource": -16.062910729117874
+      },
+      "candidateCentroids": {
+        "erosionCentroidY": 35.27566947208686,
+        "depositionCentroidY": 31.965053407972185,
+        "transportDistanceY": -3.310616064114676,
+        "erosionCentroidRelativeToSource": -12.72433052791314,
+        "depositionCentroidRelativeToSource": -16.034946592027815
+      },
+      "centroidDeltaCandidateMinusLegacy": {
+        "erosionCentroidY": 0.09214400722704852,
+        "depositionCentroidY": 0.027964137090059182,
+        "transportDistanceY": -0.06417987013698934
+      },
+      "legacyDepthAboveRef": {
+        "fractionWetCellsBelowRef": 0.9985371562317145,
+        "fractionWetCellsAboveRef": 0.001462843768285547,
+        "fractionFluxAtDepthAboveRef": 0.0057175164107818865,
+        "fractionErosionAtDepthAboveRef": 0.12821860030928595,
+        "fractionDepositionAtDepthAboveRef": 0,
+        "targetRatioDistribution": {
+          "waterFluxWeighted": {
+            "mean": 1.0031327473400613,
+            "p50": 1,
+            "p90": 1,
+            "p99": 1,
+            "max": 2.2287018299102783
+          },
+          "erosionActivityWeighted": {
+            "mean": 1.071760953093106,
+            "p50": 1,
+            "p90": 1.2194006443023682,
+            "p99": 2.2287018299102783,
+            "max": 2.2287018299102783
+          }
+        }
+      },
+      "candidateDepthAboveRef": {
+        "fractionWetCellsBelowRef": 0.9986818980667839,
+        "fractionWetCellsAboveRef": 0.0013181019332161687,
+        "fractionFluxAtDepthAboveRef": 0.005284873061168418,
+        "fractionErosionAtDepthAboveRef": 0.21630063448712433,
+        "fractionDepositionAtDepthAboveRef": 0,
+        "targetRatioDistribution": {
+          "waterFluxWeighted": {
+            "mean": 1.004743170417704,
+            "p50": 1,
+            "p90": 1,
+            "p99": 1,
+            "max": 3.053779363632202
+          },
+          "erosionActivityWeighted": {
+            "mean": 1.2268443711454835,
+            "p50": 1,
+            "p90": 2.2740259170532227,
+            "p99": 3.053779363632202,
+            "max": 3.053779363632202
+          }
+        }
+      },
+      "candidateTargetRatio": {
+        "waterFluxWeighted": {
+          "mean": 1.004743170417704,
+          "p50": 1,
+          "p90": 1,
+          "p99": 1,
+          "max": 3.053779363632202
+        },
+        "erosionActivityWeighted": {
+          "mean": 1.2268443711454835,
+          "p50": 1,
+          "p90": 2.2740259170532227,
+          "p99": 3.053779363632202,
+          "max": 3.053779363632202
+        }
+      }
+    },
+    {
+      "step": 10000,
+      "ratios": {
+        "grossErosion": 1.00141729895123,
+        "grossDeposition": 0.9976926854333878,
+        "grossTurnover": 0.9995801980891272,
+        "absoluteNetBedChange": 0.9958791772687623,
+        "suspendedSedimentMass": 1.137149368272172,
+        "netErosion": 1.1371492420351799
+      },
+      "legacyCentroids": {
+        "erosionCentroidY": 35.50922470108122,
+        "depositionCentroidY": 32.337798389143366,
+        "transportDistanceY": -3.171426311937857,
+        "erosionCentroidRelativeToSource": -12.490775298918777,
+        "depositionCentroidRelativeToSource": -15.662201610856634
+      },
+      "candidateCentroids": {
+        "erosionCentroidY": 35.76797752827908,
+        "depositionCentroidY": 32.350903612102464,
+        "transportDistanceY": -3.4170739161766193,
+        "erosionCentroidRelativeToSource": -12.232022471720917,
+        "depositionCentroidRelativeToSource": -15.649096387897536
+      },
+      "centroidDeltaCandidateMinusLegacy": {
+        "erosionCentroidY": 0.25875282719785986,
+        "depositionCentroidY": 0.013105222959097773,
+        "transportDistanceY": -0.24564760423876209
+      },
+      "legacyDepthAboveRef": {
+        "fractionWetCellsBelowRef": 0.9977976600137646,
+        "fractionWetCellsAboveRef": 0.0022023399862353753,
+        "fractionFluxAtDepthAboveRef": 0.00856989694889565,
+        "fractionErosionAtDepthAboveRef": 0.1334677510819183,
+        "fractionDepositionAtDepthAboveRef": 0,
+        "targetRatioDistribution": {
+          "waterFluxWeighted": {
+            "mean": 1.0076617233359428,
+            "p50": 1,
+            "p90": 1,
+            "p99": 1,
+            "max": 3.047302484512329
+          },
+          "erosionActivityWeighted": {
+            "mean": 1.1350242353819422,
+            "p50": 1,
+            "p90": 1.4127132892608643,
+            "p99": 3.047302484512329,
+            "max": 3.047302484512329
+          }
+        }
+      },
+      "candidateDepthAboveRef": {
+        "fractionWetCellsBelowRef": 0.9978034047226798,
+        "fractionWetCellsAboveRef": 0.002196595277320154,
+        "fractionFluxAtDepthAboveRef": 0.008517662765997745,
+        "fractionErosionAtDepthAboveRef": 0.32487210927809285,
+        "fractionDepositionAtDepthAboveRef": 0,
+        "targetRatioDistribution": {
+          "waterFluxWeighted": {
+            "mean": 1.0133372627523687,
+            "p50": 1,
+            "p90": 1,
+            "p99": 1,
+            "max": 5.152486801147461
+          },
+          "erosionActivityWeighted": {
+            "mean": 1.6665193606882593,
+            "p50": 1,
+            "p90": 4.320638179779053,
+            "p99": 5.152486801147461,
+            "max": 5.152486801147461
+          }
+        }
+      },
+      "candidateTargetRatio": {
+        "waterFluxWeighted": {
+          "mean": 1.0133372627523687,
+          "p50": 1,
+          "p90": 1,
+          "p99": 1,
+          "max": 5.152486801147461
+        },
+        "erosionActivityWeighted": {
+          "mean": 1.6665193606882593,
+          "p50": 1,
+          "p90": 4.320638179779053,
+          "p99": 5.152486801147461,
+          "max": 5.152486801147461
+        }
+      }
+    }
+  ],
+  "quantiles": [
+    {
+      "step": 5000,
+      "legacy": {
+        "erosion": {
+          "p25Y": {
+            "y": 23,
+            "relativeToSource": -25
+          },
+          "p50Y": {
+            "y": 33,
+            "relativeToSource": -15
+          },
+          "p75Y": {
+            "y": 42,
+            "relativeToSource": -6
+          },
+          "p90Y": {
+            "y": 50,
+            "relativeToSource": 2
+          }
+        },
+        "deposition": {
+          "p25Y": {
+            "y": 10,
+            "relativeToSource": -38
+          },
+          "p50Y": {
+            "y": 26,
+            "relativeToSource": -22
+          },
+          "p75Y": {
+            "y": 43,
+            "relativeToSource": -5
+          },
+          "p90Y": {
+            "y": 62,
+            "relativeToSource": 14
+          }
+        }
+      },
+      "candidate": {
+        "erosion": {
+          "p25Y": {
+            "y": 23,
+            "relativeToSource": -25
+          },
+          "p50Y": {
+            "y": 33,
+            "relativeToSource": -15
+          },
+          "p75Y": {
+            "y": 42,
+            "relativeToSource": -6
+          },
+          "p90Y": {
+            "y": 50,
+            "relativeToSource": 2
+          }
+        },
+        "deposition": {
+          "p25Y": {
+            "y": 10,
+            "relativeToSource": -38
+          },
+          "p50Y": {
+            "y": 26,
+            "relativeToSource": -22
+          },
+          "p75Y": {
+            "y": 43,
+            "relativeToSource": -5
+          },
+          "p90Y": {
+            "y": 62,
+            "relativeToSource": 14
+          }
+        }
+      }
+    },
+    {
+      "step": 10000,
+      "legacy": {
+        "erosion": {
+          "p25Y": {
+            "y": 25,
+            "relativeToSource": -23
+          },
+          "p50Y": {
+            "y": 35,
+            "relativeToSource": -13
+          },
+          "p75Y": {
+            "y": 42,
+            "relativeToSource": -6
+          },
+          "p90Y": {
+            "y": 48,
+            "relativeToSource": 0
+          }
+        },
+        "deposition": {
+          "p25Y": {
+            "y": 16,
+            "relativeToSource": -32
+          },
+          "p50Y": {
+            "y": 28,
+            "relativeToSource": -20
+          },
+          "p75Y": {
+            "y": 43,
+            "relativeToSource": -5
+          },
+          "p90Y": {
+            "y": 58,
+            "relativeToSource": 10
+          }
+        }
+      },
+      "candidate": {
+        "erosion": {
+          "p25Y": {
+            "y": 25,
+            "relativeToSource": -23
+          },
+          "p50Y": {
+            "y": 35,
+            "relativeToSource": -13
+          },
+          "p75Y": {
+            "y": 42,
+            "relativeToSource": -6
+          },
+          "p90Y": {
+            "y": 48,
+            "relativeToSource": 0
+          }
+        },
+        "deposition": {
+          "p25Y": {
+            "y": 16,
+            "relativeToSource": -32
+          },
+          "p50Y": {
+            "y": 28,
+            "relativeToSource": -20
+          },
+          "p75Y": {
+            "y": 43,
+            "relativeToSource": -5
+          },
+          "p90Y": {
+            "y": 58,
+            "relativeToSource": 10
+          }
+        }
+      }
+    }
+  ],
+  "coverageAudit": [
+    {
+      "step": 5000,
+      "legacy": {
+        "coveredErosionShare": 0.10597810725512845,
+        "coveredDepositionShare": 0.15619160488884548,
+        "unreportedUpstreamErosionShare": 0.8940218927448715,
+        "unreportedUpstreamDepositionShare": 0.8438083951111546,
+        "status": "INCOMPLETE SPATIAL COVERAGE"
+      },
+      "candidate": {
+        "coveredErosionShare": 0.10596849168891556,
+        "coveredDepositionShare": 0.15619133165240798,
+        "unreportedUpstreamErosionShare": 0.8940315083110845,
+        "unreportedUpstreamDepositionShare": 0.843808668347592,
+        "status": "INCOMPLETE SPATIAL COVERAGE"
+      }
+    },
+    {
+      "step": 10000,
+      "legacy": {
+        "coveredErosionShare": 0.10078051367453551,
+        "coveredDepositionShare": 0.15691062670808212,
+        "unreportedUpstreamErosionShare": 0.8992194863254644,
+        "unreportedUpstreamDepositionShare": 0.8430893732919179,
+        "status": "INCOMPLETE SPATIAL COVERAGE"
+      },
+      "candidate": {
+        "coveredErosionShare": 0.1004379818686702,
+        "coveredDepositionShare": 0.15638014629129957,
+        "unreportedUpstreamErosionShare": 0.8995620181313297,
+        "unreportedUpstreamDepositionShare": 0.8436198537087004,
+        "status": "INCOMPLETE SPATIAL COVERAGE"
+      }
+    }
+  ],
+  "persistedBandsAt10000": [
+    {
+      "range": "48..64",
+      "legacy": {
+        "grossErosion": 0.6637636356191564,
+        "grossDeposition": 2.7372317013401055,
+        "absoluteNetBedChange": 2.733973979949951
+      },
+      "candidate": {
+        "grossErosion": 0.6629467293803962,
+        "grossDeposition": 2.7028693649039437,
+        "absoluteNetBedChange": 2.6967789232730865
+      },
+      "ratios": {
+        "grossErosion": 0.9987692814204892,
+        "grossDeposition": 0.9874463179644827,
+        "absoluteNetBedChange": 0.9863952411582405
+      }
+    },
+    {
+      "range": "65..80",
+      "legacy": {
+        "grossErosion": 2.364181164680277,
+        "grossDeposition": 1.3370595894463169,
+        "absoluteNetBedChange": 2.3955180644989014
+      },
+      "candidate": {
+        "grossErosion": 2.357876730693952,
+        "grossDeposition": 1.3321731437243423,
+        "absoluteNetBedChange": 2.3910197019577026
+      },
+      "ratios": {
+        "grossErosion": 0.9973333541098669,
+        "grossDeposition": 0.9963453792482068,
+        "absoluteNetBedChange": 0.9981221754876894
+      }
+    },
+    {
+      "range": "81..96",
+      "legacy": {
+        "grossErosion": 0.5743297928701145,
+        "grossDeposition": 1.8923861604926815,
+        "absoluteNetBedChange": 1.7378552556037903
+      },
+      "candidate": {
+        "grossErosion": 0.575338548497824,
+        "grossDeposition": 1.894517193019925,
+        "absoluteNetBedChange": 1.7357164919376373
+      },
+      "ratios": {
+        "grossErosion": 1.0017564048395755,
+        "grossDeposition": 1.0011261087043084,
+        "absoluteNetBedChange": 0.9987693085144712
+      }
+    },
+    {
+      "range": "97..128",
+      "legacy": {
+        "grossErosion": 0.533227914911896,
+        "grossDeposition": 0.518528266258427,
+        "absoluteNetBedChange": 0.6490528881549835
+      },
+      "candidate": {
+        "grossErosion": 0.5325443779873442,
+        "grossDeposition": 0.5164064900714092,
+        "absoluteNetBedChange": 0.648578017950058
+      },
+      "ratios": {
+        "grossErosion": 0.9987181148896439,
+        "grossDeposition": 0.9959080799927688,
+        "absoluteNetBedChange": 0.9992683643912664
+      }
+    },
+    {
+      "range": "129..191",
+      "legacy": {
+        "grossErosion": 0.4866091439780009,
+        "grossDeposition": 0.5190073729325995,
+        "absoluteNetBedChange": 0.6870059967041016
+      },
+      "candidate": {
+        "grossErosion": 0.4842243272797471,
+        "grossDeposition": 0.5184609040324848,
+        "absoluteNetBedChange": 0.6842963397502899
+      },
+      "ratios": {
+        "grossErosion": 0.9950991124442133,
+        "grossDeposition": 0.998947088367884,
+        "absoluteNetBedChange": 0.9960558467221375
+      }
+    }
+  ],
+  "cuts": [
+    {
+      "step": 5000,
+      "firstYRatioAbsNetBelowPoint8": null,
+      "rows": [
+        {
+          "y": 56,
+          "legacyNetSouthward": 1.7284287712536752,
+          "candidateNetSouthward": 1.7284287712536752,
+          "legacyTotalPositiveSouth": 1.7284287712536752,
+          "candidateTotalPositiveSouth": 1.7284287712536752,
+          "ratioAbsNet": 1,
+          "sameSign": true,
+          "ratioPositiveSouth": 1
+        },
+        {
+          "y": 60,
+          "legacyNetSouthward": 1.3931291299231816,
+          "candidateNetSouthward": 1.3931291299231816,
+          "legacyTotalPositiveSouth": 1.3939962550066411,
+          "candidateTotalPositiveSouth": 1.3939962550066411,
+          "ratioAbsNet": 1,
+          "sameSign": true,
+          "ratioPositiveSouth": 1
+        },
+        {
+          "y": 64,
+          "legacyNetSouthward": 0.9316444728465285,
+          "candidateNetSouthward": 0.9316444728465285,
+          "legacyTotalPositiveSouth": 0.9558492212963756,
+          "candidateTotalPositiveSouth": 0.9558492212963756,
+          "ratioAbsNet": 1,
+          "sameSign": true,
+          "ratioPositiveSouth": 1
+        },
+        {
+          "y": 68,
+          "legacyNetSouthward": 0.550629883306101,
+          "candidateNetSouthward": 0.550629883306101,
+          "legacyTotalPositiveSouth": 0.5881810535211116,
+          "candidateTotalPositiveSouth": 0.5881810535211116,
+          "ratioAbsNet": 1,
+          "sameSign": true,
+          "ratioPositiveSouth": 1
+        },
+        {
+          "y": 72,
+          "legacyNetSouthward": 0.5767197490786202,
+          "candidateNetSouthward": 0.5767197490786202,
+          "legacyTotalPositiveSouth": 0.5799829853349365,
+          "candidateTotalPositiveSouth": 0.5799829853349365,
+          "ratioAbsNet": 1,
+          "sameSign": true,
+          "ratioPositiveSouth": 1
+        },
+        {
+          "y": 76,
+          "legacyNetSouthward": 0.5446129808206024,
+          "candidateNetSouthward": 0.5446129808206024,
+          "legacyTotalPositiveSouth": 0.7732085062543774,
+          "candidateTotalPositiveSouth": 0.7732085062543774,
+          "ratioAbsNet": 1,
+          "sameSign": true,
+          "ratioPositiveSouth": 1
+        },
+        {
+          "y": 80,
+          "legacyNetSouthward": 0.17120726103894413,
+          "candidateNetSouthward": 0.17120726103894413,
+          "legacyTotalPositiveSouth": 0.585861956817098,
+          "candidateTotalPositiveSouth": 0.585861956817098,
+          "ratioAbsNet": 1,
+          "sameSign": true,
+          "ratioPositiveSouth": 1
+        },
+        {
+          "y": 84,
+          "legacyNetSouthward": -0.31604816098115407,
+          "candidateNetSouthward": -0.31604816098115407,
+          "legacyTotalPositiveSouth": 0.33669619262218475,
+          "candidateTotalPositiveSouth": 0.33669619262218475,
+          "ratioAbsNet": 1,
+          "sameSign": true,
+          "ratioPositiveSouth": 1
+        },
+        {
+          "y": 88,
+          "legacyNetSouthward": -0.3605230127068353,
+          "candidateNetSouthward": -0.3605230127068353,
+          "legacyTotalPositiveSouth": 0.3830706516673672,
+          "candidateTotalPositiveSouth": 0.3830706516673672,
+          "ratioAbsNet": 1,
+          "sameSign": true,
+          "ratioPositiveSouth": 1
+        },
+        {
+          "y": 92,
+          "legacyNetSouthward": 0.12316684280813206,
+          "candidateNetSouthward": 0.12316684280813206,
+          "legacyTotalPositiveSouth": 0.48760712960211094,
+          "candidateTotalPositiveSouth": 0.48760712960211094,
+          "ratioAbsNet": 1,
+          "sameSign": true,
+          "ratioPositiveSouth": 1
+        }
+      ]
+    },
+    {
+      "step": 10000,
+      "firstYRatioAbsNetBelowPoint8": 56,
+      "rows": [
+        {
+          "y": 56,
+          "legacyNetSouthward": 1.7907184384876018,
+          "candidateNetSouthward": 1.207074716250645,
+          "legacyTotalPositiveSouth": 1.7907373420894146,
+          "candidateTotalPositiveSouth": 1.2127240295812953,
+          "ratioAbsNet": 0.6740728694736128,
+          "sameSign": true,
+          "ratioPositiveSouth": 0.6772204951990899
+        },
+        {
+          "y": 60,
+          "legacyNetSouthward": 1.7555508560035378,
+          "candidateNetSouthward": 1.3340464159846306,
+          "legacyTotalPositiveSouth": 1.7555508560035378,
+          "candidateTotalPositiveSouth": 1.3340464159846306,
+          "ratioAbsNet": 0.7599018914334101,
+          "sameSign": true,
+          "ratioPositiveSouth": 0.7599018914334101
+        },
+        {
+          "y": 64,
+          "legacyNetSouthward": 1.7470227397279814,
+          "candidateNetSouthward": 1.3194128341274336,
+          "legacyTotalPositiveSouth": 1.7473851455142722,
+          "candidateTotalPositiveSouth": 1.3197752399137244,
+          "ratioAbsNet": 0.7552350659916834,
+          "sameSign": true,
+          "ratioPositiveSouth": 0.7552858299738504
+        },
+        {
+          "y": 68,
+          "legacyNetSouthward": 1.7653251681476831,
+          "candidateNetSouthward": 1.6489670249866322,
+          "legacyTotalPositiveSouth": 1.765484088100493,
+          "candidateTotalPositiveSouth": 1.6550553692504764,
+          "ratioAbsNet": 0.9340868496860876,
+          "sameSign": true,
+          "ratioPositiveSouth": 0.937451308910505
+        },
+        {
+          "y": 72,
+          "legacyNetSouthward": 1.8829171411925927,
+          "candidateNetSouthward": 1.7767198247747729,
+          "legacyTotalPositiveSouth": 1.8829171411925927,
+          "candidateTotalPositiveSouth": 1.780674165856908,
+          "ratioAbsNet": 0.943599580621717,
+          "sameSign": true,
+          "ratioPositiveSouth": 0.9456996948517201
+        },
+        {
+          "y": 76,
+          "legacyNetSouthward": 2.4809038702223916,
+          "candidateNetSouthward": 2.0048733350704424,
+          "legacyTotalPositiveSouth": 2.5144247818971053,
+          "candidateTotalPositiveSouth": 2.033343857328873,
+          "ratioAbsNet": 0.8081221361030497,
+          "sameSign": true,
+          "ratioPositiveSouth": 0.8086715784732037
+        },
+        {
+          "y": 80,
+          "legacyNetSouthward": 2.544376338883012,
+          "candidateNetSouthward": 2.043405358244854,
+          "legacyTotalPositiveSouth": 2.5601706608504173,
+          "candidateTotalPositiveSouth": 2.0585697557853564,
+          "ratioAbsNet": 0.8031065715466897,
+          "sameSign": true,
+          "ratioPositiveSouth": 0.8040752076666471
+        },
+        {
+          "y": 84,
+          "legacyNetSouthward": 2.4121086336963344,
+          "candidateNetSouthward": 2.445942079503766,
+          "legacyTotalPositiveSouth": 2.4121829810901545,
+          "candidateTotalPositiveSouth": 2.445942079503766,
+          "ratioAbsNet": 1.0140265016818852,
+          "sameSign": true,
+          "ratioPositiveSouth": 1.0139952477396033
+        },
+        {
+          "y": 88,
+          "legacyNetSouthward": 2.2437483629314556,
+          "candidateNetSouthward": 2.2773119339399273,
+          "legacyTotalPositiveSouth": 2.250710316990535,
+          "candidateTotalPositiveSouth": 2.288304023386445,
+          "ratioAbsNet": 1.0149587055139377,
+          "sameSign": true,
+          "ratioPositiveSouth": 1.016703040863196
+        },
+        {
+          "y": 92,
+          "legacyNetSouthward": 1.911720259449794,
+          "candidateNetSouthward": 1.947604991553817,
+          "legacyTotalPositiveSouth": 1.911720259449794,
+          "candidateTotalPositiveSouth": 1.948212132381741,
+          "ratioAbsNet": 1.0187709116575199,
+          "sameSign": true,
+          "ratioPositiveSouth": 1.0190885003972545
+        }
+      ]
+    }
+  ],
+  "centroidMechanism": {
+    "deltaErosionCentroidY": 0.25875282719785986,
+    "deltaDepositionCentroidY": 0.013105222959097773,
+    "deltaTransportDistanceY": -0.24564760423876209,
+    "interpretation": "A: erosion shifts downstream more than deposition."
+  },
+  "profiles4750to5500": {
+    "legacy": {
+      "meanWeightedShapeChange": 0.00008847991759185468,
+      "meanWeightedDrift100": 0.029416487482282285,
+      "meanWeightedEffectiveWidth": 16.406257530892127
+    },
+    "candidate": {
+      "meanWeightedShapeChange": 0.00008847991759185468,
+      "meanWeightedDrift100": 0.029416487482282285,
+      "meanWeightedEffectiveWidth": 16.406257530892127
+    },
+    "ratios": {
+      "meanWeightedShapeChange": 1,
+      "meanWeightedDrift100": 1,
+      "meanWeightedEffectiveWidth": 1
+    }
+  },
+  "performance": [
+    {
+      "variant": "POSITIVE_LEGACY_MASS_CAPACITY",
+      "steps": 1000,
+      "repetitions": 5,
+      "meanMilliseconds": 3412.9011600000085,
+      "stepsPerSecond": 293.00584843189466
+    },
+    {
+      "variant": "POSITIVE_REFERENCE_DEPTH_CONCENTRATION",
+      "steps": 1000,
+      "repetitions": 5,
+      "meanMilliseconds": 3947.5204400000102,
+      "stepsPerSecond": 253.32357747082304,
+      "overheadPercentVsLegacy": 15.664657572444906
+    }
+  ],
+  "verdict": "CAPACITY-AUDIT E — CURRENT BANDING MISSES TOO MUCH UPSTREAM MORPHOLOGY TO INTERPRET SPATIAL EFFECT RELIABLY",
+  "completedAt": "2026-09-08T15:59:28.424Z"
+}

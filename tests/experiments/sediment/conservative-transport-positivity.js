@@ -15,9 +15,11 @@ const cuts = [56, 60, 64, 68, 72, 76, 80, 84, 88, 92];
 const compareFields = ["b", "d", "s", "u", "v", "fL", "fR", "fT", "fB"];
 const epsilon = 1e-30;
 
-fs.mkdirSync(output, { recursive: true });
-fs.rmSync(path.join(output, "COMPLETE"), { force: true });
-fs.writeFileSync(path.join(output, "progress.log"), `[start] ${new Date().toISOString()}\n`);
+function initializeOutput() {
+  fs.mkdirSync(output, { recursive: true });
+  fs.rmSync(path.join(output, "COMPLETE"), { force: true });
+  fs.writeFileSync(path.join(output, "progress.log"), `[start] ${new Date().toISOString()}\n`);
+}
 const progress = (line) => fs.appendFileSync(path.join(output, "progress.log"), `${new Date().toISOString()} ${line}\n`);
 const sum = (values) => { let total = 0; for (const value of values) total += value; return total; };
 const mean = (values) => values.length ? sum(values) / values.length : null;
@@ -189,6 +191,7 @@ function classify(legacy, concentration) {
   return "POSITIVITY A — MINIMAL FIX RESTORES NONNEGATIVE CONSERVATIVE TRANSPORT";
 }
 function main() {
+  initializeOutput();
   const originalNegative = firstOriginalNegative(); progress(`[original-first-negative] ${JSON.stringify(originalNegative)}`);
   const variants = [
     ["ORIGINAL_CONSERVATIVE_LEGACY", "LEGACY", false], ["POSITIVE_CONSERVATIVE_LEGACY", "LEGACY", true],
@@ -203,4 +206,8 @@ function main() {
   const summary = { purpose: "Positivity-preserving donor cap experiment for conservative transport; production remains unchanged.", definitions: { sediment: "s is sediment mass per cell", legacyTargetMass: "C", concentrationTargetMass: "C*d", correction: "Positive donor outputs are proportionally capped; only post-scale arithmetic excess is removed from largest positive outflow." }, originalConcentrationFirstNegative: originalNegative, variants: runs.map(({ buffers, ...run }) => run), legacyPerturbation: legacyComparison, legacyBudget, performance, classification, completedAt: new Date().toISOString() };
   fs.writeFileSync(path.join(output, "summary.json"), JSON.stringify(summary, null, 2)); fs.writeFileSync(path.join(output, "COMPLETE"), `classification: ${classification}\ncompletedAt: ${summary.completedAt}\n`); progress(`[complete] ${classification}`); console.log(classification);
 }
-try { main(); } catch (error) { progress(`[failed] ${error.stack || error.message}`); throw error; }
+if (require.main === module) {
+  try { main(); } catch (error) { progress(`[failed] ${error.stack || error.message}`); throw error; }
+}
+
+module.exports = { boundaryInstrumentation, positiveTransportSource, runVariant };
