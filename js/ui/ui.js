@@ -1,3 +1,6 @@
+const { createIcon, setIcon, initializeIcons } = UIIcons;
+initializeIcons();
+
 const speedEl = document.getElementById("speed"),
   speedLbl = document.getElementById("speedLbl");
 const pauseBtn = document.getElementById("pause");
@@ -10,18 +13,6 @@ const sidePanel = document.getElementById("side-panel");
 const panelTab = document.getElementById("panel-tab");
 const closePanelBtn = document.getElementById("close-panel");
 let paused = false;
-
-// SVG symbols are inline in both distributions, including in offline file:// use.
-function setIcon(element, name) {
-  element.querySelector("use").setAttribute("href", "#icon-" + name);
-}
-function createIcon(name) {
-  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  svg.classList.add("icon"); svg.setAttribute("viewBox", "0 0 24 24");
-  svg.setAttribute("aria-hidden", "true"); svg.setAttribute("focusable", "false");
-  const use = document.createElementNS("http://www.w3.org/2000/svg", "use");
-  use.setAttribute("href", "#icon-" + name); svg.appendChild(use); return svg;
-}
 
 // UI bounds derive from requested simulation targets, preventing stale slider positions.
 speedEl.min = "0";
@@ -202,7 +193,7 @@ let contextMenuTarget = { x: 0, y: 0, index: -1 };
 /** Aligns source-state feedback with the action exposed by the context menu. */
 function updateSourceContextMenu(source) {
   const isActive = source.active;
-  setIcon(ctxToggleIcon, isActive ? "toggle-on" : "toggle-off");
+  setIcon(ctxToggleIcon, isActive ? "toggle-right" : "toggle-left");
   ctxToggleLabel.textContent = isActive
     ? "Désactiver la source"
     : "Activer la source";
@@ -307,7 +298,7 @@ function refreshSourceList() {
       source.rate = value;
     };
     const unit = document.createElement("span"); unit.className = "source-unit"; unit.textContent = "u\u00b3/s";
-    const remove = document.createElement("button"); remove.appendChild(createIcon("close")); remove.className = "source-remove";
+    const remove = document.createElement("button"); remove.appendChild(createIcon("x")); remove.className = "source-remove";
     remove.setAttribute("aria-label", `Supprimer la source ${i + 1}`);
     remove.onclick = () => { sources.splice(i, 1); refreshSourceProtectionMask(); refreshSourceList(); };
     row.append(toggle, rate, unit, remove); sourcesDiv.appendChild(row);

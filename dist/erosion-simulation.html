@@ -566,7 +566,6 @@ button, select, input { color: var(--text-primary); }
 button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible, canvas:focus-visible {
   outline: 2px solid var(--water); outline-offset: 3px;
 }
-.icon-defs { position: absolute; width: 0; height: 0; overflow: hidden; pointer-events: none; }
 .icon { display: inline-block; width: 1em; height: 1em; flex-shrink: 0; vertical-align: middle; }
 .ctrl-btn .icon { width: 20px; height: 20px; }
 #hud .icon { width: 12px; height: 12px; margin-right: 4px; }
@@ -665,70 +664,53 @@ input:not([type="range"]):not([type="checkbox"]):not([type="file"]), select {
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 
 </style>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
   </head>
   <body>
-<svg class="icon-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><defs>
-<symbol id="icon-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5v14M15 5v14" stroke-width="3"/></symbol>
-<symbol id="icon-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m8 5 11 7-11 7Z"/></symbol>
-<symbol id="icon-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7v5h-5M4.8 8a8 8 0 1 1-.8 7M20 12a8 8 0 0 0-13.6-5.7"/></symbol>
-<symbol id="icon-clear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h12M6 6V4h6v2M5 6l1 14h6l1-14M8 10v6M18 9h3M17 13h4M16 17h5"/></symbol>
-<symbol id="icon-speed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18a9 9 0 1 1 16 0M12 3v3M5.6 5.6l2.1 2.1M3 12h3M18 12h3M12 12l4-5"/><circle cx="12" cy="12" r="1.5"/></symbol>
-<symbol id="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
-<symbol id="icon-drop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s-7 7.5-7 12a7 7 0 0 0 14 0c0-4.5-7-12-7-12Z"/></symbol>
-<symbol id="icon-toggle-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="6"/><circle cx="16" cy="12" r="3" fill="currentColor" stroke="none"/></symbol>
-<symbol id="icon-toggle-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="6"/><circle cx="8" cy="12" r="3"/></symbol>
-<symbol id="icon-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7M14 10v7"/></symbol>
-<symbol id="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m6 6 12 12M6 18 18 6"/></symbol>
-<symbol id="icon-chevron-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7"/></symbol>
-<symbol id="icon-terrain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m2 19 7-11 4 6 3-5 6 10Z"/></symbol>
-<symbol id="icon-water" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c3-4 7 4 10 0s7 4 10 0M2 12c3-4 7 4 10 0s7 4 10 0M2 18c3-4 7 4 10 0s7 4 10 0"/></symbol>
-<symbol id="icon-save" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3h13l4 4v14H3V3ZM7 3v6h9V3M7 21v-8h10v8"/></symbol>
-<symbol id="icon-folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8V4h6l3 3h8v3M2 10h21l-4 10H5Z"/></symbol>
-</defs></svg>
     <div id="app">
       <main id="stage" aria-label="Simulation hydrographique">
         <canvas id="c" tabindex="0" aria-label="Terrain interactif. Cliquez pour ajouter une source." aria-describedby="interaction-help"></canvas>
         <div id="stage-hint" role="status" hidden></div>
         <div id="toast" role="status" aria-live="polite"></div>
         <div id="context-menu" aria-label="Actions de source">
-          <button id="ctx-add-source" type="button"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-drop"></use></svg>Ajouter une source d'eau</button>
-          <button id="ctx-toggle-source" type="button" style="display: none"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-toggle-on"></use></svg><span class="context-menu-label">Désactiver la source</span></button>
-          <button id="ctx-delete-source" type="button" style="display: none"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-trash"></use></svg>Supprimer</button>
+          <button id="ctx-add-source" type="button"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="droplet"></svg>Ajouter une source d'eau</button>
+          <button id="ctx-toggle-source" type="button" style="display: none"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="toggle-right"></svg><span class="context-menu-label">Désactiver la source</span></button>
+          <button id="ctx-delete-source" type="button" style="display: none"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="trash-2"></svg>Supprimer</button>
         </div>
         <div id="hud">
           Mode: <b class="mode" id="modeLbl">Simulation</b><br />
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-speed"></use></svg> <b id="fps">--</b> fps · cible <b id="tgtMult">×1</b> · réel <b id="realMult">×1</b><br />
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-clock"></use></svg> <b id="tcount">0</b> pas · <b id="tsim">0.0</b>s
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="gauge"></svg> <b id="fps">--</b> fps · cible <b id="tgtMult">×1</b> · réel <b id="realMult">×1</b><br />
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="clock"></svg> <b id="tcount">0</b> pas · <b id="tsim">0.0</b>s
         </div>
       </main>
 
       <!-- Original floating transport bar, centered on the visible terrain. -->
       <div id="bottom-bar" role="group" aria-label="Commandes de simulation">
-        <button class="ctrl-btn" id="pause" type="button" aria-label="Mettre en pause" aria-pressed="false" title="Pause / Reprendre (Espace)"><svg id="pauseIcon" class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-pause"></use></svg></button>
+        <button class="ctrl-btn" id="pause" type="button" aria-label="Mettre en pause" aria-pressed="false" title="Pause / Reprendre (Espace)"><svg id="pauseIcon" class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="pause"></svg></button>
         <div class="speed-ctrl">
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-speed"></use></svg>
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="gauge"></svg>
           <input id="speed" aria-label="Vitesse de simulation" aria-valuetext="×1" min="0" step="1" type="range" value="0" />
           <span id="speedLbl">×1</span>
         </div>
-        <button class="ctrl-btn" id="regen" type="button" aria-label="Générer un nouveau terrain" title="Générer un nouveau terrain"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-refresh"></use></svg></button>
-        <button class="ctrl-btn" id="clearSrc" type="button" aria-label="Effacer toutes les sources" title="Effacer toutes les sources"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-clear"></use></svg></button>
+        <button class="ctrl-btn" id="regen" type="button" aria-label="Générer un nouveau terrain" title="Générer un nouveau terrain"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="rotate-cw"></svg></button>
+        <button class="ctrl-btn" id="clearSrc" type="button" aria-label="Effacer toutes les sources" title="Effacer toutes les sources"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="eraser"></svg></button>
       </div>
 
-      <button id="panel-tab" type="button" title="Ouvrir les réglages" aria-label="Ouvrir les réglages" aria-controls="side-panel" aria-expanded="false"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-chevron-left"></use></svg></button>
+      <button id="panel-tab" type="button" title="Ouvrir les réglages" aria-label="Ouvrir les réglages" aria-controls="side-panel" aria-expanded="false"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="chevron-left"></svg></button>
 
       <aside id="side-panel" aria-label="Réglages du sandbox">
-        <button id="close-panel" type="button" title="Fermer les réglages" aria-label="Fermer les réglages"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-close"></use></svg></button>
+        <button id="close-panel" type="button" title="Fermer les réglages" aria-label="Fermer les réglages"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="x"></svg></button>
         <div class="panel-header">
           <h1>Sandbox Hydrographique</h1>
           <p class="desc" id="interaction-help">Clic sur le terrain pour ajouter une source d'eau. Clic sur une source pour l'activer ou la couper.</p>
@@ -745,11 +727,11 @@ input:not([type="range"]):not([type="checkbox"]):not([type="file"]), select {
         <section id="layersBox" aria-labelledby="layers-title">
           <h2 class="section-title" id="layers-title">Couches Visuelles</h2>
           <div class="layer-group">
-            <button type="button" class="layer-group-title" data-group="layers-terrain" aria-label="Activer ou masquer les couches de terrain" aria-pressed="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-terrain"></use></svg>Terrain</button>
+            <button type="button" class="layer-group-title" data-group="layers-terrain" aria-label="Activer ou masquer les couches de terrain" aria-pressed="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="mountain"></svg>Terrain</button>
             <div class="layer-list" id="layers-terrain"></div>
           </div>
           <div class="layer-group">
-            <button type="button" class="layer-group-title" data-group="layers-water" aria-label="Activer ou masquer les couches d'eau et de dynamique" aria-pressed="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-water"></use></svg>Eau &amp; Dynamique</button>
+            <button type="button" class="layer-group-title" data-group="layers-water" aria-label="Activer ou masquer les couches d'eau et de dynamique" aria-pressed="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="waves"></svg>Eau &amp; Dynamique</button>
             <div class="layer-list" id="layers-water"></div>
           </div>
         </section>
@@ -770,7 +752,7 @@ input:not([type="range"]):not([type="checkbox"]):not([type="file"]), select {
               <label for="terrainSeed">Graine<input id="terrainSeed" type="number" min="0" max="2147483647" value="314159265" step="1" /></label>
             </div>
             <div class="button-pair"><button id="applyTerrain" type="button" class="text-btn">Générer</button><button id="replay" type="button" class="text-btn">Rejouer</button></div>
-            <button id="demo" type="button" class="text-btn demo-btn" title="Remplace le terrain par une vallée de démonstration avec une source"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-drop"></use></svg>Lancer une rivière</button>
+            <button id="demo" type="button" class="text-btn demo-btn" title="Remplace le terrain par une vallée de démonstration avec une source"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="droplet"></svg>Lancer une rivière</button>
             <div class="settings-inline">
               <label for="boundary">Limites<select id="boundary"><option value="open">Ouvertes</option><option value="closed">Fermées</option></select></label>
               <label for="rain">Pluie<select id="rain"><option value="0">Aucune</option><option value="0.00001">Légère</option><option value="0.00005">Averse</option></select></label>
@@ -798,7 +780,7 @@ input:not([type="range"]):not([type="checkbox"]):not([type="file"]), select {
           </div>
         </details>
 
-        <div class="button-pair session-actions"><button id="saveSession" type="button" class="text-btn"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-save"></use></svg>Sauvegarder</button><button id="loadSession" type="button" class="text-btn"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-folder"></use></svg>Ouvrir</button></div>
+        <div class="button-pair session-actions"><button id="saveSession" type="button" class="text-btn"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="save"></svg>Sauvegarder</button><button id="loadSession" type="button" class="text-btn"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="folder-open"></svg>Ouvrir</button></div>
         <input id="sessionFile" type="file" accept=".json,application/json" hidden />
       </aside>
     </div>
@@ -1821,6 +1803,154 @@ function render(isoStepMajor) {
 }
 
 ;
+// Generated from UiIcons.js and Lucide by npm run build.
+/*
+ISC License
+
+Copyright (c) 2026 Lucide Icons and Contributors
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+---
+
+The following Lucide icons are derived from the Feather project:
+
+airplay, alert-circle, alert-octagon, alert-triangle, aperture, arrow-down-circle, arrow-down-left, arrow-down-right, arrow-down, arrow-left-circle, arrow-left, arrow-right-circle, arrow-right, arrow-up-circle, arrow-up-left, arrow-up-right, arrow-up, at-sign, calendar, cast, check, chevron-down, chevron-left, chevron-right, chevron-up, chevrons-down, chevrons-left, chevrons-right, chevrons-up, circle, clipboard, clock, code, columns, command, compass, corner-down-left, corner-down-right, corner-left-down, corner-left-up, corner-right-down, corner-right-up, corner-up-left, corner-up-right, crosshair, database, divide-circle, divide-square, dollar-sign, download, external-link, feather, frown, hash, headphones, help-circle, info, italic, key, layout, life-buoy, link-2, link, loader, lock, log-in, log-out, maximize, meh, minimize, minimize-2, minus-circle, minus-square, minus, monitor, moon, more-horizontal, more-vertical, move, music, navigation-2, navigation, octagon, pause-circle, percent, plus-circle, plus-square, plus, power, radio, rss, search, server, share, shopping-bag, sidebar, smartphone, smile, square, table-2, tablet, target, terminal, trash-2, trash, triangle, tv, type, upload, x-circle, x-octagon, x-square, x, zoom-in, zoom-out
+
+The MIT License (MIT) (for the icons listed above)
+
+Copyright (c) 2013-present Cole Bemis
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+*/
+var UIIcons=(()=>{var s=Object.defineProperty;var L=Object.getOwnPropertyDescriptor;var R=Object.getOwnPropertyNames;var y=Object.prototype.hasOwnProperty;var T=(e,a)=>{for(var r in a)s(e,r,{get:a[r],enumerable:!0})},q=(e,a,r,t)=>{if(a&&typeof a=="object"||typeof a=="function")for(let o of R(a))!y.call(e,o)&&o!==r&&s(e,o,{get:()=>a[o],enumerable:!(t=L(a,o))||t.enumerable});return e};var b=e=>q(s({},"__esModule",{value:!0}),e);var O={};T(O,{createIcon:()=>B,initializeIcons:()=>v,setIcon:()=>D});/**
+ * @license lucide v1.52.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */var A={xmlns:"http://www.w3.org/2000/svg",width:24,height:24,viewBox:"0 0 24 24",fill:"none",stroke:"currentColor","stroke-width":2,"stroke-linecap":"round","stroke-linejoin":"round"};/**
+ * @license lucide v1.52.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */var M=([e,a,r])=>{let t=document.createElementNS("http://www.w3.org/2000/svg",e);return Object.keys(a).forEach(o=>{t.setAttribute(o,String(a[o]))}),r?.length&&r.forEach(o=>{let F=M(o);t.appendChild(F)}),t},u=(e,a={})=>{let t={...A,...a};return M(["svg",t,e])};/**
+ * @license lucide v1.52.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */var d=[["path",{d:"m15 18-6-6 6-6"}]];/**
+ * @license lucide v1.52.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */var p=[["circle",{cx:"12",cy:"12",r:"10"}],["path",{d:"M12 6v6l4 2"}]];/**
+ * @license lucide v1.52.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */var m=[["path",{d:"M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"}]];/**
+ * @license lucide v1.52.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */var x=[["path",{d:"M21 21H8a2 2 0 0 1-1.42-.587l-3.994-3.999a2 2 0 0 1 0-2.828l10-10a2 2 0 0 1 2.829 0l5.999 6a2 2 0 0 1 0 2.828L12.834 21"}],["path",{d:"m5.082 11.09 8.828 8.828"}]];/**
+ * @license lucide v1.52.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */var i=[["path",{d:"m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"}]];/**
+ * @license lucide v1.52.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */var n=[["path",{d:"m12 14 4-4"}],["path",{d:"M3.34 19a10 10 0 1 1 17.32 0"}]];/**
+ * @license lucide v1.52.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */var c=[["path",{d:"m8 3 4 8 5-5 5 15H2L8 3z"}]];/**
+ * @license lucide v1.52.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */var C=[["rect",{x:"14",y:"3",width:"5",height:"18",rx:"1"}],["rect",{x:"5",y:"3",width:"5",height:"18",rx:"1"}]];/**
+ * @license lucide v1.52.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */var h=[["path",{d:"M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"}]];/**
+ * @license lucide v1.52.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */var S=[["path",{d:"M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"}],["path",{d:"M21 3v5h-5"}]];/**
+ * @license lucide v1.52.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */var g=[["path",{d:"M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"}],["path",{d:"M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7"}],["path",{d:"M7 3v4a1 1 0 0 0 1 1h7"}]];/**
+ * @license lucide v1.52.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */var k=[["circle",{cx:"9",cy:"12",r:"3"}],["rect",{width:"20",height:"14",x:"2",y:"5",rx:"7"}]];/**
+ * @license lucide v1.52.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */var w=[["circle",{cx:"15",cy:"12",r:"3"}],["rect",{width:"20",height:"14",x:"2",y:"5",rx:"7"}]];/**
+ * @license lucide v1.52.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */var f=[["path",{d:"M10 11v6"}],["path",{d:"M14 11v6"}],["path",{d:"M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"}],["path",{d:"M3 6h18"}],["path",{d:"M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"}]];/**
+ * @license lucide v1.52.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */var l=[["path",{d:"M2 12q2.5 2 5 0t5 0 5 0 5 0"}],["path",{d:"M2 19q2.5 2 5 0t5 0 5 0 5 0"}],["path",{d:"M2 5q2.5 2 5 0t5 0 5 0 5 0"}]];/**
+ * @license lucide v1.52.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */var P=[["path",{d:"M18 6 6 18"}],["path",{d:"m6 6 12 12"}]];/**
+ * @license lucide v1.52.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */var U={"chevron-left":d,clock:p,droplet:m,eraser:x,"folder-open":i,gauge:n,mountain:c,pause:C,play:h,"rotate-cw":S,save:g,"toggle-left":k,"toggle-right":w,"trash-2":f,waves:l,x:P};function B(e){return u(U[e],{class:"icon","data-icon":e,"aria-hidden":"true",focusable:"false"})}function D(e,a){let r=B(a);for(let t of r.attributes)e.setAttribute(t.name,t.value);e.replaceChildren(...r.childNodes)}function v(){document.querySelectorAll("svg[data-icon]").forEach(e=>{D(e,e.dataset.icon)})}return b(O);})();
+
+;
+const { createIcon, setIcon, initializeIcons } = UIIcons;
+initializeIcons();
+
 const speedEl = document.getElementById("speed"),
   speedLbl = document.getElementById("speedLbl");
 const pauseBtn = document.getElementById("pause");
@@ -1833,18 +1963,6 @@ const sidePanel = document.getElementById("side-panel");
 const panelTab = document.getElementById("panel-tab");
 const closePanelBtn = document.getElementById("close-panel");
 let paused = false;
-
-// SVG symbols are inline in both distributions, including in offline file:// use.
-function setIcon(element, name) {
-  element.querySelector("use").setAttribute("href", "#icon-" + name);
-}
-function createIcon(name) {
-  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  svg.classList.add("icon"); svg.setAttribute("viewBox", "0 0 24 24");
-  svg.setAttribute("aria-hidden", "true"); svg.setAttribute("focusable", "false");
-  const use = document.createElementNS("http://www.w3.org/2000/svg", "use");
-  use.setAttribute("href", "#icon-" + name); svg.appendChild(use); return svg;
-}
 
 // UI bounds derive from requested simulation targets, preventing stale slider positions.
 speedEl.min = "0";
@@ -2025,7 +2143,7 @@ let contextMenuTarget = { x: 0, y: 0, index: -1 };
 /** Aligns source-state feedback with the action exposed by the context menu. */
 function updateSourceContextMenu(source) {
   const isActive = source.active;
-  setIcon(ctxToggleIcon, isActive ? "toggle-on" : "toggle-off");
+  setIcon(ctxToggleIcon, isActive ? "toggle-right" : "toggle-left");
   ctxToggleLabel.textContent = isActive
     ? "Désactiver la source"
     : "Activer la source";
@@ -2130,7 +2248,7 @@ function refreshSourceList() {
       source.rate = value;
     };
     const unit = document.createElement("span"); unit.className = "source-unit"; unit.textContent = "u\u00b3/s";
-    const remove = document.createElement("button"); remove.appendChild(createIcon("close")); remove.className = "source-remove";
+    const remove = document.createElement("button"); remove.appendChild(createIcon("x")); remove.className = "source-remove";
     remove.setAttribute("aria-label", `Supprimer la source ${i + 1}`);
     remove.onclick = () => { sources.splice(i, 1); refreshSourceProtectionMask(); refreshSourceList(); };
     row.append(toggle, rate, unit, remove); sourcesDiv.appendChild(row);

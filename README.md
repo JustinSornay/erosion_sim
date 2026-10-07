@@ -23,8 +23,8 @@ Le titre **Sandbox Hydrographique**, le panneau compact de 320 px, les couleurs
 historiques, les six couches visibles et la barre flottante sont rétablis.
 Le terrain reprend toute la place disponible sans passer sous le panneau.
 Le démarrage utilise le terrain naturel et les courbes topographiques ; la vallée
-reste accessible en démonstration. Les pictogrammes sont des SVG intégrés,
-sans police d'icônes, téléchargement de police ou dépendance distante.
+reste accessible en démonstration. Les pictogrammes viennent de [Lucide](https://lucide.dev/),
+intégré localement sans police d'icônes ni dépendance distante à l'exécution.
 
 Les fonctionnalités v2 restent présentes : **Terrain & simulation** regroupe
 reliefs, graine, rejeu, démonstration, pluie, limites et activation de l'érosion ;
@@ -84,6 +84,7 @@ npm test
 npm run test:baseline
 npm run test:legacy
 npm run test:long
+npm ci
 npm run build
 ```
 
@@ -124,5 +125,6 @@ Il ne reecrit aucune reference historique et n'est pas une validation de celles-
 `js/core/` contient l'etat, les calculs et le format de sauvegarde ; `js/simulation/`
 contient le moteur, le terrain et les couches de visualisation du courant.
 `js/rendering/`, `js/ui/` et `css/` restent independants du calcul physique.
-`tools/build-standalone.js` assemble le HTML autonome sans outil externe.
+`tools/build-standalone.js` compile les icônes Lucide avec esbuild, puis assemble le HTML autonome.
+`js/ui/icons.js` est généré et livré pour ouvrir `index.html` sans installation npm.
 Les scripts classiques sont charges avec `defer` dans leur ordre de dependance.

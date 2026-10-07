@@ -16,5 +16,11 @@
     "benchmark": "node tests/benchmarks/physics-profile.js 1000",
     "audit:legacy": "node tests/diagnostics/legacy-baseline-audit.js",
     "test:layout": "npm run build && python tests/browser/layout.py"
+  },
+  "dependencies": {
+    "lucide": "1.52.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
   }
 }

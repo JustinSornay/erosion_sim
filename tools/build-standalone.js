@@ -1,9 +1,24 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
+// Bundle only the selected Lucide icons; both entry points must work without a network.
+require('esbuild').buildSync({
+  entryPoints: [path.join(root, 'js/ui/00-Helpers/UiIcons.js')],
+  outfile: path.join(root, 'js/ui/icons.js'),
+  bundle: true,
+  format: 'iife',
+  globalName: 'UIIcons',
+  minify: true,
+  legalComments: 'inline',
+  banner: {
+    js: '// Generated from UiIcons.js and Lucide by npm run build.\n/*\n' +
+      fs.readFileSync(path.join(path.dirname(require.resolve('lucide/package.json')), 'LICENSE'), 'utf8') +
+      '\n*/',
+  },
+});
 let html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const scripts = [];
-html = html.replace(/<script defer src="\.\/([^"]+)"><\/script>/g, (_, file) => {
+html = html.replace(/^[ \t]*<script defer src="\.\/([^"]+)"><\/script>/gm, (_, file) => {
   scripts.push(fs.readFileSync(path.join(root, file), 'utf8'));
   return '';
 });

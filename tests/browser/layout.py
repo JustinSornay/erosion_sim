@@ -103,8 +103,8 @@ with sync_playwright() as p:
     served.set_content(html,wait_until='networkidle')
     served.click('#pause')
     check(served.evaluate('terrainPreset === "natural" && typeof getSimulationStats === "function"'), 'Multi-file HTML initializes with its separately loaded local assets')
-    check(served.locator('.layer-item').count()==6 and served.locator('#pauseIcon use').get_attribute('href')=='#icon-play', 'Multi-file entry point loads layer controls and SVG references')
-    check(len(served_requests)==20 and not served_errors and not bad_responses and all(url.startswith(base) for url in served_requests), 'All 20 separate script/style assets load through local fulfillment without errors')
+    check(served.locator('.layer-item').count()==6 and served.locator('#pauseIcon').get_attribute('data-icon')=='play' and served.locator('#pauseIcon path').count()>0, 'Multi-file entry point loads layer controls and Lucide icons')
+    check(len(served_requests)==21 and not served_errors and not bad_responses and all(url.startswith(base) for url in served_requests), 'All 21 separate script/style assets load through local fulfillment without errors')
     served.screenshot(path=str(OUT / 'multi-file.png'))
     served.close()
     report = {'passed':True, 'browser':browser.version, 'checks':checks, 'layouts':layouts, 'pageErrors':errors, 'networkRequests':requests, 'entryPointMode':'injected HTML + intercepted local assets (no HTTP server)', 'entryPointErrors':served_errors, 'entryPointRequests':served_requests, 'httpErrors':bad_responses, 'limitation':'Top-level localhost navigation is blocked by the container browser policy; native file opening on Windows is not tested.'}

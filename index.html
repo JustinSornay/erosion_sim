@@ -23,61 +23,44 @@
     <script defer src="./js/simulation/particles.js"></script>
     <script defer src="./js/core/session.js"></script>
     <script defer src="./js/rendering/render.js"></script>
+    <script defer src="./js/ui/icons.js"></script>
     <script defer src="./js/ui/ui.js"></script>
     <script defer src="./js/main.js"></script>
   </head>
   <body>
-<svg class="icon-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><defs>
-<symbol id="icon-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5v14M15 5v14" stroke-width="3"/></symbol>
-<symbol id="icon-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m8 5 11 7-11 7Z"/></symbol>
-<symbol id="icon-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7v5h-5M4.8 8a8 8 0 1 1-.8 7M20 12a8 8 0 0 0-13.6-5.7"/></symbol>
-<symbol id="icon-clear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h12M6 6V4h6v2M5 6l1 14h6l1-14M8 10v6M18 9h3M17 13h4M16 17h5"/></symbol>
-<symbol id="icon-speed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18a9 9 0 1 1 16 0M12 3v3M5.6 5.6l2.1 2.1M3 12h3M18 12h3M12 12l4-5"/><circle cx="12" cy="12" r="1.5"/></symbol>
-<symbol id="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
-<symbol id="icon-drop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s-7 7.5-7 12a7 7 0 0 0 14 0c0-4.5-7-12-7-12Z"/></symbol>
-<symbol id="icon-toggle-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="6"/><circle cx="16" cy="12" r="3" fill="currentColor" stroke="none"/></symbol>
-<symbol id="icon-toggle-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="6"/><circle cx="8" cy="12" r="3"/></symbol>
-<symbol id="icon-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7M14 10v7"/></symbol>
-<symbol id="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m6 6 12 12M6 18 18 6"/></symbol>
-<symbol id="icon-chevron-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7"/></symbol>
-<symbol id="icon-terrain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m2 19 7-11 4 6 3-5 6 10Z"/></symbol>
-<symbol id="icon-water" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c3-4 7 4 10 0s7 4 10 0M2 12c3-4 7 4 10 0s7 4 10 0M2 18c3-4 7 4 10 0s7 4 10 0"/></symbol>
-<symbol id="icon-save" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3h13l4 4v14H3V3ZM7 3v6h9V3M7 21v-8h10v8"/></symbol>
-<symbol id="icon-folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8V4h6l3 3h8v3M2 10h21l-4 10H5Z"/></symbol>
-</defs></svg>
     <div id="app">
       <main id="stage" aria-label="Simulation hydrographique">
         <canvas id="c" tabindex="0" aria-label="Terrain interactif. Cliquez pour ajouter une source." aria-describedby="interaction-help"></canvas>
         <div id="stage-hint" role="status" hidden></div>
         <div id="toast" role="status" aria-live="polite"></div>
         <div id="context-menu" aria-label="Actions de source">
-          <button id="ctx-add-source" type="button"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-drop"></use></svg>Ajouter une source d'eau</button>
-          <button id="ctx-toggle-source" type="button" style="display: none"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-toggle-on"></use></svg><span class="context-menu-label">Désactiver la source</span></button>
-          <button id="ctx-delete-source" type="button" style="display: none"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-trash"></use></svg>Supprimer</button>
+          <button id="ctx-add-source" type="button"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="droplet"></svg>Ajouter une source d'eau</button>
+          <button id="ctx-toggle-source" type="button" style="display: none"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="toggle-right"></svg><span class="context-menu-label">Désactiver la source</span></button>
+          <button id="ctx-delete-source" type="button" style="display: none"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="trash-2"></svg>Supprimer</button>
         </div>
         <div id="hud">
           Mode: <b class="mode" id="modeLbl">Simulation</b><br />
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-speed"></use></svg> <b id="fps">--</b> fps · cible <b id="tgtMult">×1</b> · réel <b id="realMult">×1</b><br />
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-clock"></use></svg> <b id="tcount">0</b> pas · <b id="tsim">0.0</b>s
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="gauge"></svg> <b id="fps">--</b> fps · cible <b id="tgtMult">×1</b> · réel <b id="realMult">×1</b><br />
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="clock"></svg> <b id="tcount">0</b> pas · <b id="tsim">0.0</b>s
         </div>
       </main>
 
       <!-- Original floating transport bar, centered on the visible terrain. -->
       <div id="bottom-bar" role="group" aria-label="Commandes de simulation">
-        <button class="ctrl-btn" id="pause" type="button" aria-label="Mettre en pause" aria-pressed="false" title="Pause / Reprendre (Espace)"><svg id="pauseIcon" class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-pause"></use></svg></button>
+        <button class="ctrl-btn" id="pause" type="button" aria-label="Mettre en pause" aria-pressed="false" title="Pause / Reprendre (Espace)"><svg id="pauseIcon" class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="pause"></svg></button>
         <div class="speed-ctrl">
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-speed"></use></svg>
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="gauge"></svg>
           <input id="speed" aria-label="Vitesse de simulation" aria-valuetext="×1" min="0" step="1" type="range" value="0" />
           <span id="speedLbl">×1</span>
         </div>
-        <button class="ctrl-btn" id="regen" type="button" aria-label="Générer un nouveau terrain" title="Générer un nouveau terrain"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-refresh"></use></svg></button>
-        <button class="ctrl-btn" id="clearSrc" type="button" aria-label="Effacer toutes les sources" title="Effacer toutes les sources"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-clear"></use></svg></button>
+        <button class="ctrl-btn" id="regen" type="button" aria-label="Générer un nouveau terrain" title="Générer un nouveau terrain"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="rotate-cw"></svg></button>
+        <button class="ctrl-btn" id="clearSrc" type="button" aria-label="Effacer toutes les sources" title="Effacer toutes les sources"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="eraser"></svg></button>
       </div>
 
-      <button id="panel-tab" type="button" title="Ouvrir les réglages" aria-label="Ouvrir les réglages" aria-controls="side-panel" aria-expanded="false"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-chevron-left"></use></svg></button>
+      <button id="panel-tab" type="button" title="Ouvrir les réglages" aria-label="Ouvrir les réglages" aria-controls="side-panel" aria-expanded="false"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="chevron-left"></svg></button>
 
       <aside id="side-panel" aria-label="Réglages du sandbox">
-        <button id="close-panel" type="button" title="Fermer les réglages" aria-label="Fermer les réglages"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-close"></use></svg></button>
+        <button id="close-panel" type="button" title="Fermer les réglages" aria-label="Fermer les réglages"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="x"></svg></button>
         <div class="panel-header">
           <h1>Sandbox Hydrographique</h1>
           <p class="desc" id="interaction-help">Clic sur le terrain pour ajouter une source d'eau. Clic sur une source pour l'activer ou la couper.</p>
@@ -94,11 +77,11 @@
         <section id="layersBox" aria-labelledby="layers-title">
           <h2 class="section-title" id="layers-title">Couches Visuelles</h2>
           <div class="layer-group">
-            <button type="button" class="layer-group-title" data-group="layers-terrain" aria-label="Activer ou masquer les couches de terrain" aria-pressed="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-terrain"></use></svg>Terrain</button>
+            <button type="button" class="layer-group-title" data-group="layers-terrain" aria-label="Activer ou masquer les couches de terrain" aria-pressed="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="mountain"></svg>Terrain</button>
             <div class="layer-list" id="layers-terrain"></div>
           </div>
           <div class="layer-group">
-            <button type="button" class="layer-group-title" data-group="layers-water" aria-label="Activer ou masquer les couches d'eau et de dynamique" aria-pressed="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-water"></use></svg>Eau &amp; Dynamique</button>
+            <button type="button" class="layer-group-title" data-group="layers-water" aria-label="Activer ou masquer les couches d'eau et de dynamique" aria-pressed="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="waves"></svg>Eau &amp; Dynamique</button>
             <div class="layer-list" id="layers-water"></div>
           </div>
         </section>
@@ -119,7 +102,7 @@
               <label for="terrainSeed">Graine<input id="terrainSeed" type="number" min="0" max="2147483647" value="314159265" step="1" /></label>
             </div>
             <div class="button-pair"><button id="applyTerrain" type="button" class="text-btn">Générer</button><button id="replay" type="button" class="text-btn">Rejouer</button></div>
-            <button id="demo" type="button" class="text-btn demo-btn" title="Remplace le terrain par une vallée de démonstration avec une source"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-drop"></use></svg>Lancer une rivière</button>
+            <button id="demo" type="button" class="text-btn demo-btn" title="Remplace le terrain par une vallée de démonstration avec une source"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="droplet"></svg>Lancer une rivière</button>
             <div class="settings-inline">
               <label for="boundary">Limites<select id="boundary"><option value="open">Ouvertes</option><option value="closed">Fermées</option></select></label>
               <label for="rain">Pluie<select id="rain"><option value="0">Aucune</option><option value="0.00001">Légère</option><option value="0.00005">Averse</option></select></label>
@@ -147,7 +130,7 @@
           </div>
         </details>
 
-        <div class="button-pair session-actions"><button id="saveSession" type="button" class="text-btn"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-save"></use></svg>Sauvegarder</button><button id="loadSession" type="button" class="text-btn"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-folder"></use></svg>Ouvrir</button></div>
+        <div class="button-pair session-actions"><button id="saveSession" type="button" class="text-btn"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="save"></svg>Sauvegarder</button><button id="loadSession" type="button" class="text-btn"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="folder-open"></svg>Ouvrir</button></div>
         <input id="sessionFile" type="file" accept=".json,application/json" hidden />
       </aside>
     </div>
