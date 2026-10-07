@@ -11,6 +11,18 @@ const panelTab = document.getElementById("panel-tab");
 const closePanelBtn = document.getElementById("close-panel");
 let paused = false;
 
+// SVG symbols are inline in both distributions, including in offline file:// use.
+function setIcon(element, name) {
+  element.querySelector("use").setAttribute("href", "#icon-" + name);
+}
+function createIcon(name) {
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.classList.add("icon"); svg.setAttribute("viewBox", "0 0 24 24");
+  svg.setAttribute("aria-hidden", "true"); svg.setAttribute("focusable", "false");
+  const use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+  use.setAttribute("href", "#icon-" + name); svg.appendChild(use); return svg;
+}
+
 // UI bounds derive from requested simulation targets, preventing stale slider positions.
 speedEl.min = "0";
 speedEl.max = String(SPEED_STEPS.length - 1);
@@ -44,19 +56,28 @@ function updateLayersUI() {
     row.classList.toggle("on", !!layerOn[row.dataset.id]);
     row.setAttribute("aria-pressed", String(!!layerOn[row.dataset.id]));
   });
+  document.querySelectorAll(".layer-group-title").forEach(button => {
+    const items = [...document.getElementById(button.dataset.group).querySelectorAll(".layer-item")];
+    const count = items.filter(item => layerOn[item.dataset.id]).length;
+    button.setAttribute("aria-pressed", count === 0 ? "false" : count === items.length ? "true" : "mixed");
+  });
 }
 
 function setMode(m) {
   viewMode = m;
   document
     .querySelectorAll(".modes button[data-m]")
-    .forEach((b) => b.classList.toggle("on", b.dataset.m === m));
+    .forEach((b) => {
+      b.classList.toggle("on", b.dataset.m === m);
+      b.setAttribute("aria-pressed", String(b.dataset.m === m));
+    });
   modeLbl.textContent = m === "composite" ? "Simulation" : m === "change" ? "Érosion / dépôts" : "Pentes D8";
   if (m === "contribution") { computeDrainage(); invalidateDrainagePaths(); }
   document.getElementById("stage-hint").textContent = m === "change"
     ? "Orange : érosion. Vert : dépôts. Le fond gris est inchangé."
     : m === "contribution" ? "Réseau potentiel du relief : les cuvettes peuvent retenir l'eau."
     : "Cliquez pour ajouter une source ; cliquez dessus pour l'activer ou la couper.";
+  document.getElementById("stage-hint").hidden = m === "composite";
   layersBox.style.display = m === "composite" ? "block" : "none";
   dividerBottom.style.display = m === "composite" ? "block" : "none";
   updateLayersUI();
@@ -90,12 +111,14 @@ document.querySelectorAll(".layer-group-title").forEach((title) => {
 
 speedEl.oninput = () => {
   speedLbl.textContent = "×" + SPEED_STEPS[+speedEl.value];
+  speedEl.setAttribute("aria-valuetext", speedLbl.textContent);
 };
 
 pauseBtn.onclick = () => {
   paused = !paused;
   pauseBtn.classList.toggle("active", paused);
-  pauseIcon.textContent = paused ? "\u25b6" : "\u23f8";
+  setIcon(pauseIcon, paused ? "play" : "pause");
+  pauseBtn.setAttribute("aria-label", paused ? "Reprendre la simulation" : "Mettre en pause");
   pauseBtn.setAttribute("aria-pressed", String(paused));
   resetClock();
 };
@@ -111,12 +134,25 @@ document.getElementById("clearSrc").onclick = () => {
   refreshSourceList();
 };
 
-// Gestion de la languette mobile et du bouton fermer
-function togglePanel() {
-  sidePanel.classList.toggle("open");
-  panelTab.classList.toggle("hidden", sidePanel.classList.contains("open"));
+// Keep off-canvas settings out of keyboard navigation on small screens.
+const mobilePanelQuery = matchMedia("(max-width: 767px)");
+function syncPanelAccessibility() {
+  const open = sidePanel.classList.contains("open");
+  const hidden = mobilePanelQuery.matches && !open;
+  sidePanel.inert = hidden;
+  panelTab.classList.toggle("hidden", open);
+  panelTab.setAttribute("aria-expanded", String(!hidden));
 }
-
+function setPanelOpen(open, focus = false) {
+  sidePanel.classList.toggle("open", open); syncPanelAccessibility();
+  if (focus && mobilePanelQuery.matches) (open ? closePanelBtn : panelTab).focus({ preventScroll: true });
+}
+function togglePanel() { setPanelOpen(!sidePanel.classList.contains("open"), true); }
+mobilePanelQuery.addEventListener("change", () => {
+  syncPanelAccessibility();
+  if (sidePanel.inert && sidePanel.contains(document.activeElement)) panelTab.focus({ preventScroll: true });
+});
+syncPanelAccessibility();
 panelTab.addEventListener("click", togglePanel);
 closePanelBtn.addEventListener("click", togglePanel);
 
@@ -159,14 +195,14 @@ const contextMenu = document.getElementById("context-menu");
 const ctxAddBtn = document.getElementById("ctx-add-source");
 const ctxToggleBtn = document.getElementById("ctx-toggle-source");
 const ctxDeleteBtn = document.getElementById("ctx-delete-source");
-const ctxToggleIcon = ctxToggleBtn.querySelector(".material-symbols-outlined");
+const ctxToggleIcon = ctxToggleBtn.querySelector(".icon");
 const ctxToggleLabel = ctxToggleBtn.querySelector(".context-menu-label");
 let contextMenuTarget = { x: 0, y: 0, index: -1 };
 
 /** Aligns source-state feedback with the action exposed by the context menu. */
 function updateSourceContextMenu(source) {
   const isActive = source.active;
-  ctxToggleIcon.textContent = isActive ? "\u25cf" : "\u25cb";
+  setIcon(ctxToggleIcon, isActive ? "toggle-on" : "toggle-off");
   ctxToggleLabel.textContent = isActive
     ? "Désactiver la source"
     : "Activer la source";
@@ -206,8 +242,11 @@ canvas.addEventListener("contextmenu", (e) => {
 
   // Positionner le menu
   contextMenu.style.display = "block";
-  contextMenu.style.left = Math.max(8, Math.min(e.clientX, innerWidth - contextMenu.offsetWidth - 8)) + "px";
-  contextMenu.style.top = Math.max(8, Math.min(e.clientY, innerHeight - contextMenu.offsetHeight - 8)) + "px";
+  // The menu belongs to the stage, not the whole window: keep edge clicks
+  // away from the settings panel and inside the stage's clipped area.
+  const stageRect = document.getElementById("stage").getBoundingClientRect();
+  contextMenu.style.left = Math.max(8, Math.min(e.clientX - stageRect.left, stageRect.width - contextMenu.offsetWidth - 8)) + "px";
+  contextMenu.style.top = Math.max(8, Math.min(e.clientY - stageRect.top, stageRect.height - contextMenu.offsetHeight - 8)) + "px";
 });
 
 // Fermer le menu quand on clique ailleurs
@@ -246,16 +285,17 @@ ctxDeleteBtn.addEventListener("click", () => {
 
 function refreshSourceList() {
   sourcesDiv.replaceChildren();
-  document.getElementById("srcCount").textContent = `${sources.filter(source => source.active).length} / ${sources.length} actives`;
+  document.getElementById("srcCount").textContent = `${sources.filter(source => source.active).length} / ${sources.length}`;
   if (sources.length === 0) {
     const empty = document.createElement("p"); empty.className = "empty-sources";
-    empty.textContent = "Un clic sur le terrain suffit."; sourcesDiv.appendChild(empty); return;
+    empty.textContent = "Aucune source. Clic sur le terrain."; sourcesDiv.appendChild(empty); return;
   }
   sources.forEach((source, i) => {
     const row = document.createElement("div"); row.className = "src-row";
     const toggle = document.createElement("button"); toggle.className = source.active ? "source-toggle" : "source-toggle off";
-    toggle.textContent = `${source.active ? "\u25cf" : "\u25cb"} ${i + 1}`;
+    toggle.textContent = `Source ${i + 1}`;
     toggle.title = `Source ${i + 1} : ${source.active ? "désactiver" : "activer"}`;
+    toggle.setAttribute("aria-label", toggle.title);
     toggle.setAttribute("aria-pressed", String(source.active));
     toggle.onclick = () => { source.active = !source.active; refreshSourceList(); };
     const rate = document.createElement("input"); rate.type = "number";
@@ -267,7 +307,7 @@ function refreshSourceList() {
       source.rate = value;
     };
     const unit = document.createElement("span"); unit.className = "source-unit"; unit.textContent = "u\u00b3/s";
-    const remove = document.createElement("button"); remove.textContent = "\u00d7"; remove.className = "source-remove";
+    const remove = document.createElement("button"); remove.appendChild(createIcon("close")); remove.className = "source-remove";
     remove.setAttribute("aria-label", `Supprimer la source ${i + 1}`);
     remove.onclick = () => { sources.splice(i, 1); refreshSourceProtectionMask(); refreshSourceList(); };
     row.append(toggle, rate, unit, remove); sourcesDiv.appendChild(row);
@@ -320,7 +360,7 @@ document.getElementById("demo").onclick = () => {
   genTerrain({ seed: 314159265, preset: "valley" });
   Object.assign(simulationOptions, DEFAULT_SIMULATION_OPTIONS);
   const src = { x: 107, y: 22, rate: DEFAULT_RATE, active: true }; configureSourceOutlets(src); sources.push(src);
-  paused = false; pauseIcon.textContent = "\u23f8"; pauseBtn.classList.remove("active"); pauseBtn.setAttribute("aria-pressed", "false");
+  paused = false; setIcon(pauseIcon, "pause"); pauseBtn.setAttribute("aria-label", "Mettre en pause"); pauseBtn.classList.remove("active"); pauseBtn.setAttribute("aria-pressed", "false");
   speedEl.value = "2"; speedEl.oninput(); resetClock(); syncTerrainControls(); refreshSourceList(); setMode("composite");
   notify("La rivière est lancée. La vue Érosion / dépôts révèle le travail de l'eau.");
 };
@@ -351,14 +391,18 @@ document.getElementById("sessionFile").onchange = async event => {
   try {
     if (file.size > 35 * 1024 * 1024) throw new Error("Sauvegarde trop volumineuse (35 Mo maximum).");
     const parsed = JSON.parse(await file.text()); restoreSimulation(parsed);
-    paused = true; pauseIcon.textContent = "\u25b6"; pauseBtn.classList.add("active"); pauseBtn.setAttribute("aria-pressed", "true");
+    paused = true; setIcon(pauseIcon, "play"); pauseBtn.setAttribute("aria-label", "Reprendre la simulation"); pauseBtn.classList.add("active"); pauseBtn.setAttribute("aria-pressed", "true");
     resetClock(); syncTerrainControls(); refreshSourceList(); updateMetrics();
     notify("Sauvegarde restaurée en pause. Reprenez quand vous le souhaitez.");
   } catch (error) { notify(error.message, true); }
   finally { event.target.value = ""; }
 };
 document.addEventListener("keydown", event => {
-  if (["INPUT", "SELECT", "TEXTAREA", "BUTTON"].includes(event.target.tagName)) return;
+  if (event.key === "Escape") {
+    contextMenu.style.display = "none";
+    if (mobilePanelQuery.matches && sidePanel.classList.contains("open")) setPanelOpen(false, true);
+    return;
+  }
+  if (event.target.closest("input, select, textarea, button, summary, a") || event.target.isContentEditable) return;
   if (event.code === "Space") { event.preventDefault(); pauseBtn.click(); }
-  if (event.key === "Escape") { contextMenu.style.display = "none"; sidePanel.classList.remove("open"); panelTab.classList.remove("hidden"); }
 });

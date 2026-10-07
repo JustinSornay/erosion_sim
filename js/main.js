@@ -27,7 +27,7 @@ function loop(now) {
       }
       stepAccumulator -= achieved;
     } catch (error) {
-      paused = true; stepAccumulator = 0; pauseIcon.textContent = "\u25b6";
+      paused = true; stepAccumulator = 0; setIcon(pauseIcon, "play"); pauseBtn.setAttribute("aria-label", "Reprendre la simulation");
       pauseBtn.classList.add("active"); pauseBtn.setAttribute("aria-pressed", "true");
       notify(`Simulation arrêtée : ${error.message}`, true); console.error(error);
     }
@@ -58,6 +58,7 @@ function loop(now) {
 }
 
 document.addEventListener("visibilitychange", resetClock);
-genTerrain({ seed: 314159265, preset: "valley" });
+// The historical natural terrain remains the first view; the valley is an optional demo.
+genTerrain({ seed: 314159265, preset: "natural" });
 syncTerrainControls(); refreshSourceList(); setMode("composite"); updateMetrics();
 requestAnimationFrame(loop);

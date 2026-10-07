@@ -1,6 +1,6 @@
 {
   "name": "erosion-sandbox",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "private": true,
   "description": "Local conservative hydraulic-erosion sandbox",
   "engines": {
@@ -14,6 +14,7 @@
     "test:browser": "npm run build && python tests/browser/smoke.py",
     "build": "node tools/build-standalone.js",
     "benchmark": "node tests/benchmarks/physics-profile.js 1000",
-    "audit:legacy": "node tests/diagnostics/legacy-baseline-audit.js"
+    "audit:legacy": "node tests/diagnostics/legacy-baseline-audit.js",
+    "test:layout": "npm run build && python tests/browser/layout.py"
   }
 }

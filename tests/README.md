@@ -64,3 +64,19 @@ le contenu du **vrai fichier autonome** avec `page.set_content`, sans simulation
 de DOM ni moteur factice. Aucune politique du navigateur n'a ete modifiee.
 Les controles de telechargement JSON et de rechargement par champ fichier sont reels.
 Aucune requete reseau n'a ete observee pendant ce parcours.
+
+## Régression d'interface 2.0.1
+
+`npm run test:browser` conserve les contrôles physiques et les interactions v2,
+et vérifie aussi le titre compact, les couches visibles, les sections repliables,
+les SVG locaux et la navigation clavier : **42 contrôles**.
+
+`npm run test:layout` couvre **8 tailles de fenêtre**, les menus au bord du terrain,
+la barre flottante, les panneaux mobiles et le chargement séparé des ressources :
+**85 contrôles**. Les résultats sont dans `tests/generated/design-validation/`,
+séparément des résultats de finalisation v2 conservés.
+
+Les tests Chromium s'exécutent sans accès au réseau. Le test multi-fichiers
+charge les scripts et feuilles de style originaux via interception locale ;
+la navigation vers un serveur localhost est bloquée par la politique du navigateur
+du conteneur. Cela ne constitue pas un test de double-clic sous Windows.

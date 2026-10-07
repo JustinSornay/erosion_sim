@@ -1,0 +1,17 @@
+{
+  "previousArchive": "erosion_sim_terminee.zip",
+  "unchangedExistingFiles": 282,
+  "changedExistingFiles": [
+    "README.md",
+    "css/components/laboratory.css",
+    "dist/erosion-simulation.html",
+    "index.html",
+    "js/main.js",
+    "js/rendering/render.js",
+    "js/ui/ui.js",
+    "package.json",
+    "tests/README.md",
+    "tests/browser/smoke.py"
+  ],
+  "missingFiles": []
+}

@@ -2,7 +2,8 @@ const canvas = document.getElementById("c");
 const ctx = canvas.getContext("2d");
 function resizeCanvas() {
   const stage = document.getElementById("stage");
-  const size = Math.max(160, Math.min(stage.clientWidth - 28, stage.clientHeight - 150));
+  const padding = window.innerWidth < 768 ? 8 : 24;
+  const size = Math.max(1, Math.min(stage.clientWidth - padding, stage.clientHeight - 20));
 
   canvas.style.width = size + "px";
   canvas.style.height = size + "px";
@@ -33,9 +34,9 @@ const LAYER_DEFS_WATER = [
 ];
 const layerOn = {
   relief: true,
-  contours: false,
+  contours: true,
   eau: true,
-  reseau: false,
+  reseau: true,
   erosion: true,
   particules: true,
 };

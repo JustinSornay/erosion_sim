@@ -1,0 +1,52 @@
+
+> erosion-sandbox@2.0.1 test:browser
+> npm run build && python tests/browser/smoke.py
+
+
+> erosion-sandbox@2.0.1 build
+> node tools/build-standalone.js
+
+Standalone: /mnt/data/design_work/revised/erosion_sim/dist/erosion-simulation.html (90362 bytes)
+PASS: Application initializes without a JavaScript error
+PASS: No remote assets or network requests
+PASS: Original compact sandbox title restored
+PASS: Original 14px heading size restored
+PASS: Natural terrain and original topographic layers are the initial view
+PASS: All six original layer controls are immediately visible
+PASS: Additional terrain and budget tools start collapsed
+PASS: No added lab branding or oversized demonstration button
+PASS: Pause button pauses the simulation
+PASS: Pause swaps the local vector icon, without icon fonts
+PASS: The initial terrain has no added instruction banner
+PASS: Original layer-group toggle also works with the keyboard
+PASS: Mixed layer state is exposed accessibly
+PASS: Desktop terrain is not hidden under settings
+PASS: Real click creates a source at the clicked cell
+PASS: Source actually injects water when running
+PASS: No hidden stepping while paused
+PASS: Source discharge is editable
+PASS: Invalid discharge cannot corrupt the engine
+PASS: Turning a source off stops injection
+PASS: Context menu toggles a source
+PASS: Context menu deletes a source
+PASS: Collapsing the new settings preserves the running session state
+PASS: Demo resets custom imported physical options
+PASS: River demo flows out, erodes and deposits in the browser
+PASS: Browser engine preserves both budgets
+PASS: Flowing water is visibly blue beyond the source marker
+PASS: Erosion/deposition view is reachable
+PASS: D8 analysis remains distinct from actual water
+PASS: A saved session restores its exact step count
+PASS: A saved session restores physical water, not just UI state
+PASS: Invalid save leaves the live session intact
+PASS: Replay resets the same terrain and preserves sources
+PASS: Rain, boundaries and erosion controls reach the engine
+PASS: Space on a settings summary does not toggle playback
+PASS: Space toggles playback outside form controls
+PASS: Closed mobile settings do not intercept keyboard focus
+PASS: Canvas fits a mobile viewport
+PASS: Mobile settings open within the viewport
+PASS: Mobile settings close normally
+PASS: Escape inside a form closes mobile settings and restores focus
+PASS: No JavaScript errors throughout the interaction sequence
+PASS: 42 browser checks

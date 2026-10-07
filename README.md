@@ -1,4 +1,4 @@
-# Erosion / Lab - simulation terminée, moteur v2
+# Érosion — Sandbox Hydrographique
 
 Une simulation locale d'eau, de transport de sédiments, d'erosion et de depot.
 Le relief evolue réellement : l'image n'est pas une animation preenregistree.
@@ -12,10 +12,27 @@ necessaire pour utiliser l'application.
 Le fichier **`dist/erosion-simulation.html`** contient aussi toute l'application
 dans un seul HTML, sans fichiers annexes : c'est la version a partager facilement.
 
-Cliquer sur **Lancer une rivière** pour une demonstration reproductible. Attendre
+Ouvrir **Terrain & simulation**, puis cliquer sur **Lancer une rivière** pour une demonstration reproductible. Attendre
 quelques secondes, puis passer a **Érosion / dépôts** pour voir le travail du
 courant : orange = creusement, vert = accumulation. La vitesse demandee est x5
 pour la demonstration ; la vitesse réellement atteinte est affichee séparément.
+
+## Interface rapprochée du design d'origine (2.0.1)
+
+Le titre **Sandbox Hydrographique**, le panneau compact de 320 px, les couleurs
+historiques, les six couches visibles et la barre flottante sont rétablis.
+Le terrain reprend toute la place disponible sans passer sous le panneau.
+Le démarrage utilise le terrain naturel et les courbes topographiques ; la vallée
+reste accessible en démonstration. Les pictogrammes sont des SVG intégrés,
+sans police d'icônes, téléchargement de police ou dépendance distante.
+
+Les fonctionnalités v2 restent présentes : **Terrain & simulation** regroupe
+reliefs, graine, rejeu, démonstration, pluie, limites et activation de l'érosion ;
+**Bilans & lecture** regroupe les mesures et leurs explications. Les deux sections
+sont repliées au départ. Les boutons **Sauvegarder** et **Ouvrir** restent visibles.
+Le moteur et le format de sauvegarde v2 n'ont pas été modifiés.
+
+Voir `docs/AJUSTEMENT_INTERFACE.md` pour le périmètre et les vérifications.
 
 ## Manipuler
 
@@ -26,7 +43,7 @@ droite ; le clic droit donne aussi acces aux commandes de source.
 Choisir un relief et une graine, puis **Generer**, cree un terrain neuf sans source.
 **Rejouer** restaure le terrain initial avec les memes sources, debits et options.
 Le bouton fleche circulaire de la barre du bas genere une nouvelle graine ; le
-bouton croix supprime les sources mais laisse le terrain et l'eau existants.
+bouton de suppression des sources supprime les sources mais laisse le terrain et l'eau existants.
 La barre espace met en pause/reprend hors des champs de formulaire.
 
 Quatre reliefs sont disponibles : vallee sinueuse, terrain naturel historique,
@@ -34,10 +51,10 @@ cuvette et crete. Les limites peuvent etre ouvertes (eau et sédiments sortent)
 ou fermees (ils restent, sauf evaporation). La pluie peut etre ajoutee ; decocher
 l'erosion fige les echanges avec le sol, mais laisse circuler l'eau et les sédiments.
 
-**Pentes D8** montre un drainage potentiel du terrain : ce n'est pas l'eau réelle
+**Terrain (D8)** montre un drainage potentiel du terrain : ce n'est pas l'eau réelle
 et ce reseau ne pilote pas la simulation. Courbes topographiques et vecteurs de
-courant sont activables dans **Couches visuelles**, sans imposer une grille visuelle
-au rendu par defaut. Les traceurs sont decoratifs : les bilans reposent sur les
+courant sont activables dans **Couches visuelles**, avec les courbes topographiques et les vecteurs de courant
+actifs par defaut, comme dans l'interface historique. Les traceurs sont decoratifs : les bilans reposent sur les
 champs physiques, pas sur des particules dessinees.
 
 **Sauvegarder** exporte un JSON contenant le terrain, l'eau, les sédiments, les
@@ -47,8 +64,8 @@ La version 2 est requise ; le JSON n'est pas un format de sauvegarde de l'ancien
 
 ## Lire les bilans
 
-Le panneau affiche l'eau presente, l'eau sortie, la matiere erodee et la matiere
-deposee cumulees. Le detail **Conservation & lecture** affiche les residus de bilan,
+La section repliable **Bilans & lecture** affiche l'eau presente, l'eau sortie, la matiere erodee et la matiere
+deposee cumulees. Cette meme section affiche les residus de bilan,
 l'evaporation et les sédiments sortis. Une matiere peut etre erodee puis deposee
 plusieurs fois : les cumuls d'echange ne sont pas le changement net de relief.
 
@@ -82,6 +99,7 @@ Les tests navigateur demandent en plus Python et Playwright/Chromium :
 python -m pip install playwright
 python -m playwright install chromium
 npm run test:browser
+npm run test:layout
 ```
 
 Ils chargent le HTML autonome en memoire et exercent les vrais clics, fichiers

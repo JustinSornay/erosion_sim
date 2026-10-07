@@ -1,0 +1,289 @@
+{
+  "passed": true,
+  "browser": "144.0.7559.96",
+  "checks": [
+    "1440x1000: square terrain fits the visible stage",
+    "1440x1000: full floating transport bar fits",
+    "1440x1000: no document overflow or focus-induced scrolling",
+    "1440x1000: edge context menu is not clipped by the panel",
+    "1440x1000: edge menu action still reaches the real simulation",
+    "1440x1000: panel contents do not overflow horizontally",
+    "1440x1000: added settings remain reachable",
+    "1440x1000: detailed budgets remain reachable",
+    "1440x1000: expanded settings and budgets fit the panel",
+    "1365x768: square terrain fits the visible stage",
+    "1365x768: full floating transport bar fits",
+    "1365x768: no document overflow or focus-induced scrolling",
+    "1365x768: edge context menu is not clipped by the panel",
+    "1365x768: edge menu action still reaches the real simulation",
+    "1365x768: panel contents do not overflow horizontally",
+    "1365x768: added settings remain reachable",
+    "1365x768: detailed budgets remain reachable",
+    "1365x768: expanded settings and budgets fit the panel",
+    "1920x1080: square terrain fits the visible stage",
+    "1920x1080: full floating transport bar fits",
+    "1920x1080: no document overflow or focus-induced scrolling",
+    "1920x1080: edge context menu is not clipped by the panel",
+    "1920x1080: edge menu action still reaches the real simulation",
+    "1920x1080: panel contents do not overflow horizontally",
+    "1920x1080: added settings remain reachable",
+    "1920x1080: detailed budgets remain reachable",
+    "1920x1080: expanded settings and budgets fit the panel",
+    "1024x768: square terrain fits the visible stage",
+    "1024x768: full floating transport bar fits",
+    "1024x768: no document overflow or focus-induced scrolling",
+    "1024x768: edge context menu is not clipped by the panel",
+    "1024x768: edge menu action still reaches the real simulation",
+    "1024x768: panel contents do not overflow horizontally",
+    "1024x768: added settings remain reachable",
+    "1024x768: detailed budgets remain reachable",
+    "1024x768: expanded settings and budgets fit the panel",
+    "768x1024: square terrain fits the visible stage",
+    "768x1024: full floating transport bar fits",
+    "768x1024: no document overflow or focus-induced scrolling",
+    "768x1024: edge context menu is not clipped by the panel",
+    "768x1024: edge menu action still reaches the real simulation",
+    "768x1024: panel contents do not overflow horizontally",
+    "768x1024: added settings remain reachable",
+    "768x1024: detailed budgets remain reachable",
+    "768x1024: expanded settings and budgets fit the panel",
+    "390x844: square terrain fits the visible stage",
+    "390x844: full floating transport bar fits",
+    "390x844: no document overflow or focus-induced scrolling",
+    "390x844: edge context menu is not clipped by the panel",
+    "390x844: edge menu action still reaches the real simulation",
+    "390x844: closed mobile panel is inert",
+    "390x844: mobile drawer remains anchored to the viewport after focus",
+    "390x844: mobile drawer exposes its expanded state",
+    "390x844: panel contents do not overflow horizontally",
+    "390x844: added settings remain reachable",
+    "390x844: detailed budgets remain reachable",
+    "390x844: expanded settings and budgets fit the panel",
+    "390x844: Escape from a field safely closes the drawer",
+    "320x568: square terrain fits the visible stage",
+    "320x568: full floating transport bar fits",
+    "320x568: no document overflow or focus-induced scrolling",
+    "320x568: edge context menu is not clipped by the panel",
+    "320x568: edge menu action still reaches the real simulation",
+    "320x568: closed mobile panel is inert",
+    "320x568: mobile drawer remains anchored to the viewport after focus",
+    "320x568: mobile drawer exposes its expanded state",
+    "320x568: panel contents do not overflow horizontally",
+    "320x568: added settings remain reachable",
+    "320x568: detailed budgets remain reachable",
+    "320x568: expanded settings and budgets fit the panel",
+    "320x568: Escape from a field safely closes the drawer",
+    "844x390: square terrain fits the visible stage",
+    "844x390: full floating transport bar fits",
+    "844x390: no document overflow or focus-induced scrolling",
+    "844x390: edge context menu is not clipped by the panel",
+    "844x390: edge menu action still reaches the real simulation",
+    "844x390: panel contents do not overflow horizontally",
+    "844x390: added settings remain reachable",
+    "844x390: detailed budgets remain reachable",
+    "844x390: expanded settings and budgets fit the panel",
+    "Layout changes and empty-source editing do not advance or regenerate the paused simulation",
+    "All responsive layouts work offline without JavaScript errors or network requests",
+    "Multi-file HTML initializes with its separately loaded local assets",
+    "Multi-file entry point loads layer controls and SVG references",
+    "All 20 separate script/style assets load through local fulfillment without errors"
+  ],
+  "layouts": [
+    {
+      "viewport": "1440x1000",
+      "canvas": {
+        "x": 70,
+        "y": 10,
+        "width": 980,
+        "height": 980
+      },
+      "bar": {
+        "x": 361,
+        "y": 914,
+        "width": 398,
+        "height": 62
+      },
+      "panel": {
+        "x": 1120,
+        "y": 0,
+        "width": 320,
+        "height": 1000
+      }
+    },
+    {
+      "viewport": "1365x768",
+      "canvas": {
+        "x": 148.5,
+        "y": 10,
+        "width": 748,
+        "height": 748
+      },
+      "bar": {
+        "x": 323.5,
+        "y": 682,
+        "width": 398,
+        "height": 62
+      },
+      "panel": {
+        "x": 1045,
+        "y": 0,
+        "width": 320,
+        "height": 768
+      }
+    },
+    {
+      "viewport": "1920x1080",
+      "canvas": {
+        "x": 270,
+        "y": 10,
+        "width": 1060,
+        "height": 1060
+      },
+      "bar": {
+        "x": 601,
+        "y": 994,
+        "width": 398,
+        "height": 62
+      },
+      "panel": {
+        "x": 1600,
+        "y": 0,
+        "width": 320,
+        "height": 1080
+      }
+    },
+    {
+      "viewport": "1024x768",
+      "canvas": {
+        "x": 12,
+        "y": 14,
+        "width": 740,
+        "height": 740
+      },
+      "bar": {
+        "x": 214,
+        "y": 682,
+        "width": 336,
+        "height": 62
+      },
+      "panel": {
+        "x": 764,
+        "y": 0,
+        "width": 260,
+        "height": 768
+      }
+    },
+    {
+      "viewport": "768x1024",
+      "canvas": {
+        "x": 12,
+        "y": 270,
+        "width": 484,
+        "height": 484
+      },
+      "bar": {
+        "x": 86,
+        "y": 938,
+        "width": 336,
+        "height": 62
+      },
+      "panel": {
+        "x": 508,
+        "y": 0,
+        "width": 260,
+        "height": 1024
+      }
+    },
+    {
+      "viewport": "390x844",
+      "canvas": {
+        "x": 4,
+        "y": 231,
+        "width": 382,
+        "height": 382
+      },
+      "bar": {
+        "x": 56.8046875,
+        "y": 780,
+        "width": 276.390625,
+        "height": 52
+      },
+      "panel": {
+        "x": 90,
+        "y": 0,
+        "width": 300,
+        "height": 844
+      }
+    },
+    {
+      "viewport": "320x568",
+      "canvas": {
+        "x": 4,
+        "y": 128,
+        "width": 312,
+        "height": 312
+      },
+      "bar": {
+        "x": 27.40625,
+        "y": 504,
+        "width": 265.1875,
+        "height": 52
+      },
+      "panel": {
+        "x": 28,
+        "y": 0,
+        "width": 292,
+        "height": 568
+      }
+    },
+    {
+      "viewport": "844x390",
+      "canvas": {
+        "x": 107,
+        "y": 10,
+        "width": 370,
+        "height": 370
+      },
+      "bar": {
+        "x": 124,
+        "y": 304,
+        "width": 336,
+        "height": 62
+      },
+      "panel": {
+        "x": 584,
+        "y": 0,
+        "width": 260,
+        "height": 390
+      }
+    }
+  ],
+  "pageErrors": [],
+  "networkRequests": [],
+  "entryPointMode": "injected HTML + intercepted local assets (no HTTP server)",
+  "entryPointErrors": [],
+  "entryPointRequests": [
+    "https://erosion.test/css/core/variables.css",
+    "https://erosion.test/css/core/base.css",
+    "https://erosion.test/css/components/stage.css",
+    "https://erosion.test/css/components/hud.css",
+    "https://erosion.test/css/components/controls.css",
+    "https://erosion.test/css/components/panel.css",
+    "https://erosion.test/css/components/context-menu.css",
+    "https://erosion.test/css/responsive.css",
+    "https://erosion.test/css/components/laboratory.css",
+    "https://erosion.test/js/core/config.js",
+    "https://erosion.test/js/core/math.js",
+    "https://erosion.test/js/core/state.js",
+    "https://erosion.test/js/simulation/terrain.js",
+    "https://erosion.test/js/simulation/simulation.js",
+    "https://erosion.test/js/simulation/drainage.js",
+    "https://erosion.test/js/simulation/particles.js",
+    "https://erosion.test/js/core/session.js",
+    "https://erosion.test/js/rendering/render.js",
+    "https://erosion.test/js/ui/ui.js",
+    "https://erosion.test/js/main.js"
+  ],
+  "httpErrors": [],
+  "limitation": "Top-level localhost navigation is blocked by the container browser policy; native file opening on Windows is not tested."
+}
