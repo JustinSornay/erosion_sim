@@ -1,0 +1,135 @@
+
+> erosion-sandbox@2.0.0 test
+> node --test --test-concurrency=1 tests/regression/production.test.js
+
+TAP version 13
+# Subtest: A dry scene neither erodes nor manufactures water
+ok 1 - A dry scene neither erodes nor manufactures water
+  ---
+  duration_ms: 292.914997
+  type: 'test'
+  ...
+# Subtest: Point injection lands at the exact centre, edges and all four corners
+ok 2 - Point injection lands at the exact centre, edges and all four corners
+  ---
+  duration_ms: 502.934288
+  type: 'test'
+  ...
+# Subtest: Disabled sources inject nothing; colocated sources add their actual volume
+ok 3 - Disabled sources inject nothing; colocated sources add their actual volume
+  ---
+  duration_ms: 128.147493
+  type: 'test'
+  ...
+# Subtest: Invalid source coordinates and rates are rejected
+ok 4 - Invalid source coordinates and rates are rejected
+  ---
+  duration_ms: 62.364978
+  type: 'test'
+  ...
+# Subtest: Source configuration never excavates or protects a hidden rock collar
+ok 5 - Source configuration never excavates or protects a hidden rock collar
+  ---
+  duration_ms: 66.206116
+  type: 'test'
+  ...
+# Subtest: All terrain presets reproduce exactly from a seed; seeds actually differ
+ok 6 - All terrain presets reproduce exactly from a seed; seeds actually differ
+  ---
+  duration_ms: 684.897373
+  type: 'test'
+  ...
+# Subtest: Invalid terrain requests fail before live state is mutated
+ok 7 - Invalid terrain requests fail before live state is mutated
+  ---
+  duration_ms: 54.967159
+  type: 'test'
+  ...
+# Subtest: A closed hydrostatic lake stays at rest on uneven terrain
+ok 8 - A closed hydrostatic lake stays at rest on uneven terrain
+  ---
+  duration_ms: 509.224653
+  type: 'test'
+  ...
+# Subtest: Direction follows terrain: rotation rotates flow, not a hardcoded south axis
+ok 9 - Direction follows terrain: rotation rotates flow, not a hardcoded south axis
+  ---
+  duration_ms: 847.019602
+  type: 'test'
+  ...
+# Subtest: Rain, sources and evaporation appear in a closed-domain water budget
+ok 10 - Rain, sources and evaporation appear in a closed-domain water budget
+  ---
+  duration_ms: 1365.567484
+  type: 'test'
+  ...
+# Subtest: Open boundaries export actual water and sediment; closed boundaries do not
+ok 11 - Open boundaries export actual water and sediment; closed boundaries do not
+  ---
+  duration_ms: 522.101519
+  type: 'test'
+  ...
+# Subtest: Shared internal faces never simultaneously carry opposing water fluxes
+ok 12 - Shared internal faces never simultaneously carry opposing water fluxes
+  ---
+  duration_ms: 206.613707
+  type: 'test'
+  ...
+# Subtest: Pure advection preserves a constant sediment/water concentration
+ok 13 - Pure advection preserves a constant sediment/water concentration
+  ---
+  duration_ms: 370.236766
+  type: 'test'
+  ...
+# Subtest: Microscopic films stay nonnegative, retain water, and cannot cause NaNs
+ok 14 - Microscopic films stay nonnegative, retain water, and cannot cause NaNs
+  ---
+  duration_ms: 65.136803
+  type: 'test'
+  ...
+# Subtest: Sediment in a dry cell is deposited rather than discarded
+ok 15 - Sediment in a dry cell is deposited rather than discarded
+  ---
+  duration_ms: 78.594243
+  type: 'test'
+  ...
+# Subtest: High transport capacity cannot excavate below bedrock
+ok 16 - High transport capacity cannot excavate below bedrock
+  ---
+  duration_ms: 871.450283
+  type: 'test'
+  ...
+# Subtest: Identical input histories give bit-identical physical fields
+ok 17 - Identical input histories give bit-identical physical fields
+  ---
+  duration_ms: 1731.2761
+  type: 'test'
+  ...
+# Subtest: A JSON save restores an identical continuation, not merely the picture
+ok 18 - A JSON save restores an identical continuation, not merely the picture
+  ---
+  duration_ms: 989.005702
+  type: 'test'
+  ...
+# Subtest: Invalid session files are rejected atomically
+ok 19 - Invalid session files are rejected atomically
+  ---
+  duration_ms: 227.243839
+  type: 'test'
+  ...
+# Subtest: Production HTML has no remote dependency and every local script exists
+ok 20 - Production HTML has no remote dependency and every local script exists
+  ---
+  duration_ms: 0.926108
+  type: 'test'
+  ...
+1..20
+# tests 20
+# suites 0
+# pass 20
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 9657.229404
+EXIT_CODE=0

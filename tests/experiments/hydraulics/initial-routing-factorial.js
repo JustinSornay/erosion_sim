@@ -7,8 +7,10 @@ const fs = require("fs");
 const path = require("path");
 
 const root = path.resolve(__dirname, "../../..");
+// Pin historical research to the exact uploaded engine, not production v2.
+const engineRoot = path.join(root, "tests/fixtures/legacy-engine");
 const files = ["js/core/config.js", "js/core/math.js", "js/core/state.js", "js/simulation/terrain.js", "js/simulation/simulation.js", "js/simulation/drainage.js"];
-const production = files.map((file) => fs.readFileSync(path.join(root, file), "utf8")).join("\n");
+const production = files.map((file) => fs.readFileSync(path.join(engineRoot, file), "utf8")).join("\n");
 const output = path.join(root, "tests/generated/initial-routing-factorial");
 const sourceX = 48, sourceY = 48, radii = [8, 12, 16, 24, 32, 48], headRadii = [8, 16, 24, 32];
 const windows = [{ name: "1..100", start: 1, end: 100 }, { name: "101..250", start: 101, end: 250 }, { name: "251..500", start: 251, end: 500 }, { name: "501..750", start: 501, end: 750 }, { name: "751..1000", start: 751, end: 1000 }];

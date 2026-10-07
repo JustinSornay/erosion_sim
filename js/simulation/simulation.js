@@ -1,235 +1,226 @@
 /**
- * Fixes a source mouth to terrain outlets selected at source creation. This
- * prevents erosion and retained water from feeding back into source routing.
+ * Conservative virtual-pipe height-field model (v2).
+ * d: water volume / cell area; s: equivalent solid volume / cell area.
+ * b + s is conserved, including solid exported through an open boundary.
+ * This is an interactive landscape model, not a calibrated hydraulic solver.
  */
-function injectSources() {
-  for (let i = 0; i < sources.length; i++) {
-    const src = sources[i];
-    if (!src.active) continue;
+function configureSourceOutlets(src) {
+  if (!Number.isInteger(src.x) || !Number.isInteger(src.y) ||
+      src.x < 0 || src.y < 0 || src.x >= N || src.y >= N ||
+      !Number.isFinite(src.rate) || src.rate < 0 || src.rate > 100)
+    throw new Error("Source invalide.");
+  // A point source changes water depth at the click, not five cells away.
+  // There is no compass direction, terrain excavation, or hidden rock collar.
+  src.outletCount = 1;
+  src.outletIndices = new Int32Array([idx(src.x, src.y)]);
+  src.outletWeights = new Float64Array([1]);
+  src.directionX = 0;
+  src.directionY = 0;
+}
 
-    const volumeStep = DT * src.rate;
-    if (src.outletCount === 0) {
-      d[idx(src.x, src.y)] += volumeStep / (L * L);
+function refreshSourceProtectionMask() {
+  // Retained API for the renderer and old callers; water sources are not rocks.
+  sourceProtectionMask.fill(1);
+}
+
+function resetBudgets() {
+  let initialWater = 0, initialSolid = 0;
+  for (let i = 0; i < NN; i++) {
+    initialWater += d[i] * L * L;
+    initialSolid += (b[i] + s[i]) * L * L;
+  }
+  budget = { initialWater, initialSolid, injected: 0, rain: 0, evaporated: 0,
+    waterOut: 0, sedimentOut: 0, eroded: 0, deposited: 0, lastOutflow: 0 };
+}
+
+function injectSources() {
+  const area = L * L;
+  for (const src of sources) {
+    if (!src.active || src.rate === 0) continue;
+    const volume = DT * src.rate;
+    d[idx(src.x, src.y)] += volume / area;
+    budget.injected += volume;
+  }
+  if (simulationOptions.rainfall > 0) {
+    const depth = simulationOptions.rainfall * DT;
+    for (let i = 0; i < NN; i++) d[i] += depth;
+    budget.rain += depth * NN * area;
+  }
+}
+
+/** One signed flux per face. Opposing fictitious pipes cannot circulate water. */
+function updateFluxes() {
+  const acceleration = DT * A * G / L;
+  const damping = 1 / (1 + FLOW_DRAG * DT);
+  const open = simulationOptions.boundary === "open";
+  for (let y = 0; y < N; y++) {
+    for (let x = 0; x < N; x++) {
+      const i = idx(x, y), h = b[i] + d[i];
+      if (x < N - 1) {
+        const j = i + 1;
+        const q = ((fR[i] - fL[j]) + acceleration * (h - b[j] - d[j])) * damping;
+        fR[i] = q > 0 ? q : 0;
+        fL[j] = q < 0 ? -q : 0;
+      }
+      if (y < N - 1) {
+        const j = i + N;
+        const q = ((fB[i] - fT[j]) + acceleration * (h - b[j] - d[j])) * damping;
+        fB[i] = q > 0 ? q : 0;
+        fT[j] = q < 0 ? -q : 0;
+      }
+      // Free outflow, no water supplied from outside. Extrapolate only a
+      // descending bed; an uphill boundary does not create a negative head.
+      if (x === 0) fL[i] = open ? Math.max(0, (fL[i] + acceleration * (d[i] + Math.max(0, b[i + 1] - b[i]))) * damping) : 0;
+      if (x === N - 1) fR[i] = open ? Math.max(0, (fR[i] + acceleration * (d[i] + Math.max(0, b[i - 1] - b[i]))) * damping) : 0;
+      if (y === 0) fT[i] = open ? Math.max(0, (fT[i] + acceleration * (d[i] + Math.max(0, b[i + N] - b[i]))) * damping) : 0;
+      if (y === N - 1) fB[i] = open ? Math.max(0, (fB[i] + acceleration * (d[i] + Math.max(0, b[i - N] - b[i]))) * damping) : 0;
+    }
+  }
+  const area = L * L;
+  for (let i = 0; i < NN; i++) {
+    // Immobile microscopic films are retained, not erased. This avoids
+    // subnormal arithmetic without changing either conservation budget.
+    if (d[i] < DRY_DEPTH * 0.001) {
+      fL[i] = fR[i] = fT[i] = fB[i] = 0;
       continue;
     }
-    const volumePerArea = volumeStep / (L * L);
-    for (let outlet = 0; outlet < src.outletCount; outlet++) {
-      d[src.outletIndices[outlet]] += volumePerArea * src.outletWeights[outlet];
-    }
+    const total = fL[i] + fR[i] + fT[i] + fB[i];
+    if (total === 0) continue;
+    // Headroom of a few floating-point ulps preserves donor positivity even
+    // when a cell empties. No absolute clipping / global renormalization.
+    const scale = Math.min(1, (d[i] * area) / (DT * total) * (1 - 8 * Number.EPSILON));
+    fL[i] *= scale; fR[i] *= scale; fT[i] *= scale; fB[i] *= scale;
   }
 }
 
-/** Calculates a fixed three-cell mouth facing the lowest terrain direction. */
-function configureSourceOutlets(src) {
-  const sourceIndex = idx(src.x, src.y);
-  const sourceAltitude = b[sourceIndex];
-  let lowestIndex = -1;
-  let lowestAltitude = sourceAltitude;
-  let directionX = 0;
-  let directionY = 0;
-  for (let y = Math.max(0, src.y - 7); y <= Math.min(N - 1, src.y + 7); y++) {
-    for (let x = Math.max(0, src.x - 7); x <= Math.min(N - 1, src.x + 7); x++) {
-      const dx = x - src.x;
-      const dy = y - src.y;
-      const distanceSquared = dx * dx + dy * dy;
-      if (
-        distanceSquared < SOURCE_DIRECTION_MIN_RADIUS_SQUARED ||
-        distanceSquared > SOURCE_DIRECTION_MAX_RADIUS_SQUARED
-      ) continue;
-      const neighborIndex = idx(x, y);
-      if (b[neighborIndex] >= lowestAltitude) continue;
-      lowestAltitude = b[neighborIndex];
-      lowestIndex = neighborIndex;
-      directionX = dx;
-      directionY = dy;
-    }
-  }
-  if (lowestIndex < 0) {
-    src.outletCount = 0;
-    src.outletIndices = new Int32Array(0);
-    src.outletWeights = new Float32Array(0);
-    return;
-  }
-  const outletIndices = new Int32Array(3);
-  const outletScores = new Float32Array(3);
-  outletScores.fill(-Infinity);
-  for (let y = Math.max(0, src.y - 5); y <= Math.min(N - 1, src.y + 5); y++) {
-    for (let x = Math.max(0, src.x - 5); x <= Math.min(N - 1, src.x + 5); x++) {
-      const dx = x - src.x;
-      const dy = y - src.y;
-      if (dx * dx + dy * dy > SOURCE_FOUNDATION_RADIUS_SQUARED) continue;
-      const score = dx * directionX + dy * directionY;
-      if (score <= outletScores[2]) continue;
-      outletScores[2] = score;
-      outletIndices[2] = idx(x, y);
-      for (let rank = 2; rank > 0 && outletScores[rank] > outletScores[rank - 1]; rank--) {
-        const scoreSwap = outletScores[rank - 1];
-        outletScores[rank - 1] = outletScores[rank];
-        outletScores[rank] = scoreSwap;
-        const indexSwap = outletIndices[rank - 1];
-        outletIndices[rank - 1] = outletIndices[rank];
-        outletIndices[rank] = indexSwap;
+/** The same accepted water transfers carry sediment, using pre-transfer depth. */
+function transportWaterAndSediment() {
+  const dtArea = DT / (L * L);
+  tmpD.fill(0);
+  tmpS.fill(0);
+  let exportedWater = 0, exportedSediment = 0;
+  for (let y = 0; y < N; y++) {
+    for (let x = 0; x < N; x++) {
+      const i = idx(x, y);
+      const qL = fL[i] * dtArea, qR = fR[i] * dtArea;
+      const qT = fT[i] * dtArea, qB = fB[i] * dtArea;
+      const total = qL + qR + qT + qB;
+      if (total === 0) {
+        tmpD[i] += d[i]; tmpS[i] += s[i];
+        continue;
       }
+      const retainedWater = d[i] - total;
+      // Flux limiting guarantees this invariant; do not hide a broken budget.
+      if (retainedWater < 0 || !Number.isFinite(retainedWater))
+        throw new Error(`Transport non conservatif: step=${steps}, cell=${i}, d=${d[i]}, total=${total}, remainder=${retainedWater}`);
+      tmpD[i] += retainedWater;
+      // Ratios of accepted water volumes stay in [0,1]. Unlike s/d, they
+      // cannot overflow for almost dry cells loaded from a valid snapshot.
+      const moved = s[i] * Math.min(1, total / d[i]);
+      let remaining = s[i];
+      const mL = Math.min(remaining, moved * (qL / total)); remaining -= mL;
+      const mR = Math.min(remaining, moved * (qR / total)); remaining -= mR;
+      const mT = Math.min(remaining, moved * (qT / total)); remaining -= mT;
+      const mB = Math.min(remaining, moved * (qB / total)); remaining -= mB;
+      tmpS[i] += remaining;
+      if (x > 0) { tmpD[i - 1] += qL; tmpS[i - 1] += mL; }
+      else { exportedWater += qL; exportedSediment += mL; }
+      if (x < N - 1) { tmpD[i + 1] += qR; tmpS[i + 1] += mR; }
+      else { exportedWater += qR; exportedSediment += mR; }
+      if (y > 0) { tmpD[i - N] += qT; tmpS[i - N] += mT; }
+      else { exportedWater += qT; exportedSediment += mT; }
+      if (y < N - 1) { tmpD[i + N] += qB; tmpS[i + N] += mB; }
+      else { exportedWater += qB; exportedSediment += mB; }
     }
   }
-  src.outletCount = 3;
-  src.outletIndices = outletIndices;
-  src.outletWeights = new Float32Array([0.6, 0.2, 0.2]);
-  src.directionX = directionX;
-  src.directionY = directionY;
+  [d, tmpD] = [tmpD, d]; // tmpD now holds the pre-transfer water depth.
+  [s, tmpS] = [tmpS, s];
+  budget.waterOut += exportedWater * L * L;
+  budget.sedimentOut += exportedSediment * L * L;
+  budget.lastOutflow = exportedWater * L * L / DT;
 }
 
-/** Rebuilds erosion-only source protection after source topology changes. */
-function refreshSourceProtectionMask() {
-  sourceProtectionMask.fill(1);
-  for (let source = 0; source < sources.length; source++) {
-    const src = sources[source];
-    for (let y = Math.max(0, src.y - SOURCE_PROTECTION_MAX_RADIUS); y <= Math.min(N - 1, src.y + SOURCE_PROTECTION_MAX_RADIUS); y++) {
-      for (let x = Math.max(0, src.x - SOURCE_PROTECTION_MAX_RADIUS); x <= Math.min(N - 1, src.x + SOURCE_PROTECTION_MAX_RADIUS); x++) {
-        const dx = x - src.x;
-        const dy = y - src.y;
-        const distanceSquared = dx * dx + dy * dy;
-        let factor = 1;
-        if (distanceSquared <= SOURCE_FOUNDATION_RADIUS_SQUARED) factor = 0;
-        else if (distanceSquared <= SOURCE_TRANSITION_RADIUS_SQUARED) factor = 0.5;
-        const cell = idx(x, y);
-        if (factor < sourceProtectionMask[cell]) sourceProtectionMask[cell] = factor;
+/** Simultaneous bed exchange: gradients never see partially updated terrain. */
+function updateVelocityAndExchange() {
+  const erodeFraction = -Math.expm1(-simulationOptions.erosionRate * DT);
+  const depositFraction = -Math.expm1(-simulationOptions.depositionRate * DT);
+  bedDelta.fill(0);
+  let eroded = 0, deposited = 0;
+  for (let y = 0; y < N; y++) {
+    for (let x = 0; x < N; x++) {
+      const i = idx(x, y);
+      if (d[i] <= DRY_DEPTH && s[i] === 0) { u[i] = v[i] = 0; continue; }
+      const inL = x > 0 ? fR[i - 1] : 0, inR = x < N - 1 ? fL[i + 1] : 0;
+      const inT = y > 0 ? fB[i - N] : 0, inB = y < N - 1 ? fT[i + N] : 0;
+      const meanDepth = Math.max(DRY_DEPTH, (tmpD[i] + d[i]) * 0.5);
+      u[i] = (inL - fL[i] + fR[i] - inR) / (2 * L * meanDepth);
+      v[i] = (inT - fT[i] + fB[i] - inB) / (2 * L * meanDepth);
+      if (!simulationOptions.erosion) continue;
+      const dx = ((x < N - 1 ? b[i + 1] : b[i]) - (x > 0 ? b[i - 1] : b[i])) / (2 * L);
+      const dy = ((y < N - 1 ? b[i + N] : b[i]) - (y > 0 ? b[i - N] : b[i])) / (2 * L);
+      const slope = Math.sqrt(dx * dx + dy * dy);
+      const sinSlope = slope / Math.sqrt(1 + slope * slope);
+      const capacity = d[i] > DRY_DEPTH ? d[i] * Math.min(MAX_SEDIMENT_CONCENTRATION,
+        simulationOptions.capacity * sinSlope * Math.sqrt(u[i] * u[i] + v[i] * v[i])) : 0;
+      const excess = s[i] - capacity;
+      if (excess > 0) {
+        const amount = d[i] <= DRY_DEPTH ? s[i] : depositFraction * excess;
+        bedDelta[i] = amount; s[i] -= amount; deposited += amount;
+      } else if (excess < 0) {
+        const amount = Math.min(-excess * erodeFraction, Math.max(0, b[i] - bedrock[i]));
+        bedDelta[i] = -amount; s[i] += amount; eroded += amount;
       }
     }
   }
+  for (let i = 0; i < NN; i++) b[i] += bedDelta[i];
+  budget.eroded += eroded * L * L;
+  budget.deposited += deposited * L * L;
+}
+
+function evaporateWater() {
+  const fraction = -Math.expm1(-simulationOptions.evaporation * DT);
+  let removed = 0;
+  for (let i = 0; i < NN; i++) {
+    const amount = d[i] * fraction;
+    d[i] -= amount; removed += amount;
+    // Evaporation removes water, never sediment. Dry suspended material settles.
+    // Settle below-resolution traces as well: retaining exponentially tiny
+    // suspended loads would eventually trigger very slow subnormal arithmetic.
+    // The transferred amount is still recorded in the solid budget.
+    if (simulationOptions.erosion && (d[i] <= DRY_DEPTH || s[i] < 1e-24) && s[i] > 0) {
+      const deposited = s[i]; b[i] += deposited; s[i] = 0;
+      budget.deposited += deposited * L * L;
+    }
+  }
+  budget.evaporated += removed * L * L;
 }
 
 function step() {
   injectSources();
-
-  for (let y = 0; y < N; y++) {
-    const row = y * N;
-    for (let x = 0; x < N; x++) {
-      const i = row + x;
-      const h = b[i] + d[i];
-      let dhL = 0,
-        dhR = 0,
-        dhT = 0,
-        dhB = 0;
-      if (x > 0) dhL = h - (b[i - 1] + d[i - 1]);
-      if (x < N - 1) dhR = h - (b[i + 1] + d[i + 1]);
-      if (y > 0) dhT = h - (b[i - N] + d[i - N]);
-      if (y < N - 1) dhB = h - (b[i + N] + d[i + N]);
-      let nl = Math.max(0, fL[i] + (DT * A * G * dhL) / L);
-      let nr = Math.max(0, fR[i] + (DT * A * G * dhR) / L);
-      let nt = Math.max(0, fT[i] + (DT * A * G * dhT) / L);
-      let nb = Math.max(0, fB[i] + (DT * A * G * dhB) / L);
-      if (x === 0) nl = 0;
-      if (x === N - 1) nr = 0;
-      if (y === 0) nt = 0;
-      if (y === N - 1) nb = 0;
-      const sum = nl + nr + nt + nb;
-      if (sum > 0) {
-        const K = Math.min(1, (d[i] * L * L) / (sum * DT + 1e-9));
-        nl *= K;
-        nr *= K;
-        nt *= K;
-        nb *= K;
-      }
-      fL[i] = nl;
-      fR[i] = nr;
-      fT[i] = nt;
-      fB[i] = nb;
-      }
-    }
-  for (let y = 0; y < N; y++) {
-    const row = y * N;
-    for (let x = 0; x < N; x++) {
-      const i = row + x;
-      const fin =
-        (x > 0 ? fR[i - 1] : 0) +
-        (x < N - 1 ? fL[i + 1] : 0) +
-        (y > 0 ? fB[i - N] : 0) +
-        (y < N - 1 ? fT[i + N] : 0);
-      const fout = fL[i] + fR[i] + fT[i] + fB[i];
-      tmpD[i] = Math.max(0, d[i] + (DT * (fin - fout)) / (L * L));
-    }
-  }
-  {
-    const t = d;
-    d = tmpD;
-    tmpD = t;
-  }
-
-  for (let y = 0; y < N; y++) {
-    const row = y * N;
-    for (let x = 0; x < N; x++) {
-      const i = row + x;
-      const inL = x > 0 ? fR[i - 1] : 0,
-        outL = fL[i];
-      const inR = x < N - 1 ? fL[i + 1] : 0,
-        outR = fR[i];
-      const inT = y > 0 ? fB[i - N] : 0,
-        outT = fT[i];
-      const inB = y < N - 1 ? fT[i + N] : 0,
-        outB = fB[i];
-      const wx = (inL - outL + (outR - inR)) * 0.5;
-      const wy = (inT - outT + (outB - inB)) * 0.5;
-      const dbar = Math.max(1e-4, d[i]);
-      const ui = wx / (L * dbar),
-        vi = wy / (L * dbar);
-      u[i] = ui;
-      v[i] = vi;
-
-      const bl = x > 0 ? b[i - 1] : b[i],
-        brr = x < N - 1 ? b[i + 1] : b[i];
-      const bt = y > 0 ? b[i - N] : b[i],
-        bb = y < N - 1 ? b[i + N] : b[i];
-      const dzx = (brr - bl) * 0.5,
-        dzy = (bb - bt) * 0.5;
-      const vel = Math.sqrt(ui * ui + vi * vi);
-      const slope = Math.sqrt(dzx * dzx + dzy * dzy);
-      const sinA = slope / Math.sqrt(1 + slope * slope);
-      const dNorm = Math.min(1, d[i] * 4);
-      const C = KC * sinA * vel * dNorm;
-      const si = s[i];
-      if (C > si) {
-        const diff = KS * (C - si) * sourceProtectionMask[i];
-        b[i] -= diff;
-        s[i] = si + diff;
-      } else {
-        const diff = KD * (si - C);
-        b[i] += diff;
-        s[i] = Math.max(0, si - diff);
-      }
-    }
-  }
-
-  for (let y = 0; y < N; y++) {
-    const row = y * N;
-    for (let x = 0; x < N; x++) {
-      const i = row + x;
-      let sx = x - (u[i] * DT) / L,
-        sy = y - (v[i] * DT) / L;
-      sx = Math.min(N - 1.001, Math.max(0, sx));
-      sy = Math.min(N - 1.001, Math.max(0, sy));
-      const x0 = sx | 0,
-        y0 = sy | 0,
-        x1 = Math.min(x0 + 1, N - 1),
-        y1 = Math.min(y0 + 1, N - 1),
-        tx = sx - x0,
-        ty = sy - y0;
-      const row0 = y0 * N,
-        row1 = y1 * N;
-      const s00 = s[row0 + x0],
-        s10 = s[row0 + x1];
-      const s01 = s[row1 + x0],
-        s11 = s[row1 + x1];
-      tmpS[i] = lerp(lerp(s00, s10, tx), lerp(s01, s11, tx), ty);
-      d[i] *= 1 - KE * DT;
-    }
-  }
-  {
-    const t = s;
-    s = tmpS;
-    tmpS = t;
-  }
-
+  updateFluxes();
+  transportWaterAndSediment();
+  updateVelocityAndExchange();
+  evaporateWater();
   steps++;
-  simTime += DT;
+  simTime = steps * DT;
+}
+
+/** Observations only: this function never corrects or renormalizes the state. */
+function getSimulationStats() {
+  let water = 0, suspended = 0, solid = 0, wetCells = 0, incision = 0, deposit = 0;
+  let maxDepth = 0, minWater = Infinity, minSediment = Infinity, finite = true;
+  for (let i = 0; i < NN; i++) {
+    water += d[i] * L * L; suspended += s[i] * L * L;
+    solid += (b[i] + s[i]) * L * L;
+    if (d[i] > 0.001) wetCells++;
+    maxDepth = Math.max(maxDepth, d[i]);
+    minWater = Math.min(minWater, d[i]); minSediment = Math.min(minSediment, s[i]);
+    incision = Math.max(incision, bInit[i] - b[i]); deposit = Math.max(deposit, b[i] - bInit[i]);
+    if (!Number.isFinite(b[i] + d[i] + s[i] + u[i] + v[i])) finite = false;
+  }
+  return { version: PHYSICS_VERSION, steps, simTime, seed: terrainSeed, preset: terrainPreset,
+    water, suspended, solid, wetCells, incision, deposit, maxDepth, minWater, minSediment, finite,
+    ...budget, waterResidual: budget.initialWater + budget.injected + budget.rain -
+      budget.waterOut - budget.evaporated - water,
+    solidResidual: budget.initialSolid - solid - budget.sedimentOut };
 }

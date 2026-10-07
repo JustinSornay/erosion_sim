@@ -20,6 +20,8 @@ const fs = require("fs");
 const path = require("path");
 
 const root = path.resolve(__dirname, "../..");
+// Pin historical research to the exact uploaded engine, not production v2.
+const engineRoot = path.join(root, "tests/fixtures/legacy-engine");
 const physicalScripts = [
   "js/core/config.js",
   "js/core/math.js",
@@ -29,7 +31,7 @@ const physicalScripts = [
   "js/simulation/drainage.js",
 ];
 const source = physicalScripts
-  .map((relativePath) => fs.readFileSync(path.join(root, relativePath), "utf8"))
+  .map((relativePath) => fs.readFileSync(path.join(engineRoot, relativePath), "utf8"))
   .join("\n");
 const sourceX = 48;
 const sourceY = 48;

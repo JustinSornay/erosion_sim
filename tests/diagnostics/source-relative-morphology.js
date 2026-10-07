@@ -9,8 +9,10 @@ const { conservativeSource } = require("../experiments/sediment/conservative-sed
 const { positiveTransportSource } = require("../experiments/sediment/conservative-transport-positivity.js");
 
 const root = path.resolve(__dirname, "../..");
+// Pin historical research to the exact uploaded engine, not production v2.
+const engineRoot = path.join(root, "tests/fixtures/legacy-engine");
 const files = ["js/core/config.js", "js/core/math.js", "js/core/state.js", "js/simulation/terrain.js", "js/simulation/simulation.js", "js/simulation/drainage.js"];
-const production = files.map((file) => fs.readFileSync(path.join(root, file), "utf8")).join("\n");
+const production = files.map((file) => fs.readFileSync(path.join(engineRoot, file), "utf8")).join("\n");
 const output = path.join(root, "tests/generated/source-relative-morphology");
 const sourceX = 48, sourceY = 48, checkpoints = [1000, 2500, 5000, 7500, 10000];
 const windows = [{ name: "0..1000", start: 1, end: 1000 }, { name: "1001..2500", start: 1001, end: 2500 }, { name: "2501..5000", start: 2501, end: 5000 }, { name: "5001..7500", start: 5001, end: 7500 }, { name: "7501..10000", start: 7501, end: 10000 }];

@@ -20,6 +20,8 @@ const fs = require("fs");
 const path = require("path");
 
 const root = path.resolve(__dirname, "../..");
+// Pin historical research to the exact uploaded engine, not production v2.
+const engineRoot = path.join(root, "tests/fixtures/legacy-engine");
 const scripts = [
   "js/core/config.js",
   "js/core/math.js",
@@ -28,7 +30,7 @@ const scripts = [
   "js/simulation/simulation.js",
   "js/simulation/drainage.js",
 ];
-const magnitudeSource = scripts.map((file) => fs.readFileSync(path.join(root, file), "utf8")).join("\n");
+const magnitudeSource = scripts.map((file) => fs.readFileSync(path.join(engineRoot, file), "utf8")).join("\n");
 const hybridArgument = process.argv.find((argument) => argument.startsWith("--hybrid="));
 const hybridFactor = hybridArgument ? Number(hybridArgument.slice("--hybrid=".length)) : null;
 if (hybridArgument && (!Number.isFinite(hybridFactor) || hybridFactor < 0 || hybridFactor > 1)) throw new Error("--hybrid requires a factor in [0, 1]");

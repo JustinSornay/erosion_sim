@@ -20,8 +20,10 @@ const fs = require("fs");
 const path = require("path");
 
 const root = path.resolve(__dirname, "../../..");
+// Pin historical research to the exact uploaded engine, not production v2.
+const engineRoot = path.join(root, "tests/fixtures/legacy-engine");
 const files = ["js/core/config.js", "js/core/math.js", "js/core/state.js", "js/simulation/terrain.js", "js/simulation/simulation.js", "js/simulation/drainage.js"];
-const magnitudeSource = files.map((file) => fs.readFileSync(path.join(root, file), "utf8")).join("\n");
+const magnitudeSource = files.map((file) => fs.readFileSync(path.join(engineRoot, file), "utf8")).join("\n");
 const coefficient = Number(process.argv.find((argument) => argument.startsWith("--kcq="))?.slice(6) ?? 0.4);
 const steps = Number(process.argv.find((argument) => argument.startsWith("--steps="))?.slice(8) ?? 5000);
 const repetitions = Number(process.argv.find((argument) => argument.startsWith("--repetitions="))?.slice(14) ?? 11);

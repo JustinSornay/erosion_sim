@@ -20,6 +20,8 @@ const fs = require("fs");
 const path = require("path");
 
 const root = path.resolve(__dirname, "../..");
+// Pin historical research to the exact uploaded engine, not production v2.
+const engineRoot = path.join(root, "tests/fixtures/legacy-engine");
 const engineFiles = [
   "js/core/config.js",
   "js/core/math.js",
@@ -28,7 +30,7 @@ const engineFiles = [
   "js/simulation/simulation.js",
   "js/simulation/drainage.js",
 ];
-const magnitudeSource = engineFiles.map((file) => fs.readFileSync(path.join(root, file), "utf8")).join("\n");
+const magnitudeSource = engineFiles.map((file) => fs.readFileSync(path.join(engineRoot, file), "utf8")).join("\n");
 const checkpoints = [100, 500, 1000, 2500, 5000, 10000];
 const comparisonCheckpoints = new Set([1000, 5000]);
 const sectionWidths = [1, 3, 5, 9];

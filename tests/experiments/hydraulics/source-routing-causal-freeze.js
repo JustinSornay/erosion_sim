@@ -10,9 +10,11 @@ const fs = require("fs");
 const path = require("path");
 
 const root = path.resolve(__dirname, "../../..");
+// Pin historical research to the exact uploaded engine, not production v2.
+const engineRoot = path.join(root, "tests/fixtures/legacy-engine");
 const output = path.join(root, "tests/generated/source-routing-causal-freeze");
 const files = ["js/core/config.js", "js/core/math.js", "js/core/state.js", "js/simulation/terrain.js", "js/simulation/simulation.js", "js/simulation/drainage.js"];
-const production = files.map((file) => fs.readFileSync(path.join(root, file), "utf8")).join("\n");
+const production = files.map((file) => fs.readFileSync(path.join(engineRoot, file), "utf8")).join("\n");
 const checkpoints = [100, 250, 500, 1000, 1500, 2500, 3500, 5000];
 const controlCheckpoints = [1000, 2500, 5000];
 const windows = [{ name: "1..250", start: 1, end: 250 }, { name: "251..500", start: 251, end: 500 }, { name: "501..1000", start: 501, end: 1000 }, { name: "1001..1500", start: 1001, end: 1500 }, { name: "1501..2500", start: 1501, end: 2500 }, { name: "2501..3500", start: 2501, end: 3500 }, { name: "3501..5000", start: 3501, end: 5000 }];

@@ -13,8 +13,10 @@ const fs = require("fs");
 const path = require("path");
 
 const root = path.resolve(__dirname, "../../..");
+// Pin historical research to the exact uploaded engine, not production v2.
+const engineRoot = path.join(root, "tests/fixtures/legacy-engine");
 const engineFiles = ["js/core/config.js", "js/core/math.js", "js/core/state.js", "js/simulation/terrain.js", "js/simulation/simulation.js", "js/simulation/drainage.js"];
-const currentSource = engineFiles.map((file) => fs.readFileSync(path.join(root, file), "utf8")).join("\n");
+const currentSource = engineFiles.map((file) => fs.readFileSync(path.join(engineRoot, file), "utf8")).join("\n");
 const outputDirectory = path.join(root, "tests/generated/morphodynamic-timescale");
 const checkpoints = [1000, 2500, 5000, 10000];
 const controlCheckpoints = new Set([1000, 5000, 10000]);

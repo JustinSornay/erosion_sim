@@ -15,7 +15,8 @@ const EROSION_VIS_SCALE = 0.06;
 const DEFAULT_RATE = 2.2;
 const DEFAULT_ISO_STEP = 0.09;
 
-// Fixed D8 source routing avoids per-step neighbor allocations.
+// Historical constants remain available to archived research harnesses.
+// Production sources no longer impose a direction or a protected foundation.
 const SOURCE_DX = [-1, 0, 1, -1, 1, -1, 0, 1];
 const SOURCE_DY = [-1, -1, -1, 0, 0, 1, 1, 1];
 const SOURCE_FOUNDATION_RADIUS_SQUARED = 5 * 5;
@@ -33,8 +34,8 @@ const NDX = [-1, 0, 1, -1, 1, -1, 0, 1],
 const NDIST = [Math.SQRT2, 1, Math.SQRT2, 1, 1, Math.SQRT2, 1, Math.SQRT2];
 
 // ---------- réseau hydrographique ACTIF : eau réellement présente et réellement en mouvement ----------
-const D_SPAWN = 0.006,
-  D_DEATH = 0.0035;
+const D_SPAWN = 0.0008,
+  D_DEATH = 0.0004;
 const V_SPAWN = 0.15,
   V_DEATH = 0.07;
 const Q_SPAWN = 0.003,
@@ -57,3 +58,10 @@ function getVisualCadence(multiplier) {
     ({ maximumMultiplier }) => multiplier <= maximumMultiplier,
   );
 }
+
+// Numerical units are deliberately uncalibrated (not litres, metres or years).
+const DRY_DEPTH = 1e-8;
+const FLOW_DRAG = 0.12;
+const MAX_SEDIMENT_CONCENTRATION = 0.35;
+const SOIL_THICKNESS = 0.32;
+const PHYSICS_VERSION = "conservative-v2";

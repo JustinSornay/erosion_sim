@@ -19,8 +19,10 @@
 const fs = require("fs");
 const path = require("path");
 const root = path.resolve(__dirname, "../../..");
+// Pin historical research to the exact uploaded engine, not production v2.
+const engineRoot = path.join(root, "tests/fixtures/legacy-engine");
 const files = ["js/core/config.js", "js/core/math.js", "js/core/state.js", "js/simulation/terrain.js", "js/simulation/simulation.js", "js/simulation/drainage.js"];
-const currentSource = files.map((file) => fs.readFileSync(path.join(root, file), "utf8")).join("\n");
+const currentSource = files.map((file) => fs.readFileSync(path.join(engineRoot, file), "utf8")).join("\n");
 const { conservativeSource: buildConservativeSource } = require("./conservative-sediment-transport.js");
 const conservativeSource = () => buildConservativeSource();
 

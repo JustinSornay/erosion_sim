@@ -12,8 +12,10 @@ const fs = require("fs");
 const path = require("path");
 
 const root = path.resolve(__dirname, "../..");
+// Pin historical research to the exact uploaded engine, not production v2.
+const engineRoot = path.join(root, "tests/fixtures/legacy-engine");
 const engineFiles = ["js/core/config.js", "js/core/math.js", "js/core/state.js", "js/simulation/terrain.js", "js/simulation/simulation.js", "js/simulation/drainage.js"];
-const currentSource = engineFiles.map((file) => fs.readFileSync(path.join(root, file), "utf8")).join("\n");
+const currentSource = engineFiles.map((file) => fs.readFileSync(path.join(engineRoot, file), "utf8")).join("\n");
 const outputDirectory = path.join(root, "tests/generated/collapse-event");
 const snapshotsDirectory = path.join(outputDirectory, "snapshots");
 const summaryPath = path.join(outputDirectory, "summary.json");

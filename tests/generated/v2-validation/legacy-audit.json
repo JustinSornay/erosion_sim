@@ -1,0 +1,159 @@
+{
+  "description": "Original archived engine versus already supplied binary fixtures; read-only diagnostic, not a passing fixture regression.",
+  "seed": 314159265,
+  "source": {
+    "x": 48,
+    "y": 48,
+    "rate": 2.2
+  },
+  "baselineComparisons": [
+    {
+      "fixture": "tests/fixtures/N192/physics-1000.bin",
+      "matches": false,
+      "fields": [
+        {
+          "name": "b",
+          "maxAbsoluteDifference": 0.047204554080963135,
+          "totalAbsoluteDifference": 1.0978501737117767
+        },
+        {
+          "name": "d",
+          "maxAbsoluteDifference": 0.026226656511425972,
+          "totalAbsoluteDifference": 8.087514839138903
+        },
+        {
+          "name": "s",
+          "maxAbsoluteDifference": 0.00043945564538936093,
+          "totalAbsoluteDifference": 0.06185904806679051
+        },
+        {
+          "name": "u",
+          "maxAbsoluteDifference": 301.2195739746094,
+          "totalAbsoluteDifference": 9355.411664141542
+        },
+        {
+          "name": "v",
+          "maxAbsoluteDifference": 1191.2845458984375,
+          "totalAbsoluteDifference": 12429.226903047074
+        },
+        {
+          "name": "fL",
+          "maxAbsoluteDifference": 0.31700265407562256,
+          "totalAbsoluteDifference": 15.442362980471906
+        },
+        {
+          "name": "fR",
+          "maxAbsoluteDifference": 0.5586976408958435,
+          "totalAbsoluteDifference": 34.08005581180163
+        },
+        {
+          "name": "fT",
+          "maxAbsoluteDifference": 0.6484398245811462,
+          "totalAbsoluteDifference": 37.89055349364526
+        },
+        {
+          "name": "fB",
+          "maxAbsoluteDifference": 0.26868534088134766,
+          "totalAbsoluteDifference": 12.021032003399396
+        }
+      ]
+    },
+    {
+      "fixture": "tests/fixtures/N192-incoming-source/physics-1000.bin",
+      "matches": false,
+      "fields": [
+        {
+          "name": "b",
+          "maxAbsoluteDifference": 0.03974330425262451,
+          "totalAbsoluteDifference": 0.8832008540630341
+        },
+        {
+          "name": "d",
+          "maxAbsoluteDifference": 0.021946778520941734,
+          "totalAbsoluteDifference": 7.430431464200215
+        },
+        {
+          "name": "s",
+          "maxAbsoluteDifference": 0.00022587381852190447,
+          "totalAbsoluteDifference": 0.0500202701860018
+        },
+        {
+          "name": "u",
+          "maxAbsoluteDifference": 376.1296081542969,
+          "totalAbsoluteDifference": 8698.82941890962
+        },
+        {
+          "name": "v",
+          "maxAbsoluteDifference": 1191.2845458984375,
+          "totalAbsoluteDifference": 11163.673289189212
+        },
+        {
+          "name": "fL",
+          "maxAbsoluteDifference": 0.29953896440565586,
+          "totalAbsoluteDifference": 14.081875394995283
+        },
+        {
+          "name": "fR",
+          "maxAbsoluteDifference": 0.39414966106414795,
+          "totalAbsoluteDifference": 30.252146968554236
+        },
+        {
+          "name": "fT",
+          "maxAbsoluteDifference": 0.8288177847862244,
+          "totalAbsoluteDifference": 32.60510695605234
+        },
+        {
+          "name": "fB",
+          "maxAbsoluteDifference": 0.26868534088134766,
+          "totalAbsoluteDifference": 11.150198013261619
+        }
+      ]
+    }
+  ],
+  "checkpoints": [
+    {
+      "steps": 1000,
+      "solid": 16449.679956456042,
+      "water": 33.82810919207748,
+      "sediment": 0.1573389520480956,
+      "bedPlusSedimentError": -0.4196723053682945
+    },
+    {
+      "steps": 5000,
+      "solid": 16482.83282773156,
+      "water": 117.20722403684285,
+      "sediment": 1.0851636524842863,
+      "bedPlusSedimentError": 32.733198970148806
+    }
+  ],
+  "v2After5000": {
+    "version": "conservative-v2",
+    "steps": 5000,
+    "simTime": 85,
+    "seed": 314159265,
+    "preset": "natural",
+    "water": 54.870733661739884,
+    "suspended": 0.3374063010043073,
+    "solid": 16446.279061684567,
+    "wetCells": 3841,
+    "incision": 0.32,
+    "deposit": 0.03200637153650099,
+    "maxDepth": 0.336219399758429,
+    "minWater": 0,
+    "minSediment": 0,
+    "finite": true,
+    "initialWater": 0,
+    "initialSolid": 16450.099627433705,
+    "injected": 186.99999999999375,
+    "rain": 0,
+    "evaporated": 6.872394780060277,
+    "waterOut": 125.25687155819962,
+    "sedimentOut": 3.820565749160992,
+    "eroded": 13.647530569145072,
+    "deposited": 9.489558518979782,
+    "lastOutflow": 2.1326042222907877,
+    "waterResidual": -6.0325078266032506e-12,
+    "solidResidual": -2.2951418543470936e-11
+  },
+  "caveat": "v2 differs in source geometry, boundary condition, precision, transport and exchange; this is an invariant audit, NOT a single-variable morphology/performance experiment."
+}

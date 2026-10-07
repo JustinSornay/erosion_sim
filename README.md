@@ -1,26 +1,110 @@
-# Érosion — Sandbox hydrographique
+# Erosion / Lab - simulation terminée, moteur v2
 
-Simulation d'érosion hydraulique exécutée entièrement dans le navigateur.
+Une simulation locale d'eau, de transport de sédiments, d'erosion et de depot.
+Le relief evolue réellement : l'image n'est pas une animation preenregistree.
 
-## Architecture
+## Demarrer
 
-- `index.html` : structure sémantique et chargement unique de l'application.
-- `css/core/` : fondations visuelles ; `css/components/` : styles des composants.
-- `js/core/` : constantes, calculs génériques et état mutable.
-- `js/simulation/` : terrain, érosion, drainage et particules.
-- `js/rendering/` et `js/ui/` : rendu Canvas et interactions DOM.
-- `js/main.js` : initialisation et boucle d'animation.
+Ouvrir `index.html` dans le navigateur, ou double-cliquer sur `start.cmd` sous
+Windows. Aucun serveur, installation npm, compte ou connexion Internet n'est
+necessaire pour utiliser l'application.
 
-Les scripts applicatifs sont chargés dans le `<head>` avec `defer`, dans leur ordre de
-dépendance. L'application reste compatible avec une ouverture directe via `file://`.
+Le fichier **`dist/erosion-simulation.html`** contient aussi toute l'application
+dans un seul HTML, sans fichiers annexes : c'est la version a partager facilement.
 
-## Validation physique
+Cliquer sur **Lancer une rivière** pour une demonstration reproductible. Attendre
+quelques secondes, puis passer a **Érosion / dépôts** pour voir le travail du
+courant : orange = creusement, vert = accumulation. La vitesse demandee est x5
+pour la demonstration ; la vitesse réellement atteinte est affichee séparément.
 
-`node tests/regression/physics-regression.js 1000 --baseline-version=incoming-source --write-baseline` crée une baseline N192 versionnée avec seed
-et source fixes. Une baseline existante exige `--force` pour être remplacée.
-`node tests/regression/physics-regression.js 1000` compare ensuite les buffers physiques à cette référence.
-`node tests/regression/source-injection.js` valide conservation du débit injecté au centre, bord et coin.
-`node tests/diagnostics/source-impact-profile.js` compare injection localisée et distribuée à 500, 2000, 5000 et 10000 steps.
-`node tests/benchmarks/physics-benchmark.js 5000` mesure la médiane des steps/s du moteur isolé.
-`node tests/benchmarks/physics-profile.js 5000` mesure les cinq phases de `step()` hors production.
-`node tests/benchmarks/browser-benchmark.js` mesure toutes les couches à N192 pour x1, x2, x5 et x10.
+## Manipuler
+
+Un clic ajoute une source exactement dans la cellule visee. Un clic pres d'une
+source existante l'active ou la coupe. Son debit se modifie dans le panneau de
+droite ; le clic droit donne aussi acces aux commandes de source.
+
+Choisir un relief et une graine, puis **Generer**, cree un terrain neuf sans source.
+**Rejouer** restaure le terrain initial avec les memes sources, debits et options.
+Le bouton fleche circulaire de la barre du bas genere une nouvelle graine ; le
+bouton croix supprime les sources mais laisse le terrain et l'eau existants.
+La barre espace met en pause/reprend hors des champs de formulaire.
+
+Quatre reliefs sont disponibles : vallee sinueuse, terrain naturel historique,
+cuvette et crete. Les limites peuvent etre ouvertes (eau et sédiments sortent)
+ou fermees (ils restent, sauf evaporation). La pluie peut etre ajoutee ; decocher
+l'erosion fige les echanges avec le sol, mais laisse circuler l'eau et les sédiments.
+
+**Pentes D8** montre un drainage potentiel du terrain : ce n'est pas l'eau réelle
+et ce reseau ne pilote pas la simulation. Courbes topographiques et vecteurs de
+courant sont activables dans **Couches visuelles**, sans imposer une grille visuelle
+au rendu par defaut. Les traceurs sont decoratifs : les bilans reposent sur les
+champs physiques, pas sur des particules dessinees.
+
+**Sauvegarder** exporte un JSON contenant le terrain, l'eau, les sédiments, les
+flux, les sources, les options et les bilans. **Ouvrir** restaure cet etat en pause.
+Les fichiers incompatibles ou invalides sont rejetes avant de modifier la session.
+La version 2 est requise ; le JSON n'est pas un format de sauvegarde de l'ancien moteur.
+
+## Lire les bilans
+
+Le panneau affiche l'eau presente, l'eau sortie, la matiere erodee et la matiere
+deposee cumulees. Le detail **Conservation & lecture** affiche les residus de bilan,
+l'evaporation et les sédiments sortis. Une matiere peut etre erodee puis deposee
+plusieurs fois : les cumuls d'echange ne sont pas le changement net de relief.
+
+Les unites sont internes au modele. Le temps affiche est un temps de simulation,
+pas une duree geologique calibree. Cette application est un bac a sable de paysage,
+**pas un outil de prevision hydrologique**.
+
+## Verification et developpement
+
+L'application n'a aucune dependance d'execution. Les commandes ci-dessous utilisent
+Node.js 22 ou plus ; cette livraison a ete testee avec Node 22.16.0. Il n'y a pas de
+`npm install` a effectuer pour les tests du moteur.
+
+```sh
+npm test
+npm run test:baseline
+npm run test:legacy
+npm run test:long
+npm run build
+```
+
+`npm test` execute les 20 tests de comportement et de conservation.
+`test:baseline` compare exactement les neuf champs a une reference v2 de 1000 pas.
+`test:legacy` verifie l'integrite du moteur historique et son determinisme :
+il ne pretend pas que ses anciennes references binaires sont coherentes.
+`test:long` execute 46 500 pas sur quatre scenarios, y compris un arret de source.
+
+Les tests navigateur demandent en plus Python et Playwright/Chromium :
+
+```sh
+python -m pip install playwright
+python -m playwright install chromium
+npm run test:browser
+```
+
+Ils chargent le HTML autonome en memoire et exercent les vrais clics, fichiers
+et calculs. `CHROMIUM_EXECUTABLE` permet de choisir un executable Chromium existant.
+Cette livraison a valide ce parcours sous Chromium 144 ; elle ne pretend pas
+avoir ete testee sur Windows ni dans tous les navigateurs.
+
+## Recherche preservee, choix explicites
+
+Lire **`docs/RECHERCHE_ET_VALIDATION.md`** pour les resultats, les compromis et les
+limites. **`tests/README.md`** distingue les tests v2 de la recherche historique.
+Les donnees générées de l'archive initiale sont conservées ; les nouveaux resultats
+sont dans **`tests/generated/v2-validation/`**. Le moteur initial est fige dans
+`tests/fixtures/legacy-engine/`, avec ses empreintes SHA-256 et son commit d'origine.
+
+L'audit `npm run audit:legacy` reproduit notamment la creation artificielle de
+matiere dans l'ancien moteur et signale ses references binaires deja divergentes.
+Il ne reecrit aucune reference historique et n'est pas une validation de celles-ci.
+
+## Structure
+
+`js/core/` contient l'etat, les calculs et le format de sauvegarde ; `js/simulation/`
+contient le moteur, le terrain et les couches de visualisation du courant.
+`js/rendering/`, `js/ui/` et `css/` restent independants du calcul physique.
+`tools/build-standalone.js` assemble le HTML autonome sans outil externe.
+Les scripts classiques sont charges avec `defer` dans leur ordre de dependance.

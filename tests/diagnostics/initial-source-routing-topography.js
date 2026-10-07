@@ -7,8 +7,10 @@ const fs = require("fs");
 const path = require("path");
 
 const root = path.resolve(__dirname, "../..");
+// Pin historical research to the exact uploaded engine, not production v2.
+const engineRoot = path.join(root, "tests/fixtures/legacy-engine");
 const engineFiles = ["js/core/config.js", "js/core/math.js", "js/core/state.js", "js/simulation/terrain.js", "js/simulation/simulation.js", "js/simulation/drainage.js"];
-const production = engineFiles.map((file) => fs.readFileSync(path.join(root, file), "utf8")).join("\n");
+const production = engineFiles.map((file) => fs.readFileSync(path.join(engineRoot, file), "utf8")).join("\n");
 const output = path.join(root, "tests/generated/initial-source-routing-topography");
 const sourceX = 48, sourceY = 48, radii = [6, 8, 12, 16, 24, 32, 48], escapeRadii = [8, 12, 16, 24, 32, 48], checkpoints = [1, 2, 5, 10, 20, 50, 100, 150, 200, 250];
 const d8 = [[-1, -1, "NW"], [0, -1, "NORTH"], [1, -1, "NE"], [-1, 0, "WEST"], [1, 0, "EAST"], [-1, 1, "SW"], [0, 1, "SOUTH"], [1, 1, "SE"]];

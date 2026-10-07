@@ -4,19 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Érosion — Sandbox Hydrographique</title>
-    <script
-      src="https://cdn.tailwindcss.com?plugins=forms,container-queries"
-      defer
-    ></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./css/core/variables.css" />
+<link rel="stylesheet" href="./css/core/variables.css" />
     <link rel="stylesheet" href="./css/core/base.css" />
     <link rel="stylesheet" href="./css/components/stage.css" />
     <link rel="stylesheet" href="./css/components/hud.css" />
@@ -24,6 +12,7 @@
     <link rel="stylesheet" href="./css/components/panel.css" />
     <link rel="stylesheet" href="./css/components/context-menu.css" />
     <link rel="stylesheet" href="./css/responsive.css" />
+    <link rel="stylesheet" href="./css/components/laboratory.css" />
     <script defer src="./js/core/config.js"></script>
     <script defer src="./js/core/math.js"></script>
     <script defer src="./js/core/state.js"></script>
@@ -31,6 +20,7 @@
     <script defer src="./js/simulation/simulation.js"></script>
     <script defer src="./js/simulation/drainage.js"></script>
     <script defer src="./js/simulation/particles.js"></script>
+    <script defer src="./js/core/session.js"></script>
     <script defer src="./js/rendering/render.js"></script>
     <script defer src="./js/ui/ui.js"></script>
     <script defer src="./js/main.js"></script>
@@ -39,23 +29,26 @@
     <div id="app">
       <!-- Canvas Area -->
       <div id="stage">
-        <canvas id="c"></canvas>
+        <div class="stage-heading"><span class="eyebrow">EROSION / LAB</span><span id="terrainCaption">Vallée</span></div>
+        <canvas id="c" tabindex="0" aria-label="Terrain interactif. Cliquez pour ajouter une source."></canvas>
+        <div id="stage-hint">Cliquez sur le terrain pour faire naître une rivière.</div>
+        <div id="toast" role="status" aria-live="polite"></div>
         <div id="context-menu">
           <button id="ctx-add-source" style="display: flex">
             <span class="material-symbols-outlined" style="font-size: 16px"
-              >water_drop</span
+              >◆</span
             >
             Ajouter une source d'eau
           </button>
           <button id="ctx-toggle-source" style="display: none">
             <span class="material-symbols-outlined" style="font-size: 16px"
-              >toggle_on</span
+              >●</span
             >
             <span class="context-menu-label">Désactiver la source</span>
           </button>
           <button id="ctx-delete-source" style="display: none">
             <span class="material-symbols-outlined" style="font-size: 16px"
-              >delete</span
+              >×</span
             >
             Supprimer
           </button>
@@ -65,14 +58,14 @@
           <span
             class="material-symbols-outlined"
             style="font-size: 12px; vertical-align: middle; margin-right: 4px"
-            >speed</span
+            >↻</span
           >
           <b id="fps">--</b> fps · cible <b id="tgtMult">×1</b> · réel
           <b id="realMult">×1</b><br />
           <span
             class="material-symbols-outlined"
             style="font-size: 12px; vertical-align: middle; margin-right: 4px"
-            >schedule</span
+            >◷</span
           >
           <b id="tcount">0</b> pas · <b id="tsim">0.0</b>s
         </div>
@@ -80,16 +73,16 @@
 
       <!-- Bottom Control Bar -->
       <div id="bottom-bar">
-        <button class="ctrl-btn" id="pause" title="Pause / Reprendre">
-          <span class="material-symbols-outlined" id="pauseIcon">pause</span>
+        <button class="ctrl-btn" id="pause" aria-label="Pause ou reprendre" title="Pause / Reprendre">
+          <span class="material-symbols-outlined" id="pauseIcon">⏸</span>
         </button>
         <div class="speed-ctrl">
           <span
             class="material-symbols-outlined"
             style="color: var(--text-muted); font-size: 16px"
-            >slow_motion_video</span
+            >×</span
           >
-          <input id="speed" min="0" step="1" type="range" value="0" />
+          <input id="speed" aria-label="Vitesse de simulation" min="0" step="1" type="range" value="0" />
           <span
             id="speedLbl"
             style="
@@ -102,21 +95,21 @@
           >
         </div>
         <button class="ctrl-btn" id="regen" title="Générer nouveau terrain">
-          <span class="material-symbols-outlined">refresh</span>
+          <span class="material-symbols-outlined">↻</span>
         </button>
         <button
           class="ctrl-btn"
           id="clearSrc"
           title="Effacer toutes les sources"
         >
-          <span class="material-symbols-outlined">delete_sweep</span>
+          <span class="material-symbols-outlined">✕</span>
         </button>
       </div>
 
       <!-- Languette pour mobile -->
       <div id="panel-tab" title="Ouvrir les réglages">
         <span class="material-symbols-outlined" style="font-size: 18px"
-          >chevron_left</span
+          >‹</span
         >
       </div>
 
@@ -124,30 +117,40 @@
       <div id="side-panel">
         <button id="close-panel" title="Fermer les réglages">
           <span class="material-symbols-outlined" style="font-size: 18px"
-            >close</span
+            >×</span
           >
         </button>
         <div class="panel-header">
-          <h1>Sandbox Hydrographique</h1>
+          <div class="eyebrow">BAC A SABLE INTERACTIF</div><h1>De l’eau au paysage.</h1>
           <p class="desc">
-            Modèle Mei, Decaudin &amp; Hu. Clic sur le sable pour ajouter une
-            source d'eau.
+            Ajoutez une source. Observez l’eau creuser, transporter et déposer. Le relief décide du chemin.
           </p>
         </div>
+        <div class="setup-grid">
+          <label>Relief<select id="preset"><option value="valley">Vallée sinueuse</option><option value="natural">Terrain naturel</option><option value="basin">Cuvette</option><option value="ridge">Crête</option></select></label>
+          <label>Graine<input id="terrainSeed" type="number" min="0" max="2147483647" value="314159265" step="1" /></label>
+        </div>
+        <div class="button-pair"><button id="applyTerrain" class="text-btn">Générer</button><button id="replay" class="text-btn">Rejouer</button></div>
+        <button id="demo" class="primary-btn">Lancer une rivière <span aria-hidden="true">↗</span></button>
+        <div class="settings-inline">
+          <label>Limites<select id="boundary"><option value="open">Ouvertes</option><option value="closed">Fermées</option></select></label>
+          <label>Pluie<select id="rain"><option value="0">Aucune</option><option value="0.00001">Légère</option><option value="0.00005">Averse</option></select></label>
+        </div>
+        <label class="check-label"><input type="checkbox" id="erode" checked /> Le terrain peut s’éroder</label>
         <div class="segmented modes">
           <button class="on" data-m="composite">Simulation</button>
-          <button data-m="contribution">Analyse Terrain (D8)</button>
+          <button data-m="change">Érosion / dépôts</button><button data-m="contribution">Pentes D8</button>
         </div>
 
         <!-- Divider 1 : Toujours visible -->
         <div class="hr"></div>
 
-        <div id="layersBox">
+        <details id="layersBox"><summary>Couches visuelles</summary>
           <div class="section-title">Couches Visuelles</div>
           <div class="layer-group">
             <div class="layer-group-title" data-group="layers-terrain">
               <span class="material-symbols-outlined" style="font-size: 14px"
-                >terrain</span
+                >△</span
               >
               Terrain
             </div>
@@ -156,21 +159,36 @@
           <div class="layer-group">
             <div class="layer-group-title" data-group="layers-water">
               <span class="material-symbols-outlined" style="font-size: 14px"
-                >water</span
+                >∿</span
               >
               Eau &amp; Dynamique
             </div>
             <div class="layer-list" id="layers-water"></div>
           </div>
-        </div>
+        </details>
 
         <!-- Divider 2 : Visible uniquement en mode composite -->
         <div class="hr" id="divider-bottom"></div>
 
         <div class="section-title">
-          Sources Actives (<span id="srcCount">0</span>)
+          Sources <span id="srcCount">0</span>
         </div>
         <div id="sources"></div>
+        <div class="metrics" aria-label="Bilan de la simulation">
+          <div><span>Eau présente</span><b id="statWater">0</b></div>
+          <div><span>Eau sortie</span><b id="statOut">0</b></div>
+          <div><span>Matière érodée</span><b id="statEroded">0</b></div>
+          <div><span>Matière déposée</span><b id="statDeposited">0</b></div>
+        </div>
+        <details class="budget-detail"><summary>Conservation &amp; lecture</summary>
+          <p id="budget-status">Bilans en attente.</p>
+          <p id="reading-help">Bleu : eau. Traits clairs : courants mesurés. Les pentes D8 sont un potentiel, pas une rivière imposée.</p>
+          <p id="budget-values"></p>
+          <p>Unités de simulation non calibrées. Modèle de paysage, pas un outil de prévision hydrologique.</p>
+        </details>
+        <div class="button-pair"><button id="saveSession" class="text-btn">Sauvegarder</button><button id="loadSession" class="text-btn">Ouvrir</button></div>
+        <input id="sessionFile" type="file" accept=".json,application/json" hidden />
+        <p class="footer-note">100 % local · sans installation · moteur conservatif v2</p>
       </div>
     </div>
   </body>

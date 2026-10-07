@@ -1,0 +1,17 @@
+Exact point-source injection and conservation: PASS
+Unbiased fixed source position: PASS
+┌─────────┬──────┬───────────────────────┬───────────────────────────┐
+│ (index) │ name │ maxAbsoluteDifference │ averageAbsoluteDifference │
+├─────────┼──────┼───────────────────────┼───────────────────────────┤
+│ 0       │ 'b'  │ 0                     │ 0                         │
+│ 1       │ 'd'  │ 0                     │ 0                         │
+│ 2       │ 's'  │ 0                     │ 0                         │
+│ 3       │ 'u'  │ 0                     │ 0                         │
+│ 4       │ 'v'  │ 0                     │ 0                         │
+│ 5       │ 'fL' │ 0                     │ 0                         │
+│ 6       │ 'fR' │ 0                     │ 0                         │
+│ 7       │ 'fT' │ 0                     │ 0                         │
+│ 8       │ 'fB' │ 0                     │ 0                         │
+└─────────┴──────┴───────────────────────┴───────────────────────────┘
+Physical determinism after 1000 steps: PASS
+EXIT_CODE=0

@@ -1,15 +1,8 @@
 const canvas = document.getElementById("c");
 const ctx = canvas.getContext("2d");
 function resizeCanvas() {
-  const w = window.innerWidth;
-  const h = window.innerHeight;
-
-  let size;
-  if (w < 768) {
-    size = Math.min(w, h) * 0.98;
-  } else {
-    size = Math.min(w - 330, h - 20);
-  }
+  const stage = document.getElementById("stage");
+  const size = Math.max(160, Math.min(stage.clientWidth - 28, stage.clientHeight - 150));
 
   canvas.style.width = size + "px";
   canvas.style.height = size + "px";
@@ -35,14 +28,14 @@ const LAYER_DEFS_TERRAIN = [
 ];
 const LAYER_DEFS_WATER = [
   { id: "eau", label: "Masse d'eau", color: "#3f8cb0" },
-  { id: "reseau", label: "Courants Actifs", color: "#5db8d8" },
+  { id: "reseau", label: "Vecteurs de courant", color: "#5db8d8" },
   { id: "particules", label: "Traceurs d'écoulement", color: "#d2eeff" },
 ];
 const layerOn = {
   relief: true,
-  contours: true,
+  contours: false,
   eau: true,
-  reseau: true,
+  reseau: false,
   erosion: true,
   particules: true,
 };
@@ -95,13 +88,14 @@ function render(isoStepMajor) {
   const range = Math.max(1e-4, bmax - bmin);
   const isoMinor = isoStepMajor / 5;
   const isContribution = viewMode === "contribution";
+  const isChange = viewMode === "change";
 
-  const showRelief = !isContribution && layerOn.relief;
-  const showContours = !isContribution && layerOn.contours;
-  const showErosion = !isContribution && layerOn.erosion;
-  const showWater = !isContribution && layerOn.eau;
-  const showActive = !isContribution && layerOn.reseau;
-  const showParticles = !isContribution && layerOn.particules;
+  const showRelief = !isContribution && !isChange && layerOn.relief;
+  const showContours = !isContribution && !isChange && layerOn.contours;
+  const showErosion = !isContribution && !isChange && layerOn.erosion;
+  const showWater = !isContribution && !isChange && layerOn.eau;
+  const showActive = !isContribution && !isChange && layerOn.reseau;
+  const showParticles = !isContribution && !isChange && layerOn.particules;
 
   for (let y = 0; y < N; y++)
     for (let x = 0; x < N; x++) {
@@ -110,6 +104,17 @@ function render(isoStepMajor) {
       const t = (h - bmin) / range;
       let r, g2, bl;
 
+      if (isChange) {
+        const delta = b[i] - bInit[i];
+        const amount = -Math.expm1(-Math.abs(delta) / 0.008);
+        const base = 45 + 24 * t;
+        const target = delta < 0 ? [231, 147, 82] : [115, 192, 157];
+        const o = i * 4;
+        data[o] = lerp(base, target[0], amount);
+        data[o + 1] = lerp(base, target[1], amount);
+        data[o + 2] = lerp(base, target[2], amount); data[o + 3] = 255;
+        continue;
+      }
       if (isContribution) {
         const v = Math.pow(accumSmooth[i], 0.6);
         const g = Math.round(lerp(20, 200, v));
@@ -128,6 +133,11 @@ function render(isoStepMajor) {
         r = Math.round(lerp(70, 140, t));
         g2 = Math.round(lerp(60, 120, t));
         bl = Math.round(lerp(50, 100, t));
+        // View-only hill shading makes incision readable without changing the bed.
+        const dx = (b[idx(Math.min(N - 1, x + 1), y)] - b[idx(Math.max(0, x - 1), y)]) * 12;
+        const dy = (b[idx(x, Math.min(N - 1, y + 1))] - b[idx(x, Math.max(0, y - 1))]) * 12;
+        const light = Math.max(0.58, Math.min(1.3, (1 + 0.6 * dx + 0.8 * dy) / Math.sqrt(1 + dx * dx + dy * dy)));
+        r *= light; g2 *= light; bl *= light;
       } else {
         r = 30;
         g2 = 29;
@@ -188,7 +198,7 @@ function render(isoStepMajor) {
 
       const depth = d[i];
       if (showWater || showActive) {
-        const depthT = smoothstep(0, 0.07, depth);
+        const depthT = -Math.expm1(-depth / 0.004);
         if (showWater && depthT > 0.002) {
           r = Math.round(lerp(r, 50, depthT * 0.8));
           g2 = Math.round(lerp(g2, 110 + 20 * depthT, depthT * 0.8));
@@ -230,34 +240,21 @@ function render(isoStepMajor) {
   }
 
   if (showActive) {
-    const streamPath = new Path2D(),
-      riverPath = new Path2D();
-    for (let y = 0; y < N; y++)
-      for (let x = 0; x < N; x++) {
-        const i = idx(x, y);
-        if (!activeCell[i]) continue;
-        const j = activeDownstream(x, y, i);
-        if (j < 0) continue;
-        const q = d[i] * activeVel[i];
-        const qn = q / maxActiveQ;
-        const x1 = j % N,
-          y1 = (j / N) | 0;
-        const sx = ((x + 0.5) / N) * DISPLAY,
-          sy = ((y + 0.5) / N) * DISPLAY;
-        const ex = ((x1 + 0.5) / N) * DISPLAY,
-          ey = ((y1 + 0.5) / N) * DISPLAY;
-        const path = qn >= 0.45 ? riverPath : streamPath;
-        path.moveTo(sx, sy);
-        path.lineTo(ex, ey);
-      }
-    ctx.lineCap = "round";
-    ctx.lineJoin = "round";
-    ctx.strokeStyle = "rgba(90,160,200,.6)";
-    ctx.lineWidth = 1.5;
-    ctx.stroke(streamPath);
-    ctx.strokeStyle = "rgba(120,200,240,.9)";
-    ctx.lineWidth = 3.5;
-    ctx.stroke(riverPath);
+    // Sparse true-velocity glyphs, not an artificial lattice of river pipes.
+    ctx.strokeStyle = "rgba(170,221,240,.55)";
+    ctx.lineWidth = 1.1; ctx.lineCap = "round";
+    ctx.beginPath();
+    for (let y = 3; y < N; y += 6) for (let x = 3; x < N; x += 6) {
+      const i = idx(x, y), speed = Math.hypot(u[i], v[i]);
+      if (!activeCell[i] || speed < .07) continue;
+      const sx = ((x + .5) / N) * DISPLAY, sy = ((y + .5) / N) * DISPLAY;
+      const dx = u[i] / speed, dy = v[i] / speed, length = 5 + Math.min(6, speed);
+      const ex = sx + dx * length, ey = sy + dy * length;
+      ctx.moveTo(sx, sy); ctx.lineTo(ex, ey);
+      ctx.moveTo(ex - dx * 3 - dy * 2, ey - dy * 3 + dx * 2);
+      ctx.lineTo(ex, ey); ctx.lineTo(ex - dx * 3 + dy * 2, ey - dy * 3 - dx * 2);
+    }
+    ctx.stroke();
   }
 
   if (showParticles) {
@@ -309,5 +306,9 @@ function render(isoStepMajor) {
     ctx.fill();
 
     ctx.globalAlpha = 1;
+    ctx.font = "600 13px sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillStyle = src.active ? "#e6f5fa" : "#aaa";
+    ctx.fillText(String(k + 1), px2, py2 - 16);
   }
 }

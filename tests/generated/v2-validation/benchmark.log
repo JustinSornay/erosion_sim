@@ -1,0 +1,14 @@
+
+> erosion-sandbox@2.0.0 benchmark
+> node tests/benchmarks/physics-profile.js 1000
+
+┌─────────┬─────────────────────────────┬────────────────────┐
+│ (index) │ phase                       │ milliseconds       │
+├─────────┼─────────────────────────────┼────────────────────┤
+│ 0       │ 'injectSources'             │ 4.018996000002289  │
+│ 1       │ 'updateFluxes'              │ 1762.0149580000061 │
+│ 2       │ 'transportWaterAndSediment' │ 948.0890260000124  │
+│ 3       │ 'updateVelocityAndExchange' │ 986.970342999992   │
+│ 4       │ 'evaporateWater'            │ 564.1407959999998  │
+└─────────┴─────────────────────────────┴────────────────────┘
+EXIT_CODE=0

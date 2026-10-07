@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "originalArtifactsCompared": 166,
+  "method": "SHA-256 of each original tests/generated and tests/fixtures raw file against the uploaded archive",
+  "gitDatabaseIncluded": false
+}

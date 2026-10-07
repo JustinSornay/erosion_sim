@@ -1,18 +1,27 @@
-function genTerrain() {
-  seed = (Math.random() * 1e9) | 0;
+function genTerrain(options = {}) {
+  const requestedSeed = options.seed === undefined ? (Math.random() * 1e9) | 0 : Number(options.seed);
+  if (!Number.isInteger(requestedSeed) || requestedSeed < 0 || requestedSeed > 2147483647)
+    throw new Error("La graine doit etre un entier entre 0 et 2147483647.");
+  const preset = options.preset || terrainPreset;
+  if (!["natural", "valley", "basin", "ridge"].includes(preset)) throw new Error("Terrain inconnu.");
+  terrainSeed = requestedSeed;
+  terrainPreset = preset;
+  seed = terrainSeed;
   reseedPerm();
-  b = new Float32Array(NN);
-  bInit = new Float32Array(NN);
-  d = new Float32Array(NN);
-  s = new Float32Array(NN);
-  fL = new Float32Array(NN);
-  fR = new Float32Array(NN);
-  fT = new Float32Array(NN);
-  fB = new Float32Array(NN);
-  u = new Float32Array(NN);
-  v = new Float32Array(NN);
-  tmpS = new Float32Array(NN);
-  tmpD = new Float32Array(NN);
+  b = new Float64Array(NN);
+  bInit = new Float64Array(NN);
+  d = new Float64Array(NN);
+  s = new Float64Array(NN);
+  fL = new Float64Array(NN);
+  fR = new Float64Array(NN);
+  fT = new Float64Array(NN);
+  fB = new Float64Array(NN);
+  u = new Float64Array(NN);
+  v = new Float64Array(NN);
+  tmpS = new Float64Array(NN);
+  tmpD = new Float64Array(NN);
+  bedrock = new Float64Array(NN);
+  bedDelta = new Float64Array(NN);
   flowTo = new Int32Array(NN);
   accum = new Float32Array(NN);
   accumSmooth = new Float32Array(NN);
@@ -50,9 +59,22 @@ function genTerrain() {
       const outletInfluence = Math.exp(-0.5 * (dx * dx + dy * dy));
       h -= OUTLET_DEPTH * outletInfluence;
 
+      if (preset === "valley") {
+        // A reproducible demonstration, explicitly distinct from natural terrain.
+        const center = 0.50 + 0.105 * Math.sin(py * 6.5);
+        h = 0.10 + 0.95 * (1 - py) + 1.9 * (px - center) ** 2
+          + 0.018 * fbm(nx * 0.9, ny * 0.9);
+      } else if (preset === "basin") {
+        const radius = Math.hypot((px - 0.5) * 1.2, py - 0.5);
+        h = 0.20 + 1.5 * radius * radius + 0.009 * fbm(nx, ny);
+      } else if (preset === "ridge") {
+        h = 0.2 + 0.9 * Math.exp(-(((px - 0.5) / 0.15) ** 2))
+          + 0.15 * (1 - py) + 0.025 * fbm(nx, ny);
+      }
       b[idx(x, y)] = h * 0.9;
     }
   bInit.set(b);
+  for (let i = 0; i < NN; i++) bedrock[i] = b[i] - SOIL_THICKNESS;
   sources.length = 0;
   steps = 0;
   simTime = 0;
@@ -64,5 +86,7 @@ function genTerrain() {
     py[i] = rnd() * N;
     pAlive[i] = 0;
   }
+  resetBudgets();
   computeDrainage();
+  if (typeof invalidateDrainagePaths === "function") invalidateDrainagePaths();
 }

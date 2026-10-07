@@ -19,8 +19,10 @@
 const fs = require("fs");
 const path = require("path");
 const root = path.resolve(__dirname, "../../..");
+// Pin historical research to the exact uploaded engine, not production v2.
+const engineRoot = path.join(root, "tests/fixtures/legacy-engine");
 const files = ["js/core/config.js", "js/core/math.js", "js/core/state.js", "js/simulation/terrain.js", "js/simulation/simulation.js", "js/simulation/drainage.js"];
-const directionalSource = files.map((file) => fs.readFileSync(path.join(root, file), "utf8")).join("\n");
+const directionalSource = files.map((file) => fs.readFileSync(path.join(engineRoot, file), "utf8")).join("\n");
 const currentSource = directionalSource.replace(
   /let flowSlope = 0;\s*if \(vel > 1e-6\) \{\s*flowSlope = Math\.max\(0, -\(dzx \* ui \+ dzy \* vi\) \/ vel\);\s*\}\s*const sinA = flowSlope \/ Math\.sqrt\(1 \+ flowSlope \* flowSlope\);/,
   "const slope = Math.sqrt(dzx * dzx + dzy * dzy); const sinA = slope / Math.sqrt(1 + slope * slope);",

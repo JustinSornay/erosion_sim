@@ -26,7 +26,7 @@ const writeFixture = process.argv.includes("--write-baseline");
 const forceWrite = process.argv.includes("--force");
 const baselineVersion = process.argv
   .find((argument) => argument.startsWith("--baseline-version="))
-  ?.slice("--baseline-version=".length);
+  ?.slice("--baseline-version=".length) || "conservative-v2";
 const physicalScripts = [
   "js/core/config.js",
   "js/core/math.js",
@@ -48,10 +48,14 @@ function runSimulation() {
     "Int32Array",
     "Uint8Array",
     `${source}
-      genTerrain();
+      genTerrain({seed:314159265, preset:"natural"});
       const source = { x: 48, y: 48, rate: DEFAULT_RATE, active: true };
       configureSourceOutlets(source); sources.push(source); refreshSourceProtectionMask();
       for (let i = 0; i < ${steps}; i++) step();
+      const stats = getSimulationStats();
+      if (!stats.finite || stats.minWater < 0 || stats.minSediment < 0 ||
+          Math.abs(stats.waterResidual) > 1e-7 || Math.abs(stats.solidResidual) > 1e-7)
+        throw new Error("Physical invariants failed: baseline refused.");
       return { b, d, s, u, v, fL, fR, fT, fB };`,
   );
   return run(deterministicMath, Float32Array, Int32Array, Uint8Array);
@@ -63,9 +67,10 @@ function serialize(snapshot) {
 
 function compare(snapshot, fixture) {
   const bytesPerField = snapshot.b.byteLength;
+  if (fixture.byteLength !== bytesPerField * fields.length) throw new Error("Wrong baseline format; v2 uses Float64 fields.");
   let failed = false;
   const results = fields.map((field, fieldIndex) => {
-    const reference = new Float32Array(
+    const reference = new Float64Array(
       fixture.buffer,
       fixture.byteOffset + fieldIndex * bytesPerField,
       snapshot[field].length,

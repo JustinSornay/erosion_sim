@@ -1,0 +1,39 @@
+
+> erosion-sandbox@2.0.0 test:browser
+> npm run build && python tests/browser/smoke.py
+
+
+> erosion-sandbox@2.0.0 build
+> node tools/build-standalone.js
+
+Standalone: /mnt/data/work/erosion_sim/dist/erosion-simulation.html (81153 bytes)
+PASS: Application initializes without a JavaScript error
+PASS: No remote assets or network requests
+PASS: Pause button pauses the simulation
+PASS: Desktop terrain is not hidden under settings
+PASS: Real click creates a source at the clicked cell
+PASS: Source actually injects water when running
+PASS: No hidden stepping while paused
+PASS: Source discharge is editable
+PASS: Invalid discharge cannot corrupt the engine
+PASS: Turning a source off stops injection
+PASS: Context menu toggles a source
+PASS: Context menu deletes a source
+PASS: Demo resets custom imported physical options
+PASS: River demo flows out, erodes and deposits in the browser
+PASS: Browser engine preserves both budgets
+PASS: Flowing water is visibly blue beyond the source marker
+PASS: Erosion/deposition view is reachable
+PASS: D8 analysis remains distinct from actual water
+PASS: A saved session restores its exact step count
+PASS: A saved session restores physical water, not just UI state
+PASS: Invalid save leaves the live session intact
+PASS: Replay resets the same terrain and preserves sources
+PASS: Rain, boundaries and erosion controls reach the engine
+PASS: Space toggles playback outside form controls
+PASS: Canvas fits a mobile viewport
+PASS: Mobile settings open within the viewport
+PASS: Mobile settings close normally
+PASS: No JavaScript errors throughout the interaction sequence
+PASS: 28 browser checks
+EXIT_CODE=0
