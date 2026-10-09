@@ -1365,6 +1365,17 @@ function getParticleVisualDt(multiplier) {
   return DT * (1 + Math.log2(Math.max(1, multiplier)) * 0.12);
 }
 
+const PARTICLE_LINEAR_SPEED_LIMIT = 0.5;
+const PARTICLE_MAX_VISUAL_SPEED = 1;
+
+/** Keeps slow currents unchanged while smoothly bounding fast tracer motion. */
+function getParticleVisualSpeed(speed) {
+  if (speed <= PARTICLE_LINEAR_SPEED_LIMIT) return speed;
+  const excess = speed - PARTICLE_LINEAR_SPEED_LIMIT;
+  const range = PARTICLE_MAX_VISUAL_SPEED - PARTICLE_LINEAR_SPEED_LIMIT;
+  return PARTICLE_LINEAR_SPEED_LIMIT + range * excess / (range + excess);
+}
+
 const flowSample = { depth: 0, u: 0, v: 0 };
 
 /** Samples all fields required by a traceur with one shared bilinear lookup. */
@@ -1414,8 +1425,10 @@ function stepParticles(dtSim) {
       const q = depth * vel;
       const outOfBounds = x < 1 || x > N - 2 || y < 1 || y > N - 2;
       if (!(depth < D_DEATH || vel < V_DEATH || q < Q_DEATH || outOfBounds)) {
-        px[i] = x + uu * dtSim * SCALE;
-        py[i] = y + vv * dtSim * SCALE;
+        // Limit display motion only; physical flow still owns direction and lifetime.
+        const visualScale = getParticleVisualSpeed(vel) / vel;
+        px[i] = x + uu * dtSim * SCALE * visualScale;
+        py[i] = y + vv * dtSim * SCALE * visualScale;
         continue;
       }
       pAlive[i] = 0;
