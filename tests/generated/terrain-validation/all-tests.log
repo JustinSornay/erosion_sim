@@ -1,0 +1,272 @@
+
+> erosion-sandbox@2.0.2 test
+> node --test --test-concurrency=1 tests/regression/production.test.js tests/regression/terrain-navigation.test.js
+
+TAP version 13
+# Subtest: A dry scene neither erodes nor manufactures water
+ok 1 - A dry scene neither erodes nor manufactures water
+  ---
+  duration_ms: 359.838783
+  type: 'test'
+  ...
+# Subtest: Point injection lands at the exact centre, edges and all four corners
+ok 2 - Point injection lands at the exact centre, edges and all four corners
+  ---
+  duration_ms: 281.944059
+  type: 'test'
+  ...
+# Subtest: Disabled sources inject nothing; colocated sources add their actual volume
+ok 3 - Disabled sources inject nothing; colocated sources add their actual volume
+  ---
+  duration_ms: 80.424589
+  type: 'test'
+  ...
+# Subtest: Invalid source coordinates and rates are rejected
+ok 4 - Invalid source coordinates and rates are rejected
+  ---
+  duration_ms: 60.547208
+  type: 'test'
+  ...
+# Subtest: Source configuration never excavates or protects a hidden rock collar
+ok 5 - Source configuration never excavates or protects a hidden rock collar
+  ---
+  duration_ms: 60.7026
+  type: 'test'
+  ...
+# Subtest: All terrain presets reproduce exactly from a seed; seeds actually differ
+ok 6 - All terrain presets reproduce exactly from a seed; seeds actually differ
+  ---
+  duration_ms: 702.92147
+  type: 'test'
+  ...
+# Subtest: Invalid terrain requests fail before live state is mutated
+ok 7 - Invalid terrain requests fail before live state is mutated
+  ---
+  duration_ms: 55.374034
+  type: 'test'
+  ...
+# Subtest: A closed hydrostatic lake stays at rest on uneven terrain
+ok 8 - A closed hydrostatic lake stays at rest on uneven terrain
+  ---
+  duration_ms: 635.539019
+  type: 'test'
+  ...
+# Subtest: Direction follows terrain: rotation rotates flow, not a hardcoded south axis
+ok 9 - Direction follows terrain: rotation rotates flow, not a hardcoded south axis
+  ---
+  duration_ms: 933.657492
+  type: 'test'
+  ...
+# Subtest: Rain, sources and evaporation appear in a closed-domain water budget
+ok 10 - Rain, sources and evaporation appear in a closed-domain water budget
+  ---
+  duration_ms: 1533.733176
+  type: 'test'
+  ...
+# Subtest: Open boundaries export actual water and sediment; closed boundaries do not
+ok 11 - Open boundaries export actual water and sediment; closed boundaries do not
+  ---
+  duration_ms: 603.136838
+  type: 'test'
+  ...
+# Subtest: Shared internal faces never simultaneously carry opposing water fluxes
+ok 12 - Shared internal faces never simultaneously carry opposing water fluxes
+  ---
+  duration_ms: 225.479145
+  type: 'test'
+  ...
+# Subtest: Pure advection preserves a constant sediment/water concentration
+ok 13 - Pure advection preserves a constant sediment/water concentration
+  ---
+  duration_ms: 279.395603
+  type: 'test'
+  ...
+# Subtest: Microscopic films stay nonnegative, retain water, and cannot cause NaNs
+ok 14 - Microscopic films stay nonnegative, retain water, and cannot cause NaNs
+  ---
+  duration_ms: 67.389642
+  type: 'test'
+  ...
+# Subtest: Sediment in a dry cell is deposited rather than discarded
+ok 15 - Sediment in a dry cell is deposited rather than discarded
+  ---
+  duration_ms: 37.066178
+  type: 'test'
+  ...
+# Subtest: High transport capacity cannot excavate below bedrock
+ok 16 - High transport capacity cannot excavate below bedrock
+  ---
+  duration_ms: 797.847407
+  type: 'test'
+  ...
+# Subtest: Identical input histories give bit-identical physical fields
+ok 17 - Identical input histories give bit-identical physical fields
+  ---
+  duration_ms: 1636.337853
+  type: 'test'
+  ...
+# Subtest: A JSON save restores an identical continuation, not merely the picture
+ok 18 - A JSON save restores an identical continuation, not merely the picture
+  ---
+  duration_ms: 898.106434
+  type: 'test'
+  ...
+# Subtest: Invalid session files are rejected atomically
+ok 19 - Invalid session files are rejected atomically
+  ---
+  duration_ms: 228.722867
+  type: 'test'
+  ...
+# Subtest: Production HTML has no remote dependency and every local script exists
+ok 20 - Production HTML has no remote dependency and every local script exists
+  ---
+  duration_ms: 0.900138
+  type: 'test'
+  ...
+# Subtest: The discovery catalogue replaces artificial ridge/bowl presets with five landscapes
+ok 21 - The discovery catalogue replaces artificial ridge/bowl presets with five landscapes
+  ---
+  duration_ms: 1.233516
+  type: 'test'
+  ...
+# Subtest: headwaters: the entire relief is reproducible, varied and initially dry
+ok 22 - headwaters: the entire relief is reproducible, varied and initially dry
+  ---
+  duration_ms: 320.859695
+  type: 'test'
+  ...
+# Subtest: headwaters: rain and real sources preserve water/solid budgets; saves continue exactly
+ok 23 - headwaters: rain and real sources preserve water/solid budgets; saves continue exactly
+  ---
+  duration_ms: 993.852536
+  type: 'test'
+  ...
+# Subtest: meanders: the entire relief is reproducible, varied and initially dry
+ok 24 - meanders: the entire relief is reproducible, varied and initially dry
+  ---
+  duration_ms: 218.583163
+  type: 'test'
+  ...
+# Subtest: meanders: rain and real sources preserve water/solid budgets; saves continue exactly
+ok 25 - meanders: rain and real sources preserve water/solid budgets; saves continue exactly
+  ---
+  duration_ms: 777.051102
+  type: 'test'
+  ...
+# Subtest: hillside: the entire relief is reproducible, varied and initially dry
+ok 26 - hillside: the entire relief is reproducible, varied and initially dry
+  ---
+  duration_ms: 166.925591
+  type: 'test'
+  ...
+# Subtest: hillside: rain and real sources preserve water/solid budgets; saves continue exactly
+ok 27 - hillside: rain and real sources preserve water/solid budgets; saves continue exactly
+  ---
+  duration_ms: 621.608034
+  type: 'test'
+  ...
+# Subtest: confluence: the entire relief is reproducible, varied and initially dry
+ok 28 - confluence: the entire relief is reproducible, varied and initially dry
+  ---
+  duration_ms: 164.049892
+  type: 'test'
+  ...
+# Subtest: confluence: rain and real sources preserve water/solid budgets; saves continue exactly
+ok 29 - confluence: rain and real sources preserve water/solid budgets; saves continue exactly
+  ---
+  duration_ms: 692.961896
+  type: 'test'
+  ...
+# Subtest: spillway: the entire relief is reproducible, varied and initially dry
+ok 30 - spillway: the entire relief is reproducible, varied and initially dry
+  ---
+  duration_ms: 178.638717
+  type: 'test'
+  ...
+# Subtest: spillway: rain and real sources preserve water/solid budgets; saves continue exactly
+ok 31 - spillway: rain and real sources preserve water/solid budgets; saves continue exactly
+  ---
+  duration_ms: 716.114481
+  type: 'test'
+  ...
+# Subtest: Open landscapes have continuous downhill routes instead of trapping most water in pits
+ok 32 - Open landscapes have continuous downhill routes instead of trapping most water in pits
+  ---
+  duration_ms: 1344.405566
+  type: 'test'
+  ...
+# Subtest: A basin keeps a real depression as well as an open downstream catchment
+ok 33 - A basin keeps a real depression as well as an open downstream catchment
+  ---
+  duration_ms: 30.269058
+  type: 'test'
+  ...
+# Subtest: Previous/next reproduce recipe order; a fresh history has no fake previous terrain
+ok 34 - Previous/next reproduce recipe order; a fresh history has no fake previous terrain
+  ---
+  duration_ms: 0.526799
+  type: 'test'
+  ...
+# Subtest: Every opening advances the stored sequence even with a constant entropy provider
+ok 35 - Every opening advances the stored sequence even with a constant entropy provider
+  ---
+  duration_ms: 3.820009
+  type: 'test'
+  ...
+# Subtest: A shuffled bag explores every family before repeating and avoids adjacent duplicates
+ok 36 - A shuffled bag explores every family before repeating and avoids adjacent duplicates
+  ---
+  duration_ms: 0.29377
+  type: 'test'
+  ...
+# Subtest: History is bounded to 60 recipes without persisting simulation buffers
+ok 37 - History is bounded to 60 recipes without persisting simulation buffers
+  ---
+  duration_ms: 0.756112
+  type: 'test'
+  ...
+# Subtest: Blocked and full storage never prevent terrain generation or backward navigation
+ok 38 - Blocked and full storage never prevent terrain generation or backward navigation
+  ---
+  duration_ms: 0.219579
+  type: 'test'
+  ...
+# Subtest: Malformed or oversized stored histories are ignored atomically
+ok 39 - Malformed or oversized stored histories are ignored atomically
+  ---
+  duration_ms: 0.545416
+  type: 'test'
+  ...
+# Subtest: Imported legacy recipes join history; invalid imports do not mutate it
+ok 40 - Imported legacy recipes join history; invalid imports do not mutate it
+  ---
+  duration_ms: 0.24685
+  type: 'test'
+  ...
+# Subtest: Returned recipes cannot mutate internal or stored history
+ok 41 - Returned recipes cannot mutate internal or stored history
+  ---
+  duration_ms: 0.104286
+  type: 'test'
+  ...
+# Subtest: All old v2 reliefs and frozen physical options still round-trip exactly
+ok 42 - All old v2 reliefs and frozen physical options still round-trip exactly
+  ---
+  duration_ms: 572.085075
+  type: 'test'
+  ...
+# Subtest: Deleted features have no residual HTML controls or UI handlers
+ok 43 - Deleted features have no residual HTML controls or UI handlers
+  ---
+  duration_ms: 0.907809
+  type: 'test'
+  ...
+1..43
+# tests 43
+# suites 0
+# pass 43
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 16422.28484

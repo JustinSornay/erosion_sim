@@ -1,13 +1,13 @@
 {
   "name": "erosion-sandbox",
-  "version": "2.0.1",
+  "version": "2.2.0",
   "private": true,
   "description": "Local conservative hydraulic-erosion sandbox",
   "engines": {
     "node": ">=22"
   },
   "scripts": {
-    "test": "node --test --test-concurrency=1 tests/regression/production.test.js",
+    "test": "node --test --test-concurrency=1 tests/regression/production.test.js tests/regression/terrain-navigation.test.js",
     "test:long": "node tests/regression/long-run.js",
     "test:baseline": "node tests/regression/physics-regression.js 1000",
     "test:legacy": "node tests/regression/legacy-integrity.js",
@@ -15,7 +15,9 @@
     "build": "node tools/build-standalone.js",
     "benchmark": "node tests/benchmarks/physics-profile.js 1000",
     "audit:legacy": "node tests/diagnostics/legacy-baseline-audit.js",
-    "test:layout": "npm run build && python tests/browser/layout.py"
+    "test:layout": "npm run build && python tests/browser/layout.py",
+    "test:terrain": "node --test tests/regression/terrain-navigation.test.js",
+    "test:navigation": "npm run build && python tests/browser/navigation.py"
   },
   "dependencies": {
     "lucide": "1.52.0"

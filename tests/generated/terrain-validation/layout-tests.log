@@ -1,0 +1,86 @@
+PASS: 1440x1000: square terrain fits the visible stage
+PASS: 1440x1000: full floating transport bar fits
+PASS: 1440x1000: no document overflow or focus-induced scrolling
+PASS: 1440x1000: edge context menu is not clipped by the panel
+PASS: 1440x1000: edge menu action still reaches the real simulation
+PASS: 1440x1000: panel contents do not overflow horizontally
+PASS: 1440x1000: added settings remain reachable
+PASS: 1440x1000: detailed budgets remain reachable
+PASS: 1440x1000: expanded settings and budgets fit the panel
+PASS: 1365x768: square terrain fits the visible stage
+PASS: 1365x768: full floating transport bar fits
+PASS: 1365x768: no document overflow or focus-induced scrolling
+PASS: 1365x768: edge context menu is not clipped by the panel
+PASS: 1365x768: edge menu action still reaches the real simulation
+PASS: 1365x768: panel contents do not overflow horizontally
+PASS: 1365x768: added settings remain reachable
+PASS: 1365x768: detailed budgets remain reachable
+PASS: 1365x768: expanded settings and budgets fit the panel
+PASS: 1920x1080: square terrain fits the visible stage
+PASS: 1920x1080: full floating transport bar fits
+PASS: 1920x1080: no document overflow or focus-induced scrolling
+PASS: 1920x1080: edge context menu is not clipped by the panel
+PASS: 1920x1080: edge menu action still reaches the real simulation
+PASS: 1920x1080: panel contents do not overflow horizontally
+PASS: 1920x1080: added settings remain reachable
+PASS: 1920x1080: detailed budgets remain reachable
+PASS: 1920x1080: expanded settings and budgets fit the panel
+PASS: 1024x768: square terrain fits the visible stage
+PASS: 1024x768: full floating transport bar fits
+PASS: 1024x768: no document overflow or focus-induced scrolling
+PASS: 1024x768: edge context menu is not clipped by the panel
+PASS: 1024x768: edge menu action still reaches the real simulation
+PASS: 1024x768: panel contents do not overflow horizontally
+PASS: 1024x768: added settings remain reachable
+PASS: 1024x768: detailed budgets remain reachable
+PASS: 1024x768: expanded settings and budgets fit the panel
+PASS: 768x1024: square terrain fits the visible stage
+PASS: 768x1024: full floating transport bar fits
+PASS: 768x1024: no document overflow or focus-induced scrolling
+PASS: 768x1024: edge context menu is not clipped by the panel
+PASS: 768x1024: edge menu action still reaches the real simulation
+PASS: 768x1024: panel contents do not overflow horizontally
+PASS: 768x1024: added settings remain reachable
+PASS: 768x1024: detailed budgets remain reachable
+PASS: 768x1024: expanded settings and budgets fit the panel
+PASS: 390x844: square terrain fits the visible stage
+PASS: 390x844: full floating transport bar fits
+PASS: 390x844: no document overflow or focus-induced scrolling
+PASS: 390x844: edge context menu is not clipped by the panel
+PASS: 390x844: edge menu action still reaches the real simulation
+PASS: 390x844: closed mobile panel is inert
+PASS: 390x844: mobile drawer remains anchored to the viewport after focus
+PASS: 390x844: mobile drawer exposes its expanded state
+PASS: 390x844: panel contents do not overflow horizontally
+PASS: 390x844: added settings remain reachable
+PASS: 390x844: detailed budgets remain reachable
+PASS: 390x844: expanded settings and budgets fit the panel
+PASS: 390x844: Escape from a field safely closes the drawer
+PASS: 320x568: square terrain fits the visible stage
+PASS: 320x568: full floating transport bar fits
+PASS: 320x568: no document overflow or focus-induced scrolling
+PASS: 320x568: edge context menu is not clipped by the panel
+PASS: 320x568: edge menu action still reaches the real simulation
+PASS: 320x568: closed mobile panel is inert
+PASS: 320x568: mobile drawer remains anchored to the viewport after focus
+PASS: 320x568: mobile drawer exposes its expanded state
+PASS: 320x568: panel contents do not overflow horizontally
+PASS: 320x568: added settings remain reachable
+PASS: 320x568: detailed budgets remain reachable
+PASS: 320x568: expanded settings and budgets fit the panel
+PASS: 320x568: Escape from a field safely closes the drawer
+PASS: 844x390: square terrain fits the visible stage
+PASS: 844x390: full floating transport bar fits
+PASS: 844x390: no document overflow or focus-induced scrolling
+PASS: 844x390: edge context menu is not clipped by the panel
+PASS: 844x390: edge menu action still reaches the real simulation
+PASS: 844x390: panel contents do not overflow horizontally
+PASS: 844x390: added settings remain reachable
+PASS: 844x390: detailed budgets remain reachable
+PASS: 844x390: expanded settings and budgets fit the panel
+PASS: Layout changes and empty-source editing do not advance or regenerate the paused simulation
+PASS: All responsive layouts work offline without JavaScript errors or network requests
+PASS: Multi-file HTML initializes with its separately loaded local assets
+PASS: Multi-file entry point loads layer controls and Lucide icons
+PASS: All 22 separate script/style assets load through local fulfillment without errors
+PASS: 85 layout and entry-point checks

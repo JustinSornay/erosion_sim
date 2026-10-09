@@ -85,8 +85,8 @@
     "Layout changes and empty-source editing do not advance or regenerate the paused simulation",
     "All responsive layouts work offline without JavaScript errors or network requests",
     "Multi-file HTML initializes with its separately loaded local assets",
-    "Multi-file entry point loads layer controls and SVG references",
-    "All 20 separate script/style assets load through local fulfillment without errors"
+    "Multi-file entry point loads layer controls and Lucide icons",
+    "All 22 separate script/style assets load through local fulfillment without errors"
   ],
   "layouts": [
     {
@@ -276,11 +276,13 @@
     "https://erosion.test/js/core/math.js",
     "https://erosion.test/js/core/state.js",
     "https://erosion.test/js/simulation/terrain.js",
+    "https://erosion.test/js/core/terrain-history.js",
     "https://erosion.test/js/simulation/simulation.js",
     "https://erosion.test/js/simulation/drainage.js",
     "https://erosion.test/js/simulation/particles.js",
     "https://erosion.test/js/core/session.js",
     "https://erosion.test/js/rendering/render.js",
+    "https://erosion.test/js/ui/icons.js",
     "https://erosion.test/js/ui/ui.js",
     "https://erosion.test/js/main.js"
   ],

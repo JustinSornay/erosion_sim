@@ -117,7 +117,7 @@ document.getElementById("regen").onclick = () => {
   const btn = document.getElementById("regen");
   btn.style.transform = "scale(0.9)";
   setTimeout(() => (btn.style.transform = "scale(1)"), 100);
-  generateFromControls(true);
+  navigateTerrain(1);
 };
 document.getElementById("clearSrc").onclick = () => {
   sources.length = 0;
@@ -315,9 +315,16 @@ function resetClock() {
   // Called only by user actions, after main.js has initialized these bindings.
   stepAccumulator = 0; lastT = performance.now(); achievedStepsPerSecSmoothed = 0;
 }
+let terrainStorage = null;
+try { terrainStorage = window.localStorage; } catch (_) { /* file:// or private browsing */ }
+const terrainHistory = createTerrainHistory({ storage: terrainStorage });
+const terrainBrowser = document.getElementById("terrain-browser");
 function syncTerrainControls() {
-  document.getElementById("terrainSeed").value = terrainSeed;
-  document.getElementById("preset").value = terrainPreset;
+  const info = terrainInfo(terrainPreset), entry = terrainHistory.current();
+  document.getElementById("terrainName").textContent = info.name;
+  document.getElementById("terrainPosition").textContent = entry ? `Relief ${entry.number} · ${terrainViewLabel(terrainSeed, terrainPreset)}` : "Sauvegarde";
+  document.getElementById("terrainCaption").textContent = info.description;
+  document.getElementById("previousTerrain").disabled = !terrainHistory.canPrevious();
   document.getElementById("boundary").value = simulationOptions.boundary;
   const rainSelect = document.getElementById("rain");
   rainSelect.querySelectorAll("option[data-custom]").forEach(option => option.remove());
@@ -327,37 +334,64 @@ function syncTerrainControls() {
     option.textContent = `Personnalisée (${rainValue})`; option.dataset.custom = "true"; rainSelect.appendChild(option);
   }
   rainSelect.value = rainValue;
-  document.getElementById("erode").checked = simulationOptions.erosion;
-  const names = { valley: "Vallée sinueuse", natural: "Terrain naturel", basin: "Cuvette", ridge: "Crête" };
-  document.getElementById("terrainCaption").textContent = `${names[terrainPreset]} / ${terrainSeed}`;
 }
-function generateFromControls(random = false) {
-  try {
-    genTerrain({ seed: random ? Math.floor(Math.random() * 1e9) : document.getElementById("terrainSeed").valueAsNumber,
-      preset: document.getElementById("preset").value });
-    contextMenu.style.display = "none";
-    resetClock(); syncTerrainControls(); refreshSourceList(); updateMetrics();
-  } catch (error) { notify(error.message, true); }
-}
-document.getElementById("applyTerrain").onclick = () => generateFromControls();
-document.getElementById("replay").onclick = () => {
-  const keep = sources.map(({ x, y, rate, active }) => ({ x, y, rate, active }));
-  genTerrain({ seed: terrainSeed, preset: terrainPreset });
-  for (const src of keep) { configureSourceOutlets(src); sources.push(src); }
+function navigateTerrain(direction) {
+  const previousHadFocus = document.activeElement === document.getElementById("previousTerrain");
+  const recipe = direction < 0 ? terrainHistory.previous() : terrainHistory.next();
+  if (!recipe) return;
+  genTerrain(recipe);
+  // Removing the checkbox must not leave a new scene silently non-erodible
+  // after opening an older frozen session. All other user settings are kept.
+  simulationOptions.erosion = true;
+  contextMenu.style.display = "none";
   resetClock(); syncTerrainControls(); refreshSourceList(); updateMetrics();
-  notify("Même terrain, mêmes sources : simulation remise à zéro.");
-};
-document.getElementById("demo").onclick = () => {
-  genTerrain({ seed: 314159265, preset: "valley" });
-  Object.assign(simulationOptions, DEFAULT_SIMULATION_OPTIONS);
-  const src = { x: 107, y: 22, rate: DEFAULT_RATE, active: true }; configureSourceOutlets(src); sources.push(src);
-  paused = false; setIcon(pauseIcon, "pause"); pauseBtn.setAttribute("aria-label", "Mettre en pause"); pauseBtn.classList.remove("active"); pauseBtn.setAttribute("aria-pressed", "false");
-  speedEl.value = "2"; speedEl.oninput(); resetClock(); syncTerrainControls(); refreshSourceList(); setMode("composite");
-  notify("La rivière est lancée. La vue Érosion / dépôts révèle le travail de l'eau.");
-};
+  document.getElementById("tcount").textContent = steps;
+  document.getElementById("tsim").textContent = simTime.toFixed(1);
+  if (previousHadFocus && !terrainHistory.canPrevious()) {
+    terrainBrowser.focus({ preventScroll: true });
+  }
+}
+document.getElementById("previousTerrain").onclick = () => navigateTerrain(-1);
+document.getElementById("nextTerrain").onclick = () => navigateTerrain(1);
+let terrainWheelArmed = false;
+terrainBrowser.addEventListener("focusin", () => { terrainWheelArmed = true; });
+terrainBrowser.addEventListener("click", event => {
+  terrainWheelArmed = true;
+  if (!event.target.closest("button")) terrainBrowser.focus({ preventScroll: true });
+});
+terrainBrowser.addEventListener("keydown", event => {
+  if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+  if (event.altKey || event.ctrlKey || event.metaKey) return;
+  event.preventDefault();
+  terrainWheelArmed = true;
+  if (!event.repeat) navigateTerrain(event.key === "ArrowLeft" ? -1 : 1);
+});
+let terrainWheelAmount = 0, terrainWheelTime = -Infinity, terrainWheelLastEvent = -Infinity;
+function resetTerrainWheel() { terrainWheelAmount = 0; terrainWheelLastEvent = -Infinity; }
+terrainBrowser.addEventListener("pointerleave", () => {
+  resetTerrainWheel();
+  // Disarm only the wheel: moving the pointer must never steal keyboard focus.
+  terrainWheelArmed = false;
+});
+terrainBrowser.addEventListener("focusout", () => { resetTerrainWheel(); terrainWheelArmed = false; });
+terrainBrowser.addEventListener("wheel", event => {
+  // Only an explicitly focused selector owns the wheel, never the whole panel.
+  if (!terrainWheelArmed || !terrainBrowser.contains(document.activeElement) || event.ctrlKey || event.metaKey || !event.cancelable) return;
+  const raw = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+  if (!raw) return;
+  event.preventDefault();
+  const now = performance.now();
+  const delta = raw * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? 200 : 1);
+  if (now - terrainWheelLastEvent > 180 || Math.sign(delta) !== Math.sign(terrainWheelAmount)) terrainWheelAmount = 0;
+  terrainWheelLastEvent = now;
+  if (now - terrainWheelTime < 360) return;
+  terrainWheelAmount += delta;
+  if (Math.abs(terrainWheelAmount) < 45) return;
+  const direction = Math.sign(terrainWheelAmount); terrainWheelAmount = 0; terrainWheelTime = now;
+  navigateTerrain(direction);
+}, { passive: false });
 document.getElementById("boundary").onchange = event => { simulationOptions.boundary = event.target.value; };
 document.getElementById("rain").onchange = event => { simulationOptions.rainfall = Number(event.target.value); };
-document.getElementById("erode").onchange = event => { simulationOptions.erosion = event.target.checked; };
 function updateMetrics() {
   const stats = getSimulationStats();
   for (const [id, key] of [["statWater", "water"], ["statOut", "waterOut"], ["statEroded", "eroded"], ["statDeposited", "deposited"]])
@@ -382,6 +416,7 @@ document.getElementById("sessionFile").onchange = async event => {
   try {
     if (file.size > 35 * 1024 * 1024) throw new Error("Sauvegarde trop volumineuse (35 Mo maximum).");
     const parsed = JSON.parse(await file.text()); restoreSimulation(parsed);
+    terrainHistory.remember({ seed: terrainSeed, preset: terrainPreset });
     paused = true; setIcon(pauseIcon, "play"); pauseBtn.setAttribute("aria-label", "Reprendre la simulation"); pauseBtn.classList.add("active"); pauseBtn.setAttribute("aria-pressed", "true");
     resetClock(); syncTerrainControls(); refreshSourceList(); updateMetrics();
     notify("Sauvegarde restaurée en pause. Reprenez quand vous le souhaitez.");

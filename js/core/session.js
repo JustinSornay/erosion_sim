@@ -12,7 +12,7 @@ function restoreSimulation(data) {
   if (!data || data.format !== "erosion-session" || data.version !== 2 || data.grid !== N || data.physics !== PHYSICS_VERSION) fail();
   if (!Number.isInteger(data.seed) || data.seed < 0 || data.seed > 2147483647 ||
       !Number.isSafeInteger(data.steps) || data.steps < 0 || data.steps > 1e9 ||
-      !["natural", "valley", "basin", "ridge"].includes(data.preset)) fail();
+      !isTerrainPreset(data.preset)) fail();
   const fields = {};
   for (const name of SESSION_FIELDS) {
     const values = data.fields && data.fields[name];

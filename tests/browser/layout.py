@@ -62,7 +62,7 @@ with sync_playwright() as p:
             check(page.locator('#panel-tab').get_attribute('aria-expanded') == 'true', f'{label}: mobile drawer exposes its expanded state')
         check(page.evaluate('sidePanel.scrollWidth <= sidePanel.clientWidth'), f'{label}: panel contents do not overflow horizontally')
         page.click('#terrain-settings > summary')
-        page.locator('#terrainSeed').fill('314159265')
+        page.locator('#terrain-browser').focus()
         check(page.evaluate('document.getElementById("terrain-settings").open'), f'{label}: added settings remain reachable')
         page.click('#simulation-budget > summary')
         page.locator('#statWater').scroll_into_view_if_needed()
@@ -72,7 +72,7 @@ with sync_playwright() as p:
         if width in [1440, 320, 768, 844]:
             page.screenshot(path=str(OUT / f'expanded-{label}.png'))
         if width < 768:
-            page.locator('#terrainSeed').focus(); page.keyboard.press('Escape'); page.wait_for_timeout(350)
+            page.locator('#nextTerrain').focus(); page.keyboard.press('Escape'); page.wait_for_timeout(350)
             check(page.evaluate('sidePanel.inert && document.activeElement === panelTab && scrollX === 0'), f'{label}: Escape from a field safely closes the drawer')
     after = page.evaluate('({steps, time:simTime, water:getSimulationStats().water, seed:terrainSeed})')
     check(before == after, 'Layout changes and empty-source editing do not advance or regenerate the paused simulation')
@@ -102,9 +102,9 @@ with sync_playwright() as p:
     html = re.sub(r'(src|href)="\./([^"\s]+)"', lambda m: f'{m[1]}="{base}{m[2]}"', html)
     served.set_content(html,wait_until='networkidle')
     served.click('#pause')
-    check(served.evaluate('terrainPreset === "natural" && typeof getSimulationStats === "function"'), 'Multi-file HTML initializes with its separately loaded local assets')
+    check(served.evaluate('Object.hasOwn(TERRAIN_CATALOG, terrainPreset) && typeof getSimulationStats === "function"'), 'Multi-file HTML initializes with its separately loaded local assets')
     check(served.locator('.layer-item').count()==6 and served.locator('#pauseIcon').get_attribute('data-icon')=='play' and served.locator('#pauseIcon path').count()>0, 'Multi-file entry point loads layer controls and Lucide icons')
-    check(len(served_requests)==21 and not served_errors and not bad_responses and all(url.startswith(base) for url in served_requests), 'All 21 separate script/style assets load through local fulfillment without errors')
+    check(len(served_requests)==22 and not served_errors and not bad_responses and all(url.startswith(base) for url in served_requests), 'All 22 separate script/style assets load through local fulfillment without errors')
     served.screenshot(path=str(OUT / 'multi-file.png'))
     served.close()
     report = {'passed':True, 'browser':browser.version, 'checks':checks, 'layouts':layouts, 'pageErrors':errors, 'networkRequests':requests, 'entryPointMode':'injected HTML + intercepted local assets (no HTTP server)', 'entryPointErrors':served_errors, 'entryPointRequests':served_requests, 'httpErrors':bad_responses, 'limitation':'Top-level localhost navigation is blocked by the container browser policy; native file opening on Windows is not tested.'}

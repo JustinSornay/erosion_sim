@@ -4,17 +4,21 @@
 
 | Commande | Ce qu'elle verifie |
 | --- | --- |
-| `npm test` | 20 tests : eau, sédiments, sources, rotation du relief, lac au repos, roche de fond, determinisme et sauvegarde |
+| `npm test` | 43 tests : physique, reliefs, historique, stockage et sauvegardes |
 | `npm run test:baseline` | Egalite exacte des 9 buffers physiques a 1000 pas avec la reference v2 |
 | `npm run test:long` | Quatre scenarios, 45 000 pas + 1 500 pas apres arret de source |
-| `npm run test:browser` | Construction autonome et 28 controles de navigateur avec le vrai moteur |
+| `npm run test:browser` | Construction autonome et 47 contrôles de navigateur avec le vrai moteur |
+| `npm run test:navigation` | Navigation, molette, clavier, sauvegardes et redémarrage de l'application |
+| `npm run test:layout` | 85 contrôles sur 8 tailles de fenêtre et chargement multi-fichiers |
 | `npm run test:legacy` | SHA-256 des 10 fichiers JS initiaux, ancrage de 39 scripts historiques et determinisme du moteur archive |
 | `node tests/regression/source-injection.js` | Centre, bords et coins ; debit injecte conserve |
 | `node tests/regression/source-routing-stability.js` | La source reste a l'endroit clique quand le relief change |
 | `node tests/regression/physics-determinism.js 1000` | Deux executions donnent exactement les memes champs |
 | `npm run benchmark` | Temps des phases du moteur courant, sans rendu |
 
-Les rapports effectifs de cette livraison sont dans `generated/v2-validation/`.
+Les rapports de cette livraison sont dans `generated/terrain-validation/` et
+`generated/design-validation/`. Les essais longs et les diagnostics historiques
+ne sont pas relancés pour cette modification de navigation.
 Les erreurs maximales des essais longs sont mesurees a chaque tranche de 1000 pas ;
 le transport verifie en plus la positivite de la quantite d'eau restante a chaque pas.
 Une comparaison binaire seule ne suffit pas : les invariants et comportements ont
@@ -80,3 +84,28 @@ Les tests Chromium s'exécutent sans accès au réseau. Le test multi-fichiers
 charge les scripts et feuilles de style originaux via interception locale ;
 la navigation vers un serveur localhost est bloquée par la politique du navigateur
 du conteneur. Cela ne constitue pas un test de double-clic sous Windows.
+
+## Navigation et reliefs 2.1.0
+
+`regression/terrain-navigation.test.js` ajoute 31 tests aux 20 tests physiques.
+Les formes sont testées sur plusieurs graines, les chemins descendants sur
+toutes les familles et échelles sur de vrais pas de simulation.
+La référence physique v2 et les empreintes de l'ancien moteur restent inchangées.
+
+`browser/navigation.py` vérifie les interactions réelles (clic, clavier, molette,
+import JSON et mobile). Les redémarrages utilisent sept pages neuves et un backend
+Storage injecté ; ce n'est pas un test de rechargement natif. Le stockage bloqué,
+plein ou invalide est aussi couvert dans les tests Node.
+
+Dans un environnement sans registre npm accessible, construire le HTML avec
+`npm run build -- --skip-icons`, puis lancer directement les trois scripts Python.
+Le build normal des icônes n'a pas été relancé dans cette livraison, car les
+paquets npm ne sont pas accessibles ; le bundle Lucide livré est inchangé.
+
+### Réintégration du terrain naturel (2.1.1)
+
+`npm test` vérifie la fidélité des hauteurs du générateur naturel historique
+avec quatre empreintes de grilles, la conservation des sauvegardes et la
+migration non destructive des historiques 2.1.0. Le contrôle navigateur
+`tests/browser/navigation.py` visite une génération classique, vérifie le
+sous-titre et son retour exact via précédent/suivant.

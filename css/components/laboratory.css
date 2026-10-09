@@ -12,7 +12,7 @@ body { height: 100dvh; }
 button, input, select { font: inherit; }
 button { cursor: pointer; }
 button, select, input { color: var(--text-primary); }
-button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible, canvas:focus-visible {
+button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible, canvas:focus-visible, .terrain-browser:focus-visible {
   outline: 2px solid var(--water); outline-offset: 3px;
 }
 .icon { display: inline-block; width: 1em; height: 1em; flex-shrink: 0; vertical-align: middle; }
@@ -63,21 +63,27 @@ button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-v
 .panel-details > summary { padding: 4px 0; font-size: 11px; color: var(--text-muted); cursor: pointer; }
 .panel-details > summary:hover, .panel-details[open] > summary { color: var(--text-primary); }
 .detail-content { display: flex; flex-direction: column; gap: 10px; padding-top: 10px; }
-.setup-grid, .settings-inline { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px; }
+.settings-inline { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px; }
 label { display: grid; gap: 5px; font-size: 11px; color: var(--text-muted); }
 input:not([type="range"]):not([type="checkbox"]):not([type="file"]), select {
   min-width: 0; background: var(--bg-control); border: 1px solid var(--border); border-radius: 6px;
 }
-.setup-grid input, .setup-grid select, .settings-inline select { width: 100%; font-size: 11px; padding: 6px; }
+.settings-inline select { width: 100%; font-size: 11px; padding: 6px; }
 .button-pair { display: flex; gap: 8px; }
 .button-pair > button { flex: 1; min-width: 0; }
 .text-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 7px 8px; background: var(--bg-control); border: 1px solid var(--border); border-radius: 6px; color: var(--text-primary); font-size: 11px; }
 .text-btn:hover { background: #383734; border-color: #55524c; }
 .text-btn .icon { width: 14px; height: 14px; }
-.demo-btn { color: var(--accent); }
-.check-label { display: flex; align-items: center; gap: 8px; color: var(--text-primary); line-height: 1.5; }
-.check-label input { accent-color: var(--accent); margin: 0; }
-#terrainCaption { margin: 0; font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); overflow-wrap: anywhere; }
+.terrain-browser { display: grid; grid-template-columns: 32px minmax(0, 1fr) 32px; align-items: center; gap: 6px; padding: 4px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg-control); }
+.terrain-arrow { width: 32px; height: 36px; padding: 0; border-color: transparent; background: transparent; }
+#nextTerrain .icon { transform: rotate(180deg); }
+.terrain-arrow:disabled { opacity: .3; cursor: default; }
+.terrain-arrow:disabled:hover { background: transparent; border-color: transparent; }
+.terrain-current { display: flex; flex-direction: column; align-items: center; gap: 3px; min-width: 0; text-align: center; }
+#terrainName { font-size: 11px; font-weight: 500; }
+#terrainPosition { font-family: var(--font-mono); font-size: 9px; color: var(--text-muted); }
+#terrainCaption { margin: 0; font-size: 11px; line-height: 1.5; color: var(--text-muted); }
+.terrain-help { margin: -3px 0 0; font-size: 10px; line-height: 1.6; color: var(--text-muted); }
 .metrics { display: flex; flex-direction: column; gap: 6px; }
 .metrics > div { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
 .metrics span { font-size: 11px; color: var(--text-muted); }

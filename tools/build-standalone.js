@@ -2,6 +2,11 @@ const fs = require('node:fs');
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 // Bundle only the selected Lucide icons; both entry points must work without a network.
+// --skip-icons reuses the committed bundle for offline HTML/CSS/engine edits.
+// Do not use this flag after changing UiIcons.js or the Lucide dependency.
+if (process.argv.includes('--skip-icons')) {
+  if (!fs.existsSync(path.join(root, 'js/ui/icons.js'))) throw new Error('The local icon bundle is missing. Run npm ci and npm run build.');
+} else {
 require('esbuild').buildSync({
   entryPoints: [path.join(root, 'js/ui/00-Helpers/UiIcons.js')],
   outfile: path.join(root, 'js/ui/icons.js'),
@@ -16,6 +21,7 @@ require('esbuild').buildSync({
       '\n*/',
   },
 });
+}
 let html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const scripts = [];
 html = html.replace(/^[ \t]*<script defer src="\.\/([^"]+)"><\/script>/gm, (_, file) => {

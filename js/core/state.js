@@ -5,7 +5,7 @@ let flowTo, accum, accumSmooth, sortIdx, drainReady;
 let activeCell, activeVel, maxActiveQ, activeCellsList, activeCellsCount;
 let sourceProtectionMask;
 let sources = [];
-let steps = 0, simTime = 0, terrainSeed = 314159265, terrainPreset = "valley";
+let steps = 0, simTime = 0, terrainSeed = 0, terrainPreset = "headwaters";
 const NP = 260;
 let px, py, pAlive;
 const DEFAULT_SIMULATION_OPTIONS = Object.freeze({

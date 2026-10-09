@@ -58,7 +58,7 @@ function loop(now) {
 }
 
 document.addEventListener("visibilitychange", resetClock);
-// The historical natural terrain remains the first view; the valley is an optional demo.
-genTerrain({ seed: 314159265, preset: "natural" });
+// Each opening explores a fresh recipe, with older reliefs still reachable.
+genTerrain(terrainHistory.start());
 syncTerrainControls(); refreshSourceList(); setMode("composite"); updateMetrics();
 requestAnimationFrame(loop);

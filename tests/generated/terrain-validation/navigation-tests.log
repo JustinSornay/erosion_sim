@@ -1,0 +1,44 @@
+PASS: River demo, erosion checkbox, preset menu, seed, Generate and Replay controls are removed
+PASS: The app opens on a new erodible landscape without a hidden demo source
+PASS: Previous is disabled at the beginning of history
+PASS: The current relief name is shown without an editable seed
+PASS: Both navigation arrows reuse the bundled Lucide icon geometry
+PASS: Next produces a genuinely different family and a clean simulation
+PASS: Previous restores the exact initial relief, not another random terrain
+PASS: Reaching the first relief preserves keyboard focus when Previous becomes disabled
+PASS: Previous never wraps around or invents a terrain
+PASS: Keyboard navigation reuses the existing forward history
+PASS: Held arrow keys do not rapidly destroy several generations
+PASS: The scene contains real simulated water before navigation
+PASS: Changing terrain resets water, sources, time and budgets together
+PASS: Navigation preserves pause, speed, rain, boundaries and the chosen visual mode
+PASS: An unfocused selector does not steal wheel scrolling or change the relief
+PASS: A fast wheel burst advances one relief rather than twenty
+PASS: Line-mode mouse wheels can return to the previous relief
+PASS: Ctrl+wheel remains available for browser zoom
+PASS: Leaving the selector disarms the wheel without stealing keyboard focus
+PASS: Arrow keys outside the relief selector never regenerate the scene
+PASS: The existing floating regeneration button uses the same history without resuming playback
+PASS: A new-relief save restores exact time and synchronizes navigation history
+PASS: Imported relief names remain synchronized with the physical state
+PASS: Old frozen saves restore faithfully even though the checkbox is gone
+PASS: A new relief restores active erosion instead of inheriting an invisible old freeze
+PASS: The new compact relief selector fits the 320px mobile layout
+PASS: Touch-sized navigation buttons remain usable on mobile
+PASS: Storage-backed startup 1 advances instead of replaying the initial seed
+PASS: Storage-backed startup 2 advances instead of replaying the initial seed
+PASS: Startup 2 retains access to the previous opening
+PASS: Storage-backed startup 3 advances instead of replaying the initial seed
+PASS: Startup 3 retains access to the previous opening
+PASS: Storage-backed startup 4 advances instead of replaying the initial seed
+PASS: Startup 4 retains access to the previous opening
+PASS: Storage-backed startup 5 advances instead of replaying the initial seed
+PASS: Startup 5 retains access to the previous opening
+PASS: Storage-backed startup 6 advances instead of replaying the initial seed
+PASS: Startup 6 retains access to the previous opening
+PASS: Storage-backed startup 7 advances instead of replaying the initial seed
+PASS: Startup 7 retains access to the previous opening
+PASS: Seven fresh application lifecycles produce seven distinct relief seeds
+PASS: Repeated openings explore all five families before repeating one
+PASS: Navigation and startup checks run offline without JavaScript errors or network requests
+PASS: 43 terrain navigation checks

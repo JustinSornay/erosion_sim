@@ -1,0 +1,16 @@
+{
+  "version": "2.0.2",
+  "nodeTests": 43,
+  "browserChecks": 47,
+  "layoutChecks": 85,
+  "navigationChecks": 43,
+  "physicalBaseline": "9 fields bit-identical at 1000 steps",
+  "legacy": "10 JS hashes intact; 39 historical scripts pinned; archived engine deterministic",
+  "build": "npm run build -- --skip-icons; existing Lucide bundle reused without modification",
+  "limitations": [
+    "No native Windows or direct file/HTTP navigation test (managed browser policy).",
+    "Startup persistence tested with 100 Node lifecycles and 7 real application pages with injected Storage.",
+    "npm registry inaccessible; icon dependencies not installed or rebuilt. No icon source or bundle change.",
+    "Long-run historical research was not rerun; simulation solver unchanged."
+  ]
+}
