@@ -1,11 +1,13 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const root = path.resolve(__dirname, '../..');
-const scripts = ['core/config', 'core/math', 'core/state', 'simulation/terrain', 'core/terrain-history', 'simulation/simulation', 'simulation/drainage', 'core/session'];
+const scripts = ['core/config', 'core/math', 'core/state', 'simulation/terrain', 'simulation/water-landscapes', 'core/terrain-history', 'simulation/simulation', 'simulation/drainage', 'simulation/scenes', 'core/session'];
 const source = scripts.map(file => fs.readFileSync(path.join(root, 'js', file + '.js'), 'utf8')).join('\n');
 function createEngine(options = {}) {
   return new Function(`${source}
     return {
+      generateScene, getSceneProfile, setSceneRain, rainAppearance, submergedComponent,
+      marine(){return {level:seaLevel, flux:seaFlux};},
       createTerrainHistory, terrainCatalog: TERRAIN_CATALOG,
       init: genTerrain, save: exportSimulation, load: restoreSimulation, step, stats: getSimulationStats, resetBudgets, injectSources,
       flux: updateFluxes, transport: transportWaterAndSediment,

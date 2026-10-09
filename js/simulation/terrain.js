@@ -18,10 +18,20 @@ const TERRAIN_CATALOG = Object.freeze({
   mesas: { name: "Mesas et buttes", description: "Des plateaux isolés émergent d'une plaine plus basse et découpée." },
   cuesta: { name: "Cuestas", description: "De longs escarpements asymétriques structurent le paysage en bandes inclinées." },
   braided: { name: "Chenaux multiples", description: "Une grande plaine est parcourue par plusieurs bras qui se divisent et se rejoignent." },
+  island: { name: "Île océanique", description: "Une île montagneuse entourée d'une mer profonde et de hauts-fonds." },
+  archipelago: { name: "Archipel", description: "Plusieurs îles et îlots séparés par des détroits et des baies." },
+  coast: { name: "Côte & criques", description: "Un littoral irrégulier, des caps rocheux et des anses ouvertes sur la mer." },
+  estuary: { name: "Estuaire", description: "Une vallée fluviale s'élargit au contact de la mer, entre des rives basses." },
+  fjord: { name: "Fjord", description: "Un bras de mer profond entre des versants escarpés et des vallées secondaires." },
+  lagoon: { name: "Lagune côtière", description: "Une eau peu profonde derrière un cordon littoral, reliée à la mer par une passe." },
+  atoll: { name: "Atoll", description: "Un chapelet d'îlots autour d'un lagon, avec des passes vers l'océan." },
+  lake: { name: "Lac de vallée", description: "Un lac allongé dans un bassin entouré de versants et de vallons." },
+  craterlake: { name: "Lac de cratère", description: "Un plan d'eau calme au creux d'un relief annulaire irrégulier." },
   // The original procedural topography is a first-class discovery choice again.
   // Its sampler below MUST stay on the untouched historical fbm path.
   natural: { name: "Terrain naturel", description: "Le relief aléatoire et irrégulier des toutes premières générations." },
 });
+const WATER_TERRAIN_KEYS = new Set(['island', 'archipelago', 'coast', 'estuary', 'fjord', 'lagoon', 'atoll', 'lake', 'craterlake']);
 const LEGACY_CLOSEUP_PRESETS = new Set(['headwaters', 'meanders', 'hillside', 'confluence', 'spillway']);
 const REGIONAL_ONLY_PRESETS = new Set(['massif', 'tableland', 'lowlands', 'mesas', 'braided']);
 const LEGACY_TERRAINS = Object.freeze({
@@ -355,6 +365,8 @@ function genTerrain(options = {}) {
     throw new Error("La graine doit etre un entier entre 0 et 2147483647.");
   const preset = options.preset || terrainPreset;
   if (!isTerrainPreset(preset)) throw new Error("Terrain inconnu.");
+  sceneState = null; seaLevel = null;
+  seaFlux = new Float64Array(4 * N); seaIncoming = new Float64Array(NN);
   terrainSeed = requestedSeed;
   terrainPreset = preset;
   seed = terrainSeed;
@@ -398,7 +410,8 @@ function genTerrain(options = {}) {
   // "natural" intentionally uses the original fractal-height branch below,
   // rather than the regional or valley samplers used by the eight new families.
   const sampleLandscape = Object.hasOwn(TERRAIN_CATALOG, preset) && preset !== "natural"
-    ? (terrainViewIndex(terrainSeed) === 0 && LEGACY_CLOSEUP_PRESETS.has(preset) && !REGIONAL_ONLY_PRESETS.has(preset)
+    ? (WATER_TERRAIN_KEYS.has(preset) ? waterLandscapeSampler(preset, terrainSeed, terrainViewIndex(terrainSeed))
+      : terrainViewIndex(terrainSeed) === 0 && LEGACY_CLOSEUP_PRESETS.has(preset) && !REGIONAL_ONLY_PRESETS.has(preset)
       ? landscapeSampler(preset, terrainSeed) // Retain the familiar close-ups for the original discovery presets.
       : regionalLandscapeSampler(preset, terrainSeed, terrainViewIndex(terrainSeed)))
     : null;

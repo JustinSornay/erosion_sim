@@ -1,6 +1,6 @@
 const TERRAIN_HISTORY_KEY = "erosion.terrain-browser.v1";
 const TERRAIN_HISTORY_LIMIT = 60;
-const TERRAIN_CATALOG_REVISION = 3;
+const TERRAIN_CATALOG_REVISION = 4;
 function terrainEntropy() {
   if (globalThis.crypto && typeof globalThis.crypto.getRandomValues === "function") {
     return globalThis.crypto.getRandomValues(new Uint32Array(1))[0] & 0x7fffffff;
@@ -30,6 +30,7 @@ function createTerrainHistory({ storage = null, entropy = terrainEntropy } = {})
         const additions = [];
         if (!saved.catalogRevision || saved.catalogRevision < 2) additions.push('natural');
         if (!saved.catalogRevision || saved.catalogRevision < 3) additions.push('canyon', 'badlands', 'glacial', 'karst', 'caldera', 'fan', 'mesas', 'cuesta', 'braided');
+        if (!saved.catalogRevision || saved.catalogRevision < 4) additions.push(...WATER_TERRAIN_KEYS);
         const missing = additions.filter(preset => Object.hasOwn(TERRAIN_CATALOG, preset) && !bag.includes(preset));
         if (missing.length) bag = missing.concat(bag);
       }
@@ -57,6 +58,12 @@ function createTerrainHistory({ storage = null, entropy = terrainEntropy } = {})
       for (let i = bag.length - 1; i > 0; i--) {
         const j = Math.floor(random() * (i + 1)); [bag[i], bag[j]] = [bag[j], bag[i]];
       }
+    }
+    // A first visit opens a ready-to-explore aquatic card. This is a swap,
+    // not an extra draw: every family still occurs exactly once per bag.
+    if (!entries.length) {
+      const aquatic = bag.findIndex(preset => WATER_TERRAIN_KEYS.has(preset));
+      if (aquatic > 0) [bag[0], bag[aquatic]] = [bag[aquatic], bag[0]];
     }
     const previous = entries.at(-1);
     if (bag.length > 1 && previous && bag[0] === previous.preset) [bag[0], bag[1]] = [bag[1], bag[0]];

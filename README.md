@@ -1,180 +1,116 @@
-# Érosion — Sandbox Hydrographique
+# Érosion — Sandbox Hydrographique 2.3.0
 
-Une simulation locale d'eau, de transport de sédiments, d'erosion et de depot.
-Le relief evolue réellement : l'image n'est pas une animation preenregistree.
+Des cartes prêtes à explorer, avec leur eau, leur pluie et leurs sources.
+Le paysage évolue réellement dans le moteur : le bleu n'est pas une animation préenregistrée.
 
-## Demarrer
+## Ouvrir
 
-Ouvrir `index.html` dans le navigateur, ou double-cliquer sur `start.cmd` sous
-Windows. Aucun serveur, installation npm, compte ou connexion Internet n'est
-necessaire pour utiliser l'application.
+Ouvrir `index.html`, ou double-cliquer sur `start.cmd` sous Windows.
+`dist/erosion-simulation.html` contient l'application complète dans un seul fichier.
+L'application n'a besoin ni de Node, ni de npm, ni d'un compte, ni d'une connexion pour fonctionner.
+Une politique d'entreprise peut toutefois interdire l'ouverture de fichiers HTML locaux.
 
-Le fichier **`dist/erosion-simulation.html`** contient aussi toute l'application
-dans un seul HTML, sans fichiers annexes : c'est la version a partager facilement.
+## Explorer
 
-Cliquer sur le terrain pour ajouter une source. Ouvrir **Terrain & simulation**
-pour parcourir les reliefs, puis passer à **Érosion / dépôts** pour observer
-le creusement (orange) et les accumulations (vert).
+Le sélecteur de carte est maintenant en haut du panneau, toujours accessible.
+Les chevrons, les flèches du clavier et la molette après un clic dans ce sélecteur
+parcourent le même historique. Le bouton suivant de la barre flottante fait de même.
 
-## Reliefs et navigation (2.1.1)
+**27 familles** : les 18 familles précédentes, dont le Terrain naturel historique,
+plus neuf familles en eau : Île océanique, Archipel, Côte & criques, Estuaire,
+Fjord, Lagune côtière, Atoll, Lac de vallée et Lac de cratère.
+Certaines anciennes cartes à dépressions peuvent aussi commencer avec un bassin en eau.
+Les terres sèches ne disparaissent pas. Les trois cadrages procéduraux restent présents ;
+le Terrain naturel conserve sa génération classique.
 
-Le design existant est conservé : panneau compact de 320 px, couleurs,
-typographie, couches visibles, barre flottante, accordéons et comportement mobile.
-Les pictogrammes Lucide sont toujours intégrés localement. La nouvelle navigation
-réutilise leurs chevrons et les styles du panneau, sans nouvelle dépendance.
+Une première visite propose une carte en eau, puis toutes les familles sont explorées
+par sacs mélangés. Chaque ouverture avance la graine. Les 60 dernières recettes sont
+conservées si le navigateur autorise le stockage local. Sans stockage, le parcours
+fonctionne en mémoire et une nouvelle graine est choisie au prochain démarrage.
+Le stockage est propre à l'origine ou au fichier selon le navigateur : déplacer
+l'application dans un nouveau dossier peut donner un historique distinct.
 
-**Lancer une rivière** et la case **Le terrain peut s'éroder** ont été retirés.
-Le formulaire relief / graine / générer / rejouer est remplacé par une ligne
-**précédent / nom du relief / suivant**. Les sections secondaires restent repliées
-au départ ; aucune nouvelle interface n'est ajoutée sur le terrain.
+**Précédent et Recommencer retrouvent l'état initial de la carte**, avec son eau,
+sa pluie et ses sources, pas la simulation abandonnée dessus.
+Le temps, les sédiments mobiles et les bilans repartent de zéro ; la pause, la vitesse
+et la vue choisie sont conservées. Utiliser Sauvegarder pour conserver une évolution.
 
-Chaque ouverture commence sur un nouveau relief. L'application garde localement
-les recettes des **60 derniers reliefs**, quand le navigateur autorise le stockage.
-Elle conserve aussi l'avancement de la séquence : rafraîchir ne reprend pas une
-liste fixe depuis le début. Sans stockage, la navigation fonctionne en mémoire et
-chaque ouverture utilise une nouvelle valeur aléatoire.
+## Pluie et sources
 
-Les neuf familles sont **Vallons**, **Vallée sinueuse**, **Versants**,
-**Confluence**, **Bassin ouvert**, **Massif montagneux**, **Plateaux entaillés**,
-**Plaine fluviale** et **Terrain naturel**. L'ordre est mélangé ; toutes les familles sont
-proposées avant une répétition. Orientation, pentes et structures varient.
-**Terrain naturel** retrouve exactement le générateur fractal des premières versions :
-les cartes y sont plus imprévisibles et comportent parfois des creux fermés.
-Elles sont présentées comme « Génération classique », pas comme une vue
-dézoomée : leur échelle n'a pas été modifiée. Une migration discrète permet de
-retrouver ce relief dès le prochain parcours pour les historiques de 2.1.0.
+Le bouton de pluie fait uniquement **marche / arrêt**. L'intensité est fixée par
+la recette de la carte, avec quatre pictogrammes : bruine, pluie fine, pluie soutenue,
+averse. L'icône reste lisible, grisée lorsque la pluie est coupée.
+Les cartes arides commencent plus souvent sans pluie ; les cartes humides plus souvent
+avec pluie. Une carte sèche autorise toujours l'activation de son intensité prévue.
+Changer de carte applique son propre réglage de départ, sans hériter du bouton précédent.
 
-Chaque nouvelle génération régionale choisit automatiquement entre **vue rapprochée**,
-**vue paysage** et **vue d'ensemble**. Le cadrage figure discrètement sous le
-nom du relief : aucune nouvelle commande ni modification de la caméra n'est
-nécessaire. Les vues larges ne grossissent pas simplement un seul massif :
-elles incluent plusieurs sommets, terrasses, vallées, tributaires ou dépressions
-suivant le type de terrain. Les reliefs régionaux ouverts offrent des écoulements vers
-les limites et les bassins gardent des cuvettes susceptibles de retenir l'eau.
-Le terrain naturel historique conserve quant à lui ses cuvettes spontanées.
-Aucune eau, source ou rivière n'est insérée automatiquement.
+Une carte peut avoir **zéro à trois sources préconfigurées**. Leur placement privilégie
+un parcours descendant vers une sortie ou un plan d'eau, loin des bords et hors de l'eau.
+Le débit tient compte du type de paysage, du bassin amont et de la longueur du parcours.
+Aucune source n'est forcée lorsque les candidats sont inadaptés.
 
-Voir `docs/RELIEFS_ET_NAVIGATION.md` pour le périmètre et les vérifications.
-`docs/AJUSTEMENT_INTERFACE.md` conserve le compte rendu de la version 2.0.1.
+Un clic sur une terre ajoute une source au débit adapté à la carte ; un clic sur
+une source l'active ou la coupe. Le panneau et le menu contextuel permettent aussi de
+la retirer. Il n'y a plus de saisie numérique du débit. Le débit exact reste
+consultable dans l'infobulle de son niveau Faible / Modéré / Soutenu.
+Retirer les sources ne supprime pas l'eau présente.
 
-## Manipuler
+## Interface
 
-Un clic ajoute une source exactement dans la cellule visee. Un clic pres d'une
-source existante l'active ou la coupe. Son debit se modifie dans le panneau de
-droite ; le clic droit donne aussi acces aux commandes de source.
+La palette, le panneau compact, la typographie, les contours, les ombres et la barre
+flottante sont conservés. Le panneau donne priorité à la carte et à la pluie.
+Les sources sont regroupées ; **Affichage** et **Détails de la simulation** sont repliés.
+Affichage propose Paysage ou Érosion & dépôts, puis trois repères facultatifs :
+courbes du relief, courants, traceurs. Le réseau potentiel D8 reste dans les diagnostics.
 
-Les boutons **précédent / suivant** parcourent les reliefs. Après un clic dans
-le sélecteur, les flèches gauche / droite du clavier et la molette font de même.
-La molette n'est interceptée que dans ce contrôle explicitement activé, jamais sur
-l'ensemble du panneau ; Ctrl + molette reste disponible pour le zoom du navigateur.
-Le bouton circulaire existant dans la barre du bas rejoint le même parcours.
+La barre flottante ne contient plus que pause/reprise, vitesse et carte suivante.
+Un clic sur la vitesse parcourt ×1, ×2, ×5, ×10. Espace commande la lecture lorsque
+le focus n'est pas sur un autre contrôle. Sur mobile, Échap referme le panneau.
 
-**Changer de relief remet le terrain à son état initial et efface l'eau, les
-sédiments en suspension, les sources, le temps et les bilans.** Revenir en arrière
-retrouve exactement le relief initial, pas la simulation abandonnée dessus.
-Utiliser **Sauvegarder** pour conserver un état de simulation complet.
-La pause, la vitesse, la pluie, les limites et le mode de visualisation sont
-conservés pendant la navigation. Les nouveaux terrains sont toujours érodables.
+## Eau réelle, modèle simplifié
 
-Les limites peuvent être ouvertes (eau et sédiments sortent) ou fermées (ils
-restent, sauf évaporation). La pluie reste réglable. La suppression des sources
-laisse le terrain et l'eau existants. La barre espace met en pause ou reprend,
-hors des champs et boutons de formulaire.
+Les mers sont remplies depuis les bords connectés, sans noyer automatiquement les
+cuvettes isolées. Les lacs sont remplis dans leur bassin. Les niveaux initiaux sont
+horizontaux, les vitesses et flux initiaux nuls, et l'eau initiale figure dans le bilan.
+La profondeur est rendue dans la palette bleue existante pour distinguer hauts-fonds
+et eaux profondes.
 
-**Terrain (D8)** montre un drainage potentiel du terrain : ce n'est pas l'eau réelle
-et ce reseau ne pilote pas la simulation. Courbes topographiques et vecteurs de
-courant sont activables dans **Couches visuelles**, avec les courbes topographiques et les vecteurs de courant
-actifs par defaut, comme dans l'interface historique. Les traceurs sont decoratifs : les bilans reposent sur les
-champs physiques, pas sur des particules dessinees.
+La mer impose un niveau de référence **aux faces externes** de la grille. Entrées et
+sorties sont comptées ; la surface intérieure n'est jamais artificiellement remise à niveau.
+Un lac reste une réserve finie, qui évolue avec pluie, sources, évaporation et débordement.
 
-**Sauvegarder** exporte un JSON contenant le terrain, l'eau, les sédiments, les
-flux, les sources, les options et les bilans. **Ouvrir** restaure cet etat en pause.
-Les fichiers incompatibles ou invalides sont rejetes avant de modifier la session.
-La version 2 est requise ; le JSON n'est pas un format de sauvegarde de l'ancien moteur.
-Les anciennes sauvegardes v2, y compris les anciens reliefs et une érosion désactivée,
-restent lisibles sans altérer leur état physique. Passer ensuite à un autre relief
-réactive l'érosion. Les sauvegardes des nouveaux reliefs demandent la version 2.1.0
-ou ultérieure pour les trois nouvelles familles (2.0.2 pour les précédentes) pour être ouvertes.
+Il ne s'agit pas d'un simulateur océanographique : pas de vagues, marées, salinité,
+transport littoral par les vagues, ni réseau karstique souterrain. Les formes initiales
+ne constituent pas une simulation des processus géologiques qui les ont créées.
+Les unités sont non calibrées et ne représentent pas des mètres ou des années.
 
+## Sauvegardes
 
-## Lire les bilans
+Les nouveaux fichiers JSON sont en version 3 : champs physiques, options, climat de
+carte et flux aux limites marines. La reprise ne se contente pas de reproduire une image.
+Les sauvegardes version 2 restent importables, sans remplacer leurs sources ni leur
+pluie active personnalisée. Cette intensité importée devient le niveau fixe du bouton.
+Une importation ouvre la simulation en pause. Les anciennes versions de l'application
+ne peuvent pas lire les nouveaux fichiers version 3.
 
-La section repliable **Bilans & lecture** affiche l'eau presente, l'eau sortie, la matiere erodee et la matiere
-deposee cumulees. Cette meme section affiche les residus de bilan,
-l'evaporation et les sédiments sortis. Une matiere peut etre erodee puis deposee
-plusieurs fois : les cumuls d'echange ne sont pas le changement net de relief.
+## Construire et valider
 
-Les unites sont internes au modele. Le temps affiche est un temps de simulation,
-pas une duree geologique calibree. Cette application est un bac a sable de paysage,
-**pas un outil de prevision hydrologique**.
-
-## Verification et developpement
-
-L'application n'a aucune dependance d'execution. Les commandes ci-dessous utilisent
-Node.js 22 ou plus ; cette livraison a ete testee avec Node 22.16.0. Il n'y a pas de
-`npm install` a effectuer pour les tests du moteur.
+Node 22+ est requis pour les tests, pas pour utiliser l'application.
 
 ```sh
 npm test
 npm run test:baseline
 npm run test:legacy
-npm run test:long
-npm ci
-npm run build
-```
-
-`npm test` exécute 51 tests : conservation, comportement physique, nouveaux reliefs,
-compatibilité des sauvegardes, historique et stockage.
-`test:baseline` compare exactement les neuf champs a une reference v2 de 1000 pas.
-`test:legacy` verifie l'integrite du moteur historique et son determinisme :
-il ne pretend pas que ses anciennes references binaires sont coherentes.
-`test:long` execute 46 500 pas sur quatre scenarios, y compris un arret de source.
-
-Les tests navigateur demandent en plus Python et Playwright/Chromium :
-
-```sh
-python -m pip install playwright
-python -m playwright install chromium
+npm run build:offline
 npm run test:browser
-npm run test:layout
-npm run test:navigation
+npm run audit:scenes
 ```
 
-Ils chargent le HTML autonome en memoire et exercent les vrais clics, fichiers
-et calculs. `CHROMIUM_EXECUTABLE` permet de choisir un executable Chromium existant.
-Les parcours navigateur couvrent les interactions, huit tailles de fenêtre et la
-navigation entre reliefs. Le stockage est injecté pour les essais de redémarrage,
-car la politique du navigateur de test bloque les navigations directes file/HTTP.
-Les rechargements natifs et le double-clic sous Windows ne sont pas revendiqués.
+`build:offline` utilise le bundle d'icônes Lucide déjà livré. Les pictogrammes de
+pluie sont définis localement dans `js/ui/scene-icons.js`, sans dépendance externe.
+Pour reconstruire le bundle Lucide lui-même, utiliser `npm ci`, puis `npm run build`.
+Les tests navigateur nécessitent Python, Playwright et Chromium.
 
-Pour réassembler le HTML hors ligne après une modification du terrain ou de l'interface :
-
-```sh
-npm run build -- --skip-icons
-```
-
-Cette option réutilise `js/ui/icons.js`, déjà livré. Après toute modification de
-`UiIcons.js` ou de Lucide, utiliser `npm ci` puis le build normal pour reconstruire
-les icônes. Les dépendances et le bundle d'icônes ne changent pas dans cette version.
-
-## Recherche preservee, choix explicites
-
-Lire **`docs/RECHERCHE_ET_VALIDATION.md`** pour les resultats, les compromis et les
-limites. **`tests/README.md`** distingue les tests v2 de la recherche historique.
-Les donnees générées de l'archive initiale sont conservées ; les nouveaux resultats
-de cette livraison sont dans **`tests/generated/terrain-validation/`** et
-**`tests/generated/design-validation/`**. Le moteur initial est fige dans
-`tests/fixtures/legacy-engine/`, avec ses empreintes SHA-256 et son commit d'origine.
-
-L'audit `npm run audit:legacy` reproduit notamment la creation artificielle de
-matiere dans l'ancien moteur et signale ses references binaires deja divergentes.
-Il ne reecrit aucune reference historique et n'est pas une validation de celles-ci.
-
-## Structure
-
-`js/core/` contient l'etat, les calculs et le format de sauvegarde ; `js/simulation/`
-contient le moteur, le terrain et les couches de visualisation du courant.
-`js/rendering/`, `js/ui/` et `css/` restent independants du calcul physique.
-`tools/build-standalone.js` compile les icônes Lucide avec esbuild, puis assemble le HTML autonome.
-`js/ui/icons.js` est généré et livré pour ouvrir `index.html` sans installation npm.
-Les scripts classiques sont charges avec `defer` dans leur ordre de dependance.
+Les résultats de cette version sont exclusivement dans
+`tests/generated/scenes-validation/`. Les autres rapports générés sont historiques.
+Voir `docs/CHANGEMENTS_2.3.0.md`, `docs/RELIEFS_ET_NAVIGATION.md` et `tests/README.md`.

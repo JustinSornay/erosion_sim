@@ -1,111 +1,60 @@
-# Tests v2 et recherche historique
+# Validation 2.3.0
 
-## Validation de la version livree
+## Commandes actives
 
-| Commande | Ce qu'elle verifie |
+| Commande | Périmètre |
 | --- | --- |
-| `npm test` | 43 tests : physique, reliefs, historique, stockage et sauvegardes |
-| `npm run test:baseline` | Egalite exacte des 9 buffers physiques a 1000 pas avec la reference v2 |
-| `npm run test:long` | Quatre scenarios, 45 000 pas + 1 500 pas apres arret de source |
-| `npm run test:browser` | Construction autonome et 47 contrôles de navigateur avec le vrai moteur |
-| `npm run test:navigation` | Navigation, molette, clavier, sauvegardes et redémarrage de l'application |
-| `npm run test:layout` | 85 contrôles sur 8 tailles de fenêtre et chargement multi-fichiers |
-| `npm run test:legacy` | SHA-256 des 10 fichiers JS initiaux, ancrage de 39 scripts historiques et determinisme du moteur archive |
-| `node tests/regression/source-injection.js` | Centre, bords et coins ; debit injecte conserve |
-| `node tests/regression/source-routing-stability.js` | La source reste a l'endroit clique quand le relief change |
-| `node tests/regression/physics-determinism.js 1000` | Deux executions donnent exactement les memes champs |
-| `npm run benchmark` | Temps des phases du moteur courant, sans rendu |
+| `npm test` | Physique, reliefs bruts, navigation, scènes hydrologiques, sauvegardes v2/v3. |
+| `npm run test:scenes` | Profils climatiques, placement des sources, mers/lacs, pluies figées, migration. |
+| `npm run test:baseline` | Comparaison binaire aux 9 champs de la référence historique à 1 000 pas. |
+| `npm run test:legacy` | Intégrité des dix fichiers initiaux, 39 lanceurs historiques et déterminisme de l'archive. |
+| `npm run build:offline` | HTML autonome reconstruit avec les icônes locales déjà livrées. |
+| `npm run test:browser` | Parcours réels Chromium, sauvegarde/import, pluie, sources, cartes et huit tailles de fenêtre. |
+| `npm run test:navigation` / `npm run test:layout` | Alias de la même suite navigateur unifiée ; ne pas additionner ses résultats. |
+| `npm run audit:scenes` | 576 cartes aquatiques échantillonnées et trois simulations de 2 000 pas. |
 
-Les rapports de cette livraison sont dans `generated/terrain-validation/` et
-`generated/design-validation/`. Les essais longs et les diagnostics historiques
-ne sont pas relancés pour cette modification de navigation.
-Les erreurs maximales des essais longs sont mesurees a chaque tranche de 1000 pas ;
-le transport verifie en plus la positivite de la quantite d'eau restante a chaque pas.
-Une comparaison binaire seule ne suffit pas : les invariants et comportements ont
-leurs propres tests, independamment des valeurs de la reference.
+Les résultats actuels sont dans **`generated/scenes-validation/`**.
+Lire `validation.md` pour les comptes et limites exacts.
+Les autres répertoires de rapports sont conservés comme historiques, pas comme
+résultats de cette version. Les trois anciens points d'entrée navigateur redirigent
+vers `browser/scenes.py` pour éviter de tester l'ancienne disposition du panneau.
 
-## References binaires
+## Stratégie
 
-La reference active est `fixtures/N192-conservative-v2/physics-1000.bin`, composee de
-neuf buffers Float64 consecutifs : b, d, s, u, v, fL, fR, fT, fB. Elle utilise le
-terrain naturel, graine 314159265, source (48,48), debit 2.2 et options v2 par defaut.
-La commande de comparaison ne cree ni ne modifie ce fichier. La regeneration est
-explicite : `node tests/regression/physics-regression.js 1000 --write-baseline` ;
-un fichier existant demande `--force`. Toute promotion doit d'abord passer les
-invariants et etre motivee, plutot que normaliser un resultat incorrect.
+`genTerrain` reste une API brute sèche utilisée par les régressions historiques.
+`generateScene` est l'API utilisée par l'interface et fait l'objet de tests séparés.
+Les cartes sont comparées à leur reconstruction exacte ; le contrôle ne se contente
+pas de constater que la graine ou le nom change.
 
-Les anciens fichiers `fixtures/N192/` et `fixtures/N192-incoming-source/` sont
-inchanges. Ils ne correspondent deja pas exactement au JS contenu dans l'archive
-initiale. `npm run audit:legacy` documente ces ecarts en lecture seule ;
-`regression/legacy-physics-regression.js` reste disponible pour exposer cet echec
-historique avec un code de sortie non nul. Il ne fait pas partie du passage de
-validation v2 et ne doit pas etre presente comme un test reussi.
+Les tests hydrostatiques désactivent explicitement sources, pluie et évaporation.
+Les tests forcés vérifient séparément les bilans d'eau et de solide, les flux marins
+entrants/sortants, la non-négativité et la reprise bit-à-bit après import JSON.
+Les 108 empreintes des terrains v2.2.0 viennent de l'archive reçue, pas d'une
+promotion des nouveaux résultats. Le fichier de référence physique n'est pas réécrit.
 
-## Recherche v1
+## Environnement et limites
 
-Les diagnostics et experiences historiques restent dans leurs repertoires.
-Leurs chargements de JS sont diriges vers `fixtures/legacy-engine/`, copie exacte
-et verifiable du moteur recu. Dans leurs anciens rapports, `CURRENT`, `production`
-ou `unchanged` designent cette version historique, **pas** le moteur v2 livre.
-Leur raisonnement et leurs sorties d'origine ne sont pas reecrits pour coller a v2.
+Calcul sous Node 22.16.0. Interface dans le vrai Chromium Linux via Playwright.
+La politique de ce navigateur interdit les navigations `file://` et HTTP local.
+Le **vrai HTML autonome** est donc chargé avec `page.set_content`. Les scripts de
+l'entrée source sont aussi assemblés dans l'ordre du document pour vérifier leur initialisation.
+Le moteur, le DOM et le rendu Canvas ne sont pas simulés.
 
-La recherche complete n'a pas ete relancee apres cette separation. Certaines
-experiences sont longues, injectent des variantes par remplacement de source
-et peuvent ne pas etre des suites a resultat vert. Les relancer peut reecrire
-leurs propres sorties générées : utiliser une copie de travail pour conserver
-l'evidence historique. Aucun de ces scripts ne doit modifier le JS applicatif.
+Les tests de persistance d'interface utilisent une implémentation de test de l'API
+Storage, car `about:blank` ne donne pas de stockage natif exploitable.
+Les transferts JSON par téléchargement et champ fichier sont réels.
+Ces tests ne valident pas le double-clic Windows, le comportement natif du stockage
+`file://` ni les autres navigateurs. Aucune politique du navigateur n'a été modifiée.
 
-L'ancien README des tests, qui marquait encore des experiences comme `Pending`,
-est conserve dans `../docs/HISTORIQUE_TESTS_V1.md`. Le rapport de finalisation
-s'appuie sur les sorties effectivement presentes, pas sur ces statuts devenus anciens.
+Le build avec reconstruction des icônes Lucide n'a pas pu être relancé ici : le
+registre npm est inaccessible par DNS. `build:offline` a été utilisé ; le bundle
+Lucide source n'a pas changé, et les nouveaux pictogrammes sont un fichier local distinct.
 
-## Environnement
+## Recherche ancienne
 
-Node 22.16.0 pour les tests de calcul ; Python 3.13.5 et Chromium 144.0.7559.96
-pour Playwright. Le navigateur de l'environnement bloque la navigation directe
-`file://` et HTTP local par politique d'administration. Les tests ont donc charge
-le contenu du **vrai fichier autonome** avec `page.set_content`, sans simulation
-de DOM ni moteur factice. Aucune politique du navigateur n'a ete modifiee.
-Les controles de telechargement JSON et de rechargement par champ fichier sont reels.
-Aucune requete reseau n'a ete observee pendant ce parcours.
-
-## Régression d'interface 2.0.1
-
-`npm run test:browser` conserve les contrôles physiques et les interactions v2,
-et vérifie aussi le titre compact, les couches visibles, les sections repliables,
-les SVG locaux et la navigation clavier : **42 contrôles**.
-
-`npm run test:layout` couvre **8 tailles de fenêtre**, les menus au bord du terrain,
-la barre flottante, les panneaux mobiles et le chargement séparé des ressources :
-**85 contrôles**. Les résultats sont dans `tests/generated/design-validation/`,
-séparément des résultats de finalisation v2 conservés.
-
-Les tests Chromium s'exécutent sans accès au réseau. Le test multi-fichiers
-charge les scripts et feuilles de style originaux via interception locale ;
-la navigation vers un serveur localhost est bloquée par la politique du navigateur
-du conteneur. Cela ne constitue pas un test de double-clic sous Windows.
-
-## Navigation et reliefs 2.1.0
-
-`regression/terrain-navigation.test.js` ajoute 31 tests aux 20 tests physiques.
-Les formes sont testées sur plusieurs graines, les chemins descendants sur
-toutes les familles et échelles sur de vrais pas de simulation.
-La référence physique v2 et les empreintes de l'ancien moteur restent inchangées.
-
-`browser/navigation.py` vérifie les interactions réelles (clic, clavier, molette,
-import JSON et mobile). Les redémarrages utilisent sept pages neuves et un backend
-Storage injecté ; ce n'est pas un test de rechargement natif. Le stockage bloqué,
-plein ou invalide est aussi couvert dans les tests Node.
-
-Dans un environnement sans registre npm accessible, construire le HTML avec
-`npm run build -- --skip-icons`, puis lancer directement les trois scripts Python.
-Le build normal des icônes n'a pas été relancé dans cette livraison, car les
-paquets npm ne sont pas accessibles ; le bundle Lucide livré est inchangé.
-
-### Réintégration du terrain naturel (2.1.1)
-
-`npm test` vérifie la fidélité des hauteurs du générateur naturel historique
-avec quatre empreintes de grilles, la conservation des sauvegardes et la
-migration non destructive des historiques 2.1.0. Le contrôle navigateur
-`tests/browser/navigation.py` visite une génération classique, vérifie le
-sous-titre et son retour exact via précédent/suivant.
+Les diagnostics et expériences v1 pointent toujours sur `fixtures/legacy-engine/`.
+Leurs anciens rapports et baselines ne deviennent pas des vérifications de v2.3.0.
+La comparaison aux vieilles baselines v1 est un diagnostic connu comme divergent,
+indépendant de la référence active `fixtures/N192-conservative-v2/physics-1000.bin`.
+La recherche v1 complète et la suite historique `test:long` ne sont pas relancées
+pour cette livraison ; les nouveaux essais longs aquatiques sont dans l'audit dédié.

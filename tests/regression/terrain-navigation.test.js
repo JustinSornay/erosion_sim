@@ -27,8 +27,8 @@ function routeStats() {
   return { drainage: reachesEdge.reduce((a, b) => a + b, 0) / b.length, longest: Math.max(...lengths), pits };
 }
 
-test('The discovery catalogue combines the original natural terrain with seventeen curated landscape families', () => {
-  assert.deepEqual(presets, ['headwaters', 'meanders', 'hillside', 'confluence', 'spillway', 'massif', 'tableland', 'lowlands', 'canyon', 'badlands', 'glacial', 'karst', 'caldera', 'fan', 'mesas', 'cuesta', 'braided', 'natural']);
+test('The discovery catalogue combines the original natural terrain with twenty-six curated landscape families', () => {
+  assert.deepEqual(presets, ['headwaters', 'meanders', 'hillside', 'confluence', 'spillway', 'massif', 'tableland', 'lowlands', 'canyon', 'badlands', 'glacial', 'karst', 'caldera', 'fan', 'mesas', 'cuesta', 'braided', 'island', 'archipelago', 'coast', 'estuary', 'fjord', 'lagoon', 'atoll', 'lake', 'craterlake', 'natural']);
   for (const info of Object.values(e.terrainCatalog)) {
     assert.ok(info.name.length > 0 && info.description.length > 15);
   }
@@ -72,7 +72,7 @@ for (const preset of presets) {
 }
 
 test('Open landscapes have continuous downhill routes instead of trapping most water in pits', () => {
-  const engineeredOpen = presets.filter(preset => !['spillway', 'natural', 'karst', 'caldera', 'canyon', 'mesas'].includes(preset));
+  const engineeredOpen = presets.filter(preset => !['spillway', 'natural', 'karst', 'caldera', 'canyon', 'mesas', 'island', 'archipelago', 'coast', 'estuary', 'fjord', 'lagoon', 'atoll', 'lake', 'craterlake'].includes(preset));
   for (const preset of engineeredOpen) for (const seed of [0, 1, 2, 3, 10, 100, 7654321, 12345678, 314159265, 271828182, 1000000000, 2147483647]) {
     e.init({ seed, preset }); const stats = routeStats();
     assert.ok(stats.drainage > .65, `${preset}/${seed}: ${stats.drainage} drainage fraction`);
@@ -200,7 +200,7 @@ test('Pre-existing 2.1.1 histories discover newly added families without losing 
   assert.equal(restored.seed, 371);
   assert.deepEqual(upgraded.previous(), { seed: 63, preset: 'headwaters', number: 1 });
   assert.deepEqual(upgraded.next(), restored);
-  assert.equal(JSON.parse(store.getItem(KEY)).catalogRevision, 3);
+  assert.equal(JSON.parse(store.getItem(KEY)).catalogRevision, 4);
   // A second browser launch must not insert the same family into the bag again.
   const again = makeHistory(store).start();
   assert.ok(presets.includes(again.preset));

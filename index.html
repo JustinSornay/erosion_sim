@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark" />
+    <meta name="application-version" content="2.3.0" />
     <title>Érosion — Sandbox Hydrographique</title>
     <link rel="stylesheet" href="./css/core/variables.css" />
     <link rel="stylesheet" href="./css/core/base.css" />
@@ -14,123 +15,111 @@
     <link rel="stylesheet" href="./css/components/context-menu.css" />
     <link rel="stylesheet" href="./css/responsive.css" />
     <link rel="stylesheet" href="./css/components/laboratory.css" />
+    <link rel="stylesheet" href="./css/components/scenes.css" />
     <script defer src="./js/core/config.js"></script>
     <script defer src="./js/core/math.js"></script>
     <script defer src="./js/core/state.js"></script>
     <script defer src="./js/simulation/terrain.js"></script>
+    <script defer src="./js/simulation/water-landscapes.js"></script>
     <script defer src="./js/core/terrain-history.js"></script>
     <script defer src="./js/simulation/simulation.js"></script>
     <script defer src="./js/simulation/drainage.js"></script>
     <script defer src="./js/simulation/particles.js"></script>
+    <script defer src="./js/simulation/scenes.js"></script>
     <script defer src="./js/core/session.js"></script>
     <script defer src="./js/rendering/render.js"></script>
     <script defer src="./js/ui/icons.js"></script>
+    <script defer src="./js/ui/scene-icons.js"></script>
     <script defer src="./js/ui/ui.js"></script>
     <script defer src="./js/main.js"></script>
   </head>
   <body>
     <div id="app">
       <main id="stage" aria-label="Simulation hydrographique">
-        <canvas id="c" tabindex="0" aria-label="Terrain interactif. Cliquez pour ajouter une source." aria-describedby="interaction-help"></canvas>
+        <canvas id="c" tabindex="0" aria-label="Carte interactive. Cliquez sur une terre pour ajouter une source." aria-describedby="interaction-help"></canvas>
         <div id="stage-hint" role="status" hidden></div>
         <div id="toast" role="status" aria-live="polite"></div>
         <div id="context-menu" aria-label="Actions de source">
-          <button id="ctx-add-source" type="button"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="droplet"></svg>Ajouter une source d'eau</button>
-          <button id="ctx-toggle-source" type="button" style="display: none"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="toggle-right"></svg><span class="context-menu-label">Désactiver la source</span></button>
-          <button id="ctx-delete-source" type="button" style="display: none"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="trash-2"></svg>Supprimer</button>
+          <button id="ctx-add-source" type="button"><svg class="icon" data-icon="droplet"></svg>Ajouter une source</button>
+          <button id="ctx-toggle-source" type="button" style="display:none"><svg class="icon" data-icon="toggle-right"></svg><span class="context-menu-label">Désactiver la source</span></button>
+          <button id="ctx-delete-source" type="button" style="display:none"><svg class="icon" data-icon="trash-2"></svg>Supprimer</button>
         </div>
-        <div id="hud">
-          Mode: <b class="mode" id="modeLbl">Simulation</b><br />
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="gauge"></svg> <b id="fps">--</b> fps · cible <b id="tgtMult">×1</b> · réel <b id="realMult">×1</b><br />
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="clock"></svg> <b id="tcount">0</b> pas · <b id="tsim">0.0</b>s
-        </div>
+        <div id="hud"><b class="mode" id="modeLbl">Paysage</b><span class="hud-separator">·</span><span id="playState">En cours</span></div>
       </main>
 
-      <!-- Original floating transport bar, centered on the visible terrain. -->
       <div id="bottom-bar" role="group" aria-label="Commandes de simulation">
-        <button class="ctrl-btn" id="pause" type="button" aria-label="Mettre en pause" aria-pressed="false" title="Pause / Reprendre (Espace)"><svg id="pauseIcon" class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="pause"></svg></button>
-        <div class="speed-ctrl">
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="gauge"></svg>
-          <input id="speed" aria-label="Vitesse de simulation" aria-valuetext="×1" min="0" step="1" type="range" value="0" />
-          <span id="speedLbl">×1</span>
-        </div>
-        <button class="ctrl-btn" id="regen" type="button" aria-label="Relief suivant" title="Relief suivant"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="rotate-cw"></svg></button>
-        <button class="ctrl-btn" id="clearSrc" type="button" aria-label="Effacer toutes les sources" title="Effacer toutes les sources"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="eraser"></svg></button>
+        <button class="ctrl-btn" id="pause" type="button" aria-label="Mettre en pause" aria-pressed="false" title="Pause / Reprendre (Espace)"><svg id="pauseIcon" class="icon" data-icon="pause"></svg></button>
+        <button class="ctrl-btn speed-button" id="speed" value="0" type="button" aria-label="Vitesse actuelle : fois 1. Cliquer pour accélérer." title="Changer la vitesse"><span id="speedLbl">×1</span></button>
+        <span class="transport-divider" aria-hidden="true"></span>
+        <button class="ctrl-btn" id="regen" type="button" aria-label="Carte suivante" title="Carte suivante"><svg class="icon" data-icon="chevron-right"></svg></button>
       </div>
+      <button id="panel-tab" type="button" title="Explorer les cartes" aria-label="Ouvrir le panneau" aria-controls="side-panel" aria-expanded="false"><svg class="icon" data-icon="chevron-left"></svg></button>
 
-      <button id="panel-tab" type="button" title="Ouvrir les réglages" aria-label="Ouvrir les réglages" aria-controls="side-panel" aria-expanded="false"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="chevron-left"></svg></button>
+      <aside id="side-panel" aria-label="Explorer et observer">
+        <button id="close-panel" type="button" title="Fermer le panneau" aria-label="Fermer le panneau"><svg class="icon" data-icon="x"></svg></button>
+        <div class="panel-header"><h1>Sandbox Hydrographique</h1><p class="desc">Un paysage. Sa pluie. Ses cours d'eau.</p></div>
 
-      <aside id="side-panel" aria-label="Réglages du sandbox">
-        <button id="close-panel" type="button" title="Fermer les réglages" aria-label="Fermer les réglages"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="x"></svg></button>
-        <div class="panel-header">
-          <h1>Sandbox Hydrographique</h1>
-          <p class="desc" id="interaction-help">Clic sur le terrain pour ajouter une source d'eau. Clic sur une source pour l'activer ou la couper.</p>
-        </div>
-        <div class="segmented modes" role="group" aria-label="Mode de visualisation">
-          <button class="on" type="button" data-m="composite" aria-pressed="true">Simulation</button>
-          <button type="button" data-m="change" aria-pressed="false">Érosion / dépôts</button>
-          <button type="button" data-m="contribution" aria-pressed="false" title="Analyse Terrain (D8)" aria-label="Analyse Terrain (D8)">Terrain (D8)</button>
-        </div>
-
-        <div class="hr"></div>
-
-        <!-- The original visual layers remain visible, not inside an accordion. -->
-        <section id="layersBox" aria-labelledby="layers-title">
-          <h2 class="section-title" id="layers-title">Couches Visuelles</h2>
-          <div class="layer-group">
-            <button type="button" class="layer-group-title" data-group="layers-terrain" aria-label="Activer ou masquer les couches de terrain" aria-pressed="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="mountain"></svg>Terrain</button>
-            <div class="layer-list" id="layers-terrain"></div>
+        <section id="terrain-settings" aria-label="Carte actuelle">
+          <div class="terrain-browser" id="terrain-browser" role="group" tabindex="0" aria-label="Parcourir les cartes" aria-describedby="terrain-help">
+            <button id="previousTerrain" type="button" class="text-btn terrain-arrow" aria-label="Carte précédente" title="Carte précédente" disabled><svg class="icon" data-icon="chevron-left"></svg></button>
+            <div class="terrain-current" aria-live="polite" aria-atomic="true"><span id="terrainName">Carte</span><span id="terrainPosition"></span></div>
+            <button id="nextTerrain" type="button" class="text-btn terrain-arrow" aria-label="Carte suivante" title="Carte suivante"><svg class="icon" data-icon="chevron-right"></svg></button>
           </div>
-          <div class="layer-group">
-            <button type="button" class="layer-group-title" data-group="layers-water" aria-label="Activer ou masquer les couches d'eau et de dynamique" aria-pressed="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="waves"></svg>Eau &amp; Dynamique</button>
-            <div class="layer-list" id="layers-water"></div>
-          </div>
+          <p id="terrainCaption"></p>
+          <div class="scene-water"><svg class="icon" id="waterIcon" data-icon="waves"></svg><span id="waterSummary"></span></div>
+          <p class="terrain-help" id="terrain-help">Flèches ou molette dans le sélecteur.<br />Chaque carte retrouve son état initial.</p>
         </section>
 
-        <div class="hr" id="divider-bottom"></div>
-
-        <section aria-labelledby="sources-title">
-          <h2 class="section-title" id="sources-title">Sources Actives (<span id="srcCount">0 / 0</span>)</h2>
-          <div id="sources"></div>
+        <section class="scene-weather" aria-label="Pluie de la carte">
+          <button id="rainToggle" type="button" class="weather-toggle" aria-pressed="false">
+            <svg class="icon" id="rainIcon" data-icon="cloud-rain"></svg>
+            <span class="weather-copy"><strong id="rainLabel">Pluie</strong><span>Intensité propre à la carte</span></span>
+            <span class="weather-state"><span id="rainState">Arrêt</span><span class="mini-switch" aria-hidden="true"></span></span>
+          </button>
         </section>
 
-        <!-- v2 tools supplement the original panel without taking priority. -->
-        <details id="terrain-settings" class="panel-details">
-          <summary>Terrain &amp; simulation</summary>
+        <details class="panel-details" id="sources-settings" open>
+          <summary>Sources <span class="summary-count" id="srcCount">0 / 0</span></summary>
           <div class="detail-content">
-            <div class="terrain-browser" id="terrain-browser" role="group" tabindex="0" aria-label="Parcourir les reliefs" aria-describedby="terrain-help terrain-reset-hint">
-              <button id="previousTerrain" type="button" class="text-btn terrain-arrow" aria-label="Relief précédent" title="Relief précédent" disabled><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="chevron-left"></svg></button>
-              <div class="terrain-current" aria-live="polite" aria-atomic="true"><span id="terrainName">Relief</span><span id="terrainPosition"></span></div>
-              <button id="nextTerrain" type="button" class="text-btn terrain-arrow" aria-label="Relief suivant" title="Relief suivant"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="chevron-left"></svg></button>
+            <div id="sources"></div>
+            <p class="terrain-help" id="interaction-help">Clic sur une terre : ajouter. Sur une source : activer ou couper. Le débit est préréglé.</p>
+            <button id="clearSrc" type="button" class="quiet-btn" hidden><svg class="icon" data-icon="eraser"></svg>Retirer les sources</button>
+          </div>
+        </details>
+
+        <details class="panel-details" id="display-settings">
+          <summary>Affichage</summary>
+          <div class="detail-content">
+            <div class="segmented modes" role="group" aria-label="Vue de la carte">
+              <button class="on" type="button" data-m="composite" aria-pressed="true">Paysage</button>
+              <button type="button" data-m="change" aria-pressed="false">Érosion &amp; dépôts</button>
             </div>
-            <p id="terrainCaption"></p>
-            <p class="terrain-help" id="terrain-help">Flèches ou molette après un clic dans le sélecteur.<br /><span id="terrain-reset-hint">Changer de relief efface l'eau et les sources.</span></p>
-            <div class="settings-inline">
-              <label for="boundary">Limites<select id="boundary"><option value="open">Ouvertes</option><option value="closed">Fermées</option></select></label>
-              <label for="rain">Pluie<select id="rain"><option value="0">Aucune</option><option value="0.00001">Légère</option><option value="0.00005">Averse</option></select></label>
-            </div>
+            <div id="layersBox" class="layer-list" aria-label="Repères visuels"></div>
           </div>
         </details>
 
         <details id="simulation-budget" class="panel-details">
-          <summary>Bilans &amp; lecture</summary>
+          <summary>Détails de la simulation</summary>
           <div class="detail-content">
             <div class="metrics" aria-label="Bilan de la simulation">
               <div><span>Eau présente</span><b id="statWater">0</b></div>
+              <div><span>Apport de la mer</span><b id="statIn">0</b></div>
               <div><span>Eau sortie</span><b id="statOut">0</b></div>
               <div><span>Matière érodée</span><b id="statEroded">0</b></div>
               <div><span>Matière déposée</span><b id="statDeposited">0</b></div>
             </div>
+            <button class="text-btn" id="analysisToggle" type="button" aria-pressed="false">Réseau potentiel du relief</button>
             <div class="budget-detail">
-              <p id="budget-status">Bilans en attente.</p>
-              <p id="reading-help">Bleu : eau. Traits clairs : courants mesurés. Orange / vert : érosion / dépôts dans la vue dédiée. Le réseau D8 est un potentiel, pas une rivière imposée.</p>
-              <p id="budget-values"></p>
-              <p>Unités de simulation non calibrées. Modèle de paysage, pas un outil de prévision hydrologique.</p>
+              <p id="scene-note"></p>
+              <p id="budget-status">Bilans en attente.</p><p id="budget-values"></p>
+              <p><b id="tcount">0</b> pas · <b id="tsim">0.0</b> s · <b id="fps">--</b> fps<br />Vitesse cible <b id="tgtMult">×1</b> · réelle <b id="realMult">×1</b></p>
+              <p>Unités non calibrées. Pas de marées, de vagues ni de circulation souterraine simulées.</p>
             </div>
           </div>
         </details>
 
-        <div class="button-pair session-actions"><button id="saveSession" type="button" class="text-btn"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="save"></svg>Sauvegarder</button><button id="loadSession" type="button" class="text-btn"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="folder-open"></svg>Ouvrir</button></div>
+        <button id="restartScene" type="button" class="quiet-btn restart-scene" title="Retrouver le relief, l'eau, la pluie et les sources de départ"><svg class="icon" data-icon="rotate-cw"></svg>Recommencer cette carte</button>
+        <div class="button-pair session-actions"><button id="saveSession" type="button" class="text-btn"><svg class="icon" data-icon="save"></svg>Sauvegarder</button><button id="loadSession" type="button" class="text-btn"><svg class="icon" data-icon="folder-open"></svg>Ouvrir</button></div>
         <input id="sessionFile" type="file" accept=".json,application/json" hidden />
       </aside>
     </div>

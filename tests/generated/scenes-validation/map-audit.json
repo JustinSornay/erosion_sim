@@ -1,0 +1,70 @@
+{
+  "samples": 576,
+  "families": {
+    "island": {
+      "minimumWaterFraction": 0.7614203559027778,
+      "maximumWaterFraction": 0.8290473090277778,
+      "maximumAdjacentHeightJump": 0.03662419536141043,
+      "minimumSources": 0,
+      "maximumSources": 2
+    },
+    "archipelago": {
+      "minimumWaterFraction": 0.7445203993055556,
+      "maximumWaterFraction": 0.9193793402777778,
+      "maximumAdjacentHeightJump": 0.043758611544268966,
+      "minimumSources": 0,
+      "maximumSources": 1
+    },
+    "coast": {
+      "minimumWaterFraction": 0.4700792100694444,
+      "maximumWaterFraction": 0.6062554253472222,
+      "maximumAdjacentHeightJump": 0.028648133092497904,
+      "minimumSources": 0,
+      "maximumSources": 1
+    },
+    "estuary": {
+      "minimumWaterFraction": 0.2485622829861111,
+      "maximumWaterFraction": 0.3797200520833333,
+      "maximumAdjacentHeightJump": 0.06270513821346824,
+      "minimumSources": 2,
+      "maximumSources": 3
+    },
+    "fjord": {
+      "minimumWaterFraction": 0.1430121527777778,
+      "maximumWaterFraction": 0.2784830729166667,
+      "maximumAdjacentHeightJump": 0.09263683257910336,
+      "minimumSources": 1,
+      "maximumSources": 2
+    },
+    "lagoon": {
+      "minimumWaterFraction": 0.4601236979166667,
+      "maximumWaterFraction": 0.6132541232638888,
+      "maximumAdjacentHeightJump": 0.06948372987737583,
+      "minimumSources": 0,
+      "maximumSources": 1
+    },
+    "atoll": {
+      "minimumWaterFraction": 0.8500434027777778,
+      "maximumWaterFraction": 0.9074978298611112,
+      "maximumAdjacentHeightJump": 0.05647604515518098,
+      "minimumSources": 0,
+      "maximumSources": 0
+    },
+    "lake": {
+      "minimumWaterFraction": 0.11737738715277778,
+      "maximumWaterFraction": 0.1306423611111111,
+      "maximumAdjacentHeightJump": 0.023441104320393757,
+      "minimumSources": 1,
+      "maximumSources": 2
+    },
+    "craterlake": {
+      "minimumWaterFraction": 0.07611762152777778,
+      "maximumWaterFraction": 0.09941948784722222,
+      "maximumAdjacentHeightJump": 0.038932976101133665,
+      "minimumSources": 0,
+      "maximumSources": 1
+    }
+  },
+  "longRuns": [],
+  "passed": true
+}

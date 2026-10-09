@@ -1,0 +1,62 @@
+/* Simpler hierarchy, same palette, density, panel and floating controls. */
+#side-panel { gap: 15px; }
+.panel-header { margin-bottom: 1px; }
+#terrain-settings { display: flex; flex-direction: column; gap: 10px; }
+.terrain-browser { grid-template-columns: 36px minmax(0, 1fr) 36px; padding: 3px; }
+.terrain-arrow { width: 36px; height: 42px; }
+#nextTerrain .icon { transform: none; }
+#terrainName { font-size: 12px; line-height: 1.3; }
+#terrainPosition { font-size: 9px; line-height: 1.5; }
+#terrainCaption { min-height: 32px; }
+.scene-water { display: flex; gap: 7px; align-items: center; color: var(--water); font-size: 10px; }
+.scene-water .icon { width: 15px; height: 15px; }
+.terrain-help { font-size: 10px; margin: 0; }
+.weather-toggle { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 66px; padding: 10px; border-radius: 7px; border: 1px solid var(--border); background: var(--bg-control); text-align: left; }
+.weather-toggle:hover { background: #383734; }
+.weather-toggle > .icon { width: 26px; height: 26px; color: var(--text-muted); }
+.weather-toggle.on { border-color: var(--water); }
+.weather-toggle.on > .icon { color: var(--water); }
+.weather-copy { min-width: 0; display: flex; flex-direction: column; gap: 5px; flex: 1; }
+.weather-copy strong { color: var(--text-primary); font-size: 11px; font-weight: 500; }
+.weather-copy > span { color: var(--text-muted); font-size: 9px; line-height: 1.4; }
+.weather-state { display: flex; flex-direction: column; align-items: center; gap: 5px; color: var(--text-muted); font-size: 9px; }
+.weather-toggle.on .weather-state { color: var(--water); }
+.mini-switch { display: block; width: 25px; height: 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-surface); position: relative; }
+.mini-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 8px; height: 8px; border-radius: 50%; background: var(--text-muted); transition: transform .15s; }
+.weather-toggle.on .mini-switch { border-color: var(--water); }
+.weather-toggle.on .mini-switch::after { transform: translateX(11px); background: var(--water); }
+.panel-details { padding-top: 10px; }
+.panel-details > summary { min-height: 30px; line-height: 22px; font-size: 11px; }
+.summary-count { float: right; color: var(--text-muted); font-family: var(--font-mono); font-size: 10px; }
+#sources { min-height: 0; max-height: 175px; background: transparent; padding: 0; }
+.src-row { min-height: 38px; border-radius: 5px; background: rgba(255,255,255,.025); padding-left: 5px; }
+.source-toggle { gap: 6px; min-height: 36px; font-family: var(--font-ui); font-size: 11px; }
+.source-toggle .icon { width: 13px; height: 13px; }
+.src-row .source-flow { color: var(--text-muted); font-family: var(--font-ui); font-size: 10px; margin-left: auto; }
+.source-remove { width: 32px; height: 34px; background: transparent; }
+.empty-sources { padding: 0; margin: 0; }
+.quiet-btn { display: inline-flex; align-items: center; justify-content: flex-start; gap: 7px; background: transparent; border: 0; color: var(--text-muted); padding: 4px 0; font-size: 10px; min-height: 28px; }
+.quiet-btn:hover { color: var(--text-primary); }
+.quiet-btn .icon { width: 14px; height: 14px; }
+.restart-scene { margin-top: 0; }
+.layer-item { min-height: 36px; }
+#bottom-bar { gap: 12px; padding: 8px 12px; }
+#speed.speed-button { width: 54px; height: 40px; }
+#speedLbl { color: var(--accent); }
+.transport-divider { height: 22px; width: 1px; background: var(--border); }
+#hud { padding: 9px 12px; line-height: 1.3; }
+.hud-separator { margin: 0 7px; }
+@media (max-width: 1024px) and (min-width: 768px) {
+  #side-panel { gap: 12px; }
+  .weather-toggle { padding: 8px; gap: 7px; }
+  .weather-toggle > .icon { width: 23px; height: 23px; }
+  #terrainName { font-size: 11px; }
+}
+@media (max-width: 767px) {
+  #side-panel { gap: 14px; }
+  #bottom-bar { gap: 10px; padding: 6px 10px; }
+  .ctrl-btn, #speed.speed-button { min-height: 44px; }
+  .terrain-arrow { min-height: 44px; }
+  .panel-details > summary { min-height: 36px; line-height: 28px; }
+  .source-toggle, .source-remove, .quiet-btn, .text-btn { min-height: 40px; }
+}

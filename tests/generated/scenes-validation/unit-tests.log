@@ -1,0 +1,746 @@
+
+> erosion-sandbox@2.3.0 test
+> node --test --test-concurrency=1 tests/regression/production.test.js tests/regression/terrain-navigation.test.js tests/regression/scenes.test.js
+
+TAP version 13
+# Subtest: A dry scene neither erodes nor manufactures water
+ok 1 - A dry scene neither erodes nor manufactures water
+  ---
+  duration_ms: 280.307772
+  type: 'test'
+  ...
+# Subtest: Point injection lands at the exact centre, edges and all four corners
+ok 2 - Point injection lands at the exact centre, edges and all four corners
+  ---
+  duration_ms: 280.873598
+  type: 'test'
+  ...
+# Subtest: Disabled sources inject nothing; colocated sources add their actual volume
+ok 3 - Disabled sources inject nothing; colocated sources add their actual volume
+  ---
+  duration_ms: 65.300821
+  type: 'test'
+  ...
+# Subtest: Invalid source coordinates and rates are rejected
+ok 4 - Invalid source coordinates and rates are rejected
+  ---
+  duration_ms: 35.573438
+  type: 'test'
+  ...
+# Subtest: Source configuration never excavates or protects a hidden rock collar
+ok 5 - Source configuration never excavates or protects a hidden rock collar
+  ---
+  duration_ms: 42.11174
+  type: 'test'
+  ...
+# Subtest: All terrain presets reproduce exactly from a seed; seeds actually differ
+ok 6 - All terrain presets reproduce exactly from a seed; seeds actually differ
+  ---
+  duration_ms: 448.571478
+  type: 'test'
+  ...
+# Subtest: Invalid terrain requests fail before live state is mutated
+ok 7 - Invalid terrain requests fail before live state is mutated
+  ---
+  duration_ms: 38.913599
+  type: 'test'
+  ...
+# Subtest: A closed hydrostatic lake stays at rest on uneven terrain
+ok 8 - A closed hydrostatic lake stays at rest on uneven terrain
+  ---
+  duration_ms: 487.745959
+  type: 'test'
+  ...
+# Subtest: Direction follows terrain: rotation rotates flow, not a hardcoded south axis
+ok 9 - Direction follows terrain: rotation rotates flow, not a hardcoded south axis
+  ---
+  duration_ms: 865.13767
+  type: 'test'
+  ...
+# Subtest: Rain, sources and evaporation appear in a closed-domain water budget
+ok 10 - Rain, sources and evaporation appear in a closed-domain water budget
+  ---
+  duration_ms: 1559.051908
+  type: 'test'
+  ...
+# Subtest: Open boundaries export actual water and sediment; closed boundaries do not
+ok 11 - Open boundaries export actual water and sediment; closed boundaries do not
+  ---
+  duration_ms: 587.364854
+  type: 'test'
+  ...
+# Subtest: Shared internal faces never simultaneously carry opposing water fluxes
+ok 12 - Shared internal faces never simultaneously carry opposing water fluxes
+  ---
+  duration_ms: 199.316167
+  type: 'test'
+  ...
+# Subtest: Pure advection preserves a constant sediment/water concentration
+ok 13 - Pure advection preserves a constant sediment/water concentration
+  ---
+  duration_ms: 263.926877
+  type: 'test'
+  ...
+# Subtest: Microscopic films stay nonnegative, retain water, and cannot cause NaNs
+ok 14 - Microscopic films stay nonnegative, retain water, and cannot cause NaNs
+  ---
+  duration_ms: 102.76561
+  type: 'test'
+  ...
+# Subtest: Sediment in a dry cell is deposited rather than discarded
+ok 15 - Sediment in a dry cell is deposited rather than discarded
+  ---
+  duration_ms: 81.208734
+  type: 'test'
+  ...
+# Subtest: High transport capacity cannot excavate below bedrock
+ok 16 - High transport capacity cannot excavate below bedrock
+  ---
+  duration_ms: 898.749771
+  type: 'test'
+  ...
+# Subtest: Identical input histories give bit-identical physical fields
+ok 17 - Identical input histories give bit-identical physical fields
+  ---
+  duration_ms: 1863.619801
+  type: 'test'
+  ...
+# Subtest: A JSON save restores an identical continuation, not merely the picture
+ok 18 - A JSON save restores an identical continuation, not merely the picture
+  ---
+  duration_ms: 988.303315
+  type: 'test'
+  ...
+# Subtest: Invalid session files are rejected atomically
+ok 19 - Invalid session files are rejected atomically
+  ---
+  duration_ms: 247.462853
+  type: 'test'
+  ...
+# Subtest: Production HTML has no remote dependency and every local script exists
+ok 20 - Production HTML has no remote dependency and every local script exists
+  ---
+  duration_ms: 1.02704
+  type: 'test'
+  ...
+# Subtest: All 27 cards have a deterministic climate and optional, dry-land, well-separated sources
+ok 21 - All 27 cards have a deterministic climate and optional, dry-land, well-separated sources
+  ---
+  duration_ms: 11391.150048
+  type: 'test'
+  ...
+# Subtest: Aquatic cards show a meaningful mix of real water and dry land in every framing
+ok 22 - Aquatic cards show a meaningful mix of real water and dry land in every framing
+  ---
+  duration_ms: 3785.459384
+  type: 'test'
+  ...
+# Subtest: Sea only fills components connected to an external boundary, never isolated holes
+ok 23 - Sea only fills components connected to an external boundary, never isolated holes
+  ---
+  duration_ms: 960.337014
+  type: 'test'
+  ...
+# Subtest: The atoll lagoon is connected to the sea through its passes, not left artificially dry
+ok 24 - The atoll lagoon is connected to the sea through its passes, not left artificially dry
+  ---
+  duration_ms: 343.496285
+  type: 'test'
+  ...
+# Subtest: Rain is only off or the fixed card intensity, including after repeated toggles
+ok 25 - Rain is only off or the fixed card intensity, including after repeated toggles
+  ---
+  duration_ms: 939.938747
+  type: 'test'
+  ...
+# Subtest: Restart restores initial land, lake, rainfall, sources and budgets bit-for-bit
+ok 26 - Restart restores initial land, lake, rainfall, sources and budgets bit-for-bit
+  ---
+  duration_ms: 1752.947724
+  type: 'test'
+  ...
+# Subtest: island: an unforced lake or sea starts hydrostatic and never drains through an artificial edge
+ok 27 - island: an unforced lake or sea starts hydrostatic and never drains through an artificial edge
+  ---
+  duration_ms: 785.612126
+  type: 'test'
+  ...
+# Subtest: archipelago: an unforced lake or sea starts hydrostatic and never drains through an artificial edge
+ok 28 - archipelago: an unforced lake or sea starts hydrostatic and never drains through an artificial edge
+  ---
+  duration_ms: 708.230598
+  type: 'test'
+  ...
+# Subtest: coast: an unforced lake or sea starts hydrostatic and never drains through an artificial edge
+ok 29 - coast: an unforced lake or sea starts hydrostatic and never drains through an artificial edge
+  ---
+  duration_ms: 702.195716
+  type: 'test'
+  ...
+# Subtest: estuary: an unforced lake or sea starts hydrostatic and never drains through an artificial edge
+ok 30 - estuary: an unforced lake or sea starts hydrostatic and never drains through an artificial edge
+  ---
+  duration_ms: 562.683281
+  type: 'test'
+  ...
+# Subtest: fjord: an unforced lake or sea starts hydrostatic and never drains through an artificial edge
+ok 31 - fjord: an unforced lake or sea starts hydrostatic and never drains through an artificial edge
+  ---
+  duration_ms: 616.781994
+  type: 'test'
+  ...
+# Subtest: lagoon: an unforced lake or sea starts hydrostatic and never drains through an artificial edge
+ok 32 - lagoon: an unforced lake or sea starts hydrostatic and never drains through an artificial edge
+  ---
+  duration_ms: 855.012023
+  type: 'test'
+  ...
+# Subtest: atoll: an unforced lake or sea starts hydrostatic and never drains through an artificial edge
+ok 33 - atoll: an unforced lake or sea starts hydrostatic and never drains through an artificial edge
+  ---
+  duration_ms: 749.206559
+  type: 'test'
+  ...
+# Subtest: lake: an unforced lake or sea starts hydrostatic and never drains through an artificial edge
+ok 34 - lake: an unforced lake or sea starts hydrostatic and never drains through an artificial edge
+  ---
+  duration_ms: 556.791804
+  type: 'test'
+  ...
+# Subtest: craterlake: an unforced lake or sea starts hydrostatic and never drains through an artificial edge
+ok 35 - craterlake: an unforced lake or sea starts hydrostatic and never drains through an artificial edge
+  ---
+  duration_ms: 523.075811
+  type: 'test'
+  ...
+# Subtest: Marine inflow replaces deficits, outflow exports surpluses, and both enter the water budget
+ok 36 - Marine inflow replaces deficits, outflow exports surpluses, and both enter the water budget
+  ---
+  duration_ms: 749.15019
+  type: 'test'
+  ...
+# Subtest: island: forced scene budgets and signed marine momentum survive JSON round trips
+ok 37 - island: forced scene budgets and signed marine momentum survive JSON round trips
+  ---
+  duration_ms: 760.873647
+  type: 'test'
+  ...
+# Subtest: estuary: forced scene budgets and signed marine momentum survive JSON round trips
+ok 38 - estuary: forced scene budgets and signed marine momentum survive JSON round trips
+  ---
+  duration_ms: 677.235763
+  type: 'test'
+  ...
+# Subtest: atoll: forced scene budgets and signed marine momentum survive JSON round trips
+ok 39 - atoll: forced scene budgets and signed marine momentum survive JSON round trips
+  ---
+  duration_ms: 654.265957
+  type: 'test'
+  ...
+# Subtest: lake: forced scene budgets and signed marine momentum survive JSON round trips
+ok 40 - lake: forced scene budgets and signed marine momentum survive JSON round trips
+  ---
+  duration_ms: 634.627355
+  type: 'test'
+  ...
+# Subtest: craterlake: forced scene budgets and signed marine momentum survive JSON round trips
+ok 41 - craterlake: forced scene budgets and signed marine momentum survive JSON round trips
+  ---
+  duration_ms: 633.380378
+  type: 'test'
+  ...
+# Subtest: headwaters: forced scene budgets and signed marine momentum survive JSON round trips
+ok 42 - headwaters: forced scene budgets and signed marine momentum survive JSON round trips
+  ---
+  duration_ms: 733.118357
+  type: 'test'
+  ...
+# Subtest: natural: forced scene budgets and signed marine momentum survive JSON round trips
+ok 43 - natural: forced scene budgets and signed marine momentum survive JSON round trips
+  ---
+  duration_ms: 660.212335
+  type: 'test'
+  ...
+# Subtest: Old version-2 sessions remain loadable and keep their formerly custom rain rate when toggled
+ok 44 - Old version-2 sessions remain loadable and keep their formerly custom rain rate when toggled
+  ---
+  duration_ms: 178.784366
+  type: 'test'
+  ...
+# Subtest: Invalid v3 scene settings, sea momentum and budgets are rejected without mutating the simulation
+ok 45 - Invalid v3 scene settings, sea momentum and budgets are rejected without mutating the simulation
+  ---
+  duration_ms: 816.294709
+  type: 'test'
+  ...
+# Subtest: v2.2 histories prioritize the nine water families once, without dropping previous cards
+ok 46 - v2.2 histories prioritize the nine water families once, without dropping previous cards
+  ---
+  duration_ms: 1.487942
+  type: 'test'
+  ...
+# Subtest: The simplified interface contains no rain intensity, discharge or boundary editor
+ok 47 - The simplified interface contains no rain intensity, discharge or boundary editor
+  ---
+  duration_ms: 0.805582
+  type: 'test'
+  ...
+# Subtest: The previous eighteen height-field generators match 108 archived v2.2.0 grids
+ok 48 - The previous eighteen height-field generators match 108 archived v2.2.0 grids
+  ---
+  duration_ms: 2553.62362
+  type: 'test'
+  ...
+# Subtest: Discharge scales with landscape type instead of assigning an estuary the same flow as an islet
+ok 49 - Discharge scales with landscape type instead of assigning an estuary the same flow as an islet
+  ---
+  duration_ms: 319.871028
+  type: 'test'
+  ...
+# Subtest: The discovery catalogue combines the original natural terrain with twenty-six curated landscape families
+ok 50 - The discovery catalogue combines the original natural terrain with twenty-six curated landscape families
+  ---
+  duration_ms: 2.677853
+  type: 'test'
+  ...
+# Subtest: headwaters: the entire relief is reproducible, varied and initially dry
+ok 51 - headwaters: the entire relief is reproducible, varied and initially dry
+  ---
+  duration_ms: 386.726395
+  type: 'test'
+  ...
+# Subtest: headwaters: rain and real sources preserve water/solid budgets; saves continue exactly
+ok 52 - headwaters: rain and real sources preserve water/solid budgets; saves continue exactly
+  ---
+  duration_ms: 940.496207
+  type: 'test'
+  ...
+# Subtest: meanders: the entire relief is reproducible, varied and initially dry
+ok 53 - meanders: the entire relief is reproducible, varied and initially dry
+  ---
+  duration_ms: 232.572543
+  type: 'test'
+  ...
+# Subtest: meanders: rain and real sources preserve water/solid budgets; saves continue exactly
+ok 54 - meanders: rain and real sources preserve water/solid budgets; saves continue exactly
+  ---
+  duration_ms: 780.542627
+  type: 'test'
+  ...
+# Subtest: hillside: the entire relief is reproducible, varied and initially dry
+ok 55 - hillside: the entire relief is reproducible, varied and initially dry
+  ---
+  duration_ms: 202.169416
+  type: 'test'
+  ...
+# Subtest: hillside: rain and real sources preserve water/solid budgets; saves continue exactly
+ok 56 - hillside: rain and real sources preserve water/solid budgets; saves continue exactly
+  ---
+  duration_ms: 783.043834
+  type: 'test'
+  ...
+# Subtest: confluence: the entire relief is reproducible, varied and initially dry
+ok 57 - confluence: the entire relief is reproducible, varied and initially dry
+  ---
+  duration_ms: 212.699659
+  type: 'test'
+  ...
+# Subtest: confluence: rain and real sources preserve water/solid budgets; saves continue exactly
+ok 58 - confluence: rain and real sources preserve water/solid budgets; saves continue exactly
+  ---
+  duration_ms: 784.701118
+  type: 'test'
+  ...
+# Subtest: spillway: the entire relief is reproducible, varied and initially dry
+ok 59 - spillway: the entire relief is reproducible, varied and initially dry
+  ---
+  duration_ms: 221.394284
+  type: 'test'
+  ...
+# Subtest: spillway: rain and real sources preserve water/solid budgets; saves continue exactly
+ok 60 - spillway: rain and real sources preserve water/solid budgets; saves continue exactly
+  ---
+  duration_ms: 679.014351
+  type: 'test'
+  ...
+# Subtest: massif: the entire relief is reproducible, varied and initially dry
+ok 61 - massif: the entire relief is reproducible, varied and initially dry
+  ---
+  duration_ms: 224.506308
+  type: 'test'
+  ...
+# Subtest: massif: rain and real sources preserve water/solid budgets; saves continue exactly
+ok 62 - massif: rain and real sources preserve water/solid budgets; saves continue exactly
+  ---
+  duration_ms: 744.471195
+  type: 'test'
+  ...
+# Subtest: tableland: the entire relief is reproducible, varied and initially dry
+ok 63 - tableland: the entire relief is reproducible, varied and initially dry
+  ---
+  duration_ms: 202.409254
+  type: 'test'
+  ...
+# Subtest: tableland: rain and real sources preserve water/solid budgets; saves continue exactly
+ok 64 - tableland: rain and real sources preserve water/solid budgets; saves continue exactly
+  ---
+  duration_ms: 711.724183
+  type: 'test'
+  ...
+# Subtest: lowlands: the entire relief is reproducible, varied and initially dry
+ok 65 - lowlands: the entire relief is reproducible, varied and initially dry
+  ---
+  duration_ms: 197.513529
+  type: 'test'
+  ...
+# Subtest: lowlands: rain and real sources preserve water/solid budgets; saves continue exactly
+ok 66 - lowlands: rain and real sources preserve water/solid budgets; saves continue exactly
+  ---
+  duration_ms: 715.710776
+  type: 'test'
+  ...
+# Subtest: canyon: the entire relief is reproducible, varied and initially dry
+ok 67 - canyon: the entire relief is reproducible, varied and initially dry
+  ---
+  duration_ms: 215.674906
+  type: 'test'
+  ...
+# Subtest: canyon: rain and real sources preserve water/solid budgets; saves continue exactly
+ok 68 - canyon: rain and real sources preserve water/solid budgets; saves continue exactly
+  ---
+  duration_ms: 746.625602
+  type: 'test'
+  ...
+# Subtest: badlands: the entire relief is reproducible, varied and initially dry
+ok 69 - badlands: the entire relief is reproducible, varied and initially dry
+  ---
+  duration_ms: 259.435545
+  type: 'test'
+  ...
+# Subtest: badlands: rain and real sources preserve water/solid budgets; saves continue exactly
+ok 70 - badlands: rain and real sources preserve water/solid budgets; saves continue exactly
+  ---
+  duration_ms: 752.451798
+  type: 'test'
+  ...
+# Subtest: glacial: the entire relief is reproducible, varied and initially dry
+ok 71 - glacial: the entire relief is reproducible, varied and initially dry
+  ---
+  duration_ms: 172.699335
+  type: 'test'
+  ...
+# Subtest: glacial: rain and real sources preserve water/solid budgets; saves continue exactly
+ok 72 - glacial: rain and real sources preserve water/solid budgets; saves continue exactly
+  ---
+  duration_ms: 682.564092
+  type: 'test'
+  ...
+# Subtest: karst: the entire relief is reproducible, varied and initially dry
+ok 73 - karst: the entire relief is reproducible, varied and initially dry
+  ---
+  duration_ms: 347.712203
+  type: 'test'
+  ...
+# Subtest: karst: rain and real sources preserve water/solid budgets; saves continue exactly
+ok 74 - karst: rain and real sources preserve water/solid budgets; saves continue exactly
+  ---
+  duration_ms: 793.77486
+  type: 'test'
+  ...
+# Subtest: caldera: the entire relief is reproducible, varied and initially dry
+ok 75 - caldera: the entire relief is reproducible, varied and initially dry
+  ---
+  duration_ms: 219.185782
+  type: 'test'
+  ...
+# Subtest: caldera: rain and real sources preserve water/solid budgets; saves continue exactly
+ok 76 - caldera: rain and real sources preserve water/solid budgets; saves continue exactly
+  ---
+  duration_ms: 709.577324
+  type: 'test'
+  ...
+# Subtest: fan: the entire relief is reproducible, varied and initially dry
+ok 77 - fan: the entire relief is reproducible, varied and initially dry
+  ---
+  duration_ms: 244.543183
+  type: 'test'
+  ...
+# Subtest: fan: rain and real sources preserve water/solid budgets; saves continue exactly
+ok 78 - fan: rain and real sources preserve water/solid budgets; saves continue exactly
+  ---
+  duration_ms: 699.238209
+  type: 'test'
+  ...
+# Subtest: mesas: the entire relief is reproducible, varied and initially dry
+ok 79 - mesas: the entire relief is reproducible, varied and initially dry
+  ---
+  duration_ms: 269.90121
+  type: 'test'
+  ...
+# Subtest: mesas: rain and real sources preserve water/solid budgets; saves continue exactly
+ok 80 - mesas: rain and real sources preserve water/solid budgets; saves continue exactly
+  ---
+  duration_ms: 722.340951
+  type: 'test'
+  ...
+# Subtest: cuesta: the entire relief is reproducible, varied and initially dry
+ok 81 - cuesta: the entire relief is reproducible, varied and initially dry
+  ---
+  duration_ms: 223.210932
+  type: 'test'
+  ...
+# Subtest: cuesta: rain and real sources preserve water/solid budgets; saves continue exactly
+ok 82 - cuesta: rain and real sources preserve water/solid budgets; saves continue exactly
+  ---
+  duration_ms: 718.918898
+  type: 'test'
+  ...
+# Subtest: braided: the entire relief is reproducible, varied and initially dry
+ok 83 - braided: the entire relief is reproducible, varied and initially dry
+  ---
+  duration_ms: 297.676033
+  type: 'test'
+  ...
+# Subtest: braided: rain and real sources preserve water/solid budgets; saves continue exactly
+ok 84 - braided: rain and real sources preserve water/solid budgets; saves continue exactly
+  ---
+  duration_ms: 777.956658
+  type: 'test'
+  ...
+# Subtest: island: the entire relief is reproducible, varied and initially dry
+ok 85 - island: the entire relief is reproducible, varied and initially dry
+  ---
+  duration_ms: 330.425685
+  type: 'test'
+  ...
+# Subtest: island: rain and real sources preserve water/solid budgets; saves continue exactly
+ok 86 - island: rain and real sources preserve water/solid budgets; saves continue exactly
+  ---
+  duration_ms: 714.590975
+  type: 'test'
+  ...
+# Subtest: archipelago: the entire relief is reproducible, varied and initially dry
+ok 87 - archipelago: the entire relief is reproducible, varied and initially dry
+  ---
+  duration_ms: 225.788074
+  type: 'test'
+  ...
+# Subtest: archipelago: rain and real sources preserve water/solid budgets; saves continue exactly
+ok 88 - archipelago: rain and real sources preserve water/solid budgets; saves continue exactly
+  ---
+  duration_ms: 954.133052
+  type: 'test'
+  ...
+# Subtest: coast: the entire relief is reproducible, varied and initially dry
+ok 89 - coast: the entire relief is reproducible, varied and initially dry
+  ---
+  duration_ms: 255.387248
+  type: 'test'
+  ...
+# Subtest: coast: rain and real sources preserve water/solid budgets; saves continue exactly
+ok 90 - coast: rain and real sources preserve water/solid budgets; saves continue exactly
+  ---
+  duration_ms: 707.301937
+  type: 'test'
+  ...
+# Subtest: estuary: the entire relief is reproducible, varied and initially dry
+ok 91 - estuary: the entire relief is reproducible, varied and initially dry
+  ---
+  duration_ms: 292.606479
+  type: 'test'
+  ...
+# Subtest: estuary: rain and real sources preserve water/solid budgets; saves continue exactly
+ok 92 - estuary: rain and real sources preserve water/solid budgets; saves continue exactly
+  ---
+  duration_ms: 916.695332
+  type: 'test'
+  ...
+# Subtest: fjord: the entire relief is reproducible, varied and initially dry
+ok 93 - fjord: the entire relief is reproducible, varied and initially dry
+  ---
+  duration_ms: 312.728158
+  type: 'test'
+  ...
+# Subtest: fjord: rain and real sources preserve water/solid budgets; saves continue exactly
+ok 94 - fjord: rain and real sources preserve water/solid budgets; saves continue exactly
+  ---
+  duration_ms: 925.055707
+  type: 'test'
+  ...
+# Subtest: lagoon: the entire relief is reproducible, varied and initially dry
+ok 95 - lagoon: the entire relief is reproducible, varied and initially dry
+  ---
+  duration_ms: 243.725673
+  type: 'test'
+  ...
+# Subtest: lagoon: rain and real sources preserve water/solid budgets; saves continue exactly
+ok 96 - lagoon: rain and real sources preserve water/solid budgets; saves continue exactly
+  ---
+  duration_ms: 785.535796
+  type: 'test'
+  ...
+# Subtest: atoll: the entire relief is reproducible, varied and initially dry
+ok 97 - atoll: the entire relief is reproducible, varied and initially dry
+  ---
+  duration_ms: 260.249022
+  type: 'test'
+  ...
+# Subtest: atoll: rain and real sources preserve water/solid budgets; saves continue exactly
+ok 98 - atoll: rain and real sources preserve water/solid budgets; saves continue exactly
+  ---
+  duration_ms: 781.100058
+  type: 'test'
+  ...
+# Subtest: lake: the entire relief is reproducible, varied and initially dry
+ok 99 - lake: the entire relief is reproducible, varied and initially dry
+  ---
+  duration_ms: 207.161647
+  type: 'test'
+  ...
+# Subtest: lake: rain and real sources preserve water/solid budgets; saves continue exactly
+ok 100 - lake: rain and real sources preserve water/solid budgets; saves continue exactly
+  ---
+  duration_ms: 762.219191
+  type: 'test'
+  ...
+# Subtest: craterlake: the entire relief is reproducible, varied and initially dry
+ok 101 - craterlake: the entire relief is reproducible, varied and initially dry
+  ---
+  duration_ms: 262.172694
+  type: 'test'
+  ...
+# Subtest: craterlake: rain and real sources preserve water/solid budgets; saves continue exactly
+ok 102 - craterlake: rain and real sources preserve water/solid budgets; saves continue exactly
+  ---
+  duration_ms: 752.769054
+  type: 'test'
+  ...
+# Subtest: natural: the entire relief is reproducible, varied and initially dry
+ok 103 - natural: the entire relief is reproducible, varied and initially dry
+  ---
+  duration_ms: 225.262239
+  type: 'test'
+  ...
+# Subtest: natural: rain and real sources preserve water/solid budgets; saves continue exactly
+ok 104 - natural: rain and real sources preserve water/solid budgets; saves continue exactly
+  ---
+  duration_ms: 918.834852
+  type: 'test'
+  ...
+# Subtest: Open landscapes have continuous downhill routes instead of trapping most water in pits
+ok 105 - Open landscapes have continuous downhill routes instead of trapping most water in pits
+  ---
+  duration_ms: 4807.840313
+  type: 'test'
+  ...
+# Subtest: Karst and caldera families deliberately preserve enclosed basins as part of their identity
+ok 106 - Karst and caldera families deliberately preserve enclosed basins as part of their identity
+  ---
+  duration_ms: 212.647447
+  type: 'test'
+  ...
+# Subtest: The rediscovered natural terrain is bit-for-bit identical to the archived default generator
+ok 107 - The rediscovered natural terrain is bit-for-bit identical to the archived default generator
+  ---
+  duration_ms: 80.94171
+  type: 'test'
+  ...
+# Subtest: Classic natural terrain retains irregular depressions unlike the engineered drainage landscapes
+ok 108 - Classic natural terrain retains irregular depressions unlike the engineered drainage landscapes
+  ---
+  duration_ms: 28.619877
+  type: 'test'
+  ...
+# Subtest: A basin keeps a real depression as well as an open downstream catchment
+ok 109 - A basin keeps a real depression as well as an open downstream catchment
+  ---
+  duration_ms: 29.06768
+  type: 'test'
+  ...
+# Subtest: Scrolling explores all three camera framings rather than only close-ups
+ok 110 - Scrolling explores all three camera framings rather than only close-ups
+  ---
+  duration_ms: 0.807104
+  type: 'test'
+  ...
+# Subtest: All wide-area landscapes are reproducible, continuous and keep water budgets
+ok 111 - All wide-area landscapes are reproducible, continuous and keep water budgets
+  ---
+  duration_ms: 5311.040776
+  type: 'test'
+  ...
+# Subtest: Previous/next reproduce recipe order; a fresh history has no fake previous terrain
+ok 112 - Previous/next reproduce recipe order; a fresh history has no fake previous terrain
+  ---
+  duration_ms: 0.322677
+  type: 'test'
+  ...
+# Subtest: Every opening advances the stored sequence even with a constant entropy provider
+ok 113 - Every opening advances the stored sequence even with a constant entropy provider
+  ---
+  duration_ms: 4.31197
+  type: 'test'
+  ...
+# Subtest: A shuffled bag explores every family before repeating and avoids adjacent duplicates
+ok 114 - A shuffled bag explores every family before repeating and avoids adjacent duplicates
+  ---
+  duration_ms: 0.379532
+  type: 'test'
+  ...
+# Subtest: History is bounded to 60 recipes without persisting simulation buffers
+ok 115 - History is bounded to 60 recipes without persisting simulation buffers
+  ---
+  duration_ms: 0.755298
+  type: 'test'
+  ...
+# Subtest: Pre-existing 2.1.1 histories discover newly added families without losing recipes
+ok 116 - Pre-existing 2.1.1 histories discover newly added families without losing recipes
+  ---
+  duration_ms: 0.288087
+  type: 'test'
+  ...
+# Subtest: Blocked and full storage never prevent terrain generation or backward navigation
+ok 117 - Blocked and full storage never prevent terrain generation or backward navigation
+  ---
+  duration_ms: 0.22984
+  type: 'test'
+  ...
+# Subtest: Malformed or oversized stored histories are ignored atomically
+ok 118 - Malformed or oversized stored histories are ignored atomically
+  ---
+  duration_ms: 0.6484
+  type: 'test'
+  ...
+# Subtest: Imported legacy recipes join history; invalid imports do not mutate it
+ok 119 - Imported legacy recipes join history; invalid imports do not mutate it
+  ---
+  duration_ms: 0.25027
+  type: 'test'
+  ...
+# Subtest: Returned recipes cannot mutate internal or stored history
+ok 120 - Returned recipes cannot mutate internal or stored history
+  ---
+  duration_ms: 0.136883
+  type: 'test'
+  ...
+# Subtest: All old v2 reliefs and frozen physical options still round-trip exactly
+ok 121 - All old v2 reliefs and frozen physical options still round-trip exactly
+  ---
+  duration_ms: 513.779514
+  type: 'test'
+  ...
+# Subtest: Deleted features have no residual HTML controls or UI handlers
+ok 122 - Deleted features have no residual HTML controls or UI handlers
+  ---
+  duration_ms: 0.718373
+  type: 'test'
+  ...
+1..122
+# tests 122
+# suites 0
+# pass 122
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 82923.935889

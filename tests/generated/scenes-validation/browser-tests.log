@@ -1,0 +1,102 @@
+PASS: First visit opens a live, prefilled aquatic card
+PASS: The actual standalone document initializes in memory without any network request
+PASS: The existing title is retained
+PASS: Original warm accent color is retained
+PASS: Original water/UI color is retained
+PASS: Card browsing and rain are directly visible
+PASS: No boundary, rainfall intensity, source discharge or speed slider remains
+PASS: Two view choices replace three persistent analysis tabs
+PASS: Display and diagnostics start collapsed
+PASS: Floating transport contains only playback, speed and next card
+PASS: An island card can include an upstream preconfigured source
+PASS: Rain button reflects the card default
+PASS: Rain has only off and the prescribed on-rate
+PASS: Switching rain off preserves the intensity-specific glyph
+PASS: Switching back recovers the exact prescribed rainfall
+PASS: Rain toggle never erases or repaints standing water
+PASS: Sources display read-only discharge levels instead of numeric editors
+PASS: An automatically placed source can be turned off
+PASS: The same source can be reactivated
+PASS: Removing sources does not remove the sea
+PASS: Restart restores the entire initial scene, not just its height field
+PASS: Restart preserves pause state
+PASS: A single speed button cycles through the four existing speeds
+PASS: Browsing preserves playback and speed
+PASS: The next card uses its own rain default, not the previous toggle
+PASS: Previous returns the exact initial water, rain and sources of the previous card
+PASS: Keyboard left/right shares the same card history
+PASS: An explicitly focused selector supports wheel browsing
+PASS: Leaving the selector disarms the wheel
+PASS: Arrow keys outside the card selector do not change the map
+PASS: Floating next-card button shares the same navigation
+PASS: glacial: correct rain glyph for actual intensity
+PASS: headwaters: correct rain glyph for actual intensity
+PASS: island: correct rain glyph for actual intensity
+PASS: badlands: correct rain glyph for actual intensity
+PASS: An arid card can start with neither sources nor rain
+PASS: A dry card still permits its prescribed rain to be activated
+PASS: Clicking emergent terrain adds a source
+PASS: Manual sources inherit the card-appropriate discharge
+PASS: Context menu recognizes sources at the exact clicked position
+PASS: Context-menu source toggle remains functional
+PASS: Clicking deep sea does not create an accidental underwater source
+PASS: Actual downloaded snapshot includes card climate and marine momentum
+PASS: Actual file import restores every saved physical buffer and option exactly
+PASS: Imported rainfall state matches the button
+PASS: Old v2 sessions retain exact rain and no invented sea boundary
+PASS: An imported legacy custom rate is fixed but still switchable
+PASS: Invalid import leaves the current map untouched
+PASS: The erosion view retains its explanation
+PASS: Optional terrain contours still toggle
+PASS: Potential-flow analysis remains available in diagnostics
+PASS: Leaving analysis restores the landscape view
+PASS: A fresh application lifecycle advances the seed instead of replaying the initial map
+PASS: A fresh lifecycle preserves the stored history and sequence number
+PASS: Previous can recover the map from before reload
+PASS: 320x568: no horizontal viewport overflow
+PASS: 320x568: no clipped side-panel contents
+PASS: 320x568: primary controls remain reachable
+PASS: 320x568: next button remains usable
+PASS: 320x568: closing drawer restores focus and makes it inert
+PASS: 360x640: no horizontal viewport overflow
+PASS: 360x640: no clipped side-panel contents
+PASS: 360x640: primary controls remain reachable
+PASS: 360x640: next button remains usable
+PASS: 360x640: closing drawer restores focus and makes it inert
+PASS: 390x844: no horizontal viewport overflow
+PASS: 390x844: no clipped side-panel contents
+PASS: 390x844: primary controls remain reachable
+PASS: 390x844: next button remains usable
+PASS: 390x844: closing drawer restores focus and makes it inert
+PASS: 768x1024: no horizontal viewport overflow
+PASS: 768x1024: no clipped side-panel contents
+PASS: 768x1024: primary controls remain reachable
+PASS: 768x1024: next button remains usable
+PASS: 1024x768: no horizontal viewport overflow
+PASS: 1024x768: no clipped side-panel contents
+PASS: 1024x768: primary controls remain reachable
+PASS: 1024x768: next button remains usable
+PASS: 1280x720: no horizontal viewport overflow
+PASS: 1280x720: no clipped side-panel contents
+PASS: 1280x720: primary controls remain reachable
+PASS: 1280x720: next button remains usable
+PASS: 1440x950: no horizontal viewport overflow
+PASS: 1440x950: no clipped side-panel contents
+PASS: 1440x950: primary controls remain reachable
+PASS: 1440x950: next button remains usable
+PASS: 1920x1080: no horizontal viewport overflow
+PASS: 1920x1080: no clipped side-panel contents
+PASS: 1920x1080: primary controls remain reachable
+PASS: 1920x1080: next button remains usable
+PASS: island: actual rendered card contains initialized water
+PASS: archipelago: actual rendered card contains initialized water
+PASS: coast: actual rendered card contains initialized water
+PASS: estuary: actual rendered card contains initialized water
+PASS: fjord: actual rendered card contains initialized water
+PASS: lagoon: actual rendered card contains initialized water
+PASS: atoll: actual rendered card contains initialized water
+PASS: lake: actual rendered card contains initialized water
+PASS: craterlake: actual rendered card contains initialized water
+PASS: All interactions and layouts stay offline and free from JavaScript errors
+PASS: The source scripts also initialize in document order without remote assets
+101 browser checks passed

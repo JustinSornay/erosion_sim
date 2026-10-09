@@ -1,0 +1,5 @@
+
+> erosion-sandbox@2.3.0 build:offline
+> node tools/build-standalone.js --skip-icons
+
+Standalone: /mnt/data/erosion_v230_work/erosion_sim_2.3.0/dist/erosion-simulation.html (146697 bytes)

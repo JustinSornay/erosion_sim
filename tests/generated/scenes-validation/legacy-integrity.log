@@ -1,0 +1,6 @@
+
+> erosion-sandbox@2.3.0 test:legacy
+> node tests/regression/legacy-integrity.js
+
+PASS: 10 original JS hashes; 39 historical runners pinned; archived engine deterministic at 200 steps.
+Historical binary fixture agreement is a separate, known-failing diagnostic: npm run audit:legacy.

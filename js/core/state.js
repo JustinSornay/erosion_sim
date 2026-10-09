@@ -14,3 +14,7 @@ const DEFAULT_SIMULATION_OPTIONS = Object.freeze({
 });
 const simulationOptions = { ...DEFAULT_SIMULATION_OPTIONS };
 let budget = {};
+
+// Optional scene configuration. The historical dry-engine API remains unchanged.
+let sceneState = null, seaLevel = null;
+let seaFlux, seaIncoming; // signed external face fluxes and accepted inflows

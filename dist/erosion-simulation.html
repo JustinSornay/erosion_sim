@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark" />
+    <meta name="application-version" content="2.3.0" />
     <title>Érosion — Sandbox Hydrographique</title>
     <style>
 :root {
@@ -670,6 +671,74 @@ input:not([type="range"]):not([type="checkbox"]):not([type="file"]), select {
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 
 </style>
+    <style>
+/* Simpler hierarchy, same palette, density, panel and floating controls. */
+#side-panel { gap: 15px; }
+.panel-header { margin-bottom: 1px; }
+#terrain-settings { display: flex; flex-direction: column; gap: 10px; }
+.terrain-browser { grid-template-columns: 36px minmax(0, 1fr) 36px; padding: 3px; }
+.terrain-arrow { width: 36px; height: 42px; }
+#nextTerrain .icon { transform: none; }
+#terrainName { font-size: 12px; line-height: 1.3; }
+#terrainPosition { font-size: 9px; line-height: 1.5; }
+#terrainCaption { min-height: 32px; }
+.scene-water { display: flex; gap: 7px; align-items: center; color: var(--water); font-size: 10px; }
+.scene-water .icon { width: 15px; height: 15px; }
+.terrain-help { font-size: 10px; margin: 0; }
+.weather-toggle { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 66px; padding: 10px; border-radius: 7px; border: 1px solid var(--border); background: var(--bg-control); text-align: left; }
+.weather-toggle:hover { background: #383734; }
+.weather-toggle > .icon { width: 26px; height: 26px; color: var(--text-muted); }
+.weather-toggle.on { border-color: var(--water); }
+.weather-toggle.on > .icon { color: var(--water); }
+.weather-copy { min-width: 0; display: flex; flex-direction: column; gap: 5px; flex: 1; }
+.weather-copy strong { color: var(--text-primary); font-size: 11px; font-weight: 500; }
+.weather-copy > span { color: var(--text-muted); font-size: 9px; line-height: 1.4; }
+.weather-state { display: flex; flex-direction: column; align-items: center; gap: 5px; color: var(--text-muted); font-size: 9px; }
+.weather-toggle.on .weather-state { color: var(--water); }
+.mini-switch { display: block; width: 25px; height: 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-surface); position: relative; }
+.mini-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 8px; height: 8px; border-radius: 50%; background: var(--text-muted); transition: transform .15s; }
+.weather-toggle.on .mini-switch { border-color: var(--water); }
+.weather-toggle.on .mini-switch::after { transform: translateX(11px); background: var(--water); }
+.panel-details { padding-top: 10px; }
+.panel-details > summary { min-height: 30px; line-height: 22px; font-size: 11px; }
+.summary-count { float: right; color: var(--text-muted); font-family: var(--font-mono); font-size: 10px; }
+#sources { min-height: 0; max-height: 175px; background: transparent; padding: 0; }
+.src-row { min-height: 38px; border-radius: 5px; background: rgba(255,255,255,.025); padding-left: 5px; }
+.source-toggle { gap: 6px; min-height: 36px; font-family: var(--font-ui); font-size: 11px; }
+.source-toggle .icon { width: 13px; height: 13px; }
+.src-row .source-flow { color: var(--text-muted); font-family: var(--font-ui); font-size: 10px; margin-left: auto; }
+.source-remove { width: 32px; height: 34px; background: transparent; }
+.empty-sources { padding: 0; margin: 0; }
+.quiet-btn { display: inline-flex; align-items: center; justify-content: flex-start; gap: 7px; background: transparent; border: 0; color: var(--text-muted); padding: 4px 0; font-size: 10px; min-height: 28px; }
+.quiet-btn:hover { color: var(--text-primary); }
+.quiet-btn .icon { width: 14px; height: 14px; }
+.restart-scene { margin-top: 0; }
+.layer-item { min-height: 36px; }
+#bottom-bar { gap: 12px; padding: 8px 12px; }
+#speed.speed-button { width: 54px; height: 40px; }
+#speedLbl { color: var(--accent); }
+.transport-divider { height: 22px; width: 1px; background: var(--border); }
+#hud { padding: 9px 12px; line-height: 1.3; }
+.hud-separator { margin: 0 7px; }
+@media (max-width: 1024px) and (min-width: 768px) {
+  #side-panel { gap: 12px; }
+  .weather-toggle { padding: 8px; gap: 7px; }
+  .weather-toggle > .icon { width: 23px; height: 23px; }
+  #terrainName { font-size: 11px; }
+}
+@media (max-width: 767px) {
+  #side-panel { gap: 14px; }
+  #bottom-bar { gap: 10px; padding: 6px 10px; }
+  .ctrl-btn, #speed.speed-button { min-height: 44px; }
+  .terrain-arrow { min-height: 44px; }
+  .panel-details > summary { min-height: 36px; line-height: 28px; }
+  .source-toggle, .source-remove, .quiet-btn, .text-btn { min-height: 40px; }
+}
+
+</style>
+
+
+
 
 
 
@@ -687,106 +756,90 @@ input:not([type="range"]):not([type="checkbox"]):not([type="file"]), select {
   <body>
     <div id="app">
       <main id="stage" aria-label="Simulation hydrographique">
-        <canvas id="c" tabindex="0" aria-label="Terrain interactif. Cliquez pour ajouter une source." aria-describedby="interaction-help"></canvas>
+        <canvas id="c" tabindex="0" aria-label="Carte interactive. Cliquez sur une terre pour ajouter une source." aria-describedby="interaction-help"></canvas>
         <div id="stage-hint" role="status" hidden></div>
         <div id="toast" role="status" aria-live="polite"></div>
         <div id="context-menu" aria-label="Actions de source">
-          <button id="ctx-add-source" type="button"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="droplet"></svg>Ajouter une source d'eau</button>
-          <button id="ctx-toggle-source" type="button" style="display: none"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="toggle-right"></svg><span class="context-menu-label">Désactiver la source</span></button>
-          <button id="ctx-delete-source" type="button" style="display: none"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="trash-2"></svg>Supprimer</button>
+          <button id="ctx-add-source" type="button"><svg class="icon" data-icon="droplet"></svg>Ajouter une source</button>
+          <button id="ctx-toggle-source" type="button" style="display:none"><svg class="icon" data-icon="toggle-right"></svg><span class="context-menu-label">Désactiver la source</span></button>
+          <button id="ctx-delete-source" type="button" style="display:none"><svg class="icon" data-icon="trash-2"></svg>Supprimer</button>
         </div>
-        <div id="hud">
-          Mode: <b class="mode" id="modeLbl">Simulation</b><br />
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="gauge"></svg> <b id="fps">--</b> fps · cible <b id="tgtMult">×1</b> · réel <b id="realMult">×1</b><br />
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="clock"></svg> <b id="tcount">0</b> pas · <b id="tsim">0.0</b>s
-        </div>
+        <div id="hud"><b class="mode" id="modeLbl">Paysage</b><span class="hud-separator">·</span><span id="playState">En cours</span></div>
       </main>
 
-      <!-- Original floating transport bar, centered on the visible terrain. -->
       <div id="bottom-bar" role="group" aria-label="Commandes de simulation">
-        <button class="ctrl-btn" id="pause" type="button" aria-label="Mettre en pause" aria-pressed="false" title="Pause / Reprendre (Espace)"><svg id="pauseIcon" class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="pause"></svg></button>
-        <div class="speed-ctrl">
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="gauge"></svg>
-          <input id="speed" aria-label="Vitesse de simulation" aria-valuetext="×1" min="0" step="1" type="range" value="0" />
-          <span id="speedLbl">×1</span>
-        </div>
-        <button class="ctrl-btn" id="regen" type="button" aria-label="Relief suivant" title="Relief suivant"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="rotate-cw"></svg></button>
-        <button class="ctrl-btn" id="clearSrc" type="button" aria-label="Effacer toutes les sources" title="Effacer toutes les sources"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="eraser"></svg></button>
+        <button class="ctrl-btn" id="pause" type="button" aria-label="Mettre en pause" aria-pressed="false" title="Pause / Reprendre (Espace)"><svg id="pauseIcon" class="icon" data-icon="pause"></svg></button>
+        <button class="ctrl-btn speed-button" id="speed" value="0" type="button" aria-label="Vitesse actuelle : fois 1. Cliquer pour accélérer." title="Changer la vitesse"><span id="speedLbl">×1</span></button>
+        <span class="transport-divider" aria-hidden="true"></span>
+        <button class="ctrl-btn" id="regen" type="button" aria-label="Carte suivante" title="Carte suivante"><svg class="icon" data-icon="chevron-right"></svg></button>
       </div>
+      <button id="panel-tab" type="button" title="Explorer les cartes" aria-label="Ouvrir le panneau" aria-controls="side-panel" aria-expanded="false"><svg class="icon" data-icon="chevron-left"></svg></button>
 
-      <button id="panel-tab" type="button" title="Ouvrir les réglages" aria-label="Ouvrir les réglages" aria-controls="side-panel" aria-expanded="false"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="chevron-left"></svg></button>
+      <aside id="side-panel" aria-label="Explorer et observer">
+        <button id="close-panel" type="button" title="Fermer le panneau" aria-label="Fermer le panneau"><svg class="icon" data-icon="x"></svg></button>
+        <div class="panel-header"><h1>Sandbox Hydrographique</h1><p class="desc">Un paysage. Sa pluie. Ses cours d'eau.</p></div>
 
-      <aside id="side-panel" aria-label="Réglages du sandbox">
-        <button id="close-panel" type="button" title="Fermer les réglages" aria-label="Fermer les réglages"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="x"></svg></button>
-        <div class="panel-header">
-          <h1>Sandbox Hydrographique</h1>
-          <p class="desc" id="interaction-help">Clic sur le terrain pour ajouter une source d'eau. Clic sur une source pour l'activer ou la couper.</p>
-        </div>
-        <div class="segmented modes" role="group" aria-label="Mode de visualisation">
-          <button class="on" type="button" data-m="composite" aria-pressed="true">Simulation</button>
-          <button type="button" data-m="change" aria-pressed="false">Érosion / dépôts</button>
-          <button type="button" data-m="contribution" aria-pressed="false" title="Analyse Terrain (D8)" aria-label="Analyse Terrain (D8)">Terrain (D8)</button>
-        </div>
-
-        <div class="hr"></div>
-
-        <!-- The original visual layers remain visible, not inside an accordion. -->
-        <section id="layersBox" aria-labelledby="layers-title">
-          <h2 class="section-title" id="layers-title">Couches Visuelles</h2>
-          <div class="layer-group">
-            <button type="button" class="layer-group-title" data-group="layers-terrain" aria-label="Activer ou masquer les couches de terrain" aria-pressed="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="mountain"></svg>Terrain</button>
-            <div class="layer-list" id="layers-terrain"></div>
+        <section id="terrain-settings" aria-label="Carte actuelle">
+          <div class="terrain-browser" id="terrain-browser" role="group" tabindex="0" aria-label="Parcourir les cartes" aria-describedby="terrain-help">
+            <button id="previousTerrain" type="button" class="text-btn terrain-arrow" aria-label="Carte précédente" title="Carte précédente" disabled><svg class="icon" data-icon="chevron-left"></svg></button>
+            <div class="terrain-current" aria-live="polite" aria-atomic="true"><span id="terrainName">Carte</span><span id="terrainPosition"></span></div>
+            <button id="nextTerrain" type="button" class="text-btn terrain-arrow" aria-label="Carte suivante" title="Carte suivante"><svg class="icon" data-icon="chevron-right"></svg></button>
           </div>
-          <div class="layer-group">
-            <button type="button" class="layer-group-title" data-group="layers-water" aria-label="Activer ou masquer les couches d'eau et de dynamique" aria-pressed="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="waves"></svg>Eau &amp; Dynamique</button>
-            <div class="layer-list" id="layers-water"></div>
-          </div>
+          <p id="terrainCaption"></p>
+          <div class="scene-water"><svg class="icon" id="waterIcon" data-icon="waves"></svg><span id="waterSummary"></span></div>
+          <p class="terrain-help" id="terrain-help">Flèches ou molette dans le sélecteur.<br />Chaque carte retrouve son état initial.</p>
         </section>
 
-        <div class="hr" id="divider-bottom"></div>
-
-        <section aria-labelledby="sources-title">
-          <h2 class="section-title" id="sources-title">Sources Actives (<span id="srcCount">0 / 0</span>)</h2>
-          <div id="sources"></div>
+        <section class="scene-weather" aria-label="Pluie de la carte">
+          <button id="rainToggle" type="button" class="weather-toggle" aria-pressed="false">
+            <svg class="icon" id="rainIcon" data-icon="cloud-rain"></svg>
+            <span class="weather-copy"><strong id="rainLabel">Pluie</strong><span>Intensité propre à la carte</span></span>
+            <span class="weather-state"><span id="rainState">Arrêt</span><span class="mini-switch" aria-hidden="true"></span></span>
+          </button>
         </section>
 
-        <!-- v2 tools supplement the original panel without taking priority. -->
-        <details id="terrain-settings" class="panel-details">
-          <summary>Terrain &amp; simulation</summary>
+        <details class="panel-details" id="sources-settings" open>
+          <summary>Sources <span class="summary-count" id="srcCount">0 / 0</span></summary>
           <div class="detail-content">
-            <div class="terrain-browser" id="terrain-browser" role="group" tabindex="0" aria-label="Parcourir les reliefs" aria-describedby="terrain-help terrain-reset-hint">
-              <button id="previousTerrain" type="button" class="text-btn terrain-arrow" aria-label="Relief précédent" title="Relief précédent" disabled><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="chevron-left"></svg></button>
-              <div class="terrain-current" aria-live="polite" aria-atomic="true"><span id="terrainName">Relief</span><span id="terrainPosition"></span></div>
-              <button id="nextTerrain" type="button" class="text-btn terrain-arrow" aria-label="Relief suivant" title="Relief suivant"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="chevron-left"></svg></button>
+            <div id="sources"></div>
+            <p class="terrain-help" id="interaction-help">Clic sur une terre : ajouter. Sur une source : activer ou couper. Le débit est préréglé.</p>
+            <button id="clearSrc" type="button" class="quiet-btn" hidden><svg class="icon" data-icon="eraser"></svg>Retirer les sources</button>
+          </div>
+        </details>
+
+        <details class="panel-details" id="display-settings">
+          <summary>Affichage</summary>
+          <div class="detail-content">
+            <div class="segmented modes" role="group" aria-label="Vue de la carte">
+              <button class="on" type="button" data-m="composite" aria-pressed="true">Paysage</button>
+              <button type="button" data-m="change" aria-pressed="false">Érosion &amp; dépôts</button>
             </div>
-            <p id="terrainCaption"></p>
-            <p class="terrain-help" id="terrain-help">Flèches ou molette après un clic dans le sélecteur.<br /><span id="terrain-reset-hint">Changer de relief efface l'eau et les sources.</span></p>
-            <div class="settings-inline">
-              <label for="boundary">Limites<select id="boundary"><option value="open">Ouvertes</option><option value="closed">Fermées</option></select></label>
-              <label for="rain">Pluie<select id="rain"><option value="0">Aucune</option><option value="0.00001">Légère</option><option value="0.00005">Averse</option></select></label>
-            </div>
+            <div id="layersBox" class="layer-list" aria-label="Repères visuels"></div>
           </div>
         </details>
 
         <details id="simulation-budget" class="panel-details">
-          <summary>Bilans &amp; lecture</summary>
+          <summary>Détails de la simulation</summary>
           <div class="detail-content">
             <div class="metrics" aria-label="Bilan de la simulation">
               <div><span>Eau présente</span><b id="statWater">0</b></div>
+              <div><span>Apport de la mer</span><b id="statIn">0</b></div>
               <div><span>Eau sortie</span><b id="statOut">0</b></div>
               <div><span>Matière érodée</span><b id="statEroded">0</b></div>
               <div><span>Matière déposée</span><b id="statDeposited">0</b></div>
             </div>
+            <button class="text-btn" id="analysisToggle" type="button" aria-pressed="false">Réseau potentiel du relief</button>
             <div class="budget-detail">
-              <p id="budget-status">Bilans en attente.</p>
-              <p id="reading-help">Bleu : eau. Traits clairs : courants mesurés. Orange / vert : érosion / dépôts dans la vue dédiée. Le réseau D8 est un potentiel, pas une rivière imposée.</p>
-              <p id="budget-values"></p>
-              <p>Unités de simulation non calibrées. Modèle de paysage, pas un outil de prévision hydrologique.</p>
+              <p id="scene-note"></p>
+              <p id="budget-status">Bilans en attente.</p><p id="budget-values"></p>
+              <p><b id="tcount">0</b> pas · <b id="tsim">0.0</b> s · <b id="fps">--</b> fps<br />Vitesse cible <b id="tgtMult">×1</b> · réelle <b id="realMult">×1</b></p>
+              <p>Unités non calibrées. Pas de marées, de vagues ni de circulation souterraine simulées.</p>
             </div>
           </div>
         </details>
 
-        <div class="button-pair session-actions"><button id="saveSession" type="button" class="text-btn"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="save"></svg>Sauvegarder</button><button id="loadSession" type="button" class="text-btn"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-icon="folder-open"></svg>Ouvrir</button></div>
+        <button id="restartScene" type="button" class="quiet-btn restart-scene" title="Retrouver le relief, l'eau, la pluie et les sources de départ"><svg class="icon" data-icon="rotate-cw"></svg>Recommencer cette carte</button>
+        <div class="button-pair session-actions"><button id="saveSession" type="button" class="text-btn"><svg class="icon" data-icon="save"></svg>Sauvegarder</button><button id="loadSession" type="button" class="text-btn"><svg class="icon" data-icon="folder-open"></svg>Ouvrir</button></div>
         <input id="sessionFile" type="file" accept=".json,application/json" hidden />
       </aside>
     </div>
@@ -956,6 +1009,10 @@ const DEFAULT_SIMULATION_OPTIONS = Object.freeze({
 const simulationOptions = { ...DEFAULT_SIMULATION_OPTIONS };
 let budget = {};
 
+// Optional scene configuration. The historical dry-engine API remains unchanged.
+let sceneState = null, seaLevel = null;
+let seaFlux, seaIncoming; // signed external face fluxes and accepted inflows
+
 ;
 // The browser only proposes these landscapes. Legacy recipes below remain
 // available to saved sessions and deterministic physics regression fixtures.
@@ -977,10 +1034,20 @@ const TERRAIN_CATALOG = Object.freeze({
   mesas: { name: "Mesas et buttes", description: "Des plateaux isolés émergent d'une plaine plus basse et découpée." },
   cuesta: { name: "Cuestas", description: "De longs escarpements asymétriques structurent le paysage en bandes inclinées." },
   braided: { name: "Chenaux multiples", description: "Une grande plaine est parcourue par plusieurs bras qui se divisent et se rejoignent." },
+  island: { name: "Île océanique", description: "Une île montagneuse entourée d'une mer profonde et de hauts-fonds." },
+  archipelago: { name: "Archipel", description: "Plusieurs îles et îlots séparés par des détroits et des baies." },
+  coast: { name: "Côte & criques", description: "Un littoral irrégulier, des caps rocheux et des anses ouvertes sur la mer." },
+  estuary: { name: "Estuaire", description: "Une vallée fluviale s'élargit au contact de la mer, entre des rives basses." },
+  fjord: { name: "Fjord", description: "Un bras de mer profond entre des versants escarpés et des vallées secondaires." },
+  lagoon: { name: "Lagune côtière", description: "Une eau peu profonde derrière un cordon littoral, reliée à la mer par une passe." },
+  atoll: { name: "Atoll", description: "Un chapelet d'îlots autour d'un lagon, avec des passes vers l'océan." },
+  lake: { name: "Lac de vallée", description: "Un lac allongé dans un bassin entouré de versants et de vallons." },
+  craterlake: { name: "Lac de cratère", description: "Un plan d'eau calme au creux d'un relief annulaire irrégulier." },
   // The original procedural topography is a first-class discovery choice again.
   // Its sampler below MUST stay on the untouched historical fbm path.
   natural: { name: "Terrain naturel", description: "Le relief aléatoire et irrégulier des toutes premières générations." },
 });
+const WATER_TERRAIN_KEYS = new Set(['island', 'archipelago', 'coast', 'estuary', 'fjord', 'lagoon', 'atoll', 'lake', 'craterlake']);
 const LEGACY_CLOSEUP_PRESETS = new Set(['headwaters', 'meanders', 'hillside', 'confluence', 'spillway']);
 const REGIONAL_ONLY_PRESETS = new Set(['massif', 'tableland', 'lowlands', 'mesas', 'braided']);
 const LEGACY_TERRAINS = Object.freeze({
@@ -1314,6 +1381,8 @@ function genTerrain(options = {}) {
     throw new Error("La graine doit etre un entier entre 0 et 2147483647.");
   const preset = options.preset || terrainPreset;
   if (!isTerrainPreset(preset)) throw new Error("Terrain inconnu.");
+  sceneState = null; seaLevel = null;
+  seaFlux = new Float64Array(4 * N); seaIncoming = new Float64Array(NN);
   terrainSeed = requestedSeed;
   terrainPreset = preset;
   seed = terrainSeed;
@@ -1357,7 +1426,8 @@ function genTerrain(options = {}) {
   // "natural" intentionally uses the original fractal-height branch below,
   // rather than the regional or valley samplers used by the eight new families.
   const sampleLandscape = Object.hasOwn(TERRAIN_CATALOG, preset) && preset !== "natural"
-    ? (terrainViewIndex(terrainSeed) === 0 && LEGACY_CLOSEUP_PRESETS.has(preset) && !REGIONAL_ONLY_PRESETS.has(preset)
+    ? (WATER_TERRAIN_KEYS.has(preset) ? waterLandscapeSampler(preset, terrainSeed, terrainViewIndex(terrainSeed))
+      : terrainViewIndex(terrainSeed) === 0 && LEGACY_CLOSEUP_PRESETS.has(preset) && !REGIONAL_ONLY_PRESETS.has(preset)
       ? landscapeSampler(preset, terrainSeed) // Retain the familiar close-ups for the original discovery presets.
       : regionalLandscapeSampler(preset, terrainSeed, terrainViewIndex(terrainSeed)))
     : null;
@@ -1413,9 +1483,112 @@ function genTerrain(options = {}) {
 }
 
 ;
+// Dry topographies for the aquatic catalogue. Filling is a separate, conserved
+// scene initialization step; no water, current or erosion is painted into b.
+function waterLandscapeSampler(preset, value, view) {
+  const random = terrainRandom(value ^ 0x4a53dc71);
+  const extent = [1.5, 2.05, 2.8][view];
+  const angle = random() * Math.PI * 2, cs = Math.cos(angle), sn = Math.sin(angle);
+  const cx = (random() - .5) * .09, cy = (random() - .5) * .09;
+  const ox = 20 + 170 * random(), oy = 20 + 170 * random();
+  const phase = random() * Math.PI * 2, phase2 = random() * Math.PI * 2;
+  const amplitude = .62 + .18 * random(), oval = .78 + .24 * random();
+  const islandCount = [3, 5, 7][view];
+  const islands = [];
+  for (let k = 0; k < islandCount; k++) {
+    // Staggered islands, not a stack of peaks occupying the same central hill.
+    const row = Math.floor(k / 3), column = k % 3;
+    islands.push({ x: (column - 1) * .27 + (random() - .5) * .09,
+      y: (row - (Math.ceil(islandCount / 3) - 1) / 2) * .29 + (random() - .5) * .10,
+      rx: .11 + random() * .04, ry: .105 + random() * .035, h: .44 + random() * .32 });
+  }
+  const peaks = Array.from({length: 5 + 2 * view}, () => ({
+    x: (random() - .5) * .85, y: (random() - .5) * .85,
+    rx: .10 + random() * .12, ry: .10 + random() * .12, h: .12 + .16 * random(),
+  }));
+  const atollRadius = .29 + .025 * random(), atollWidth = .046 + random() * .014;
+  const opening = -.65 + .45 * random();
+  return (px, py) => {
+    const dx = px - .5 - cx, dy = py - .5 - cy;
+    const x = cs * dx - sn * dy, y = sn * dx + cs * dy;
+    const broad = .7 * perlin(ox + x * extent * 1.7, oy + y * extent * 1.7)
+      + .3 * perlin(ox + x * extent * 3.4, oy + y * extent * 3.4);
+    const fine = perlin(ox + x * extent * 7, oy + y * extent * 7);
+    const coastLine = .035 + .065 * Math.sin(y * 8 + phase) + .045 * broad;
+    const channel = .06 * Math.sin(y * 5 + phase) + .03 * Math.sin(y * 11 + phase2);
+    let uplands = 0;
+    for (const peak of peaks) uplands += peak.h * radialGaussian(x - peak.x, y - peak.y, peak.rx, peak.ry);
+    if (preset === 'island') {
+      const r = Math.hypot(x / oval, y);
+      const a = Math.atan2(y, x);
+      const rim = .27 * (1 + .12 * Math.sin(3 * a + phase) + .07 * Math.sin(5 * a + phase2));
+      const core = Math.exp(-1.25 * (r / rim) ** 2);
+      return -.30 + (amplitude + .33) * core + .10 * broad * core + .17 * uplands * core;
+    }
+    if (preset === 'archipelago') {
+      let h = -.20;
+      for (const island of islands) {
+        const r = ((x - island.x + .014 * broad) / island.rx) ** 2 + ((y - island.y) / island.ry) ** 2;
+        h += island.h * Math.exp(-1.8 * r);
+      }
+      return h + .045 * broad + .009 * fine;
+    }
+    if (preset === 'atoll') {
+      const a = Math.atan2(y, x), r = Math.hypot(x / oval, y);
+      const radius = atollRadius * (1 + .055 * Math.sin(4 * a + phase));
+      const ring = .42 * gaussian(r - radius, atollWidth);
+      const heightVariation = .64 + .36 * Math.sin(3 * a + phase2) ** 2;
+      // Two submerged passes connect the lagoon to the external sea.
+      const pass = .32 * radialGaussian(x - radius * Math.cos(opening), y - radius * Math.sin(opening), .08, .075)
+        + .24 * radialGaussian(x + radius * .8, y - radius * .3, .07, .07);
+      return -.19 + ring * heightVariation - pass + .012 * broad;
+    }
+    if (preset === 'coast') {
+      const shore = x - coastLine;
+      return .50 * Math.tanh(6 * shore) + .25 * uplands * terrainSmooth(-.08, .20, shore)
+        + .032 * broad + .006 * fine;
+    }
+    if (preset === 'estuary') {
+      const width = .042 + .12 * terrainSmooth(-.30, .28, y);
+      const valley = .48 * (1 - Math.exp(-(((x - channel) / width) ** 2)));
+      const floor = -.07 - .68 * y;
+      const land = floor + valley + .08 * uplands + .016 * broad;
+      const sea = -.28 - .30 * Math.max(0, y);
+      return lerp(land, sea, terrainSmooth(.05, .40, y));
+    }
+    if (preset === 'fjord') {
+      let distance = Math.abs(x - channel);
+      const fork = .24 * (1 - terrainSmooth(-.27, -.02, y));
+      if (view > 0) distance = Math.min(distance, Math.abs(x - channel + fork));
+      const walls = amplitude * (1 - Math.exp(-((distance / (.068 + .01 * view)) ** 2)));
+      const valley = -.22 - .43 * y + walls + .16 * uplands + .02 * broad;
+      return lerp(valley, -.42, terrainSmooth(.23, .52, y));
+    }
+    if (preset === 'lagoon') {
+      const shore = x - coastLine;
+      const hinterland = .48 * Math.tanh(7 * (shore - .13));
+      const beach = .49 * gaussian(shore + .10, .048 + .008 * view);
+      const pass = 1 - .98 * gaussian(y - .08 * Math.sin(phase), .057);
+      return hinterland + beach * pass + .16 + .12 * uplands * terrainSmooth(.08, .22, shore) + .011 * broad;
+    }
+    if (preset === 'lake') {
+      const axis = x - .04 * Math.sin(y * 7 + phase);
+      const radius = Math.hypot(axis / .29, y / .43);
+      return -.22 + .79 * terrainSmooth(.22, 1.28, radius) + .12 * uplands + .023 * broad + .004 * fine;
+    }
+    // A lake below an irregular crater rim. Borders remain dry at level zero.
+    const radius = Math.hypot(x / oval, y);
+    const a = Math.atan2(y, x);
+    const rim = .31 * (1 + .065 * Math.sin(3 * a + phase));
+    return .16 + .53 * gaussian(radius - rim, .105) - .47 * gaussian(radius, .24)
+      + .04 * uplands + .019 * broad;
+  };
+}
+
+;
 const TERRAIN_HISTORY_KEY = "erosion.terrain-browser.v1";
 const TERRAIN_HISTORY_LIMIT = 60;
-const TERRAIN_CATALOG_REVISION = 3;
+const TERRAIN_CATALOG_REVISION = 4;
 function terrainEntropy() {
   if (globalThis.crypto && typeof globalThis.crypto.getRandomValues === "function") {
     return globalThis.crypto.getRandomValues(new Uint32Array(1))[0] & 0x7fffffff;
@@ -1445,6 +1618,7 @@ function createTerrainHistory({ storage = null, entropy = terrainEntropy } = {})
         const additions = [];
         if (!saved.catalogRevision || saved.catalogRevision < 2) additions.push('natural');
         if (!saved.catalogRevision || saved.catalogRevision < 3) additions.push('canyon', 'badlands', 'glacial', 'karst', 'caldera', 'fan', 'mesas', 'cuesta', 'braided');
+        if (!saved.catalogRevision || saved.catalogRevision < 4) additions.push(...WATER_TERRAIN_KEYS);
         const missing = additions.filter(preset => Object.hasOwn(TERRAIN_CATALOG, preset) && !bag.includes(preset));
         if (missing.length) bag = missing.concat(bag);
       }
@@ -1472,6 +1646,12 @@ function createTerrainHistory({ storage = null, entropy = terrainEntropy } = {})
       for (let i = bag.length - 1; i > 0; i--) {
         const j = Math.floor(random() * (i + 1)); [bag[i], bag[j]] = [bag[j], bag[i]];
       }
+    }
+    // A first visit opens a ready-to-explore aquatic card. This is a swap,
+    // not an extra draw: every family still occurs exactly once per bag.
+    if (!entries.length) {
+      const aquatic = bag.findIndex(preset => WATER_TERRAIN_KEYS.has(preset));
+      if (aquatic > 0) [bag[0], bag[aquatic]] = [bag[aquatic], bag[0]];
     }
     const previous = entries.at(-1);
     if (bag.length > 1 && previous && bag[0] === previous.preset) [bag[0], bag[1]] = [bag[1], bag[0]];
@@ -1529,7 +1709,7 @@ function resetBudgets() {
     initialSolid += (b[i] + s[i]) * L * L;
   }
   budget = { initialWater, initialSolid, injected: 0, rain: 0, evaporated: 0,
-    waterOut: 0, sedimentOut: 0, eroded: 0, deposited: 0, lastOutflow: 0 };
+    waterIn: 0, waterOut: 0, sedimentOut: 0, eroded: 0, deposited: 0, lastOutflow: 0 };
 }
 
 function injectSources() {
@@ -1547,11 +1727,23 @@ function injectSources() {
   }
 }
 
+// A marine face sees a fixed external free surface, not a bottomless drain.
+// Signed momentum is persisted; accepted inward water is counted explicitly.
+function marineFaceFlux(face, i, h, acceleration, damping) {
+  const outsideHead = Math.max(b[i], seaLevel);
+  const q = (seaFlux[face] + acceleration * (h - outsideHead)) * damping;
+  seaFlux[face] = q;
+  if (q < 0) seaIncoming[i] -= q;
+  return Math.max(0, q);
+}
+
 /** One signed flux per face. Opposing fictitious pipes cannot circulate water. */
 function updateFluxes() {
   const acceleration = DT * A * G / L;
   const damping = 1 / (1 + FLOW_DRAG * DT);
   const open = simulationOptions.boundary === "open";
+  const marine = seaLevel !== null;
+  if (marine) seaIncoming.fill(0);
   for (let y = 0; y < N; y++) {
     for (let x = 0; x < N; x++) {
       const i = idx(x, y), h = b[i] + d[i];
@@ -1569,10 +1761,14 @@ function updateFluxes() {
       }
       // Free outflow, no water supplied from outside. Extrapolate only a
       // descending bed; an uphill boundary does not create a negative head.
-      if (x === 0) fL[i] = open ? Math.max(0, (fL[i] + acceleration * (d[i] + Math.max(0, b[i + 1] - b[i]))) * damping) : 0;
-      if (x === N - 1) fR[i] = open ? Math.max(0, (fR[i] + acceleration * (d[i] + Math.max(0, b[i - 1] - b[i]))) * damping) : 0;
-      if (y === 0) fT[i] = open ? Math.max(0, (fT[i] + acceleration * (d[i] + Math.max(0, b[i + N] - b[i]))) * damping) : 0;
-      if (y === N - 1) fB[i] = open ? Math.max(0, (fB[i] + acceleration * (d[i] + Math.max(0, b[i - N] - b[i]))) * damping) : 0;
+      if (x === 0) fL[i] = marine ? marineFaceFlux(y, i, h, acceleration, damping)
+        : open ? Math.max(0, (fL[i] + acceleration * (d[i] + Math.max(0, b[i + 1] - b[i]))) * damping) : 0;
+      if (x === N - 1) fR[i] = marine ? marineFaceFlux(N + y, i, h, acceleration, damping)
+        : open ? Math.max(0, (fR[i] + acceleration * (d[i] + Math.max(0, b[i - 1] - b[i]))) * damping) : 0;
+      if (y === 0) fT[i] = marine ? marineFaceFlux(2 * N + x, i, h, acceleration, damping)
+        : open ? Math.max(0, (fT[i] + acceleration * (d[i] + Math.max(0, b[i + N] - b[i]))) * damping) : 0;
+      if (y === N - 1) fB[i] = marine ? marineFaceFlux(3 * N + x, i, h, acceleration, damping)
+        : open ? Math.max(0, (fB[i] + acceleration * (d[i] + Math.max(0, b[i - N] - b[i]))) * damping) : 0;
     }
   }
   const area = L * L;
@@ -1589,6 +1785,13 @@ function updateFluxes() {
     // when a cell empties. No absolute clipping / global renormalization.
     const scale = Math.min(1, (d[i] * area) / (DT * total) * (1 - 8 * Number.EPSILON));
     fL[i] *= scale; fR[i] *= scale; fT[i] *= scale; fB[i] *= scale;
+  }
+  if (marine) for (let k = 0; k < N; k++) {
+    // Retain actual accepted outflow momentum after the donor limiter.
+    if (seaFlux[k] > 0) seaFlux[k] = fL[k * N];
+    if (seaFlux[N + k] > 0) seaFlux[N + k] = fR[k * N + N - 1];
+    if (seaFlux[2 * N + k] > 0) seaFlux[2 * N + k] = fT[k];
+    if (seaFlux[3 * N + k] > 0) seaFlux[3 * N + k] = fB[NN - N + k];
   }
 }
 
@@ -1632,6 +1835,14 @@ function transportWaterAndSediment() {
       else { exportedWater += qB; exportedSediment += mB; }
     }
   }
+  if (seaLevel !== null) {
+    let importedWater = 0;
+    for (let i = 0; i < NN; i++) if (seaIncoming[i] > 0) {
+      const depth = seaIncoming[i] * dtArea;
+      tmpD[i] += depth; importedWater += depth;
+    }
+    budget.waterIn += importedWater * L * L; // Incoming sea has no suspended load.
+  }
   [d, tmpD] = [tmpD, d]; // tmpD now holds the pre-transfer water depth.
   [s, tmpS] = [tmpS, s];
   budget.waterOut += exportedWater * L * L;
@@ -1649,8 +1860,10 @@ function updateVelocityAndExchange() {
     for (let x = 0; x < N; x++) {
       const i = idx(x, y);
       if (d[i] <= DRY_DEPTH && s[i] === 0) { u[i] = v[i] = 0; continue; }
-      const inL = x > 0 ? fR[i - 1] : 0, inR = x < N - 1 ? fL[i + 1] : 0;
-      const inT = y > 0 ? fB[i - N] : 0, inB = y < N - 1 ? fT[i + N] : 0;
+      const inL = x > 0 ? fR[i - 1] : seaLevel === null ? 0 : Math.max(0, -seaFlux[y]);
+      const inR = x < N - 1 ? fL[i + 1] : seaLevel === null ? 0 : Math.max(0, -seaFlux[N + y]);
+      const inT = y > 0 ? fB[i - N] : seaLevel === null ? 0 : Math.max(0, -seaFlux[2 * N + x]);
+      const inB = y < N - 1 ? fT[i + N] : seaLevel === null ? 0 : Math.max(0, -seaFlux[3 * N + x]);
       const meanDepth = Math.max(DRY_DEPTH, (tmpD[i] + d[i]) * 0.5);
       u[i] = (inL - fL[i] + fR[i] - inR) / (2 * L * meanDepth);
       v[i] = (inT - fT[i] + fB[i] - inB) / (2 * L * meanDepth);
@@ -1719,7 +1932,7 @@ function getSimulationStats() {
   }
   return { version: PHYSICS_VERSION, steps, simTime, seed: terrainSeed, preset: terrainPreset,
     water, suspended, solid, wetCells, incision, deposit, maxDepth, minWater, minSediment, finite,
-    ...budget, waterResidual: budget.initialWater + budget.injected + budget.rain -
+    ...budget, waterResidual: budget.initialWater + budget.injected + budget.rain + budget.waterIn -
       budget.waterOut - budget.evaporated - water,
     solidResidual: budget.initialSolid - solid - budget.sedimentOut };
 }
@@ -1895,59 +2108,240 @@ function stepParticles(dtSim) {
 }
 
 ;
-// Versioned, local JSON snapshots. Validate everything before touching live state.
-const SESSION_FIELDS = ["b", "bInit", "bedrock", "d", "s", "fL", "fR", "fT", "fB", "u", "v"];
+// Card-specific hydrology. Profiles are generated once, independently of the
+// terrain sampler's RNG. Browsing always restores this complete initial scene.
+const SCENE_VERSION = 1;
+const SCENE_CLIMATES = Object.freeze({
+  headwaters: [18, 38, .9, 1, 2], meanders: [12, 28, .7, 1, 2],
+  hillside: [10, 28, .8, 0, 1], confluence: [14, 30, .8, 2, 3],
+  spillway: [18, 38, .8, 0, 1], massif: [10, 26, .8, 1, 3],
+  tableland: [16, 38, .25, 0, 1], lowlands: [12, 28, .8, 1, 2],
+  canyon: [18, 40, .2, 0, 1], badlands: [42, 70, .2, 0, 0],
+  glacial: [5, 14, .55, 1, 2], karst: [20, 42, .8, 0, 1],
+  caldera: [12, 30, .5, 0, 1], fan: [24, 50, .35, 1, 1],
+  mesas: [20, 48, .15, 0, 0], cuesta: [12, 30, .6, 0, 1],
+  braided: [10, 24, .7, 2, 3], natural: [8, 36, .6, 0, 2],
+  island: [16, 40, .85, 0, 2], archipelago: [12, 34, .7, 0, 1],
+  coast: [8, 28, .65, 0, 1], estuary: [16, 34, .8, 2, 3],
+  fjord: [10, 26, .8, 1, 2], lagoon: [10, 24, .6, 0, 1],
+  atoll: [4, 12, .45, 0, 0], lake: [12, 30, .8, 1, 2],
+  craterlake: [10, 26, .75, 0, 1],
+});
+const SEA_PRESETS = new Set(['island', 'archipelago', 'coast', 'estuary', 'fjord', 'lagoon', 'atoll']);
+function rainAppearance(rate) {
+  if (rate < .000010) return { label: 'Bruine', icon: 'cloud-drizzle', intensity: 'drizzle' };
+  if (rate < .000024) return { label: 'Pluie fine', icon: 'cloud-rain', intensity: 'light' };
+  if (rate < .000042) return { label: 'Pluie soutenue', icon: 'cloud-rain-wind', intensity: 'steady' };
+  return { label: 'Averse', icon: 'cloud-rain-heavy', intensity: 'heavy' };
+}
+function makeSceneProfile(preset, value) {
+  const random = terrainRandom(value ^ 0x781ced03);
+  const [lo, hi, chance, minSources, maxSources] = SCENE_CLIMATES[preset] || SCENE_CLIMATES.natural;
+  const rainRate = Math.round(lo + random() * (hi - lo)) / 1000000;
+  const rainDefault = random() < chance;
+  const sourceCount = minSources + Math.floor(random() * (maxSources - minSources + 1));
+  // Larger river systems receive stronger discharges than small maritime
+  // catchments. Variations stay modest so a source never overwhelms an islet.
+  const flowScale = ({estuary: 1.45, braided: 1.4, confluence: 1.2, lowlands: 1.15,
+    archipelago: .55, atoll: .40, island: .75, coast: .85, lagoon: .65,
+    craterlake: .65, glacial: .85, karst: .8})[preset] || 1;
+  const sourceRate = Math.round((.7 + random() * 1.5) * flowScale * 100) / 100;
+  return { version: SCENE_VERSION, rainRate, rainDefault, sourceCount,
+    manualSourceRate: sourceRate, waterKind: SEA_PRESETS.has(preset) ? 'sea'
+      : ['lake', 'craterlake'].includes(preset) ? 'lake' : 'none',
+    initialWetCells: 0, initialSourceCount: 0 };
+}
+function getSceneProfile() {
+  // A v2 saved custom rain remains the fixed on-intensity for that saved card.
+  if (sceneState) return sceneState;
+  const profile = makeSceneProfile(terrainPreset, terrainSeed);
+  if (simulationOptions.rainfall > 0) profile.rainRate = simulationOptions.rainfall;
+  return profile;
+}
+function setSceneRain(enabled) {
+  if (typeof enabled !== 'boolean') throw new Error('Etat de pluie invalide.');
+  if (!sceneState) sceneState = getSceneProfile();
+  simulationOptions.rainfall = enabled ? sceneState.rainRate : 0;
+}
+
+// Four-connected flood fill prevents filling isolated inland depressions with
+// seawater merely because they lie below zero. Diagonal-only joins are not pipes.
+function submergedComponent(level, starts) {
+  const mask = new Uint8Array(NN), queue = new Int32Array(NN);
+  let tail = 0;
+  const visit = i => { if (!mask[i] && b[i] < level) { mask[i] = 1; queue[tail++] = i; } };
+  for (const i of starts) visit(i);
+  for (let head = 0; head < tail; head++) {
+    const i = queue[head], x = i % N, y = (i / N) | 0;
+    if (x > 0) visit(i - 1); if (x < N - 1) visit(i + 1);
+    if (y > 0) visit(i - N); if (y < N - 1) visit(i + N);
+  }
+  return { mask, cells: queue.subarray(0, tail), touchesEdge: queue.subarray(0, tail).some(i =>
+    i % N === 0 || i % N === N - 1 || i < N || i >= NN - N) };
+}
+function fillSceneWater(profile, value) {
+  if (profile.waterKind === 'sea') {
+    const edges = [];
+    for (let k = 0; k < N; k++) edges.push(k, NN - N + k, k * N, k * N + N - 1);
+    const component = submergedComponent(0, edges);
+    for (const i of component.cells) d[i] = -b[i];
+    seaLevel = 0; // boundary reservoir, never an interior depth clamp
+  } else if (profile.waterKind === 'lake') {
+    let minimum = (NN / 2) | 0;
+    for (let y = 12; y < N - 12; y++) for (let x = 12; x < N - 12; x++) {
+      const i = idx(x, y); if (b[i] < b[minimum]) minimum = i;
+    }
+    const component = submergedComponent(0, [minimum]);
+    if (!component.touchesEdge) for (const i of component.cells) d[i] = -b[i];
+  } else if (['spillway', 'caldera', 'karst', 'natural'].includes(terrainPreset)) {
+    const random = terrainRandom(value ^ 0x194acc11);
+    if (random() < .60) {
+      // Try a small retained lake, never a fictitious dam across an open valley.
+      let minimum = -1;
+      for (let y = 16; y < N - 16; y++) for (let x = 16; x < N - 16; x++) {
+        const i = idx(x, y);
+        if (flowTo[i] < 0 && (minimum < 0 || b[i] < b[minimum])) minimum = i;
+      }
+      if (minimum >= 0) {
+        let depth = .08 + .10 * random();
+        for (let attempt = 0; attempt < 5; attempt++, depth *= .5) {
+          const level = b[minimum] + depth, component = submergedComponent(level, [minimum]);
+          if (!component.touchesEdge && component.cells.length >= 16) {
+            for (const i of component.cells) d[i] = level - b[i];
+            profile.waterKind = 'pond'; break;
+          }
+        }
+      }
+    }
+  }
+  profile.initialWetCells = d.reduce((sum, depth) => sum + (depth > .001 ? 1 : 0), 0);
+}
+
+function placeSceneSources(profile, value) {
+  if (!profile.sourceCount) return;
+  const random = terrainRandom(value ^ 0x98bade31);
+  const order = Array.from(b, (_, i) => i).sort((a, c) => b[a] - b[c]);
+  const path = new Uint16Array(NN), drains = new Uint8Array(NN);
+  for (const i of order) {
+    const j = flowTo[i], edge = i < N || i >= NN - N || i % N === 0 || i % N === N - 1;
+    if (d[i] > .002 || edge) drains[i] = 1;
+    else if (j >= 0) { drains[i] = drains[j]; path[i] = path[j] + 1; }
+  }
+  const land = order.filter(i => d[i] < .00001);
+  const threshold = land[Math.floor(land.length * .40)];
+  const candidates = [];
+  for (let y = 14; y < N - 14; y += 2) for (let x = 14; x < N - 14; x += 2) {
+    const i = idx(x, y), j = flowTo[i];
+    if (d[i] > .00001 || j < 0 || !drains[i] || path[i] < 22 || b[i] < b[threshold]) continue;
+    const slope = b[i] - b[j];
+    if (slope <= .0001 || slope > .075) continue;
+    // Prefer a meaningful downstream journey. Random tie-breaking varies the
+    // chosen catchments without placing a source in the sea or on a cliff.
+    candidates.push({ i, x, y, score: path[i] * (.70 + random() * .6), slope, length: path[i] });
+  }
+  candidates.sort((a, c) => c.score - a.score);
+  for (const candidate of candidates) {
+    if (sources.length >= profile.sourceCount) break;
+    if (sources.some(src => Math.hypot(src.x - candidate.x, src.y - candidate.y) < N * .23)) continue;
+    const catchment = Math.min(1, Math.log1p(accum[candidate.i]) / Math.log(100));
+    const journey = Math.min(1, candidate.length / N);
+    const rate = Math.round(profile.manualSourceRate * (.75 + .2 * journey + .15 * catchment) * (.9 + .2 * random()) * 100) / 100;
+    const src = { x: candidate.x, y: candidate.y, rate, active: true };
+    configureSourceOutlets(src); sources.push(src);
+  }
+  profile.initialSourceCount = sources.length;
+}
+function generateScene(recipe) {
+  genTerrain(recipe);
+  const profile = makeSceneProfile(terrainPreset, terrainSeed);
+  Object.assign(simulationOptions, DEFAULT_SIMULATION_OPTIONS);
+  simulationOptions.rainfall = profile.rainDefault ? profile.rainRate : 0;
+  // Large bodies evaporate slowly at this uncalibrated simulation timescale.
+  simulationOptions.evaporation = profile.waterKind === 'sea' ? .00008
+    : profile.waterKind === 'lake' ? .00012 : .0012;
+  fillSceneWater(profile, terrainSeed);
+  placeSceneSources(profile, terrainSeed);
+  sceneState = profile;
+  refreshSourceProtectionMask(); resetBudgets(); computeActiveNetwork();
+  return profile;
+}
+
+;
+// Versioned local snapshots. Validate all fields BEFORE changing live state.
+// v2 remains importable; v3 adds card hydrology and signed ocean-boundary momentum.
+const SESSION_FIELDS = ['b', 'bInit', 'bedrock', 'd', 's', 'fL', 'fR', 'fT', 'fB', 'u', 'v'];
 function exportSimulation() {
   const fields = { b, bInit, bedrock, d, s, fL, fR, fT, fB, u, v };
-  return { format: "erosion-session", version: 2, physics: PHYSICS_VERSION, grid: N,
+  return { format: 'erosion-session', version: 3, physics: PHYSICS_VERSION, grid: N,
     seed: terrainSeed, preset: terrainPreset, steps, options: { ...simulationOptions },
+    scene: sceneState ? { ...sceneState } : null,
+    marine: seaLevel === null ? null : { level: seaLevel, flux: Array.from(seaFlux) },
     budget: { ...budget }, sources: sources.map(({ x, y, rate, active }) => ({ x, y, rate, active })),
     fields: Object.fromEntries(SESSION_FIELDS.map(name => [name, Array.from(fields[name])])) };
 }
 function restoreSimulation(data) {
-  const fail = () => { throw new Error("Sauvegarde invalide ou incompatible (version 2 requise)."); };
-  if (!data || data.format !== "erosion-session" || data.version !== 2 || data.grid !== N || data.physics !== PHYSICS_VERSION) fail();
+  const fail = () => { throw new Error('Sauvegarde invalide ou incompatible (version 2 ou 3 requise).'); };
+  if (!data || data.format !== 'erosion-session' || ![2, 3].includes(data.version) || data.grid !== N || data.physics !== PHYSICS_VERSION) fail();
   if (!Number.isInteger(data.seed) || data.seed < 0 || data.seed > 2147483647 ||
-      !Number.isSafeInteger(data.steps) || data.steps < 0 || data.steps > 1e9 ||
-      !isTerrainPreset(data.preset)) fail();
+      !Number.isSafeInteger(data.steps) || data.steps < 0 || data.steps > 1e9 || !isTerrainPreset(data.preset)) fail();
   const fields = {};
   for (const name of SESSION_FIELDS) {
     const values = data.fields && data.fields[name];
     if (!Array.isArray(values) || values.length !== NN) fail();
-    const nonnegative = ["d", "s", "fL", "fR", "fT", "fB"].includes(name);
+    const nonnegative = ['d', 's', 'fL', 'fR', 'fT', 'fB'].includes(name);
     if (values.some(value => !Number.isFinite(value) || Math.abs(value) > 1e6 || (nonnegative && value < 0))) fail();
     fields[name] = new Float64Array(values);
   }
   for (let i = 0; i < NN; i++) if (fields.b[i] < fields.bedrock[i] - 1e-10) fail();
   const opt = data.options;
-  if (!opt || !["open", "closed"].includes(opt.boundary) || typeof opt.erosion !== "boolean") fail();
-  for (const [key, max] of [["rainfall", .01], ["evaporation", 10], ["capacity", 10], ["erosionRate", 100], ["depositionRate", 100]])
+  if (!opt || !['open', 'closed'].includes(opt.boundary) || typeof opt.erosion !== 'boolean') fail();
+  for (const [key, max] of [['rainfall', .01], ['evaporation', 10], ['capacity', 10], ['erosionRate', 100], ['depositionRate', 100]])
     if (!Number.isFinite(opt[key]) || opt[key] < 0 || opt[key] > max) fail();
   if (!Array.isArray(data.sources) || data.sources.length > 128) fail();
   const nextSources = data.sources.map(src => {
-    if (!src || typeof src.active !== "boolean") fail();
+    if (!src || typeof src.active !== 'boolean') fail();
     const result = { x: src.x, y: src.y, rate: src.rate, active: src.active };
-    configureSourceOutlets(result);
-    return result;
+    configureSourceOutlets(result); return result;
   });
-  const budgetKeys = ["initialWater", "initialSolid", "injected", "rain", "evaporated", "waterOut", "sedimentOut", "eroded", "deposited", "lastOutflow"];
+  const budgetKeys = ['initialWater', 'initialSolid', 'injected', 'rain', 'evaporated', 'waterOut', 'sedimentOut', 'eroded', 'deposited', 'lastOutflow'];
   const nextBudget = {};
   for (const key of budgetKeys) {
     const value = data.budget && data.budget[key];
-    if (!Number.isFinite(value) || Math.abs(value) > 1e15 || (key !== "initialSolid" && value < 0)) fail();
+    if (!Number.isFinite(value) || Math.abs(value) > 1e15 || (key !== 'initialSolid' && value < 0)) fail();
     nextBudget[key] = value;
+  }
+  nextBudget.waterIn = data.version === 2 ? 0 : data.budget.waterIn;
+  if (!Number.isFinite(nextBudget.waterIn) || nextBudget.waterIn < 0 || nextBudget.waterIn > 1e15) fail();
+  let nextScene = null, nextLevel = null, nextSeaFlux = new Float64Array(4 * N);
+  if (data.version === 3) {
+    if (data.scene !== null) {
+      const sc = data.scene;
+      if (!sc || sc.version !== 1 || typeof sc.rainDefault !== 'boolean' ||
+          !['sea', 'lake', 'pond', 'none'].includes(sc.waterKind) ||
+          !Number.isFinite(sc.rainRate) || sc.rainRate <= 0 || sc.rainRate > .01 ||
+          !Number.isFinite(sc.manualSourceRate) || sc.manualSourceRate <= 0 || sc.manualSourceRate > 100) fail();
+      for (const [key, max] of [['sourceCount', 128], ['initialWetCells', NN], ['initialSourceCount', 128]])
+        if (!Number.isInteger(sc[key]) || sc[key] < 0 || sc[key] > max) fail();
+      if (opt.rainfall !== 0 && opt.rainfall !== sc.rainRate) fail();
+      nextScene = { version: sc.version, rainRate: sc.rainRate, rainDefault: sc.rainDefault,
+        sourceCount: sc.sourceCount, manualSourceRate: sc.manualSourceRate, waterKind: sc.waterKind,
+        initialWetCells: sc.initialWetCells, initialSourceCount: sc.initialSourceCount };
+    }
+    if (data.marine !== null) {
+      const m = data.marine;
+      if (!m || !Number.isFinite(m.level) || Math.abs(m.level) > 1e6 ||
+          !Array.isArray(m.flux) || m.flux.length !== 4 * N || m.flux.some(q => !Number.isFinite(q) || Math.abs(q) > 1e6)) fail();
+      nextLevel = m.level; nextSeaFlux = new Float64Array(m.flux);
+    }
+    if (nextScene && ((nextScene.waterKind === 'sea') !== (nextLevel !== null))) fail();
   }
   genTerrain({ seed: data.seed, preset: data.preset });
   ({ b, bInit, bedrock, d, s, fL, fR, fT, fB, u, v } = fields);
   for (const key of Object.keys(simulationOptions)) simulationOptions[key] = opt[key];
-  sources = nextSources;
-  budget = nextBudget;
-  steps = data.steps;
-  simTime = steps * DT;
-  refreshSourceProtectionMask();
-  computeDrainage();
-  computeActiveNetwork();
-  if (typeof invalidateDrainagePaths === "function") invalidateDrainagePaths();
+  sceneState = nextScene; seaLevel = nextLevel; seaFlux = nextSeaFlux;
+  sources = nextSources; budget = nextBudget; steps = data.steps; simTime = steps * DT;
+  refreshSourceProtectionMask(); computeDrainage(); computeActiveNetwork();
+  if (typeof invalidateDrainagePaths === 'function') invalidateDrainagePaths();
 }
 
 ;
@@ -2154,9 +2548,13 @@ function render(isoStepMajor) {
       if (showWater || showActive) {
         const depthT = -Math.expm1(-depth / 0.004);
         if (showWater && depthT > 0.002) {
-          r = Math.round(lerp(r, 50, depthT * 0.8));
-          g2 = Math.round(lerp(g2, 110 + 20 * depthT, depthT * 0.8));
-          bl = Math.round(lerp(bl, 140 + 40 * depthT, depthT * 0.8));
+          // Standing water uses the same blue family, with visible shallows
+          // and depth rather than a uniform opaque sea. No fake moving waves.
+          const bathymetry = sceneState && sceneState.initialWetCells > 0
+            ? -Math.expm1(-Math.max(0, depth - .008) / .14) : 0;
+          r = Math.round(lerp(r, lerp(50, 31, bathymetry), depthT * 0.8));
+          g2 = Math.round(lerp(g2, lerp(110 + 20 * depthT, 78, bathymetry), depthT * 0.8));
+          bl = Math.round(lerp(bl, lerp(140 + 40 * depthT, 111, bathymetry), depthT * 0.8));
         }
         if (showActive && activeCell[i]) {
           const q = depth * activeVel[i];
@@ -2413,439 +2811,309 @@ var UIIcons=(()=>{var s=Object.defineProperty;var L=Object.getOwnPropertyDescrip
  */var U={"chevron-left":d,clock:p,droplet:m,eraser:x,"folder-open":i,gauge:n,mountain:c,pause:C,play:h,"rotate-cw":S,save:g,"toggle-left":k,"toggle-right":w,"trash-2":f,waves:l,x:P};function B(e){return u(U[e],{class:"icon","data-icon":e,"aria-hidden":"true",focusable:"false"})}function D(e,a){let r=B(a);for(let t of r.attributes)e.setAttribute(t.name,t.value);e.replaceChildren(...r.childNodes)}function v(){document.querySelectorAll("svg[data-icon]").forEach(e=>{D(e,e.dataset.icon)})}return b(O);})();
 
 ;
+// Small local weather glyphs in the existing 24px / 2px-stroke visual language.
+// Kept separate from the committed Lucide bundle: fully reproducible offline.
+(() => {
+  const original = UIIcons.createIcon;
+  const cloud = 'M5 14a4 4 0 0 1-.3-8 6 6 0 0 1 11.1-1A4.5 4.5 0 0 1 20 14';
+  const paths = {
+    'chevron-right': ['m9 18 6-6-6-6'],
+    'cloud-drizzle': [cloud, 'M8 17v.5M12 19v.5M16 17v.5'],
+    'cloud-rain': [cloud, 'M8 17v3M16 17v3'],
+    'cloud-rain-wind': [cloud, 'm8 17-2 4m8-4-2 4m8-4-2 4'],
+    'cloud-rain-heavy': [cloud, 'm6 17-1 4m5-4-1 4m5-4-1 4m5-4-1 4'],
+  };
+  function createIcon(name) {
+    if (!paths[name]) return original(name);
+    const ns = 'http://www.w3.org/2000/svg', svg = document.createElementNS(ns, 'svg');
+    for (const [key, value] of Object.entries({viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor',
+      'stroke-width': '2', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', class: 'icon',
+      'data-icon': name, 'aria-hidden': 'true', focusable: 'false'})) svg.setAttribute(key, value);
+    for (const d of paths[name]) { const path = document.createElementNS(ns, 'path'); path.setAttribute('d', d); svg.appendChild(path); }
+    return svg;
+  }
+  function setIcon(element, name) {
+    const icon = createIcon(name);
+    for (const attribute of icon.attributes) element.setAttribute(attribute.name, attribute.value);
+    element.replaceChildren(...icon.childNodes);
+  }
+  UIIcons = {...UIIcons, createIcon, setIcon, initializeIcons() {
+    document.querySelectorAll('svg[data-icon]').forEach(svg => setIcon(svg, svg.dataset.icon));
+  }};
+})();
+
+;
 const { createIcon, setIcon, initializeIcons } = UIIcons;
 initializeIcons();
-
-const speedEl = document.getElementById("speed"),
-  speedLbl = document.getElementById("speedLbl");
-const pauseBtn = document.getElementById("pause");
-const pauseIcon = document.getElementById("pauseIcon");
-const sourcesDiv = document.getElementById("sources");
-const modeLbl = document.getElementById("modeLbl");
-const layersBox = document.getElementById("layersBox");
-const dividerBottom = document.getElementById("divider-bottom");
-const sidePanel = document.getElementById("side-panel");
-const panelTab = document.getElementById("panel-tab");
-const closePanelBtn = document.getElementById("close-panel");
+const speedEl = document.getElementById('speed'), speedLbl = document.getElementById('speedLbl');
+const pauseBtn = document.getElementById('pause'), pauseIcon = document.getElementById('pauseIcon');
+const sourcesDiv = document.getElementById('sources'), modeLbl = document.getElementById('modeLbl');
+const layersBox = document.getElementById('layersBox'), sidePanel = document.getElementById('side-panel');
+const panelTab = document.getElementById('panel-tab'), closePanelBtn = document.getElementById('close-panel');
 let paused = false;
 
-// UI bounds derive from requested simulation targets, preventing stale slider positions.
-speedEl.min = "0";
-speedEl.max = String(SPEED_STEPS.length - 1);
-speedEl.value = String(
-  Math.min(Math.max(Number(speedEl.value) || 0, 0), SPEED_STEPS.length - 1),
-);
-speedLbl.textContent = "×" + SPEED_STEPS[+speedEl.value];
-
-function buildLayerUI(defs, containerId) {
-  const container = document.getElementById(containerId);
-  defs.forEach((L) => {
-    const row = document.createElement("button");
-    row.type = "button";
-    row.className = "layer-item on";
-    row.dataset.id = L.id;
-    row.style.setProperty("--c", L.color);
-    row.innerHTML = `<div class="swatch"></div><span>${L.label}</span>`;
-    row.onclick = () => {
-      layerOn[L.id] = !layerOn[L.id];
-      updateLayersUI();
-    };
-    container.appendChild(row);
-  });
+function updatePlaybackUI() {
+  pauseBtn.classList.toggle('active', paused);
+  setIcon(pauseIcon, paused ? 'play' : 'pause');
+  pauseBtn.setAttribute('aria-label', paused ? 'Reprendre la simulation' : 'Mettre en pause');
+  pauseBtn.setAttribute('aria-pressed', String(paused));
+  document.getElementById('playState').textContent = paused ? 'En pause' : 'En cours';
 }
+function setSpeedIndex(index) {
+  speedEl.value = String(Math.max(0, Math.min(SPEED_STEPS.length - 1, index)));
+  const speed = SPEED_STEPS[Number(speedEl.value)];
+  speedLbl.textContent = '\u00d7' + speed;
+  speedEl.title = `Vitesse \u00d7${speed}. Cliquer : \u00d7${SPEED_STEPS[(Number(speedEl.value) + 1) % SPEED_STEPS.length]}`;
+  speedEl.setAttribute('aria-label', speedEl.title);
+}
+setSpeedIndex(0);
+speedEl.onclick = () => { setSpeedIndex((Number(speedEl.value) + 1) % SPEED_STEPS.length); resetClock(); };
+pauseBtn.onclick = () => { paused = !paused; updatePlaybackUI(); resetClock(); };
 
-buildLayerUI(LAYER_DEFS_TERRAIN, "layers-terrain");
-buildLayerUI(LAYER_DEFS_WATER, "layers-water");
-
+// Three optional overlays instead of two groups and six permanent switches.
+for (const def of [
+  {id: 'contours', label: 'Courbes du relief', color: '#bfa88c'},
+  {id: 'reseau', label: 'Courants', color: '#5db8d8'},
+  {id: 'particules', label: 'Traceurs', color: '#d2eeff'},
+]) {
+  const row = document.createElement('button'); row.type = 'button'; row.className = 'layer-item';
+  row.dataset.id = def.id; row.style.setProperty('--c', def.color);
+  const swatch = document.createElement('span'); swatch.className = 'swatch';
+  const label = document.createElement('span'); label.textContent = def.label;
+  row.append(swatch, label); row.onclick = () => { layerOn[def.id] = !layerOn[def.id]; updateLayersUI(); };
+  layersBox.appendChild(row);
+}
 function updateLayersUI() {
-  document.querySelectorAll(".layer-item").forEach((row) => {
-    row.classList.toggle("on", !!layerOn[row.dataset.id]);
-    row.setAttribute("aria-pressed", String(!!layerOn[row.dataset.id]));
-  });
-  document.querySelectorAll(".layer-group-title").forEach(button => {
-    const items = [...document.getElementById(button.dataset.group).querySelectorAll(".layer-item")];
-    const count = items.filter(item => layerOn[item.dataset.id]).length;
-    button.setAttribute("aria-pressed", count === 0 ? "false" : count === items.length ? "true" : "mixed");
-  });
+  for (const row of layersBox.querySelectorAll('.layer-item')) {
+    row.classList.toggle('on', !!layerOn[row.dataset.id]);
+    row.setAttribute('aria-pressed', String(!!layerOn[row.dataset.id]));
+  }
 }
-
-function setMode(m) {
-  viewMode = m;
-  document
-    .querySelectorAll(".modes button[data-m]")
-    .forEach((b) => {
-      b.classList.toggle("on", b.dataset.m === m);
-      b.setAttribute("aria-pressed", String(b.dataset.m === m));
-    });
-  modeLbl.textContent = m === "composite" ? "Simulation" : m === "change" ? "Érosion / dépôts" : "Pentes D8";
-  if (m === "contribution") { computeDrainage(); invalidateDrainagePaths(); }
-  document.getElementById("stage-hint").textContent = m === "change"
-    ? "Orange : érosion. Vert : dépôts. Le fond gris est inchangé."
-    : m === "contribution" ? "Réseau potentiel du relief : les cuvettes peuvent retenir l'eau."
-    : "Cliquez pour ajouter une source ; cliquez dessus pour l'activer ou la couper.";
-  document.getElementById("stage-hint").hidden = m === "composite";
-  layersBox.style.display = m === "composite" ? "block" : "none";
-  dividerBottom.style.display = m === "composite" ? "block" : "none";
-  updateLayersUI();
+function setMode(mode) {
+  if (!['composite', 'change', 'contribution'].includes(mode)) return;
+  viewMode = mode;
+  document.querySelectorAll('.modes button').forEach(button => {
+    button.classList.toggle('on', button.dataset.m === mode);
+    button.setAttribute('aria-pressed', String(button.dataset.m === mode));
+  });
+  const analysis = document.getElementById('analysisToggle');
+  analysis.setAttribute('aria-pressed', String(mode === 'contribution'));
+  analysis.textContent = mode === 'contribution' ? 'Revenir au paysage' : 'R\u00e9seau potentiel du relief';
+  modeLbl.textContent = mode === 'composite' ? 'Paysage' : mode === 'change' ? '\u00c9rosion & d\u00e9p\u00f4ts' : '\u00c9coulement potentiel';
+  if (mode === 'contribution') { computeDrainage(); invalidateDrainagePaths(); }
+  const hint = document.getElementById('stage-hint');
+  hint.textContent = mode === 'change' ? 'Orange : \u00e9rosion. Vert : d\u00e9p\u00f4ts. Gris : terrain inchang\u00e9.'
+    : 'Analyse des pentes, pas des courants r\u00e9els. Les cuvettes peuvent retenir l\u2019eau.';
+  hint.hidden = mode === 'composite'; layersBox.hidden = mode !== 'composite'; updateLayersUI();
 }
+document.querySelectorAll('.modes button').forEach(button => { button.onclick = () => setMode(button.dataset.m); });
+document.getElementById('analysisToggle').onclick = () => setMode(viewMode === 'contribution' ? 'composite' : 'contribution');
 
-document.querySelectorAll(".modes button[data-m]").forEach((btn) => {
-  btn.onclick = () => setMode(btn.dataset.m);
-});
-
-// --- Make group titles clickable toggles ---
-function toggleGroup(groupId) {
-  const list = document.getElementById(groupId);
-  const items = list.querySelectorAll(".layer-item");
-  let allOn = true;
-  items.forEach((item) => {
-    if (!layerOn[item.dataset.id]) allOn = false;
-  });
-  const newState = !allOn;
-  items.forEach((item) => {
-    layerOn[item.dataset.id] = newState;
-  });
-  updateLayersUI();
-}
-
-document.querySelectorAll(".layer-group-title").forEach((title) => {
-  title.addEventListener("click", () => {
-    const groupId = title.dataset.group;
-    if (groupId) toggleGroup(groupId);
-  });
-});
-
-speedEl.oninput = () => {
-  speedLbl.textContent = "×" + SPEED_STEPS[+speedEl.value];
-  speedEl.setAttribute("aria-valuetext", speedLbl.textContent);
-};
-
-pauseBtn.onclick = () => {
-  paused = !paused;
-  pauseBtn.classList.toggle("active", paused);
-  setIcon(pauseIcon, paused ? "play" : "pause");
-  pauseBtn.setAttribute("aria-label", paused ? "Reprendre la simulation" : "Mettre en pause");
-  pauseBtn.setAttribute("aria-pressed", String(paused));
-  resetClock();
-};
-document.getElementById("regen").onclick = () => {
-  const btn = document.getElementById("regen");
-  btn.style.transform = "scale(0.9)";
-  setTimeout(() => (btn.style.transform = "scale(1)"), 100);
-  navigateTerrain(1);
-};
-document.getElementById("clearSrc").onclick = () => {
-  sources.length = 0;
-  refreshSourceProtectionMask();
-  refreshSourceList();
-};
-
-// Keep off-canvas settings out of keyboard navigation on small screens.
-const mobilePanelQuery = matchMedia("(max-width: 767px)");
+const mobilePanelQuery = matchMedia('(max-width: 767px)');
 function syncPanelAccessibility() {
-  const open = sidePanel.classList.contains("open");
-  const hidden = mobilePanelQuery.matches && !open;
-  sidePanel.inert = hidden;
-  panelTab.classList.toggle("hidden", open);
-  panelTab.setAttribute("aria-expanded", String(!hidden));
+  const open = sidePanel.classList.contains('open'), hidden = mobilePanelQuery.matches && !open;
+  sidePanel.inert = hidden; panelTab.classList.toggle('hidden', open);
+  panelTab.setAttribute('aria-expanded', String(!hidden));
 }
 function setPanelOpen(open, focus = false) {
-  sidePanel.classList.toggle("open", open); syncPanelAccessibility();
-  if (focus && mobilePanelQuery.matches) (open ? closePanelBtn : panelTab).focus({ preventScroll: true });
+  sidePanel.classList.toggle('open', open); syncPanelAccessibility();
+  if (focus && mobilePanelQuery.matches) (open ? closePanelBtn : panelTab).focus({preventScroll: true});
 }
-function togglePanel() { setPanelOpen(!sidePanel.classList.contains("open"), true); }
-mobilePanelQuery.addEventListener("change", () => {
+mobilePanelQuery.addEventListener('change', () => {
   syncPanelAccessibility();
-  if (sidePanel.inert && sidePanel.contains(document.activeElement)) panelTab.focus({ preventScroll: true });
+  if (sidePanel.inert && sidePanel.contains(document.activeElement)) panelTab.focus({preventScroll: true});
 });
 syncPanelAccessibility();
-panelTab.addEventListener("click", togglePanel);
-closePanelBtn.addEventListener("click", togglePanel);
+panelTab.onclick = () => setPanelOpen(true, true); closePanelBtn.onclick = () => setPanelOpen(false, true);
 
-// Fonction utilitaire pour ajouter une source (utilisée pour le clic gauche et le clic droit)
 function addSourceAt(gx, gy) {
-  for (let i = 0; i < sources.length; i++) {
-    const s2 = sources[i];
-    if (Math.hypot(s2.x - gx, s2.y - gy) < 6) {
-      s2.active = !s2.active;
-      refreshSourceProtectionMask();
-      refreshSourceList();
-      return;
-    }
-  }
   if (!Number.isFinite(gx) || !Number.isFinite(gy)) return;
-  if (sources.length >= 128) { notify("Limite de 128 sources atteinte."); return; }
-  const cx = Math.max(0, Math.min(N - 1, Math.floor(gx)));
-  const cy = Math.max(0, Math.min(N - 1, Math.floor(gy)));
-  const source = { x: cx, y: cy, rate: DEFAULT_RATE, active: true };
-  configureSourceOutlets(source);
-  sources.push(source);
-  refreshSourceProtectionMask();
-
-  canvas.style.transform = "scale(0.99)";
-  setTimeout(() => (canvas.style.transform = "scale(1)"), 100);
-
-  refreshSourceList();
+  const existing = sources.find(src => Math.hypot(src.x - gx, src.y - gy) < 6);
+  if (existing) { existing.active = !existing.active; refreshSourceList(); return; }
+  if (sources.length >= 128) { notify('Limite de 128 sources atteinte.'); return; }
+  const x = Math.max(0, Math.min(N - 1, Math.floor(gx))), y = Math.max(0, Math.min(N - 1, Math.floor(gy)));
+  if (d[idx(x, y)] > .005) { notify('Choisissez une terre \u00e9merg\u00e9e pour ajouter une source.'); return; }
+  const src = {x, y, rate: getSceneProfile().manualSourceRate, active: true};
+  configureSourceOutlets(src); sources.push(src); refreshSourceProtectionMask(); refreshSourceList();
 }
-
-// Clic gauche (existant)
-canvas.addEventListener("click", (e) => {
+canvas.addEventListener('click', event => {
   const rect = canvas.getBoundingClientRect();
-  const px0 = (e.clientX - rect.left) / rect.width,
-    py0 = (e.clientY - rect.top) / rect.height;
-  addSourceAt(px0 * N, py0 * N);
+  addSourceAt((event.clientX - rect.left) / rect.width * N, (event.clientY - rect.top) / rect.height * N);
 });
-
-// Clic droit : Afficher le menu contextuel personnalisé
-const contextMenu = document.getElementById("context-menu");
-const ctxAddBtn = document.getElementById("ctx-add-source");
-const ctxToggleBtn = document.getElementById("ctx-toggle-source");
-const ctxDeleteBtn = document.getElementById("ctx-delete-source");
-const ctxToggleIcon = ctxToggleBtn.querySelector(".icon");
-const ctxToggleLabel = ctxToggleBtn.querySelector(".context-menu-label");
-let contextMenuTarget = { x: 0, y: 0, index: -1 };
-
-/** Aligns source-state feedback with the action exposed by the context menu. */
-function updateSourceContextMenu(source) {
-  const isActive = source.active;
-  setIcon(ctxToggleIcon, isActive ? "toggle-right" : "toggle-left");
-  ctxToggleLabel.textContent = isActive
-    ? "Désactiver la source"
-    : "Activer la source";
-  ctxToggleBtn.dataset.state = isActive ? "active" : "inactive";
-}
-
-canvas.addEventListener("contextmenu", (e) => {
-  e.preventDefault();
+const contextMenu = document.getElementById('context-menu'), ctxAddBtn = document.getElementById('ctx-add-source');
+const ctxToggleBtn = document.getElementById('ctx-toggle-source'), ctxDeleteBtn = document.getElementById('ctx-delete-source');
+let contextMenuTarget = {x: 0, y: 0, index: -1};
+canvas.addEventListener('contextmenu', event => {
+  event.preventDefault();
   const rect = canvas.getBoundingClientRect();
-  const px0 = (e.clientX - rect.left) / rect.width,
-    py0 = (e.clientY - rect.top) / rect.height;
-  const gx = px0 * N;
-  const gy = py0 * N;
-  contextMenuTarget = { x: gx, y: gy, index: -1 };
-
-  // Vérifier si on a cliqué sur une source existante
-  for (let i = 0; i < sources.length; i++) {
-    const s2 = sources[i];
-    if (Math.hypot(s2.x - gx, s2.y - gy) < 6) {
-      contextMenuTarget.index = i;
-      break;
-    }
+  const x = (event.clientX - rect.left) / rect.width * N, y = (event.clientY - rect.top) / rect.height * N;
+  const index = sources.findIndex(src => Math.hypot(src.x - x, src.y - y) < 6);
+  contextMenuTarget = {x, y, index};
+  ctxAddBtn.style.display = index < 0 ? 'flex' : 'none';
+  ctxToggleBtn.style.display = ctxDeleteBtn.style.display = index >= 0 ? 'flex' : 'none';
+  if (index >= 0) {
+    const active = sources[index].active;
+    setIcon(ctxToggleBtn.querySelector('.icon'), active ? 'toggle-right' : 'toggle-left');
+    ctxToggleBtn.querySelector('.context-menu-label').textContent = active ? 'D\u00e9sactiver la source' : 'Activer la source';
+    ctxToggleBtn.dataset.state = active ? 'active' : 'inactive';
   }
-
-  // Configurer le menu en conséquence
-  if (contextMenuTarget.index >= 0) {
-    const source = sources[contextMenuTarget.index];
-    ctxAddBtn.style.display = "none";
-    ctxToggleBtn.style.display = "flex";
-    ctxDeleteBtn.style.display = "flex";
-    updateSourceContextMenu(source);
-  } else {
-    ctxAddBtn.style.display = "flex";
-    ctxToggleBtn.style.display = "none";
-    ctxDeleteBtn.style.display = "none";
+  contextMenu.style.display = 'block';
+  const stage = document.getElementById('stage').getBoundingClientRect();
+  contextMenu.style.left = Math.max(8, Math.min(event.clientX - stage.left, stage.width - contextMenu.offsetWidth - 8)) + 'px';
+  contextMenu.style.top = Math.max(8, Math.min(event.clientY - stage.top, stage.height - contextMenu.offsetHeight - 8)) + 'px';
+});
+document.addEventListener('click', event => { if (!contextMenu.contains(event.target)) contextMenu.style.display = 'none'; });
+ctxAddBtn.onclick = () => { addSourceAt(contextMenuTarget.x, contextMenuTarget.y); contextMenu.style.display = 'none'; };
+ctxToggleBtn.onclick = () => {
+  const src = sources[contextMenuTarget.index]; if (src) { src.active = !src.active; refreshSourceList(); }
+  contextMenu.style.display = 'none';
+};
+ctxDeleteBtn.onclick = () => {
+  if (contextMenuTarget.index >= 0 && contextMenuTarget.index < sources.length) {
+    sources.splice(contextMenuTarget.index, 1); refreshSourceProtectionMask(); refreshSourceList();
   }
-
-  // Positionner le menu
-  contextMenu.style.display = "block";
-  // The menu belongs to the stage, not the whole window: keep edge clicks
-  // away from the settings panel and inside the stage's clipped area.
-  const stageRect = document.getElementById("stage").getBoundingClientRect();
-  contextMenu.style.left = Math.max(8, Math.min(e.clientX - stageRect.left, stageRect.width - contextMenu.offsetWidth - 8)) + "px";
-  contextMenu.style.top = Math.max(8, Math.min(e.clientY - stageRect.top, stageRect.height - contextMenu.offsetHeight - 8)) + "px";
-});
-
-// Fermer le menu quand on clique ailleurs
-document.addEventListener("click", (e) => {
-  if (!contextMenu.contains(e.target)) {
-    contextMenu.style.display = "none";
-  }
-});
-
-// Action du menu contextuel : ajouter
-ctxAddBtn.addEventListener("click", () => {
-  addSourceAt(contextMenuTarget.x, contextMenuTarget.y);
-  contextMenu.style.display = "none";
-});
-
-// Action du menu contextuel : toggle source
-ctxToggleBtn.addEventListener("click", () => {
-  if (contextMenuTarget.index >= 0) {
-    const src = sources[contextMenuTarget.index];
-    src.active = !src.active;
-    refreshSourceProtectionMask();
-    refreshSourceList();
-  }
-  contextMenu.style.display = "none";
-});
-
-// Action du menu contextuel : supprimer
-ctxDeleteBtn.addEventListener("click", () => {
-  if (contextMenuTarget.index >= 0) {
-    sources.splice(contextMenuTarget.index, 1);
-    refreshSourceProtectionMask();
-    refreshSourceList();
-  }
-  contextMenu.style.display = "none";
-});
-
+  contextMenu.style.display = 'none';
+};
+document.getElementById('clearSrc').onclick = () => { sources.length = 0; refreshSourceProtectionMask(); refreshSourceList(); };
 function refreshSourceList() {
   sourcesDiv.replaceChildren();
-  document.getElementById("srcCount").textContent = `${sources.filter(source => source.active).length} / ${sources.length}`;
-  if (sources.length === 0) {
-    const empty = document.createElement("p"); empty.className = "empty-sources";
-    empty.textContent = "Aucune source. Clic sur le terrain."; sourcesDiv.appendChild(empty); return;
+  document.getElementById('srcCount').textContent = `${sources.filter(src => src.active).length} / ${sources.length}`;
+  document.getElementById('clearSrc').hidden = sources.length === 0;
+  if (!sources.length) {
+    const empty = document.createElement('p'); empty.className = 'empty-sources';
+    empty.textContent = 'Aucune source sur cette carte.'; sourcesDiv.appendChild(empty); return;
   }
   sources.forEach((source, i) => {
-    const row = document.createElement("div"); row.className = "src-row";
-    const toggle = document.createElement("button"); toggle.className = source.active ? "source-toggle" : "source-toggle off";
-    toggle.textContent = `Source ${i + 1}`;
-    toggle.title = `Source ${i + 1} : ${source.active ? "désactiver" : "activer"}`;
-    toggle.setAttribute("aria-label", toggle.title);
-    toggle.setAttribute("aria-pressed", String(source.active));
+    const row = document.createElement('div'); row.className = 'src-row';
+    const toggle = document.createElement('button'); toggle.type = 'button';
+    toggle.className = source.active ? 'source-toggle' : 'source-toggle off';
+    toggle.appendChild(createIcon('droplet')); toggle.append(`Source ${i + 1}`);
+    toggle.title = `Source ${i + 1} : ${source.active ? 'd\u00e9sactiver' : 'activer'}`;
+    toggle.setAttribute('aria-label', toggle.title); toggle.setAttribute('aria-pressed', String(source.active));
     toggle.onclick = () => { source.active = !source.active; refreshSourceList(); };
-    const rate = document.createElement("input"); rate.type = "number";
-    rate.min = "0"; rate.max = "100"; rate.step = "0.1"; rate.value = source.rate;
-    rate.setAttribute("aria-label", `Débit de la source ${i + 1}, unités de volume par seconde de simulation`);
-    rate.onchange = () => {
-      const value = rate.valueAsNumber;
-      if (!Number.isFinite(value) || value < 0 || value > 100) { rate.value = source.rate; notify("Débit attendu : 0 à 100."); return; }
-      source.rate = value;
-    };
-    const unit = document.createElement("span"); unit.className = "source-unit"; unit.textContent = "u\u00b3/s";
-    const remove = document.createElement("button"); remove.appendChild(createIcon("x")); remove.className = "source-remove";
-    remove.setAttribute("aria-label", `Supprimer la source ${i + 1}`);
+    const flow = document.createElement('span'); flow.className = 'source-flow';
+    flow.textContent = source.rate < 1 ? 'Faible' : source.rate < 2 ? 'Mod\u00e9r\u00e9' : 'Soutenu';
+    flow.title = `D\u00e9bit pr\u00e9r\u00e9gl\u00e9 : ${source.rate.toLocaleString('fr-FR')} unit\u00e9s de volume/s (non calibr\u00e9es)`;
+    const remove = document.createElement('button'); remove.type = 'button'; remove.className = 'source-remove';
+    remove.appendChild(createIcon('x')); remove.setAttribute('aria-label', `Supprimer la source ${i + 1}`);
     remove.onclick = () => { sources.splice(i, 1); refreshSourceProtectionMask(); refreshSourceList(); };
-    row.append(toggle, rate, unit, remove); sourcesDiv.appendChild(row);
+    row.append(toggle, flow, remove); sourcesDiv.appendChild(row);
   });
 }
 
 let toastTimer;
 function notify(message, error = false) {
-  const toast = document.getElementById("toast");
-  toast.textContent = message; toast.classList.toggle("error", error); toast.classList.add("visible");
-  clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove("visible"), 5000);
+  const toast = document.getElementById('toast');
+  toast.textContent = message; toast.classList.toggle('error', error); toast.classList.add('visible');
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('visible'), 5000);
 }
-function resetClock() {
-  // Called only by user actions, after main.js has initialized these bindings.
-  stepAccumulator = 0; lastT = performance.now(); achievedStepsPerSecSmoothed = 0;
-}
+function resetClock() { stepAccumulator = 0; lastT = performance.now(); achievedStepsPerSecSmoothed = 0; }
 let terrainStorage = null;
-try { terrainStorage = window.localStorage; } catch (_) { /* file:// or private browsing */ }
-const terrainHistory = createTerrainHistory({ storage: terrainStorage });
-const terrainBrowser = document.getElementById("terrain-browser");
+try { terrainStorage = window.localStorage; } catch (_) { /* Local file / private browsing fallback. */ }
+const terrainHistory = createTerrainHistory({storage: terrainStorage});
+const terrainBrowser = document.getElementById('terrain-browser');
+function syncRainControls() {
+  const profile = getSceneProfile(), appearance = rainAppearance(profile.rainRate), active = simulationOptions.rainfall > 0;
+  const button = document.getElementById('rainToggle');
+  document.getElementById('rainLabel').textContent = appearance.label;
+  document.getElementById('rainState').textContent = active ? 'Active' : 'Arr\u00eat';
+  setIcon(document.getElementById('rainIcon'), appearance.icon);
+  button.dataset.intensity = appearance.intensity; button.classList.toggle('on', active);
+  button.setAttribute('aria-pressed', String(active));
+  button.setAttribute('aria-label', `${active ? 'D\u00e9sactiver' : 'Activer'} : ${appearance.label.toLowerCase()}. Intensit\u00e9 fix\u00e9e par la carte.`);
+}
+document.getElementById('rainToggle').onclick = () => { setSceneRain(simulationOptions.rainfall === 0); syncRainControls(); };
 function syncTerrainControls() {
-  const info = terrainInfo(terrainPreset), entry = terrainHistory.current();
-  document.getElementById("terrainName").textContent = info.name;
-  document.getElementById("terrainPosition").textContent = entry ? `Relief ${entry.number} · ${terrainViewLabel(terrainSeed, terrainPreset)}` : "Sauvegarde";
-  document.getElementById("terrainCaption").textContent = info.description;
-  document.getElementById("previousTerrain").disabled = !terrainHistory.canPrevious();
-  document.getElementById("boundary").value = simulationOptions.boundary;
-  const rainSelect = document.getElementById("rain");
-  rainSelect.querySelectorAll("option[data-custom]").forEach(option => option.remove());
-  const rainValue = String(simulationOptions.rainfall);
-  if (![...rainSelect.options].some(option => option.value === rainValue)) {
-    const option = document.createElement("option"); option.value = rainValue;
-    option.textContent = `Personnalisée (${rainValue})`; option.dataset.custom = "true"; rainSelect.appendChild(option);
-  }
-  rainSelect.value = rainValue;
+  const info = terrainInfo(terrainPreset), entry = terrainHistory.current(), profile = getSceneProfile();
+  document.getElementById('terrainName').textContent = info.name;
+  document.getElementById('terrainPosition').textContent = entry ? `Carte ${entry.number} \u00b7 ${terrainViewLabel(terrainSeed, terrainPreset)}` : 'Sauvegarde';
+  document.getElementById('terrainCaption').textContent = info.description;
+  document.getElementById('previousTerrain').disabled = !terrainHistory.canPrevious();
+  const kind = {sea: 'Mer ouverte', lake: 'Lac', pond: 'Bassin en eau', none: 'Terre ferme'}[profile.waterKind];
+  const water = document.getElementById('waterSummary');
+  water.textContent = profile.initialWetCells ? `${kind} \u00b7 ${Math.round(profile.initialWetCells / NN * 100)} % d\u2019eau` : kind;
+  water.title = 'Eau pr\u00e9sente au d\u00e9part de cette carte';
+  setIcon(document.getElementById('waterIcon'), profile.initialWetCells ? 'waves' : 'mountain');
+  document.getElementById('scene-note').textContent = seaLevel !== null
+    ? 'Mer : niveau maintenu aux limites. Les entr\u00e9es et sorties d\u2019eau sont compt\u00e9es dans les bilans.'
+    : 'L\u2019eau des lacs est une r\u00e9serve initiale : pluie, sources, \u00e9vaporation et d\u00e9bordement la font \u00e9voluer.';
+  syncRainControls();
+}
+function refreshSceneUI() {
+  contextMenu.style.display = 'none'; contextMenuTarget.index = -1;
+  resetClock(); syncTerrainControls(); refreshSourceList(); updateMetrics(); updatePlaybackUI();
+  document.getElementById('tcount').textContent = steps; document.getElementById('tsim').textContent = simTime.toFixed(1);
 }
 function navigateTerrain(direction) {
-  const previousHadFocus = document.activeElement === document.getElementById("previousTerrain");
-  const recipe = direction < 0 ? terrainHistory.previous() : terrainHistory.next();
-  if (!recipe) return;
-  genTerrain(recipe);
-  // Removing the checkbox must not leave a new scene silently non-erodible
-  // after opening an older frozen session. All other user settings are kept.
-  simulationOptions.erosion = true;
-  contextMenu.style.display = "none";
-  resetClock(); syncTerrainControls(); refreshSourceList(); updateMetrics();
-  document.getElementById("tcount").textContent = steps;
-  document.getElementById("tsim").textContent = simTime.toFixed(1);
-  if (previousHadFocus && !terrainHistory.canPrevious()) {
-    terrainBrowser.focus({ preventScroll: true });
-  }
+  const previousHadFocus = document.activeElement === document.getElementById('previousTerrain');
+  const recipe = direction < 0 ? terrainHistory.previous() : terrainHistory.next(); if (!recipe) return;
+  generateScene(recipe); refreshSceneUI();
+  if (previousHadFocus && !terrainHistory.canPrevious()) terrainBrowser.focus({preventScroll: true});
 }
-document.getElementById("previousTerrain").onclick = () => navigateTerrain(-1);
-document.getElementById("nextTerrain").onclick = () => navigateTerrain(1);
-let terrainWheelArmed = false;
-terrainBrowser.addEventListener("focusin", () => { terrainWheelArmed = true; });
-terrainBrowser.addEventListener("click", event => {
-  terrainWheelArmed = true;
-  if (!event.target.closest("button")) terrainBrowser.focus({ preventScroll: true });
+document.getElementById('previousTerrain').onclick = () => navigateTerrain(-1);
+document.getElementById('nextTerrain').onclick = document.getElementById('regen').onclick = () => navigateTerrain(1);
+document.getElementById('restartScene').onclick = () => {
+  generateScene({seed: terrainSeed, preset: terrainPreset}); refreshSceneUI();
+  notify('Carte r\u00e9initialis\u00e9e : eau, pluie et sources de d\u00e9part.');
+};
+let terrainWheelArmed = false, terrainWheelAmount = 0, terrainWheelTime = -Infinity, terrainWheelLastEvent = -Infinity;
+terrainBrowser.addEventListener('focusin', () => { terrainWheelArmed = true; });
+terrainBrowser.addEventListener('click', event => {
+  terrainWheelArmed = true; if (!event.target.closest('button')) terrainBrowser.focus({preventScroll: true});
 });
-terrainBrowser.addEventListener("keydown", event => {
-  if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
-  if (event.altKey || event.ctrlKey || event.metaKey) return;
-  event.preventDefault();
-  terrainWheelArmed = true;
-  if (!event.repeat) navigateTerrain(event.key === "ArrowLeft" ? -1 : 1);
+terrainBrowser.addEventListener('keydown', event => {
+  if (!['ArrowLeft', 'ArrowRight'].includes(event.key) || event.altKey || event.ctrlKey || event.metaKey) return;
+  event.preventDefault(); terrainWheelArmed = true;
+  if (!event.repeat) navigateTerrain(event.key === 'ArrowLeft' ? -1 : 1);
 });
-let terrainWheelAmount = 0, terrainWheelTime = -Infinity, terrainWheelLastEvent = -Infinity;
-function resetTerrainWheel() { terrainWheelAmount = 0; terrainWheelLastEvent = -Infinity; }
-terrainBrowser.addEventListener("pointerleave", () => {
-  resetTerrainWheel();
-  // Disarm only the wheel: moving the pointer must never steal keyboard focus.
-  terrainWheelArmed = false;
-});
-terrainBrowser.addEventListener("focusout", () => { resetTerrainWheel(); terrainWheelArmed = false; });
-terrainBrowser.addEventListener("wheel", event => {
-  // Only an explicitly focused selector owns the wheel, never the whole panel.
+function resetTerrainWheel() { terrainWheelAmount = 0; terrainWheelLastEvent = -Infinity; terrainWheelArmed = false; }
+terrainBrowser.addEventListener('pointerleave', resetTerrainWheel); terrainBrowser.addEventListener('focusout', resetTerrainWheel);
+terrainBrowser.addEventListener('wheel', event => {
   if (!terrainWheelArmed || !terrainBrowser.contains(document.activeElement) || event.ctrlKey || event.metaKey || !event.cancelable) return;
-  const raw = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
-  if (!raw) return;
-  event.preventDefault();
-  const now = performance.now();
+  const raw = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY; if (!raw) return;
+  event.preventDefault(); const now = performance.now();
   const delta = raw * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? 200 : 1);
   if (now - terrainWheelLastEvent > 180 || Math.sign(delta) !== Math.sign(terrainWheelAmount)) terrainWheelAmount = 0;
-  terrainWheelLastEvent = now;
-  if (now - terrainWheelTime < 360) return;
-  terrainWheelAmount += delta;
-  if (Math.abs(terrainWheelAmount) < 45) return;
-  const direction = Math.sign(terrainWheelAmount); terrainWheelAmount = 0; terrainWheelTime = now;
-  navigateTerrain(direction);
-}, { passive: false });
-document.getElementById("boundary").onchange = event => { simulationOptions.boundary = event.target.value; };
-document.getElementById("rain").onchange = event => { simulationOptions.rainfall = Number(event.target.value); };
+  terrainWheelLastEvent = now; if (now - terrainWheelTime < 360) return;
+  terrainWheelAmount += delta; if (Math.abs(terrainWheelAmount) < 45) return;
+  const direction = Math.sign(terrainWheelAmount); terrainWheelAmount = 0; terrainWheelTime = now; navigateTerrain(direction);
+}, {passive: false});
+
 function updateMetrics() {
   const stats = getSimulationStats();
-  for (const [id, key] of [["statWater", "water"], ["statOut", "waterOut"], ["statEroded", "eroded"], ["statDeposited", "deposited"]])
-    document.getElementById(id).textContent = stats[key].toLocaleString("fr-FR", { maximumFractionDigits: 2 });
+  for (const [id, key] of [['statWater', 'water'], ['statIn', 'waterIn'], ['statOut', 'waterOut'], ['statEroded', 'eroded'], ['statDeposited', 'deposited']])
+    document.getElementById(id).textContent = stats[key].toLocaleString('fr-FR', {maximumFractionDigits: 2});
   const good = stats.finite && Math.abs(stats.waterResidual) < 1e-6 && Math.abs(stats.solidResidual) < 1e-6;
-  const status = document.getElementById("budget-status");
-  status.textContent = good ? "Eau et matière : bilans conservés." : "Attention : écart dans les bilans.";
-  status.className = good ? "budget-ok" : "budget-error";
-  document.getElementById("budget-values").textContent = `Écarts : eau ${stats.waterResidual.toExponential(1)} ; solide ${stats.solidResidual.toExponential(1)}. ` +
-    `Évaporé : ${stats.evaporated.toFixed(2)}. Sédiment sorti : ${stats.sedimentOut.toFixed(2)}. Incision max. : ${stats.incision.toFixed(3)}.`;
+  const status = document.getElementById('budget-status');
+  status.textContent = good ? 'Eau et mati\u00e8re : bilans conserv\u00e9s.' : 'Attention : \u00e9cart dans les bilans.';
+  status.className = good ? 'budget-ok' : 'budget-error';
+  document.getElementById('budget-values').textContent = `\u00c9carts : eau ${stats.waterResidual.toExponential(1)} ; solide ${stats.solidResidual.toExponential(1)}. ` +
+    `\u00c9vapor\u00e9 : ${stats.evaporated.toFixed(2)}. S\u00e9diment sorti : ${stats.sedimentOut.toFixed(2)}.`;
   return stats;
 }
-document.getElementById("saveSession").onclick = () => {
-  const blob = new Blob([JSON.stringify(exportSimulation())], { type: "application/json" });
-  const url = URL.createObjectURL(blob), link = document.createElement("a");
+document.getElementById('saveSession').onclick = () => {
+  const blob = new Blob([JSON.stringify(exportSimulation())], {type: 'application/json'});
+  const url = URL.createObjectURL(blob), link = document.createElement('a');
   link.href = url; link.download = `erosion-${terrainSeed}-${steps}.json`; link.click();
-  setTimeout(() => URL.revokeObjectURL(url), 1000); notify("Sauvegarde exportée.");
+  setTimeout(() => URL.revokeObjectURL(url), 1000); notify('Sauvegarde export\u00e9e.');
 };
-document.getElementById("loadSession").onclick = () => document.getElementById("sessionFile").click();
-document.getElementById("sessionFile").onchange = async event => {
+document.getElementById('loadSession').onclick = () => document.getElementById('sessionFile').click();
+document.getElementById('sessionFile').onchange = async event => {
   const file = event.target.files[0]; if (!file) return;
   try {
-    if (file.size > 35 * 1024 * 1024) throw new Error("Sauvegarde trop volumineuse (35 Mo maximum).");
-    const parsed = JSON.parse(await file.text()); restoreSimulation(parsed);
-    terrainHistory.remember({ seed: terrainSeed, preset: terrainPreset });
-    paused = true; setIcon(pauseIcon, "play"); pauseBtn.setAttribute("aria-label", "Reprendre la simulation"); pauseBtn.classList.add("active"); pauseBtn.setAttribute("aria-pressed", "true");
-    resetClock(); syncTerrainControls(); refreshSourceList(); updateMetrics();
-    notify("Sauvegarde restaurée en pause. Reprenez quand vous le souhaitez.");
+    if (file.size > 35 * 1024 * 1024) throw new Error('Sauvegarde trop volumineuse (35 Mo maximum).');
+    restoreSimulation(JSON.parse(await file.text()));
+    terrainHistory.remember({seed: terrainSeed, preset: terrainPreset}); paused = true; refreshSceneUI();
+    notify('Sauvegarde restaur\u00e9e en pause.');
   } catch (error) { notify(error.message, true); }
-  finally { event.target.value = ""; }
+  finally { event.target.value = ''; }
 };
-document.addEventListener("keydown", event => {
-  if (event.key === "Escape") {
-    contextMenu.style.display = "none";
-    if (mobilePanelQuery.matches && sidePanel.classList.contains("open")) setPanelOpen(false, true);
-    return;
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') {
+    contextMenu.style.display = 'none'; if (mobilePanelQuery.matches && sidePanel.classList.contains('open')) setPanelOpen(false, true); return;
   }
-  if (event.target.closest("input, select, textarea, button, summary, a") || event.target.isContentEditable) return;
-  if (event.code === "Space") { event.preventDefault(); pauseBtn.click(); }
+  if (event.target.closest('input, select, textarea, button, summary, a') || event.target.isContentEditable) return;
+  if (event.code === 'Space') { event.preventDefault(); pauseBtn.click(); }
 });
 
 ;
@@ -2880,6 +3148,7 @@ function loop(now) {
     } catch (error) {
       paused = true; stepAccumulator = 0; setIcon(pauseIcon, "play"); pauseBtn.setAttribute("aria-label", "Reprendre la simulation");
       pauseBtn.classList.add("active"); pauseBtn.setAttribute("aria-pressed", "true");
+      updatePlaybackUI();
       notify(`Simulation arrêtée : ${error.message}`, true); console.error(error);
     }
   } else stepAccumulator = 0;
@@ -2910,7 +3179,7 @@ function loop(now) {
 
 document.addEventListener("visibilitychange", resetClock);
 // Each opening explores a fresh recipe, with older reliefs still reachable.
-genTerrain(terrainHistory.start());
+generateScene(terrainHistory.start());
 syncTerrainControls(); refreshSourceList(); setMode("composite"); updateMetrics();
 requestAnimationFrame(loop);
 

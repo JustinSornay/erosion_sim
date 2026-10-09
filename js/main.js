@@ -29,6 +29,7 @@ function loop(now) {
     } catch (error) {
       paused = true; stepAccumulator = 0; setIcon(pauseIcon, "play"); pauseBtn.setAttribute("aria-label", "Reprendre la simulation");
       pauseBtn.classList.add("active"); pauseBtn.setAttribute("aria-pressed", "true");
+      updatePlaybackUI();
       notify(`Simulation arrêtée : ${error.message}`, true); console.error(error);
     }
   } else stepAccumulator = 0;
@@ -59,6 +60,6 @@ function loop(now) {
 
 document.addEventListener("visibilitychange", resetClock);
 // Each opening explores a fresh recipe, with older reliefs still reachable.
-genTerrain(terrainHistory.start());
+generateScene(terrainHistory.start());
 syncTerrainControls(); refreshSourceList(); setMode("composite"); updateMetrics();
 requestAnimationFrame(loop);

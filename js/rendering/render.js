@@ -201,9 +201,13 @@ function render(isoStepMajor) {
       if (showWater || showActive) {
         const depthT = -Math.expm1(-depth / 0.004);
         if (showWater && depthT > 0.002) {
-          r = Math.round(lerp(r, 50, depthT * 0.8));
-          g2 = Math.round(lerp(g2, 110 + 20 * depthT, depthT * 0.8));
-          bl = Math.round(lerp(bl, 140 + 40 * depthT, depthT * 0.8));
+          // Standing water uses the same blue family, with visible shallows
+          // and depth rather than a uniform opaque sea. No fake moving waves.
+          const bathymetry = sceneState && sceneState.initialWetCells > 0
+            ? -Math.expm1(-Math.max(0, depth - .008) / .14) : 0;
+          r = Math.round(lerp(r, lerp(50, 31, bathymetry), depthT * 0.8));
+          g2 = Math.round(lerp(g2, lerp(110 + 20 * depthT, 78, bathymetry), depthT * 0.8));
+          bl = Math.round(lerp(bl, lerp(140 + 40 * depthT, 111, bathymetry), depthT * 0.8));
         }
         if (showActive && activeCell[i]) {
           const q = depth * activeVel[i];

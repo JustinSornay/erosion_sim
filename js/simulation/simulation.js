@@ -30,7 +30,7 @@ function resetBudgets() {
     initialSolid += (b[i] + s[i]) * L * L;
   }
   budget = { initialWater, initialSolid, injected: 0, rain: 0, evaporated: 0,
-    waterOut: 0, sedimentOut: 0, eroded: 0, deposited: 0, lastOutflow: 0 };
+    waterIn: 0, waterOut: 0, sedimentOut: 0, eroded: 0, deposited: 0, lastOutflow: 0 };
 }
 
 function injectSources() {
@@ -48,11 +48,23 @@ function injectSources() {
   }
 }
 
+// A marine face sees a fixed external free surface, not a bottomless drain.
+// Signed momentum is persisted; accepted inward water is counted explicitly.
+function marineFaceFlux(face, i, h, acceleration, damping) {
+  const outsideHead = Math.max(b[i], seaLevel);
+  const q = (seaFlux[face] + acceleration * (h - outsideHead)) * damping;
+  seaFlux[face] = q;
+  if (q < 0) seaIncoming[i] -= q;
+  return Math.max(0, q);
+}
+
 /** One signed flux per face. Opposing fictitious pipes cannot circulate water. */
 function updateFluxes() {
   const acceleration = DT * A * G / L;
   const damping = 1 / (1 + FLOW_DRAG * DT);
   const open = simulationOptions.boundary === "open";
+  const marine = seaLevel !== null;
+  if (marine) seaIncoming.fill(0);
   for (let y = 0; y < N; y++) {
     for (let x = 0; x < N; x++) {
       const i = idx(x, y), h = b[i] + d[i];
@@ -70,10 +82,14 @@ function updateFluxes() {
       }
       // Free outflow, no water supplied from outside. Extrapolate only a
       // descending bed; an uphill boundary does not create a negative head.
-      if (x === 0) fL[i] = open ? Math.max(0, (fL[i] + acceleration * (d[i] + Math.max(0, b[i + 1] - b[i]))) * damping) : 0;
-      if (x === N - 1) fR[i] = open ? Math.max(0, (fR[i] + acceleration * (d[i] + Math.max(0, b[i - 1] - b[i]))) * damping) : 0;
-      if (y === 0) fT[i] = open ? Math.max(0, (fT[i] + acceleration * (d[i] + Math.max(0, b[i + N] - b[i]))) * damping) : 0;
-      if (y === N - 1) fB[i] = open ? Math.max(0, (fB[i] + acceleration * (d[i] + Math.max(0, b[i - N] - b[i]))) * damping) : 0;
+      if (x === 0) fL[i] = marine ? marineFaceFlux(y, i, h, acceleration, damping)
+        : open ? Math.max(0, (fL[i] + acceleration * (d[i] + Math.max(0, b[i + 1] - b[i]))) * damping) : 0;
+      if (x === N - 1) fR[i] = marine ? marineFaceFlux(N + y, i, h, acceleration, damping)
+        : open ? Math.max(0, (fR[i] + acceleration * (d[i] + Math.max(0, b[i - 1] - b[i]))) * damping) : 0;
+      if (y === 0) fT[i] = marine ? marineFaceFlux(2 * N + x, i, h, acceleration, damping)
+        : open ? Math.max(0, (fT[i] + acceleration * (d[i] + Math.max(0, b[i + N] - b[i]))) * damping) : 0;
+      if (y === N - 1) fB[i] = marine ? marineFaceFlux(3 * N + x, i, h, acceleration, damping)
+        : open ? Math.max(0, (fB[i] + acceleration * (d[i] + Math.max(0, b[i - N] - b[i]))) * damping) : 0;
     }
   }
   const area = L * L;
@@ -90,6 +106,13 @@ function updateFluxes() {
     // when a cell empties. No absolute clipping / global renormalization.
     const scale = Math.min(1, (d[i] * area) / (DT * total) * (1 - 8 * Number.EPSILON));
     fL[i] *= scale; fR[i] *= scale; fT[i] *= scale; fB[i] *= scale;
+  }
+  if (marine) for (let k = 0; k < N; k++) {
+    // Retain actual accepted outflow momentum after the donor limiter.
+    if (seaFlux[k] > 0) seaFlux[k] = fL[k * N];
+    if (seaFlux[N + k] > 0) seaFlux[N + k] = fR[k * N + N - 1];
+    if (seaFlux[2 * N + k] > 0) seaFlux[2 * N + k] = fT[k];
+    if (seaFlux[3 * N + k] > 0) seaFlux[3 * N + k] = fB[NN - N + k];
   }
 }
 
@@ -133,6 +156,14 @@ function transportWaterAndSediment() {
       else { exportedWater += qB; exportedSediment += mB; }
     }
   }
+  if (seaLevel !== null) {
+    let importedWater = 0;
+    for (let i = 0; i < NN; i++) if (seaIncoming[i] > 0) {
+      const depth = seaIncoming[i] * dtArea;
+      tmpD[i] += depth; importedWater += depth;
+    }
+    budget.waterIn += importedWater * L * L; // Incoming sea has no suspended load.
+  }
   [d, tmpD] = [tmpD, d]; // tmpD now holds the pre-transfer water depth.
   [s, tmpS] = [tmpS, s];
   budget.waterOut += exportedWater * L * L;
@@ -150,8 +181,10 @@ function updateVelocityAndExchange() {
     for (let x = 0; x < N; x++) {
       const i = idx(x, y);
       if (d[i] <= DRY_DEPTH && s[i] === 0) { u[i] = v[i] = 0; continue; }
-      const inL = x > 0 ? fR[i - 1] : 0, inR = x < N - 1 ? fL[i + 1] : 0;
-      const inT = y > 0 ? fB[i - N] : 0, inB = y < N - 1 ? fT[i + N] : 0;
+      const inL = x > 0 ? fR[i - 1] : seaLevel === null ? 0 : Math.max(0, -seaFlux[y]);
+      const inR = x < N - 1 ? fL[i + 1] : seaLevel === null ? 0 : Math.max(0, -seaFlux[N + y]);
+      const inT = y > 0 ? fB[i - N] : seaLevel === null ? 0 : Math.max(0, -seaFlux[2 * N + x]);
+      const inB = y < N - 1 ? fT[i + N] : seaLevel === null ? 0 : Math.max(0, -seaFlux[3 * N + x]);
       const meanDepth = Math.max(DRY_DEPTH, (tmpD[i] + d[i]) * 0.5);
       u[i] = (inL - fL[i] + fR[i] - inR) / (2 * L * meanDepth);
       v[i] = (inT - fT[i] + fB[i] - inB) / (2 * L * meanDepth);
@@ -220,7 +253,7 @@ function getSimulationStats() {
   }
   return { version: PHYSICS_VERSION, steps, simTime, seed: terrainSeed, preset: terrainPreset,
     water, suspended, solid, wetCells, incision, deposit, maxDepth, minWater, minSediment, finite,
-    ...budget, waterResidual: budget.initialWater + budget.injected + budget.rain -
+    ...budget, waterResidual: budget.initialWater + budget.injected + budget.rain + budget.waterIn -
       budget.waterOut - budget.evaporated - water,
     solidResidual: budget.initialSolid - solid - budget.sedimentOut };
 }

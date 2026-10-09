@@ -1,0 +1,110 @@
+{
+  "samples": 576,
+  "families": {
+    "island": {
+      "minimumWaterFraction": 0.7614203559027778,
+      "maximumWaterFraction": 0.8290473090277778,
+      "maximumAdjacentHeightJump": 0.03662419536141043,
+      "minimumSources": 0,
+      "maximumSources": 2
+    },
+    "archipelago": {
+      "minimumWaterFraction": 0.7445203993055556,
+      "maximumWaterFraction": 0.9193793402777778,
+      "maximumAdjacentHeightJump": 0.043758611544268966,
+      "minimumSources": 0,
+      "maximumSources": 1
+    },
+    "coast": {
+      "minimumWaterFraction": 0.4700792100694444,
+      "maximumWaterFraction": 0.6062554253472222,
+      "maximumAdjacentHeightJump": 0.028648133092497904,
+      "minimumSources": 0,
+      "maximumSources": 1
+    },
+    "estuary": {
+      "minimumWaterFraction": 0.2485622829861111,
+      "maximumWaterFraction": 0.3797200520833333,
+      "maximumAdjacentHeightJump": 0.06270513821346824,
+      "minimumSources": 2,
+      "maximumSources": 3
+    },
+    "fjord": {
+      "minimumWaterFraction": 0.1430121527777778,
+      "maximumWaterFraction": 0.2784830729166667,
+      "maximumAdjacentHeightJump": 0.09263683257910336,
+      "minimumSources": 1,
+      "maximumSources": 2
+    },
+    "lagoon": {
+      "minimumWaterFraction": 0.4601236979166667,
+      "maximumWaterFraction": 0.6132541232638888,
+      "maximumAdjacentHeightJump": 0.06948372987737583,
+      "minimumSources": 0,
+      "maximumSources": 1
+    },
+    "atoll": {
+      "minimumWaterFraction": 0.8500434027777778,
+      "maximumWaterFraction": 0.9074978298611112,
+      "maximumAdjacentHeightJump": 0.05647604515518098,
+      "minimumSources": 0,
+      "maximumSources": 0
+    },
+    "lake": {
+      "minimumWaterFraction": 0.11737738715277778,
+      "maximumWaterFraction": 0.1306423611111111,
+      "maximumAdjacentHeightJump": 0.023441104320393757,
+      "minimumSources": 1,
+      "maximumSources": 2
+    },
+    "craterlake": {
+      "minimumWaterFraction": 0.07611762152777778,
+      "maximumWaterFraction": 0.09941948784722222,
+      "maximumAdjacentHeightJump": 0.038932976101133665,
+      "minimumSources": 0,
+      "maximumSources": 1
+    }
+  },
+  "longRuns": [
+    {
+      "preset": "island",
+      "steps": 2000,
+      "maximumErrors": {
+        "water": 6.348273018375039e-10,
+        "solid": 2.6515730773167198e-11
+      },
+      "initialWater": 7392.56901847851,
+      "finalWater": 7407.450768884645,
+      "seaIn": 0.1002316011706699,
+      "outflow": 41.46854504609857,
+      "eroded": 6.506853919022454
+    },
+    {
+      "preset": "estuary",
+      "steps": 2000,
+      "maximumErrors": {
+        "water": 3.6061464925296605e-10,
+        "solid": 1.266546867384477e-10
+      },
+      "initialWater": 3105.43312347597,
+      "finalWater": 3229.855347571663,
+      "seaIn": 0.20939055544237636,
+      "outflow": 88.57139183713679,
+      "eroded": 29.939687148496855
+    },
+    {
+      "preset": "lake",
+      "steps": 2000,
+      "maximumErrors": {
+        "water": 4.0245140553452075e-11,
+        "solid": 1.5611312242924669e-10
+      },
+      "initialWater": 612.2609363244246,
+      "finalWater": 717.0885300858691,
+      "seaIn": 0,
+      "outflow": 16.73949969290267,
+      "eroded": 11.480976533698705
+    }
+  ],
+  "passed": true
+}

@@ -1,0 +1,545 @@
+{
+  "source": "erosion_sim_2.2.0_exported.zip",
+  "fixtures": [
+    {
+      "preset": "headwaters",
+      "seed": 0,
+      "sha256": "9f2f635c7cedc8c4053af99b266241fd2b9d1ea0adf01217df5a3a099ea66a75"
+    },
+    {
+      "preset": "headwaters",
+      "seed": 1,
+      "sha256": "b2556ecadad796c6d2daf39f8c969bd504aa3a45273c115942d427dc8a62119a"
+    },
+    {
+      "preset": "headwaters",
+      "seed": 2,
+      "sha256": "04027f7e050305f6e3a4d1b3f8411cf5eaa6b6d73e5f585f84912d08612eca5b"
+    },
+    {
+      "preset": "headwaters",
+      "seed": 314159265,
+      "sha256": "c3df4b0a15a25fe15cd25adf57b3d3732a6f376e807944020d03ab6eb3ad45f2"
+    },
+    {
+      "preset": "headwaters",
+      "seed": 271828182,
+      "sha256": "2e850ffec51905f63c342e88d1f55d7c87fd478cc613048861793e119351c25d"
+    },
+    {
+      "preset": "headwaters",
+      "seed": 2147483647,
+      "sha256": "6dbdf9d83920a3f5176a0f5dfcc6a8a9fba513c40d41b62a684974bd4bd80438"
+    },
+    {
+      "preset": "meanders",
+      "seed": 0,
+      "sha256": "1ff87be6d8ec35e532b4f7840dbe117be40b4b10dcb78ffbc8fcc38d85baf31d"
+    },
+    {
+      "preset": "meanders",
+      "seed": 1,
+      "sha256": "4e41bae9e9f169a0e276f64d6527720aa5ec4b306076bbd211fc2eeabcde2d8c"
+    },
+    {
+      "preset": "meanders",
+      "seed": 2,
+      "sha256": "c5cad62ca420e33a160c427521919592d6a39462d2bb812f7607325f520f2aa0"
+    },
+    {
+      "preset": "meanders",
+      "seed": 314159265,
+      "sha256": "77dd320df60dc5f6f6cfed8c2326c9b2a8868307c8df67a9f9c36655fb661442"
+    },
+    {
+      "preset": "meanders",
+      "seed": 271828182,
+      "sha256": "e8e64e25882a2f88a673e63161bec41f75ced3619f67e7c16ee1d7723b2ed624"
+    },
+    {
+      "preset": "meanders",
+      "seed": 2147483647,
+      "sha256": "ea9049d65f9fed4a43e928e668aa7c3d27358bb52570ece414922471d1ba9646"
+    },
+    {
+      "preset": "hillside",
+      "seed": 0,
+      "sha256": "a45b3f4e92d8e18d4ce232166141f03b478c870ca0831eed42b8e9e5dfbf2116"
+    },
+    {
+      "preset": "hillside",
+      "seed": 1,
+      "sha256": "b8ef3dfc1393c21eb3c931c169571f88334506680b220c480094f01dfa16f7fd"
+    },
+    {
+      "preset": "hillside",
+      "seed": 2,
+      "sha256": "c6eb17862ccc025aa575b6e40b273db93b5b6b84a8ec42ef24ef41b8b3d70657"
+    },
+    {
+      "preset": "hillside",
+      "seed": 314159265,
+      "sha256": "84142a65cf3623d48aa41ca811e936241df206e36fd1b2a156a8cc39d2aea8ae"
+    },
+    {
+      "preset": "hillside",
+      "seed": 271828182,
+      "sha256": "365538a0156f4f12c95cd2b7c163d93d45b10257a710794721a3ed0b89e6254b"
+    },
+    {
+      "preset": "hillside",
+      "seed": 2147483647,
+      "sha256": "360437f8c415f7accbee2abebf8cd28c405e4ce22947822421ce9ff8795bca74"
+    },
+    {
+      "preset": "confluence",
+      "seed": 0,
+      "sha256": "664f5b006f6315125617391201a5edbaa2607a0c213d350b3f3dd9baf611c395"
+    },
+    {
+      "preset": "confluence",
+      "seed": 1,
+      "sha256": "354eb1ec90d16d95abd20e3a2247068f4679e71ed1ccf4b0ab16a293659eef18"
+    },
+    {
+      "preset": "confluence",
+      "seed": 2,
+      "sha256": "74da780a30f64aa991d5b388862827230481a3468fe356ffd93814e84eae3f9d"
+    },
+    {
+      "preset": "confluence",
+      "seed": 314159265,
+      "sha256": "349e00f349f11cca1eb7bbdf4745d244262c4904e05e81aefadb2e1d29f9e16d"
+    },
+    {
+      "preset": "confluence",
+      "seed": 271828182,
+      "sha256": "9fe104da23e13b88998acb6cc2ca5d7c3597168780f1273d0296dbf465e32132"
+    },
+    {
+      "preset": "confluence",
+      "seed": 2147483647,
+      "sha256": "deb14d3b352c16060bb0ebeb330043c03ef235c620c467a38504df1de53e16b2"
+    },
+    {
+      "preset": "spillway",
+      "seed": 0,
+      "sha256": "ca9f1deb11682629f3c5c28b142d4232cde4c77552c20f9f9e247e3826861500"
+    },
+    {
+      "preset": "spillway",
+      "seed": 1,
+      "sha256": "e3f96285f431294c945756fc0fa5c20bd7bcbe141637d955dcb110b6a6c759c0"
+    },
+    {
+      "preset": "spillway",
+      "seed": 2,
+      "sha256": "3e06a055c3e6bb4a16151d8bed217b1c364c95a6229cd79298a73646612c4f19"
+    },
+    {
+      "preset": "spillway",
+      "seed": 314159265,
+      "sha256": "c0a05afc822d0025a101eef44853d00d6d6c07d5b072b5bc4425b4601511998b"
+    },
+    {
+      "preset": "spillway",
+      "seed": 271828182,
+      "sha256": "e6e68a54d78fc1ef6a924dac5ce77f4786268b17d0601daf3081a7227692a446"
+    },
+    {
+      "preset": "spillway",
+      "seed": 2147483647,
+      "sha256": "b1511229e22d3f5e5adaa31cea8422ceb193698f7bf58b298aef1e1b08f8b5f0"
+    },
+    {
+      "preset": "massif",
+      "seed": 0,
+      "sha256": "45f33d43133ff9b1fe443ee2f91658591a2422c5e8a3f38563b2a29b464160df"
+    },
+    {
+      "preset": "massif",
+      "seed": 1,
+      "sha256": "4d8f65fb8c8ff07372a1b092f0e36569d4165436dc6902dfd2aad47861cd65c0"
+    },
+    {
+      "preset": "massif",
+      "seed": 2,
+      "sha256": "256f7be57f3f3249dfb79c172b25b75f9cd066e590747f54350fdb15317ce08f"
+    },
+    {
+      "preset": "massif",
+      "seed": 314159265,
+      "sha256": "8a139306332f7519c6c756551c44eb441e7ce5cfe61b1ee97da93fb3a2eb0702"
+    },
+    {
+      "preset": "massif",
+      "seed": 271828182,
+      "sha256": "0c6294c4c7df4ca9362f67683a07445668590b98ea5f46721eab7ccfa0f25f2a"
+    },
+    {
+      "preset": "massif",
+      "seed": 2147483647,
+      "sha256": "4c053fc5e24226a719ffa3291961b8aa2c362a81c2e24d6a4678abd163b4a640"
+    },
+    {
+      "preset": "tableland",
+      "seed": 0,
+      "sha256": "d6fd53847c4d89c979459c602eb393b9ee51390e92a5690e0af061203670bd3c"
+    },
+    {
+      "preset": "tableland",
+      "seed": 1,
+      "sha256": "d13ab9917367cf96a4d14541fb6b15b69daf86c08c83a4fee2f7c0546cc928fd"
+    },
+    {
+      "preset": "tableland",
+      "seed": 2,
+      "sha256": "1d7ae0ce5d800e6c1a41e90e35a16df032da60a40b036bb4bb31f982e0014c50"
+    },
+    {
+      "preset": "tableland",
+      "seed": 314159265,
+      "sha256": "049700c3b2da5d2224b700163c133bc4371ab07f9c0cdb3f762641e4ca4665cc"
+    },
+    {
+      "preset": "tableland",
+      "seed": 271828182,
+      "sha256": "c024c14728651bfc40e359655a5ba4d1f7133523e735085751a43c3a6e298a38"
+    },
+    {
+      "preset": "tableland",
+      "seed": 2147483647,
+      "sha256": "2c3b6f1e0fb69b54c6f36885b10bb80922f525e3fec8401e86b09489f99b9df5"
+    },
+    {
+      "preset": "lowlands",
+      "seed": 0,
+      "sha256": "f75725c7122b762d81e358f3a0030a4fb8608106f8c2c3465986365e2f21eb6b"
+    },
+    {
+      "preset": "lowlands",
+      "seed": 1,
+      "sha256": "b6003c1a1fab7ffa3bfb575e19feb7a4d25715e1d8fb1dd1f21d028a0e0594df"
+    },
+    {
+      "preset": "lowlands",
+      "seed": 2,
+      "sha256": "e2da4a6c0503d5ae33c5e2da39f3806b2de96214e9fc8b629777468ce50d5da9"
+    },
+    {
+      "preset": "lowlands",
+      "seed": 314159265,
+      "sha256": "3a6eadb930c42b85a72537c824ff5c90195d118abfd2b86a8ae1cc4e4213fecf"
+    },
+    {
+      "preset": "lowlands",
+      "seed": 271828182,
+      "sha256": "d71e0303220e63d94101d195d68a6d0037a09a8b18d74a372a9b09dfb089f629"
+    },
+    {
+      "preset": "lowlands",
+      "seed": 2147483647,
+      "sha256": "350dcdc5b3e7fae527ed2eaefe4eb498286d4c8ff0f6afb78b1dbccea27ead71"
+    },
+    {
+      "preset": "canyon",
+      "seed": 0,
+      "sha256": "9c5a36a70963114972cc918695ef2e65d7284d3147a8238b0a3d43b1469d93dd"
+    },
+    {
+      "preset": "canyon",
+      "seed": 1,
+      "sha256": "dc73405c16e5b0cc40699c58ddc5ba3ef1238fa6ee296e8640861a123f13c796"
+    },
+    {
+      "preset": "canyon",
+      "seed": 2,
+      "sha256": "cce326011a23366be831ee960087eab572f62de1fc68d775413b154a47d8dba4"
+    },
+    {
+      "preset": "canyon",
+      "seed": 314159265,
+      "sha256": "8587d015594a97d8a15bd0d0fb92545d01bd27ff469e60048fea10dc09f13ebc"
+    },
+    {
+      "preset": "canyon",
+      "seed": 271828182,
+      "sha256": "1025c083440ff101f9431873c5cc25d81c297835337a03c3ffd95a565fc7b94b"
+    },
+    {
+      "preset": "canyon",
+      "seed": 2147483647,
+      "sha256": "7b0d1a42b406b7426dc36505836dcd6b6bc0bf3cddf53bb1e10c3ffc81d4ad80"
+    },
+    {
+      "preset": "badlands",
+      "seed": 0,
+      "sha256": "b6f1c26e8e0e67eadec24359ce0bb0b24dd6cdb3b0715eeb6d5425e747f5aa22"
+    },
+    {
+      "preset": "badlands",
+      "seed": 1,
+      "sha256": "640413aab3e31cde41f00cbbb1fb61ce933ca4996a460deda9c479bb0d8b547b"
+    },
+    {
+      "preset": "badlands",
+      "seed": 2,
+      "sha256": "69f76051f40c10c75b0a792977af304fc4bb242fa08a530f7d7ab6bd430d9feb"
+    },
+    {
+      "preset": "badlands",
+      "seed": 314159265,
+      "sha256": "5ed36b12fb3dbb70dc41d772bbf20dd237b0cff87cbfee60ab05dd74077716b7"
+    },
+    {
+      "preset": "badlands",
+      "seed": 271828182,
+      "sha256": "fa20f51eb7961f686ca0e1e364865b3e6a7723be20a45d8e5619c91a4736370e"
+    },
+    {
+      "preset": "badlands",
+      "seed": 2147483647,
+      "sha256": "06f53ea4ed935d2bd94570ed64cb0038baa99ab6a196029feac8a21345a94a0b"
+    },
+    {
+      "preset": "glacial",
+      "seed": 0,
+      "sha256": "16f856c581b2aec64f7d80655e25c74e60bfb86773506c3475e05d286a7d0fe7"
+    },
+    {
+      "preset": "glacial",
+      "seed": 1,
+      "sha256": "bc6c86c77c40fd85da124b08c7ccd73310b54562f2078f311a4a1dbb96bc7fc0"
+    },
+    {
+      "preset": "glacial",
+      "seed": 2,
+      "sha256": "e62f38315fce0e58b7e41f4e8042aa1260b227c83ac60dc2d18ffc6785df3db9"
+    },
+    {
+      "preset": "glacial",
+      "seed": 314159265,
+      "sha256": "f37f00c27c1df92bc26fb33cadc4c0d0a437b714ac2ac4c26299484fa3985a7a"
+    },
+    {
+      "preset": "glacial",
+      "seed": 271828182,
+      "sha256": "70acc04a002bd0e53e0caa0fdb1ee51c14081986eab1afef18ec9def90ed3708"
+    },
+    {
+      "preset": "glacial",
+      "seed": 2147483647,
+      "sha256": "2a2bf6ec2f684418b8045d39d0ad88d0383607d609be8f197f0325df04db0ba8"
+    },
+    {
+      "preset": "karst",
+      "seed": 0,
+      "sha256": "3e057ac13ae3faceead01da701304f872d18c893b34bb33ff148e3e853ee293a"
+    },
+    {
+      "preset": "karst",
+      "seed": 1,
+      "sha256": "0ed75282cfbb5519fc747050ee12e769816a29f32fbb7551281f403e0539e035"
+    },
+    {
+      "preset": "karst",
+      "seed": 2,
+      "sha256": "0ceea2d4b04a887aa55bb6ae0efee4b6bde5ff715ac5fe8b49a9a45409ca14ca"
+    },
+    {
+      "preset": "karst",
+      "seed": 314159265,
+      "sha256": "f9d8e71062e43ddd2adee38d1c09ff5f11a6572e62a90c7522cbb61397cf480f"
+    },
+    {
+      "preset": "karst",
+      "seed": 271828182,
+      "sha256": "a545863e5022bb64883b34b81d576d8eda5012759dbab7c4a926979f10af92b0"
+    },
+    {
+      "preset": "karst",
+      "seed": 2147483647,
+      "sha256": "e7fe9f41e905e5e2213e1aa4aac5dcdc0fd5adde321df7e0c186d14ef4b9ffaa"
+    },
+    {
+      "preset": "caldera",
+      "seed": 0,
+      "sha256": "e328190f626a9fa9a34269ef3c0efe6b5dbe109bca168d1b2a181a924ca8daf1"
+    },
+    {
+      "preset": "caldera",
+      "seed": 1,
+      "sha256": "c2821fc3c502ddd8f80f166ecc47cb7a1f94b5635866e76ad6653ce400f9a2f5"
+    },
+    {
+      "preset": "caldera",
+      "seed": 2,
+      "sha256": "f3da111afa7ac014d2ecdf2ce868315f98d8009e1c39a98721f51563cb062110"
+    },
+    {
+      "preset": "caldera",
+      "seed": 314159265,
+      "sha256": "4f51743cb80530327e4e6b6bd2e2a4c9761621a4cc82932f309b63e9f28e220f"
+    },
+    {
+      "preset": "caldera",
+      "seed": 271828182,
+      "sha256": "c1b9849844269fa0f50476cd5bfb5a90f80fea31811ef6c27c49c5c3d84436ff"
+    },
+    {
+      "preset": "caldera",
+      "seed": 2147483647,
+      "sha256": "374181a3e2453fb7f60c09f209861bd3bbb1b7009a7874cb60fa007de8336420"
+    },
+    {
+      "preset": "fan",
+      "seed": 0,
+      "sha256": "7b45a955b361ebb5d7df8a326eb6413834aad3751cec10d1dcea6d9df96b59bc"
+    },
+    {
+      "preset": "fan",
+      "seed": 1,
+      "sha256": "f4738a026bb2e6ebe4e17e627e135443041424ba8795c2a46ffd4fb87dfa91dd"
+    },
+    {
+      "preset": "fan",
+      "seed": 2,
+      "sha256": "b5eb201bd7ced890fc5c8d642ed701e20118ac554075ceaa99305ea2997745a6"
+    },
+    {
+      "preset": "fan",
+      "seed": 314159265,
+      "sha256": "0d1956450ea8175ce418fa1794ccd5cec6deadaaaed90ee5c345b950cd8f18f3"
+    },
+    {
+      "preset": "fan",
+      "seed": 271828182,
+      "sha256": "8a88110d8b5b61e3a19d857aea051c12e750a3c2b1f7c39d5ad2a746ac255492"
+    },
+    {
+      "preset": "fan",
+      "seed": 2147483647,
+      "sha256": "8f15d625c46359654e9dbb8e0d404ade5a4c2c8e7be5c034f2afa3804f40173b"
+    },
+    {
+      "preset": "mesas",
+      "seed": 0,
+      "sha256": "852dfafa66c19afa50c0f83358a931864eb2f9e7bd8dade830993846f91b0079"
+    },
+    {
+      "preset": "mesas",
+      "seed": 1,
+      "sha256": "a86ef20a9e684b7e162bb24f1d773348d8ea6cde1c4a4119e638e3ccc5e81097"
+    },
+    {
+      "preset": "mesas",
+      "seed": 2,
+      "sha256": "242aac5b189414cc06453a7327119c4ac0db12faacffd8f5302f22524643a831"
+    },
+    {
+      "preset": "mesas",
+      "seed": 314159265,
+      "sha256": "4039d0733b3b3e143453171cac21b67f78358402ff0de027d19002248ad1a1cb"
+    },
+    {
+      "preset": "mesas",
+      "seed": 271828182,
+      "sha256": "22de6e454d78bf0cd2799fbe5ea50e59825a2eee092fdbeb055e5494e825a5d2"
+    },
+    {
+      "preset": "mesas",
+      "seed": 2147483647,
+      "sha256": "c758b4efa9da7463c254ced94764c19d997ce2caa93fc5b1193e50ab1f7d39bb"
+    },
+    {
+      "preset": "cuesta",
+      "seed": 0,
+      "sha256": "84a3c4363b5591cea73793ca53b19b00305a98f4eeebc1ed28887c5b0abb96c9"
+    },
+    {
+      "preset": "cuesta",
+      "seed": 1,
+      "sha256": "f08562a9b66510d3e766578c7f5a623d1a363389b607d090e8b8cbebee464964"
+    },
+    {
+      "preset": "cuesta",
+      "seed": 2,
+      "sha256": "59c7643f5f0d488f3d769770e3248bd8802872e3525c0e125ef96fc540deeebb"
+    },
+    {
+      "preset": "cuesta",
+      "seed": 314159265,
+      "sha256": "da92bbb7dabe979376ee7bd9350943172845544e51424e8ad4590ad2c0036ae1"
+    },
+    {
+      "preset": "cuesta",
+      "seed": 271828182,
+      "sha256": "4cc154b25d85c268427d95a29768abf8f635b77ef8988f37d8124d7227874c85"
+    },
+    {
+      "preset": "cuesta",
+      "seed": 2147483647,
+      "sha256": "1138d8343855efd98bc22ad7fa0defa817f27034f0f343019a08d40abb3da109"
+    },
+    {
+      "preset": "braided",
+      "seed": 0,
+      "sha256": "e0b4222af77d2c49e63a85d878d5faaa4ae92efb2a2ca9c720096694fb77fb12"
+    },
+    {
+      "preset": "braided",
+      "seed": 1,
+      "sha256": "d251392621468595107c620cb3a4af7de11297a16974911075d44e3eaf91f8ba"
+    },
+    {
+      "preset": "braided",
+      "seed": 2,
+      "sha256": "a6efec3733b77a5a2f79461fbf8e4ea892ad2622c5463d6ef469efbf17fb8ec6"
+    },
+    {
+      "preset": "braided",
+      "seed": 314159265,
+      "sha256": "aee6b3b0797084d7a6b5403519b60fb097b2f502cc54a63e7ff8013dc318c7bb"
+    },
+    {
+      "preset": "braided",
+      "seed": 271828182,
+      "sha256": "c574ca672698ee3d45526f63bab066e34a6a7cc8f59e842f552186df77192bb8"
+    },
+    {
+      "preset": "braided",
+      "seed": 2147483647,
+      "sha256": "00e6c2fddbc244e6ef29483af9ee0502dbf7c636ab68ddb28650bd165b6551a2"
+    },
+    {
+      "preset": "natural",
+      "seed": 0,
+      "sha256": "89ad8214994f1cfad1365f7fe21b678032c87b1f5b4097d3402a8a2b752d8b66"
+    },
+    {
+      "preset": "natural",
+      "seed": 1,
+      "sha256": "399954649bde593d3f5c29b60e788058ebb3c981bb10df5c7651224ce09d9e3f"
+    },
+    {
+      "preset": "natural",
+      "seed": 2,
+      "sha256": "d07486e732f0e1d03998457606a3147080c6dbae76b5e087662b90e897c42876"
+    },
+    {
+      "preset": "natural",
+      "seed": 314159265,
+      "sha256": "1412ed2b08f3406568713dfebf2a2e4d61f85c641f3233654e6dd044ff39bc77"
+    },
+    {
+      "preset": "natural",
+      "seed": 271828182,
+      "sha256": "275e909ab517696103970fe0fb528c9d6889d2227dcfde902fb15a603a00d4be"
+    },
+    {
+      "preset": "natural",
+      "seed": 2147483647,
+      "sha256": "80c2de2c538fdc2e35eeedd27663166790d31a74463f327e61f4ce9bd57fc5d8"
+    }
+  ]
+}

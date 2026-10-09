@@ -1,23 +1,26 @@
 {
   "name": "erosion-sandbox",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "private": true,
   "description": "Local conservative hydraulic-erosion sandbox",
   "engines": {
     "node": ">=22"
   },
   "scripts": {
-    "test": "node --test --test-concurrency=1 tests/regression/production.test.js tests/regression/terrain-navigation.test.js",
+    "test": "node --test --test-concurrency=1 tests/regression/production.test.js tests/regression/terrain-navigation.test.js tests/regression/scenes.test.js",
     "test:long": "node tests/regression/long-run.js",
     "test:baseline": "node tests/regression/physics-regression.js 1000",
     "test:legacy": "node tests/regression/legacy-integrity.js",
-    "test:browser": "npm run build && python tests/browser/smoke.py",
+    "test:browser": "npm run build:offline && python tests/browser/scenes.py",
     "build": "node tools/build-standalone.js",
     "benchmark": "node tests/benchmarks/physics-profile.js 1000",
     "audit:legacy": "node tests/diagnostics/legacy-baseline-audit.js",
-    "test:layout": "npm run build && python tests/browser/layout.py",
+    "test:layout": "npm run build:offline && python tests/browser/scenes.py --layout",
     "test:terrain": "node --test tests/regression/terrain-navigation.test.js",
-    "test:navigation": "npm run build && python tests/browser/navigation.py"
+    "test:navigation": "npm run build:offline && python tests/browser/scenes.py",
+    "test:scenes": "node --test tests/regression/scenes.test.js",
+    "build:offline": "node tools/build-standalone.js --skip-icons",
+    "audit:scenes": "node tests/diagnostics/scenes-audit.js --maps-only && node tests/diagnostics/scenes-audit.js --long-only"
   },
   "dependencies": {
     "lucide": "1.52.0"
